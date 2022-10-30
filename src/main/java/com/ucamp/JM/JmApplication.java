@@ -21,8 +21,10 @@ public class JmApplication {
 		System.out.println("곧 프로젝트 시작");
 
 		System.out.println("asdasd");
+		System.out.println("asdasdasdasdasdsad");
 		System.out.println("이현호 실습");
 
+		System.out.println("kcwkcw");
 	}
 
 }
