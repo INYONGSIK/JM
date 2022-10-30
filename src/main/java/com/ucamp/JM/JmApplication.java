@@ -20,6 +20,7 @@ public class JmApplication {
 		System.out.println("asdasdasdasdasdsad");
 		System.out.println("이현호 실습");
 
+		System.out.println("kcwkcw");
 	}
 
 }
