@@ -10,5 +10,4 @@ import lombok.NoArgsConstructor;
 public class User {
     private int user_number;
     private String user_name;
-    //asdasd
 }
