@@ -10,6 +10,7 @@ public class JmApplication {
 		SpringApplication.run(JmApplication.class, args);
 		System.out.println("hi");
 		System.out.println("asdasd");
+		System.out.println("이현호 실습");
 	}
 
 }
