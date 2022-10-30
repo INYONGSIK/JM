@@ -8,6 +8,8 @@ public class JmApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(JmApplication.class, args);
+		System.out.println("hi");
+		System.out.println("asdasd");
 	}
 
 }
