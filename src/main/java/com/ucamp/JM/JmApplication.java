@@ -10,6 +10,7 @@ public class JmApplication {
 		SpringApplication.run(JmApplication.class, args);
 
 		System.out.println("emm");
+		System.out.println("emm");
 
 		System.out.println("test");
 
