@@ -3,7 +3,6 @@ package com.ucamp.JM.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-//test
 @Controller
 @RequestMapping("/")
 public class RootController {
