@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="bootswatch/bootstrap.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+<table id="example" class="table table-hover" style="width:100%" aria-describedby="example_info">
+    <thead>
+    <tr class="table-active">
+        <th class="sorting sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+            aria-sort="ascending">
+            제목
+        </th>
+        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">가수
+        </th>
+        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">장르
+        </th>
+        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">좋아요 수
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="table-secondary" th:each="song:${ranklist}">
+        <td class="sorting_1">[[${song.music_title}]]</td>
+        <td>[[${song.music_singer}]]</td>
+        <td>[[${song.music_genre}]]</td>
+        <td>[[${song.music_like}]]</td>
+        <td>[[${song.music_release}]]</td>
+
+    </tr>
+    </tbody>
+</table>
+<body>
+
+
