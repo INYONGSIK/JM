@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/login" method="post">
+    <table>
+        <tr>
+            <th>
+                <label for="user_email">이메일</label>
+            </th>
+            <td>
+                <input type="text" id="user_email" name="user_email"/>
+                <div class="error"></div>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                <label for="user_password">비밀번호</label>
+            </th>
+            <td>
+                <input type="text" id="user_password" name="user_password"/>
+                <div class="error"></div>
+            </td>
+            <td><input type="submit" value="로그인"/></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
