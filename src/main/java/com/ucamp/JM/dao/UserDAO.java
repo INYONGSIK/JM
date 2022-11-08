@@ -3,9 +3,15 @@ package com.ucamp.JM.dao;
 import com.ucamp.JM.dto.User;
 import org.apache.ibatis.annotations.Mapper;
 
-import java.util.ArrayList;
-
 @Mapper
 public interface UserDAO {
-    ArrayList<User> selectAll();
+    // 용식: 이메일로 유저 정보 가져오기
+    User getUserInfoByEmail(String user_email);
+
+    // 용식: 회원가입 유저 정보 insert
+    void insertUser(User user) throws Exception;
+
+    void deleteUser(String user_email, String user_password) throws Exception;
+
+
 }
