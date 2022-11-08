@@ -11,5 +11,7 @@ public interface UserDAO {
     // 용식: 회원가입 유저 정보 insert
     void insertUser(User user) throws Exception;
 
+    void deleteUser(String user_email, String user_password) throws Exception;
+
 
 }
