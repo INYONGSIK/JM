@@ -1,4 +1,3 @@
-
 package com.ucamp.JM.controller;
 
 import com.ucamp.JM.dto.User;
@@ -104,9 +103,5 @@ public class RootController {
             return "에러";
         }
     }
-    @GetMapping("/rank")
-    public String rank(Model model) {
-        model.addAttribute("ranklist", musicService.selectRankMusic());
-        return "rank";
-    }
+
 }
