@@ -150,6 +150,28 @@ public class RootController {
             return "error";
         }
     }
+
+    // 용식 : 이메일 보내기
+    @ResponseBody
+    @GetMapping("/sendMail")
+    public String sendMail(@RequestParam String user_email) {
+        String result = "";
+        try {
+            User user = userService.queryUser(user_email);
+            if (user != null) {
+                result = userService.sendMailForFindPw(user_email);
+            } else {
+                result = "유저없음";
+            }
+
+        } catch (Exception e) {
+            result = "에러";
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+
 }
 
 

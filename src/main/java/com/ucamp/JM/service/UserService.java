@@ -23,4 +23,7 @@ public interface UserService {
 
     // 용식 : 비밀번호변경 (비밀번호 찾기후 변경)
     void modifyPassword(String user_email, String user_password) throws Exception;
+
+    // 용식 : 비밀번호 찾기 이메일보내기
+    String sendMailForFindPw(String email) throws Exception;
 }
