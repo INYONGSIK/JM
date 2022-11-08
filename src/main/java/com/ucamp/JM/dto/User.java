@@ -22,3 +22,4 @@ public class User {
     private String user_like;
     private String type;
 }
+
