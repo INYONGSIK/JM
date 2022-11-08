@@ -31,6 +31,8 @@ dependencies {
 
     // 이메일 인증
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '2.6.3'
+    // 휴대폰 인증
+    implementation group: 'net.nurigo', name: 'javaSDK', version: '2.2'
 }
 
 tasks.named('test') {

@@ -95,4 +95,6 @@ public class UserServiceImpl implements UserService {
         String num = Integer.toString(checkNum);
         return num;
     }
+
+
 }
