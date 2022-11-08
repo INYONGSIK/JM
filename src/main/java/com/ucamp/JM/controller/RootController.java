@@ -127,6 +127,26 @@ public class RootController {
         return "findpwform";
     }
 
+    // 용식 : 이메일 보내기
+    @ResponseBody
+    @GetMapping("/sendMail")
+    public String sendMail(@RequestParam String user_email) {
+        String result = "";
+        try {
+            User user = userService.queryUser(user_email);
+            if (user.getUser_email() != null) {
+                result = userService.sendMailForFindPw(user_email);
+            } else {
+                result = "유저없음";
+            }
+
+        } catch (Exception e) {
+            result = "에러";
+            e.printStackTrace();
+        }
+        return result;
+    }
+
     // 용식 : 비밀번호 찾기에서 이메일인증시 비밀번호 바꾸는 폼
     @GetMapping("/modifypasswordform")
     public String modifypasswordform(@RequestParam(required = false) String user_email, Model model) {
@@ -139,8 +159,7 @@ public class RootController {
     public String modifyPassword(@RequestParam String user_email, @RequestParam String user_password, Model model) {
         try {
             logger.info("user_email =>" + user_email);
-            logger.info("user_email =>" + user_password);
-
+            logger.info("user_password =>" + user_password);
             userService.modifyPassword(user_email, user_password);
             System.out.println("성공");
             return "redirect:/";
@@ -149,26 +168,6 @@ public class RootController {
             model.addAttribute("err", e.getMessage());
             return "error";
         }
-    }
-
-    // 용식 : 이메일 보내기
-    @ResponseBody
-    @GetMapping("/sendMail")
-    public String sendMail(@RequestParam String user_email) {
-        String result = "";
-        try {
-            User user = userService.queryUser(user_email);
-            if (user != null) {
-                result = userService.sendMailForFindPw(user_email);
-            } else {
-                result = "유저없음";
-            }
-
-        } catch (Exception e) {
-            result = "에러";
-            e.printStackTrace();
-        }
-        return result;
     }
 
 
