@@ -127,7 +127,7 @@ public class RootController {
         try {
             logger.info("user_email =>" + user_email);
             logger.info("user_email =>" + user_password);
-           
+
             userService.modifyPassword(user_email, user_password);
             System.out.println("성공");
             return "redirect:/";
@@ -138,4 +138,7 @@ public class RootController {
         }
     }
 }
+
+
+
 
