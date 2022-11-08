@@ -5,14 +5,11 @@ import com.ucamp.JM.dto.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpSession;
-
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
     private final UserDAO userDAO;
-    private final HttpSession session;
 
     @Override
     public User queryUser(String user_email) throws Exception {
@@ -56,5 +53,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(String user_email, String user_password) throws Exception {
         userDAO.deleteUser(user_email, user_password);
+    }
+
+    @Override
+    public void modifyPassword(String user_email, String user_password) throws Exception {
+        userDAO.updatePassword(user_email, user_password);
     }
 }
