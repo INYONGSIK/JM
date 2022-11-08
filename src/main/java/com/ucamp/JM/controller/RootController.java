@@ -3,6 +3,8 @@ package com.ucamp.JM.controller;
 import com.ucamp.JM.dto.User;
 import com.ucamp.JM.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +19,8 @@ public class RootController {
 
     private final UserService userService;
     private final HttpSession session;
+
+    private Logger logger = LoggerFactory.getLogger(RootController.class);
 
     @GetMapping("/")
     public String main() {
@@ -104,4 +108,38 @@ public class RootController {
         }
     }
 
+    // 용식 : 비밀번호찾기 눌렀을 떄 나오는 폼
+    @GetMapping("/findpwform")
+    public String findpwform() {
+        return "findpwform";
+    }
+
+    // 용식 : 비밀번호 찾기에서 이메일인증시 비밀번호 바꾸는 폼
+    @GetMapping("/modifypasswordform")
+    public String modifypasswordform(@RequestParam(required = false) String user_email, Model model) {
+        model.addAttribute("user_email", user_email);
+        return "modifypasswordform";
+    }
+
+    // 용식 : 비밀번호 변경
+    @GetMapping("/modifyPassword")
+    public String modifyPassword(@RequestParam(value = "user_email") String user_email, @RequestParam(value = "user_password") String user_password, Model model) {
+        try {
+            logger.info("user_email =>" + user_email);
+            logger.info("user_email =>" + user_password);
+
+            userService.modifyPassword(user_email, user_password);
+            System.out.println("성공");
+            return "redirect:/";
+        } catch (Exception e) {
+            e.printStackTrace();
+            model.addAttribute("err", e.getMessage());
+            return "error";
+        }
+    }
 }
+
+
+
+
+
