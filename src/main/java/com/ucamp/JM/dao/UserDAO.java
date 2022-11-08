@@ -8,5 +8,4 @@ import java.util.ArrayList;
 @Mapper
 public interface UserDAO {
     ArrayList<User> selectAll();
-
 }
