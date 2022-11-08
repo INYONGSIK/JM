@@ -1,10 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>board</title>
+    <title>boardList</title>
 </head>
 <body>
+
+<form action="boardSearchList">
+    <select name="boardSearch">
+        <option value="전체">전체</option>
+        <option value="제목">제목</option>
+        <option value="작성자">작성자</option>
+    </select>
+
+    <input type="text" placeholder="검색어를 입력하세요" th:value="${boardSearchString}" name="boardSearchString">
+    <!--    <input type="hidden" name="mode" value="find"/>-->
+    <input type="submit" value="검색">
+</form>
+<br> <br>
+<a href="/boardWriteForm">글쓰기</a>
+
+<div>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>No.</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>작성일자</th>
+            <th>조회수</th>
+        </tr>
+        </thead>
+        <tbod>
+            <tr>
+                <td>1</td>
+                <td> 프론트에서 입력한 임의의 값</td>
+                <td>aaa</td>
+                <td>2022/11/08</td>
+                <td>3</td>
+            </tr>
+        </tbod>
+    </table>
+</div>
+
+<!--<div>-->
+<!--    <th:if test="${rowCount>0}">-->
+<!--        <th:if test="${startPage>1}">-->
+<!--            [<a th:href="/boardList?pageNum=${startPage-1}">이전</a>]-->
+<!--        </th:if>-->
+<!--        <th:forEach var="i" begin="${startPage}" end="${endPage}">-->
+<!--            [<a th:href="/boardList?pageNum=${i}">-->
+<!--            <th:out value="${i}"/>-->
+<!--        </a>]-->
+<!--        </th:forEach>-->
+<!--        <th:if test="${endPage<pageCount}">-->
+<!--            [<a th:href="/boardList?pageNum=${endPage+1}">다음</a>]-->
+<!--        </th:if>-->
+<!--    </th:if>-->
+<!--</div>-->
 
 </body>
 </html>
