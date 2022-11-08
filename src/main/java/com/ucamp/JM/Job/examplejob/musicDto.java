@@ -8,6 +8,7 @@ import lombok.*;
 @ToString
 @Builder(builderMethodName = "MusicDto")
 public class musicDto {
+
     private int music_number;
     private String music_title;
     private String music_singer;

@@ -19,6 +19,7 @@ import org.springframework.core.io.FileSystemResource;
 @Configuration
 @AllArgsConstructor
 @Slf4j
+
 public class FlatFileJobConfig {
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
