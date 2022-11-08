@@ -51,6 +51,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public boolean nicknameOverLapCheck(String user_nickname) throws Exception {
+        User user = userDAO.getUserInfoByNickname(user_nickname);
+        if (user == null) return false;
+        return true;
+    }
+
+    @Override
     public void deleteUser(String user_email, String user_password) throws Exception {
         userDAO.deleteUser(user_email, user_password);
     }

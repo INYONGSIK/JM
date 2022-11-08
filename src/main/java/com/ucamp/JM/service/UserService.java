@@ -15,6 +15,9 @@ public interface UserService {
     // 용식 : 이메일 중복 체크
     boolean emailOverLapCheck(String user_email) throws Exception;
 
+    // 용식 : 닉네임 중복 체크
+    boolean nicknameOverLapCheck(String user_nickname) throws Exception;
+
     // 용식 : 회원탈퇴
     void deleteUser(String user_email, String user_password) throws Exception;
 
