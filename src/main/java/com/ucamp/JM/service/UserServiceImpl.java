@@ -3,13 +3,19 @@ package com.ucamp.JM.service;
 import com.ucamp.JM.dao.UserDAO;
 import com.ucamp.JM.dto.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+
+import javax.mail.internet.MimeMessage;
+import java.util.Random;
 
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
     private final UserDAO userDAO;
+    private final JavaMailSender javaMailSender;
 
     @Override
     public User queryUser(String user_email) throws Exception {
@@ -65,5 +71,28 @@ public class UserServiceImpl implements UserService {
     @Override
     public void modifyPassword(String user_email, String user_password) throws Exception {
         userDAO.updatePassword(user_email, user_password);
+    }
+
+    // 이메일 인증 보내기
+    // 인증번호 return
+    @Override
+    public String sendMailForFindPw(String user_email) throws Exception {
+        Random random = new Random();
+        int checkNum = random.nextInt(999999);
+        String setFrom = "dlsdydtlr@gmail.com";
+        String toMail = user_email;
+        String title = ("[JM]인증이메일 입니다.");
+        String content = "<h1>인증번호는" + checkNum + "입니다.</h1>";
+
+        MimeMessage message = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, "utf-8");
+        helper.setFrom(setFrom);
+        helper.setTo(toMail);
+        helper.setSubject(title);
+        helper.setText(content, true);
+        javaMailSender.send(message);
+
+        String num = Integer.toString(checkNum);
+        return num;
     }
 }
