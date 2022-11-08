@@ -19,4 +19,7 @@
         #{user_birthday},#{user_phone_number},#{user_genre},#{user_image},#{type})
     </insert>
 
+    <delete id="deleteUser" parameterType="String">
+        delete * from jmuser where user_email = #{user_email} and user_password = #{user_password}
+    </delete>
 </mapper>
