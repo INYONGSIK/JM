@@ -86,6 +86,19 @@ public class RootController {
         return result;
     }
 
+    // 용식 : 닉네임 중복확인
+    @ResponseBody
+    @PostMapping("/nicknameoverlap")
+    public boolean nicknameoverlap(@RequestParam String user_nickname) {
+        boolean result = false;
+        try {
+            result = userService.nicknameOverLapCheck(user_nickname);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
     // 용식 : 회원탈퇴
     @ResponseBody
     @PostMapping("/deleteuser")
@@ -123,7 +136,7 @@ public class RootController {
 
     // 용식 : 비밀번호 변경
     @GetMapping("/modifyPassword")
-    public String modifyPassword(@RequestParam(value = "user_email") String user_email, @RequestParam(value = "user_password") String user_password, Model model) {
+    public String modifyPassword(@RequestParam String user_email, @RequestParam String user_password, Model model) {
         try {
             logger.info("user_email =>" + user_email);
             logger.info("user_email =>" + user_password);

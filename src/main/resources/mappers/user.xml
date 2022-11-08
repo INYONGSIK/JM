@@ -10,6 +10,10 @@
         select * from jmuser where user_email = #{user_email}
     </select>
 
+    <select id="getUserInfoByNickname" resultType="user" parameterType="String">
+        select * from jmuser where user_nickname = #{user_nickname}
+    </select>
+
     <!--용식: 회원가입 유저 정보 insert-->
     <insert id="insertUser" parameterType="user">
         insert into jmuser
@@ -23,7 +27,7 @@
         delete * from jmuser where user_email = #{user_email} and user_password = #{user_password}
     </delete>
 
-    <update id="updatePassword">
+    <update id="updatePassword" parameterType="map">
         <![CDATA[
         update jmuser set user_password = #{user_password} where user_email = #{user_email}
         ]]>
