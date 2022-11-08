@@ -22,4 +22,10 @@
     <delete id="deleteUser" parameterType="String">
         delete * from jmuser where user_email = #{user_email} and user_password = #{user_password}
     </delete>
+
+    <update id="updatePassword">
+        <![CDATA[
+        update jmuser set user_password = #{user_password} where user_email = #{user_email}
+        ]]>
+    </update>
 </mapper>
