@@ -5,8 +5,8 @@
 
 <mapper namespace="com.ucamp.JM.dao.UserDAO">
     <select id="selectAll" resultType="User">
-        select user_number,user_name from user_table
+        select * from jmuser
     </select>
 
-    
+
 </mapper>

@@ -11,4 +11,5 @@ public class JmApplication {
 		SpringApplication.run(JmApplication.class, args);
 	}
 
+
 }
