@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Speech To Text</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.js"
+            integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    <script src="resources/js/stt.js"></script>
+</head>
+<body>
+<h2>CSR : STT (음성을 텍스트로 변환)</h2>
+음성파일(mp3)에서 음성을 추출해서 텍스트로 변환<br><br>
+
+<form id="sttForm" method="post" enctype="multipart/form-data">
+    음성 파일 : <input type="file" id="uploadFile" name="uploadFile"><br><br>
+    언어 : <select name="language">
+    <option value="Kor" selected>한국어</option>
+    <option value="Eng">영어</option>
+    <option value="Jpn">일본어</option>
+    <option value="Chn">중국어</option>
+</select>
+
+    <input type="button" id="result" value="결과 확인">
+</form>
+<br><br>
+
+<h2>STT : 음성 파일을 텍스트로 변환한 결과</h2>
+<div id="resultDiv"></div>
+<br><br>
+
+<br><br>
+</body>
+<script>
+    $("#result").click(function(){
+        $.ajax({
+            type : "POST",
+            url : "clovaSTT",
+            data : uploadFile
+        })
+    })
+
+</script>
+</html>
