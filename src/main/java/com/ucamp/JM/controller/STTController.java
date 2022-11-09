@@ -4,6 +4,7 @@ import com.ucamp.JM.service.STTService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,6 +17,19 @@ public class STTController {
 
     @Autowired
     private STTService sttService;
+
+    @RequestMapping(value = "/voice", method = RequestMethod.GET)
+    public String voice() {
+
+        return "voiceRecord";
+    }
+
+    @RequestMapping(value = "/stt", method = RequestMethod.GET)
+    public String stt() {
+
+        return "sttResult";
+
+    }
 
     @RequestMapping(value = "/clovaSTT", produces = "application/text; charset=UTF-8")
     @ResponseBody
