@@ -29,9 +29,6 @@ function checkAll() {
     checkPhone();
     checkPhone2();
     checkRadio();
-
-    console.log(checkNickname());
-
     if (confirm("회원가입을하시겠습니까?")) {
         if (checkNickname() === true && checkEmail() === true && checkPassword() === true
             && checkPassword2() === true && checkName() === true
@@ -63,7 +60,7 @@ const setSuccess = element => {
 }
 
 function checkNickname() {
-    var checked = false;
+    var checkedNick = false;
     const nicknameValue = nickname.value.trim();
     var nicknamePattern = /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{1,10}$/;
     if (nicknameValue.value === "") {
@@ -81,19 +78,18 @@ function checkNickname() {
        },
        success: function(data){
         var isOk = data
+        //  isOk가 true => 이미있는 닉네임
         if(isOk){
-            console.log("false:" + nickname);
             setError(nickname, "이미있는 닉네임 입니다.");
-             checked = false;
+            checkedNick = false;
         }else{
-            console.log("true"+ nickname);
             setSuccess(nickname);
-            checked = true;
+            checkedNick = true;
         }
        }
      })
     }
-    return checked;
+    return checkedNick;
 }
 
 // 이메일 유효성 검사
@@ -246,8 +242,10 @@ $("#phoneChk").click(function () {
     var phone = $("#phone").val();
     $.ajax({
         type: "GET",
-        url: "phoneCheck?user_phone_number"
-        data : "user_phone_number" : phone
+        url: "phoneCheck",
+        data:{
+             "user_phone_number" : phone,
+        },
         success: function (data) {
             if (data == "error") {
                 alert("휴대폰 번호가 올바르지 않습니다.")
