@@ -1,18 +1,25 @@
 <!--회원가입 페이지-->
 <!DOCTYPE HTML>
-<html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
 <head>
     <title>회원가입</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
     <!--    <link rel="stylesheet" href="css/main.css"/>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        .error{
+            color:red;
+        }
+
+    </style>
 </head>
 <body class="is-preload">
 
 
 <!-- Wrapper -->
 <div id="wrapper">
-    <form action="/register" method="post">
+    <form action="/register" method="post" id="form">
         <!-- Main -->
         <div id="main">
 
@@ -22,18 +29,11 @@
                     <!-- 여기에 이미지 -->
                     <img src="#" alt=""/>
                 </div>
+                <!--필수사항-->
+                <h2>필수</h2>
                 <div class="container">
                     <!--닉네임-->
                     <table>
-                        <tr>
-                            <th>
-                                <label for="user_number">유저넘버 테스트</label>
-                            </th>
-                            <td>
-                                <input type="text" id="user_number" name="user_number"/>
-                                <div class="error"></div>
-                            </td>
-                        </tr>
                         <tr>
                             <th>
                                 <label for="user_nickname">닉네임</label>
@@ -126,6 +126,7 @@
             <!-- two -->
             <section id="two">
                 <!--선택 사항-->
+                <h2>선택</h2>
                 <!--선호하는 음악 장르-->
                 <div class="container">
                     <table>
@@ -150,11 +151,10 @@
                                 <div align="center" class="filebox" style="padding:10px">
                                     <label id="filebtn" for="user_profile">사진 등록</label>
                                     <input id="user_profile" name="user_image" type="file"
-                                           style="display: none" accept=".gif, .jpg, .png">
+                                           style="display: none" accept=".gif, .jpg, .png" onchange="readURL(this);">
                                 </div>
-                                <div id='attZone'>
-                                </div>
-                                <div class="error"></div>
+                                <!--이미지 미리보기-->
+                                <img id="preview" width="200" height="200" src="img/basic.png"/>
                             </td>
                         </tr>
                     </table>
@@ -190,7 +190,7 @@
                     </label>
                     <div class="error"></div>
                     <br><br>
-                    <input id="subbtn" type="submit" value="회원가입" class="w-btn"/>
+                    <input id="subbtn" type="button" value="회원가입" class="w-btn" onClick="return checkAll()"/>
                 </div>
 
             </section>
@@ -216,70 +216,19 @@
 <!--<script src="assets/js/breakpoints.min.js"></script>-->
 <!--<script src="assets/js/util.js"></script>-->
 <!--<script src="assets/js/main.js"></script>-->
+<script type=text/javascript th:src="@{/js/join/resisterValid.js}"></script>
 <script>
-    (/* att_zone : 이미지들이 들어갈 위치 id, btn : file tag id */
-        imageView = function imageView(att_zone, btn) {
-            var attZone = document.getElementById(att_zone);
-            var user_profile = document.getElementById(btn)
-            var sel_files = [];
-            // 미리보기 이미지 속성
-            var img_style = 'display:inline-block;position:relative;'
-                + 'width:150px;height:120px;margin:5px;border:1px solid #b4b4b4;z-index:1';
-            user_profile.onchange = function (e) {
-                var files = e.target.files;
-                var fileArr = Array.prototype.slice.call(files)
-                for (f of fileArr) {
-                    imageLoader(f);
-                }
-            }
-            <!--첨부된 이미리즐을 배열에 넣고 미리보기 -->
-            imageLoader = function (image) {
-                sel_files.push(image);
-                var reader = new FileReader();
-                reader.onload = function (ee) {
-                    let img = document.createElement('img')
-                    img.setAttribute('src', ee.target.result);
-                    img.setAttribute('style', img_style)
-                    document.querySelector("div#attZone").appendChild(img);
-                }
-                reader.readAsDataURL(image);
-            }
-        }
-    )('att_zone', 'user_profile')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+function readURL(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      document.getElementById('preview').src = e.target.result;
+    };
+    reader.readAsDataURL(input.files[0]);
+  } else {
+    document.getElementById('preview').src = "img/basic.png";
+  }
+}
 
 
 

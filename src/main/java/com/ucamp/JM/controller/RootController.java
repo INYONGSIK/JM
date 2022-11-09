@@ -1,6 +1,7 @@
 package com.ucamp.JM.controller;
 
 import com.ucamp.JM.dto.User;
+import com.ucamp.JM.service.SendAuthNumberPhone;
 import com.ucamp.JM.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -27,6 +28,7 @@ public class RootController {
         return "main";
     }
 
+    // 회원가입 폼
     @GetMapping("/registerform")
     public String registerform() {
         return "registerform";
@@ -45,6 +47,18 @@ public class RootController {
         return "redirect:/";
     }
 
+    // 용식 : 회원가입 문자정송
+    @ResponseBody
+    @GetMapping("/phoneCheck")
+    public String sendSMS(@RequestParam("user_phone_number") String userPhoneNumber) { // 휴대폰 문자보내기
+        int randomNumber = (int) ((Math.random() * (9999 - 1000 + 1)) + 1000);//난수 생성
+        SendAuthNumberPhone phone = new SendAuthNumberPhone();
+        phone.certifiedPhoneNumber(userPhoneNumber, randomNumber);
+        System.out.println(randomNumber);
+        return Integer.toString(randomNumber);
+    }
+
+    // 로그인 폼
     @GetMapping("/loginform")
     public String loginform() {
         return "loginform";
@@ -170,7 +184,10 @@ public class RootController {
         }
     }
 
-
+    @GetMapping("/findidform")
+    public String findidform() {
+        return "findidform";
+    }
 }
 
 
