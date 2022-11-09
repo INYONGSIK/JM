@@ -17,24 +17,24 @@ public class STTController {
     @Autowired
     private STTService sttService;
 
-    @RequestMapping(value = "/user/clovaSTT", produces = "application/text; charset=UTF-8")
+    @RequestMapping(value = "/clovaSTT", produces = "application/text; charset=UTF-8")
     @ResponseBody
     public String stt(@RequestParam("uploadFile") MultipartFile file,
                       @RequestParam("language") String language) {
         String result = "";
 
         try {
-            //1. 파일 저장 경로 설정 : 실제 서비스 되는 위치 (프로젝트 외부에 저장)
+            //1. 파일 저장 경로 설정 : 실제 서비스 되는 위치 (프로젝트 외부에 저장)   --이현호
             String uploadPath = "c:/ucamp36/ai";
 
-            //2.원본 파일 이름
+            //2.원본 파일 이름   --이현호
             String originalFileName = file.getOriginalFilename();
 
-            //3. 파일 생성
+            //3. 파일 생성   --이현호
             String filePathName = uploadPath + originalFileName;
             File file1 = new File(filePathName);
             System.out.println(filePathName);
-            //4. 서버로 전송
+            //4. 서버로 전송   --이현호
             file.transferTo(file1);
 
             result = sttService.clovaSpeechToText(filePathName, language);

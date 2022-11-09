@@ -14,8 +14,8 @@ public class STTServiceImpl implements STTService {
     @Override
     public String clovaSpeechToText(String filePathName, String language) {
 
-        String clientId = "xol4i19ny6";             // Application Client ID";
-        String clientSecret = "giPyiivYOd5AzbId0qhA3vvrCdGWHth2dOWGrz6J";     // Application Client Secret";
+        String clientId = "xol4i19ny6";             // Application Client ID"     --이현호;
+        String clientSecret = "giPyiivYOd5AzbId0qhA3vvrCdGWHth2dOWGrz6J";     // Application Client Secret"   --이현호;
         String result = null;
         try {
             File voiceFile = new File(filePathName);
@@ -43,9 +43,9 @@ public class STTServiceImpl implements STTService {
             inputStream.close();
             BufferedReader br = null;
             int responseCode = conn.getResponseCode();
-            if (responseCode == 200) { // 정상 호출
+            if (responseCode == 200) { // 정상 호출   --이현호
                 br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            } else {  // 오류 발생
+            } else {  // 오류 발생   --이현호
                 System.out.println("error!!!!!!! responseCode= " + responseCode);
                 br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             }
