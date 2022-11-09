@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ucamp.JM.dao.Playlist_ManageDAO">
+
+    <select id="selectAllPM" resultType="playlist_manage">
+        select list_name from playlist_manage
+    </select>
+
+    <insert id="insertPlaylist_Manage">
+        insert into playlist_manage(list_name, user_number)
+        values (#(list_name), #(user_number))
+    </insert>
+</mapper>
+
+<!--        insert into playlist_manage (list_name, user_number)-->
+<!--        values ('hi', 1);-->

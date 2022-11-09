@@ -1,3 +1,4 @@
+
 package com.ucamp.JM.dao;
 
 import com.ucamp.JM.dto.Music;
@@ -11,3 +12,4 @@ public interface MusicDAO {
 
     void insertTodayMusic(Music music);
 }
+
