@@ -3,10 +3,7 @@ package com.ucamp.JM.controller;
 import com.ucamp.JM.service.STTService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -31,7 +28,7 @@ public class STTController {
 
     }
 
-    @RequestMapping(value = "/clovaSTT", produces = "application/text; charset=UTF-8")
+    @PostMapping(value = "/clovaSTT", produces = "application/text; charset=UTF-8")
     @ResponseBody
     public String stt(@RequestParam("uploadFile") MultipartFile file,
                       @RequestParam("language") String language) {
