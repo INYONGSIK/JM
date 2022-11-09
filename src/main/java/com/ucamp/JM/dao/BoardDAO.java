@@ -1,6 +1,7 @@
 package com.ucamp.JM.dao;
 
 import com.ucamp.JM.dto.Board;
+import com.ucamp.JM.dto.User;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.ArrayList;
@@ -10,6 +11,9 @@ public interface BoardDAO {
 
     ArrayList<Board> boardSelectAll();
 
-    void boardWriteInput(Board board);
+    void insertBoardWrite(Board board);
+
+    User getUserNicknameByEmail(String user_email);
+
 
 }

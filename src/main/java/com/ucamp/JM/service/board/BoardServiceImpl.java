@@ -2,6 +2,7 @@ package com.ucamp.JM.service.board;
 
 import com.ucamp.JM.dao.BoardDAO;
 import com.ucamp.JM.dto.Board;
+import com.ucamp.JM.dto.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,5 +19,15 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public ArrayList<Board> boardSelectAll() {
         return boardDAO.boardSelectAll();
+    }
+
+    @Override
+    public User getUserNicknameByEmail(String user_email) {
+        return boardDAO.getUserNicknameByEmail(user_email);
+    }
+
+    @Override
+    public void insertBoardWrite(Board board) {
+        boardDAO.insertBoardWrite(board);
     }
 }
