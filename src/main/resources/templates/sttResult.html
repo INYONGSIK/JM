@@ -5,7 +5,7 @@
     <title>Speech To Text</title>
     <script src="https://code.jquery.com/jquery-3.6.1.js"
             integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
-    <script src="resources/js/stt.js"></script>
+    <script src="js/stt.js"></script>
 </head>
 <body>
 <h2>CSR : STT (음성을 텍스트로 변환)</h2>
@@ -20,8 +20,9 @@
     <option value="Chn">중국어</option>
 </select>
 
-    <input type="button" id="result" value="결과 확인">
+
 </form>
+<button id="sttFormAjax">결과 확인</button>
 <br><br>
 
 <h2>STT : 음성 파일을 텍스트로 변환한 결과</h2>
@@ -30,14 +31,5 @@
 
 <br><br>
 </body>
-<script>
-    $("#result").click(function(){
-        $.ajax({
-            type : "POST",
-            url : "clovaSTT",
-            data : uploadFile
-        })
-    })
 
-</script>
 </html>
