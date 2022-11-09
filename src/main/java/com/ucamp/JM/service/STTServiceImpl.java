@@ -20,7 +20,7 @@ public class STTServiceImpl implements STTService {
         try {
             File voiceFile = new File(filePathName);
 
-            //String language = "Kor";        // 언어 코드 ( Kor, Jpn, Eng, Chn )
+            //String language = "Kor";        // 언어 코드 ( Kor, Jpn, Eng, Chn ) => sttResult에서 언어 선택하여 value 값 받아오기   --이현호
             String apiURL = "https://naveropenapi.apigw.ntruss.com/recog/v1/stt?lang=" + language;
             URL url = new URL(apiURL);
 
