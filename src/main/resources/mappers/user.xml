@@ -19,7 +19,7 @@
         insert into jmuser
         (user_number ,user_nickname, user_email, user_password, user_name, user_birthday, user_phone_number, user_genre
         ,user_image, type)
-        values (#{user_number}, #{user_nickname}, #{user_email}, #{user_password}, #{user_name},
+        values (user_number.nextval, #{user_nickname}, #{user_email}, #{user_password}, #{user_name},
         #{user_birthday},#{user_phone_number},#{user_genre},#{user_image},#{type})
     </insert>
 
