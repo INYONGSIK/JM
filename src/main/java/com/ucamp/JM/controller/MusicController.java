@@ -20,7 +20,7 @@ public class MusicController {
     @RequestMapping("/music")
     public String test(Model model){
 
-        ArrayList<Music> musicList = musicService.selectMusicAll();
+        ArrayList<Music> musicList = musicService.selectRankMusic();
 
  
         model.addAttribute("musicList", musicList);

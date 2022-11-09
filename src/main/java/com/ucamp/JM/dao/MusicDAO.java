@@ -1,3 +1,4 @@
+
 package com.ucamp.JM.dao;
 
 import com.ucamp.JM.dto.Music;
@@ -7,5 +8,8 @@ import java.util.ArrayList;
 
 @Mapper
 public interface MusicDAO {
-    ArrayList<Music> selectAllMusic();
+    ArrayList<Music> selectMusic();
+
+    void insertTodayMusic(Music music);
 }
+

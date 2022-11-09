@@ -12,7 +12,7 @@
 
 <!-- Wrapper -->
 <div id="wrapper">
-    <form action="register" method="post">
+    <form action="/register" method="post">
         <!-- Main -->
         <div id="main">
 
@@ -25,6 +25,15 @@
                 <div class="container">
                     <!--닉네임-->
                     <table>
+                        <tr>
+                            <th>
+                                <label for="user_number">유저넘버 테스트</label>
+                            </th>
+                            <td>
+                                <input type="text" id="user_number" name="user_number"/>
+                                <div class="error"></div>
+                            </td>
+                        </tr>
                         <tr>
                             <th>
                                 <label for="user_nickname">닉네임</label>
@@ -50,7 +59,7 @@
                                 <label for="user_password">비밀번호</label>
                             </th>
                             <td>
-                                <input type="password" id="user_password" name="user_email"/>
+                                <input type="password" id="user_password" name="user_password"/>
                                 <div class="error"></div>
                             </td>
                         </tr>
@@ -91,7 +100,8 @@
                             </th>
                             <td>
                                 <div>
-                                    <input class="signup_inputs user_border" id="phone" type="text" name="user_phone"
+                                    <input class="signup_inputs user_border" id="phone" type="text"
+                                           name="user_phone_number"
                                            title="전화번호 입력" style=""/>
                                     <input type="button" id="phoneChk" class="w-btn" value="인증번호 받기">
                                 </div>
@@ -236,6 +246,11 @@
             }
         }
     )('att_zone', 'user_profile')
+
+
+
+
+
 
 
 

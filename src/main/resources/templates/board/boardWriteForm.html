@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>boardWriteForm</title>
+</head>
+
+<body>
+<div>
+    <label>게시글 작성</label>
+</div>
+<br> <br>
+
+<form name="f" action="/boardWriteInput" method="post"  onsubmit="return check()">
+
+
+    <div class="row">
+        <div >
+            <div class="row">
+                <div>
+                    <label>글쓴이</label>
+                </div>
+                <div>
+<!--                    <th:if test="${not empty AdminloginData}">-->
+<!--                        <input class="form-control" type="text" value="${AdminloginData.name}" name="dashboard_user" size="30"  disabled>-->
+<!--                    </th:if>-->
+
+<!--                    <th:block th:if="${session.user_email}">-->
+                        <input type="text" th:value="${dashboard_user}" name="dashboard_user" size="30"  disabled>
+                        <input type="text" th:value="${user_number}" name="user_number"/>
+<!--
+</th:block>-->
+
+
+
+            </div>
+            <br>
+
+            <div>
+                <div>
+                    <label>제 목</label>
+                </div>
+                <div>
+                    <input  type="text" name="dashboard_title" size="50">
+                </div>
+            </div>
+            <br>
+
+            <div >
+                <div >
+                    <label>내 용</label>
+                </div>
+                <div >
+                    <textarea  name="dashboard_content" rows="11" cols="50"></textarea>
+                </div>
+            </div>
+
+            <br><br>
+
+            <div class="row">
+                <div >
+                    <input type="submit" value="글쓰기">
+                </div>
+                &nbsp;
+                <div >
+                    <input  type="reset" value="다시작성">
+                </div>
+                &nbsp;
+                <div >
+                    <input  type="button" value="목록보기" onclick="window.location='boardList'">
+                    <!--  	<input type="button" value="목록보기" onclick="window.location='list_board.do'">  -->
+                </div>
+            </div>
+            <br><br>
+        </div>
+    </div>
+
+</body>
+</html>
