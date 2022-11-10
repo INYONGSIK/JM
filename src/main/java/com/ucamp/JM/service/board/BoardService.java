@@ -11,4 +11,9 @@ public interface BoardService {
     User getUserNicknameByEmail(String user_email);
 
     void insertBoardWrite(Board board);
+
+    Board readboard(int dashboard_No);
+
+    void deletedashboard(int dashboard_No);
+
 }
