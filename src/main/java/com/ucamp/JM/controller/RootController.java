@@ -9,8 +9,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.util.UUID;
 
 
 @Controller
@@ -20,7 +24,6 @@ public class RootController {
 
     private final UserService userService;
     private final HttpSession session;
-
     private Logger logger = LoggerFactory.getLogger(RootController.class);
 
     @GetMapping("/")
@@ -36,10 +39,35 @@ public class RootController {
 
     // 용식 :회원가입
     @PostMapping("/register")
-    public String register(@ModelAttribute User user) {
+    public String register(HttpServletRequest request, MultipartFile user_image) {
+        User user = new User();
+        user.setUser_email(request.getParameter("user_email"));
+        user.setUser_nickname(request.getParameter("user_nickname"));
+        user.setUser_password(request.getParameter("user_password"));
+        user.setUser_name(request.getParameter("user_name"));
+        user.setUser_birthday(request.getParameter("user_birthday"));
+        user.setUser_phone_number(request.getParameter("user_phone_number"));
+        user.setUser_genre(request.getParameter("user_genre"));
+        user.setUser_image(request.getParameter("user_image"));
+        // 회원가입시 유저타입(admin or user) user 로 설정
+        user.setType("user");
+
         try {
-            // 회원가입시 유저타입(admin or user) user 로 설정
-            user.setType("user");
+            // 원래 파일 이름
+            String profile = user_image.getOriginalFilename();
+            // 파일이름으로 사용할 uuid 생성
+            String uuid = UUID.randomUUID().toString();
+            // 확장자 추출 ( ex.png)
+            String extension = profile.substring(profile.lastIndexOf(".") + 1);
+            // uuid 와 확장자 결합
+            String saveProfile = uuid + "." + extension;
+            // 저장할 위치
+            // servletContext 쓸려면 private final ServletContext servletContext; 해줘여함
+            // String path = servletContext.getRealPath("/resources/img/profile/"); --내장톰켓써서 패스가 안잡힘
+            String path = "C:\\Users\\user\\Desktop\\ucamp-project\\JM\\src\\main\\resources\\static\\img\\profile\\";
+            File destFile = new File(path + saveProfile);
+            user_image.transferTo(destFile);
+            user.setUser_image(saveProfile.toString());
             userService.register(user);
         } catch (Exception e) {
             e.printStackTrace();
