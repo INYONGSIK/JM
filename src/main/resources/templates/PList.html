@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>PList</h1>
+<input type="hidden" name="user_number" th:value="${P_user_number}"><br>
+<input type="hidden" name="list_name" th:value="${P_list_name}"><br>
+<ul th:each="P: ${Plist}">
+    <li>playlist = [[${P.music_number}]]</li>
+</ul>
+
+</body>
+</html>
