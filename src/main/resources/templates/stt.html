@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Speech To Text</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.js"
+            integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    <script src="js/stt.js"></script>
+    <script src="js/voiceRecord.js"></script>
+</head>
+<body>
+<button id="record">시작</button>
+<button id="stop">종료</button>
+<div id="sound-clips"></div>
+
+<br><br>
+
+<form id="sttForm" method="post" enctype="multipart/form-data">
+    음성 파일 : <input type="file" name="uploadFile"><br><br>
+
+</form>
+<button id="sttFormAjax">결과 확인</button>
+<br><br>
+
+<h2>STT : 음성 파일을 텍스트로 변환한 결과</h2>
+<div id="resultDiv"></div>
+<br><br>
+
+
+</body>
+
+</html>
