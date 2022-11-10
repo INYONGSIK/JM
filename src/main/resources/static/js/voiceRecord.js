@@ -31,6 +31,14 @@
                         record.style.background = "";
                         record.style.color = "";
                     }
+
+                    mediaRecorder.onstart = e =>{
+                    console.log("녹음시작합니다")
+//                    $.ajax({
+//                        type:"POST",
+//                        url:"/deleteFile",
+//                        data})
+                    }
                     
                     mediaRecorder.onstop = e => {
                         
@@ -57,7 +65,7 @@
                         const audioURL = URL.createObjectURL(blob);
                         audio.src = audioURL;
                         //blob:http://localhost:8090/485bdf60-bcb4-41ea-913e-93a5745e78a8
-                        a.href=audio.src;                     
+                        a.href=audioURL;
                         a.download = clipName;
                        //a.innerHTML = "DOWN"
 						a.click(); // 다운로드 폴더에 저장하도록 클릭 이벤트 발생
