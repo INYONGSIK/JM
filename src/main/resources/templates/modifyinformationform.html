@@ -153,7 +153,7 @@
                                            style="display: none" accept=".gif, .jpg, .png" onchange="readURL(this);">
                                 </div>
                                 <!--이미지 미리보기-->
-                                <img id="preview" width="200" height="200" src="/img/profile/fe6ab046-181b-49d2-a4fa-4bcec3d96fb5.png"/>
+                                <img id="preview" width="200" height="200" th:src="|/img/profile/${user.user_image}|"/>
                             </td>
                         </tr>
                     </table>
