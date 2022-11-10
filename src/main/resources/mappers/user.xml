@@ -5,16 +5,17 @@
 
 <mapper namespace="com.ucamp.JM.dao.UserDAO">
 
-    <!--용식: 이메일로 유저 정보 가져오기-->
+    <!--이메일로 유저 정보 가져오기-->
     <select id="getUserInfoByEmail" resultType="user" parameterType="String">
         select * from jmuser where user_email = #{user_email}
     </select>
 
+    <!--닉네임으로 유저 정보 가져오기(닉네임 중복체크)-->
     <select id="getUserInfoByNickname" resultType="user" parameterType="String">
         select * from jmuser where user_nickname = #{user_nickname}
     </select>
 
-    <!--용식: 회원가입 유저 정보 insert-->
+    <!--회원가입 유저 정보 insert-->
     <insert id="insertUser" parameterType="user">
         insert into jmuser
         (user_number ,user_nickname, user_email, user_password, user_name, user_birthday, user_phone_number, user_genre
@@ -22,14 +23,19 @@
         values (user_number.nextval, #{user_nickname}, #{user_email}, #{user_password}, #{user_name},
         #{user_birthday},#{user_phone_number},#{user_genre},#{user_image},#{type})
     </insert>
-
+    <!--회원 탈퇴-->
     <delete id="deleteUser" parameterType="String">
         delete * from jmuser where user_email = #{user_email} and user_password = #{user_password}
     </delete>
-
+    <!--비밀번호 변경-->
     <update id="updatePassword" parameterType="map">
         <![CDATA[
         update jmuser set user_password = #{user_password} where user_email = #{user_email}
         ]]>
     </update>
+
+    <!--아이디(이메일) 찾기 => 이름과 휴대폰 번호로 이메일 가져오기 -->
+    <select id="getEmailByNameAndPhone" resultType="user" parameterType="map">
+        select user_email from jmuser where user_name = #{user_name} and user_phone_number = #{user_phone_number}
+    </select>
 </mapper>
