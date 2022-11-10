@@ -5,16 +5,14 @@ import com.ucamp.JM.service.board.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.Writer;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 
 @Controller
 public class BoardController {
@@ -51,7 +49,10 @@ public class BoardController {
 
     @RequestMapping("/readboard/{dashboard_No}")
     public String readboard(Model model, @PathVariable int dashboard_No) {
+
+
         Board board = boardService.readboard(dashboard_No);
+        model.addAttribute("dashboard_No", dashboard_No);
         model.addAttribute("dashboard_user", board.getDashboard_user());
         model.addAttribute("dashboard_title", board.getDashboard_title());
         model.addAttribute("dashboard_content", board.getDashboard_content());
@@ -79,6 +80,35 @@ public class BoardController {
             response.flushBuffer();
             out.close();
         }
+
+
+        return "redirect:/boardList";
+    }
+
+    @GetMapping("/boardSearchList")
+    public String boardSearchList(@RequestParam String boardSearchString, Model model) {
+
+        ArrayList<Board> boardsearchList = boardService.boardSearchList(boardSearchString);
+
+        model.addAttribute("dashboards", boardsearchList);
+
+        return "/board/boardList";
+    }
+
+    @GetMapping("/editBoardForm/{dashboard_No}")
+    public String editBoardForm(@PathVariable int dashboard_No, Model model) {
+
+        Board board = boardService.readboard(dashboard_No);
+        model.addAttribute("dashboard_user", board.getDashboard_user());
+        model.addAttribute("dashboard_title", board.getDashboard_title());
+        model.addAttribute("dashboard_content", board.getDashboard_content());
+
+        return "/board/editBoardForm";
+    }
+
+    @GetMapping("/editBoard")
+    public String editBoard(@RequestParam int dashboard_No) {
+        boardService.editBoard(dashboard_No);
 
 
         return "redirect:/boardList";

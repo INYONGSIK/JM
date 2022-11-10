@@ -74,7 +74,7 @@ public class RootController {
             // 저장할 위치
             // servletContext 쓸려면 private final ServletContext servletContext; 해줘여함
             // String path = servletContext.getRealPath("/resources/img/profile/"); --내장톰켓써서 패스가 안잡힘
-            String path = "C:\\Users\\user\\Desktop\\ucamp-project\\JM\\src\\main\\resources\\static\\img\\profile\\";
+            String path = "C:\\Users\\dbsek\\Desktop\\팀프로젝트\\JM\\src\\main\\resources\\static\\img\\profile\\";
             File destFile = new File(path + saveProfile);
             user_image.transferTo(destFile);
             user.setUser_image(saveProfile.toString());
@@ -123,7 +123,7 @@ public class RootController {
             // 저장할 위치
             // servletContext 쓸려면 private final ServletContext servletContext; 해줘여함
             // String path = servletContext.getRealPath("/resources/img/profile/"); --내장톰켓써서 패스가 안잡힘
-            String path = "C:\\Users\\user\\Desktop\\ucamp-project\\JM\\src\\main\\resources\\static\\img\\profile\\";
+            String path = "C:\\Users\\dbsek\\Desktop\\팀프로젝트\\JM\\src\\main\\resources\\static\\img\\profile\\";
             File destFile = new File(path + saveProfile);
             user_image.transferTo(destFile);
             user.setUser_image(saveProfile.toString());
