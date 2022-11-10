@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>boardWriteForm</title>
+
+
+
 </head>
 
 <body>
@@ -21,17 +24,8 @@
                     <label>글쓴이</label>
                 </div>
                 <div>
-<!--                    <th:if test="${not empty AdminloginData}">-->
-<!--                        <input class="form-control" type="text" value="${AdminloginData.name}" name="dashboard_user" size="30"  disabled>-->
-<!--                    </th:if>-->
-
-<!--                    <th:block th:if="${session.user_email}">-->
-                        <input type="text" th:value="${dashboard_user}" name="dashboard_user" size="30"  disabled>
-                        <input type="text" th:value="${user_number}" name="user_number"/>
-<!--
-</th:block>-->
-
-
+                        <input type="text" th:value="${dashboard_user}" id="dashboard_user" name="dashboard_user" size="30"  readonly>
+                        <input type="hidden" th:value="${user_number}" name="user_number"/>
 
             </div>
             <br>

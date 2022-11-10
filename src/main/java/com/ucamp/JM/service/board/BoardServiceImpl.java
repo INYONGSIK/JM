@@ -30,4 +30,14 @@ public class BoardServiceImpl implements BoardService {
     public void insertBoardWrite(Board board) {
         boardDAO.insertBoardWrite(board);
     }
+
+    @Override
+    public Board readboard(int dashboard_No) {
+        return boardDAO.readboard(dashboard_No);
+    }
+
+    @Override
+    public void deletedashboard(int dashboard_No) {
+        boardDAO.deletedashboard(dashboard_No);
+    }
 }
