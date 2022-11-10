@@ -15,7 +15,7 @@
 			processData:false, //필수
 			contentType:false, //필수
 			success:function(result){
-				alert(result);
+//				alert(result);
 				data=JSON.parse(result);
 				$('#resultDiv').text(data.text);
 			},
