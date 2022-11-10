@@ -96,5 +96,22 @@ public class UserServiceImpl implements UserService {
         return num;
     }
 
+    // 아이디 찾을 때 이름과 휴대폰번호를 이용해 이메일이 있는지 확인 : boolean
+    @Override
+    public boolean findId(String user_name, String user_phone_number) throws Exception {
+        User user = userDAO.getEmailByNameAndPhone(user_name, user_phone_number);
+        if (user == null) return false;
+        return true;
+    }
 
+    // 아이디 찾을 때 이름과 휴대폰번호를 이용해 이메일 return
+    @Override
+    public User findId2(String user_name, String user_phone_number) throws Exception {
+        return userDAO.getEmailByNameAndPhone(user_name, user_phone_number);
+    }
+
+    @Override
+    public void modifyUserInfo(User user) throws Exception {
+        userDAO.updateUser(user);
+    }
 }

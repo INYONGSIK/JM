@@ -1,6 +1,7 @@
 package com.ucamp.JM.controller;
 
 import com.ucamp.JM.dto.User;
+import com.ucamp.JM.service.SendAuthNumberPhone;
 import com.ucamp.JM.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -8,8 +9,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 
 @Controller
@@ -19,7 +27,7 @@ public class RootController {
 
     private final UserService userService;
     private final HttpSession session;
-
+    private final ServletContext servletContext;
     private Logger logger = LoggerFactory.getLogger(RootController.class);
 
     @GetMapping("/")
@@ -27,6 +35,7 @@ public class RootController {
         return "main";
     }
 
+    // 회원가입 폼
     @GetMapping("/registerform")
     public String registerform() {
         return "registerform";
@@ -34,10 +43,42 @@ public class RootController {
 
     // 용식 :회원가입
     @PostMapping("/register")
-    public String register(@ModelAttribute User user) {
+    public String register(HttpServletRequest request, MultipartFile user_image) {
+        User user = new User();
+        user.setUser_email(request.getParameter("user_email"));
+        user.setUser_nickname(request.getParameter("user_nickname"));
+        user.setUser_password(request.getParameter("user_password"));
+        user.setUser_name(request.getParameter("user_name"));
+        user.setUser_birthday(request.getParameter("user_birthday"));
+        user.setUser_phone_number(request.getParameter("user_phone_number"));
+        String[] genres = request.getParameterValues("user_genre");
+        List<String> sortGenre = new ArrayList<>();
+        if (genres != null) {
+            for (String genre : genres) {
+                sortGenre.add(genre);
+            }
+        }
+        user.setUser_genre(sortGenre.toString().substring(1, sortGenre.toString().length() - 1).trim());
+        user.setUser_image(request.getParameter("user_image"));
+
+        // 회원가입시 유저타입(admin or user) user 로 설정
+        user.setType("user");
+
         try {
-            // 회원가입시 유저타입(admin or user) user 로 설정
-            user.setType("user");
+            // 원래 파일 이름
+            String profile = user_image.getOriginalFilename();
+            // 파일이름으로 사용할 uuid 생성
+            String uuid = UUID.randomUUID().toString();
+            // 확장자 추출 ( ex.png)
+            String extension = profile.substring(profile.lastIndexOf(".") + 1);
+            // uuid 와 확장자 결합
+            String saveProfile = uuid + "." + extension;
+            // 저장할 위치
+            // servletContext 쓸려면 private final ServletContext servletContext; 해줘여함
+            String path = servletContext.getRealPath("/img/profile/");
+            File destFile = new File(path + saveProfile);
+            user_image.transferTo(destFile);
+            user.setUser_image(saveProfile.toString());
             userService.register(user);
         } catch (Exception e) {
             e.printStackTrace();
@@ -45,6 +86,18 @@ public class RootController {
         return "redirect:/";
     }
 
+    // 용식 : 회원가입 문자정송
+    @ResponseBody
+    @GetMapping("/phoneCheck")
+    public String sendSMS(@RequestParam("user_phone_number") String userPhoneNumber) { // 휴대폰 문자보내기
+        int randomNumber = (int) ((Math.random() * (9999 - 1000 + 1)) + 1000);//난수 생성
+        SendAuthNumberPhone phone = new SendAuthNumberPhone();
+        phone.certifiedPhoneNumber(userPhoneNumber, randomNumber);
+        System.out.println(randomNumber);
+        return Integer.toString(randomNumber);
+    }
+
+    // 로그인 폼
     @GetMapping("/loginform")
     public String loginform() {
         return "loginform";
@@ -134,7 +187,7 @@ public class RootController {
         String result = "";
         try {
             User user = userService.queryUser(user_email);
-            if (user.getUser_email() != null) {
+            if (user != null) {
                 result = userService.sendMailForFindPw(user_email);
             } else {
                 result = "유저없음";
@@ -170,6 +223,114 @@ public class RootController {
         }
     }
 
+    // 이름과 휴대폰번호가가 일치하고 존재하는지 확인
+    @GetMapping("/findidform")
+    public String findidform() {
+        return "findidform";
+    }
+
+    @ResponseBody
+    @PostMapping(value = "findid", produces = "application/text; charset=UTF-8")
+    public String findid(@RequestParam String user_name, @RequestParam String user_phone_number) {
+        String result = "";
+        try {
+            if (userService.findId(user_name, user_phone_number)) {
+                result = "성공";
+            } else {
+                result = "유저없음";
+            }
+        } catch (Exception e) {
+            result = "에러";
+            throw new RuntimeException(e);
+        }
+        return result;
+    }
+
+    // 이름과 휴대폰번호가 일치했을 때 보내줄 사용자 이메일
+    @ResponseBody
+    @PostMapping("findid2")
+    public User findid2(@RequestParam String user_name, @RequestParam String user_phone_number) {
+        User user = null;
+        try {
+            user = userService.findId2(user_name, user_phone_number);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+
+        }
+        return user;
+    }
+
+    @GetMapping("/modifyinformationform")
+    public String modifyinformation(Model model) {
+        String email = (String) session.getAttribute("user_email");
+        if (email == null) {
+            return "redirect:/";
+        }
+        try {
+            User user = userService.queryUser(email);
+            user.setUser_birthday(user.getUser_birthday().substring(0, 10));
+            if (user == null) {
+                return "/loginform";
+            } else {
+                model.addAttribute("user", user);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "modifyinformationform";
+    }
+
+    // 회원정보 수정
+    @PostMapping("modifyinformation")
+    public String modifyinformation(HttpServletRequest request, MultipartFile user_image) throws Exception {
+        String email = (String) session.getAttribute("user_email");
+        User info = userService.queryUser(email);
+
+        User user = new User();
+        user.setUser_email(request.getParameter("user_email"));
+        user.setUser_nickname(request.getParameter("user_nickname"));
+        user.setUser_password(request.getParameter("user_password"));
+        user.setUser_name(request.getParameter("user_name"));
+        user.setUser_birthday(request.getParameter("user_birthday"));
+        user.setUser_phone_number(request.getParameter("user_phone_number"));
+
+        String[] genres = request.getParameterValues("user_genre");
+        List<String> sortGenre = new ArrayList<>();
+        if (genres != null) {
+            for (String genre : genres) {
+                sortGenre.add(genre);
+            }
+        }
+        user.setUser_genre(sortGenre.toString().substring(1, sortGenre.toString().length() - 1).trim());
+        user.setUser_image(request.getParameter("user_image"));
+        try {
+            System.out.println(user);
+            // 원래 파일 이름
+            String profile = user_image.getOriginalFilename();
+            // 파일이름으로 사용할 uuid 생성
+            String uuid = UUID.randomUUID().toString();
+            // 확장자 추출 ( ex.png)
+            String extension = profile.substring(profile.lastIndexOf(".") + 1);
+            // uuid 와 확장자 결합
+            String saveProfile = uuid + "." + extension;
+            // 저장할 위치
+            // servletContext 쓸려면 private final ServletContext servletContext; 해줘여함 --내장톰켓써서 패스가 안잡힘
+            String path = servletContext.getRealPath("/img/profile/");
+            System.out.println("path : " + path);
+            File destFile = new File(path + saveProfile);
+            user_image.transferTo(destFile);
+            user.setUser_image(saveProfile.toString());
+            if (user.getUser_password().equals("")) {
+                user.setUser_password(info.getUser_password());
+            }
+            userService.modifyUserInfo(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "redirect:/modifyinformationform";
+    }
 
 }
 

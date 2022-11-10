@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<form action="boardSearchList">
+<form action="/boardSearchList">
     <select name="boardSearch">
         <option value="전체">전체</option>
         <option value="제목">제목</option>
@@ -14,11 +14,17 @@
     </select>
 
     <input type="text" placeholder="검색어를 입력하세요" th:value="${boardSearchString}" name="boardSearchString">
-    <!--    <input type="hidden" name="mode" value="find"/>-->
+
     <input type="submit" value="검색">
 </form>
 <br> <br>
-<a href="/boardWriteForm">글쓰기</a>
+<th:block th:if="${session.user_email}">
+    <a href="/boardWriteForm">글쓰기</a>
+</th:block>
+
+<th:block th:unless="${session.user_email}">
+    회원가입 후 글쓰기 가능합니다.
+</th:block>
 
 <div>
     <table border="1">
@@ -32,12 +38,12 @@
         </tr>
         </thead>
         <tbod>
-            <tr>
-                <td>1</td>
-                <td> 프론트에서 입력한 임의의 값</td>
-                <td>aaa</td>
-                <td>2022/11/08</td>
-                <td>3</td>
+            <tr th:each="d:${dashboards}">
+                <td>[[${d.dashboard_No}]]</td>
+                <td><a th:href="|/readboard/${d.dashboard_No}|"> [[${d.dashboard_title}]] </a></td>
+                <td>[[${d.dashboard_user}]]</td>
+                <td>[[${d.dashboard_date}]]</td>
+                <td>[[${d.dashboard_views}]]</td>
             </tr>
         </tbod>
     </table>
