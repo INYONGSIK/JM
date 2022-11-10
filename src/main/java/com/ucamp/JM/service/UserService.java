@@ -32,4 +32,6 @@ public interface UserService {
 
     // 용식 : 이름과 휴대폰번호로 아이디찾기
     User findId2(String user_name, String user_phone_number) throws Exception;
+
+    void modifyUserInfo(User user) throws Exception;
 }

@@ -38,4 +38,16 @@
     <select id="getEmailByNameAndPhone" resultType="user" parameterType="map">
         select user_email from jmuser where user_name = #{user_name} and user_phone_number = #{user_phone_number}
     </select>
+
+    <update id="updateUser" parameterType="user">
+        update jmuser set
+        user_nickname = #{user_nickname},
+        user_password = #{user_password},
+        user_name = #{user_name},
+        user_birthday=#{user_birthday},
+        user_phone_number = #{user_phone_number},
+        user_genre = #{user_genre},
+        user_image = #{user_image}
+        where user_email = #{user_email}
+    </update>
 </mapper>
