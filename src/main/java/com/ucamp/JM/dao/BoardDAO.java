@@ -15,5 +15,8 @@ public interface BoardDAO {
 
     User getUserNicknameByEmail(String user_email);
 
+    Board readboard(int dashboard_No);
+
+    void deletedashboard(int dashboard_No);
 
 }
