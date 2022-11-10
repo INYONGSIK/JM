@@ -13,6 +13,8 @@
         }
 
 
+
+
     </style>
 </head>
 <body class="is-preload">
@@ -155,7 +157,7 @@
                                            style="display: none" accept=".gif, .jpg, .png" onchange="readURL(this);">
                                 </div>
                                 <!--이미지 미리보기-->
-                                <img id="preview" width="200" height="200" src="img/basic.png"/>
+                                <img id="preview" width="200" height="200" src="webapp/img/basic.png"/>
                             </td>
                         </tr>
                     </table>
@@ -198,7 +200,7 @@
         </div>
     </form>
 </div>
-<script type=text/javascript th:src="@{/js/join/resisterValid.js}"></script>
+<script type=text/javascript th:src="@{webapp/js/join/resisterValid.js}"></script>
 <script>
 function readURL(input) {
   if (input.files && input.files[0]) {
@@ -211,6 +213,8 @@ function readURL(input) {
     document.getElementById('preview').src = "img/basic.png";
   }
 }
+
+
 
 </script>
 </body>
