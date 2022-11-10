@@ -85,7 +85,7 @@ public class RootController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "redirect:/modifyinformationform";
+        return "redirect:/";
     }
 
     // 용식 :회원가입
@@ -98,8 +98,16 @@ public class RootController {
         user.setUser_name(request.getParameter("user_name"));
         user.setUser_birthday(request.getParameter("user_birthday"));
         user.setUser_phone_number(request.getParameter("user_phone_number"));
-        user.setUser_genre(request.getParameter("user_genre"));
+        String[] genres = request.getParameterValues("user_genre");
+        List<String> sortGenre = new ArrayList<>();
+        if (genres != null) {
+            for (String genre : genres) {
+                sortGenre.add(genre);
+            }
+        }
+        user.setUser_genre(sortGenre.toString().substring(1, sortGenre.toString().length() - 1).trim());
         user.setUser_image(request.getParameter("user_image"));
+
         // 회원가입시 유저타입(admin or user) user 로 설정
         user.setType("user");
 
@@ -309,6 +317,7 @@ public class RootController {
         }
         try {
             User user = userService.queryUser(email);
+            user.setUser_birthday(user.getUser_birthday().substring(0, 10));
             if (user == null) {
                 return "/loginform";
             } else {
