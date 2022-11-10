@@ -40,4 +40,14 @@ public class BoardServiceImpl implements BoardService {
     public void deletedashboard(int dashboard_No) {
         boardDAO.deletedashboard(dashboard_No);
     }
+
+    @Override
+    public ArrayList<Board> boardSearchList(String boardSearchString) {
+        return boardDAO.boardSearchList(boardSearchString);
+    }
+
+    @Override
+    public void editBoard(int dashboard_No) {
+        boardDAO.editBoard(dashboard_No);
+    }
 }
