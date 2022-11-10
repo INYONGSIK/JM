@@ -10,8 +10,12 @@
 
     <insert id="insertPlaylist_Manage">
         insert into playlist_manage(list_name, user_number)
-        values (#(list_name), #(user_number))
+        values (#{list_name}, #{user_number})
     </insert>
+
+    <select id="PMgetUserNumByEmail" resultType="User">
+        select user_number from jmuser where user_email=#{user_email}
+    </select>
 </mapper>
 
 <!--        insert into playlist_manage (list_name, user_number)-->
