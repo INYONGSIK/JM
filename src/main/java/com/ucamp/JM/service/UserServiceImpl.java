@@ -109,4 +109,9 @@ public class UserServiceImpl implements UserService {
     public User findId2(String user_name, String user_phone_number) throws Exception {
         return userDAO.getEmailByNameAndPhone(user_name, user_phone_number);
     }
+
+    @Override
+    public void modifyUserInfo(User user) throws Exception {
+        userDAO.updateUser(user);
+    }
 }
