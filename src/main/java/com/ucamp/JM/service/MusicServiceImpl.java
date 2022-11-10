@@ -16,9 +16,10 @@ public class MusicServiceImpl implements MusicService {
 
     private final MusicDAO musicDAO;
 
+
     @Override
-    public ArrayList<Music> selectRankMusic() {
-        return musicDAO.selectMusic();
+    public ArrayList<Music> selectAllMusic() {
+        return musicDAO.selectAllMusic();
     }
 
     @Override

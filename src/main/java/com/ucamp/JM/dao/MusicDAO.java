@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 @Mapper
 public interface MusicDAO {
-    ArrayList<Music> selectMusic();
+    ArrayList<Music> selectAllMusic();
 
     void insertTodayMusic(Music music);
 }

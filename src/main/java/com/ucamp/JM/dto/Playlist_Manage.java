@@ -11,5 +11,5 @@ import lombok.ToString;
 @ToString
 public class Playlist_Manage {
     private String list_name;
-    private String user_number;
+    private int user_number;
 }
