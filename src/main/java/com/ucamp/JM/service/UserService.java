@@ -26,4 +26,10 @@ public interface UserService {
 
     // 용식 : 비밀번호 찾기 이메일보내기
     String sendMailForFindPw(String email) throws Exception;
+
+    // 용식 : 이름과 휴대폰번호로 아이디찾기가 있는지 확인
+    boolean findId(String user_name, String user_phone_number) throws Exception;
+
+    // 용식 : 이름과 휴대폰번호로 아이디찾기
+    User findId2(String user_name, String user_phone_number) throws Exception;
 }

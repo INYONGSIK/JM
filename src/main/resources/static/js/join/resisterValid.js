@@ -60,7 +60,7 @@ const setSuccess = element => {
 }
 
 function checkNickname() {
-    var checkedNick = false;
+    var checkedNick = true;
     const nicknameValue = nickname.value.trim();
     var nicknamePattern = /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{1,10}$/;
     if (nicknameValue.value === "") {
@@ -94,7 +94,7 @@ function checkNickname() {
 
 // 이메일 유효성 검사
 function checkEmail() {
-    var checked = false;
+    var checked = true;
     const emailValue = email.value.trim();
     var emailPattern = /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
     if (emailValue === "") {
@@ -160,7 +160,7 @@ function checkPassword2() {
 // 이름 유효성 검사
 function checkName() {
     const nameValue = name.value.trim();
-    var namePattern = /^[가-힣]{2,4}$/;
+    var namePattern = /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{1,10}$/;
     if (nameValue === "") {
         setError(name, "필수 정보입니다.");
         return false;
