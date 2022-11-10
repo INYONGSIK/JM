@@ -148,7 +148,7 @@ public class RootController {
         String result = "";
         try {
             User user = userService.queryUser(user_email);
-            if (user.getUser_email() != null) {
+            if (user != null) {
                 result = userService.sendMailForFindPw(user_email);
             } else {
                 result = "유저없음";
@@ -184,9 +184,42 @@ public class RootController {
         }
     }
 
+    // 이름과 휴대폰번호가가 일치하고 존재하는지 확인
     @GetMapping("/findidform")
     public String findidform() {
         return "findidform";
+    }
+
+    @ResponseBody
+    @PostMapping(value = "findid", produces = "application/text; charset=UTF-8")
+    public String findid(@RequestParam String user_name, @RequestParam String user_phone_number) {
+        String result = "";
+        try {
+            if (userService.findId(user_name, user_phone_number)) {
+                result = "성공";
+            } else {
+                result = "유저없음";
+            }
+        } catch (Exception e) {
+            result = "에러";
+            throw new RuntimeException(e);
+        }
+        return result;
+    }
+
+    // 이름과 휴대폰번호가 일치했을 때 보내줄 사용자 이메일
+    @ResponseBody
+    @PostMapping("findid2")
+    public User findid2(@RequestParam String user_name, @RequestParam String user_phone_number) {
+        User user = null;
+        try {
+            user = userService.findId2(user_name, user_phone_number);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+
+        }
+        return user;
     }
 }
 
