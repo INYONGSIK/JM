@@ -34,7 +34,7 @@
                     
                     mediaRecorder.onstop = e => {
                         
-                        const clipName = "voiceMsg";  // 파일명 : 확장자 안 붙었음
+                        const clipName = "voice";  // 파일명 : 확장자 안 붙었음
 						//태그 3개 생성
                         const clipContainer = document.createElement('article');                     
                         const audio = document.createElement('audio');
@@ -56,12 +56,11 @@
                         chunks = [];
                         const audioURL = URL.createObjectURL(blob);
                         audio.src = audioURL;
-                        a.href=audio.src;
-                       //blob:http://localhost:8011/6377d19d-2ca8-49b1-a37f-068d602ceb60    
+                        //blob:http://localhost:8090/485bdf60-bcb4-41ea-913e-93a5745e78a8
                         a.href=audio.src;                     
-                        a.download = clipName;                      
+                        a.download = clipName;
                        //a.innerHTML = "DOWN"
-						a.click(); // 다운로드 폴더에 저장하도록 클릭 이벤트 발생						
+						a.click(); // 다운로드 폴더에 저장하도록 클릭 이벤트 발생
                     }//mediaRecorder.onstop
 
                     //녹음 시작시킨 상태가 되면 chunks에 녹음 데이터를 저장하라 
