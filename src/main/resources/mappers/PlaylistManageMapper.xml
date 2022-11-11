@@ -18,6 +18,11 @@
     <select id="PMgetUserNumByEmail" resultType="User">
         select user_number from jmuser where user_email=#{user_email}
     </select>
+
+
+    <select id="selectAllMusic2" resultType="Music">
+        select * from music order by music_number
+    </select>
 </mapper>
 
         <!--        insert into playlist_manage (list_name, user_number)-->

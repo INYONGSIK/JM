@@ -10,10 +10,13 @@ import java.util.ArrayList;
 @Mapper
 public interface Playlist_ManageDAO {
 
-    ArrayList<Playlist_Manage> selectAllPM();
+    ArrayList<Playlist_Manage> selectAllPM(int user_number);
     void insertPlaylist_Manage(Playlist_Manage playlist_manage);
 
     User PMgetUserNumByEmail(String user_email);
+
+
+    ArrayList<Music> selectAllMusic2();
 
 
 }

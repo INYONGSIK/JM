@@ -20,6 +20,7 @@
         <form action="/add_P" method="get">
         <input type="hidden" name="user_number" th:value="${P_user_number}">
         <input type="hidden" name="list_name" th:value="${P_list_name}">
+            <input type="hidden" name = "music_number" th:value="${music.music_number}">
         <th>[[${music.music_number}]]</th>
         <th>[[${music.music_singer}]]</th>
         <th>[[${music.music_title}]]</th>
