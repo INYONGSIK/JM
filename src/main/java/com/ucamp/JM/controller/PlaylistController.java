@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,20 +26,18 @@ public class PlaylistController {
     @Autowired
     private MusicService musicService;
 
+    //플레이리스트의 노래들을 보여줍니다
+    @RequestMapping("/listP/{user_number}/{list_name}")
+    public String viewPlaylist(HttpServletRequest request, Model model, @PathVariable int user_number, @PathVariable String list_name){
 
-    @RequestMapping("/listP")
-    public String viewPlaylist(HttpServletRequest request,Model model){
-        String user_email = (String)request.getSession().getAttribute("user_email");
-        int number = playlistService.PgetUserNumByEmail(user_email).getUser_number();
-        System.out.println(number);
-        System.out.println(playlistService.PgetListNameByUserNum(playlistService.PgetUserNumByEmail(user_email).getUser_number()));
-        model.addAttribute("P_user_number",number);
-        System.out.println( playlistService.PgetListNameByUserNum(number));
-        model.addAttribute("P_list_name", playlistService.PgetListNameByUserNum(number));
-        ArrayList<Playlist> PlaylistList = playlistService.selectPlaylist();
+        model.addAttribute("P_user_number",user_number);
+        model.addAttribute("P_list_name", list_name);
+        ArrayList<Playlist> PlaylistList = playlistService.selectPlaylist(list_name,user_number);
         model.addAttribute("PList",PlaylistList);
-        return "PList";
+        return "playlist/PList";
     }
+
+    // 플레이리스트의 폼으로 이동합니다
 
     @RequestMapping("/addP")
     public String addP(HttpServletRequest request, Model model){
@@ -55,13 +54,14 @@ public class PlaylistController {
         model.addAttribute("P_user_number", playlistService.PgetUserNumByEmail(user_email).getUser_number());
         model.addAttribute("P_list_name", playlistService.PgetListNameByUserNum(playlistService.PgetUserNumByEmail(user_email).getUser_number()).get(0));
         model.addAttribute("musicList", musicService.selectAllMusic());
-        return "/addPform";
+        return "playlist/addPform";
     }
 
+    //플레이리스트에 노래를 넣습니다
     @RequestMapping("add_P")
     public String add_P(Playlist playlist){
         playlistService.insertPlaylist(playlist);
-        return "redirect:/listP";
+        return "redirect:/listP/{user_number}/{list_name}";
     }
 
 

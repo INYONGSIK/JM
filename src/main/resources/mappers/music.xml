@@ -30,7 +30,3 @@
         (month_music_seq.NEXTVAL,SYSDATE,#{music_number},#{music_title},#{music_singer},#{music_genre},#{music_release},#{music_image},#{music_file},#{music_lyrics},#{accumul_music_like})
     </insert>
 </mapper>
-
-
-
-
