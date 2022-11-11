@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form action="/add">
+    <table>
+        <tr>
+            <td>제목</td>
+            <td><input type="text" name="music_title"></td>
+        </tr>
+        <tr>
+            <td>가수</td>
+            <td><input type="text" name="music_singer"></td>
+        </tr>
+        <tr>
+            <td>장르</td>
+            <td>
+                <select name="music_genre">
+                    <option value="힙합">힙합</option>
+                    <option value="발라드">발라드</option>
+                    <option value="댄스">댄스</option>
+                    <option value="R&B">R&B</option>
+                    <option value="인디">인디</option>
+                    <option value="일렉트로닉">일렉트로닉</option>
+                    <option value="트로트">트로트</option>
+                    <option value="기타">기타</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>출시일</td>
+            <td><input type="date" name="music_release"></td>
+        </tr>
+        <tr>
+            <td>이미지</td>
+            <td><input type="text" name="music_image"></td>
+        </tr>
+        <tr>
+            <td>음원파일</td>
+            <td><input type="file" name="music_file"></td>
+        </tr>
+        <tr>
+            <td>가사</td>
+            <td><input type="text" name="music_lyrics"></td>
+        </tr>
+
+        <tr>
+            <td><input type="submit" value="추가"/></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
