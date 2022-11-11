@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>header</title>
+</head>
+<body>
+<th:block th:fragment="navi">
+    <a href="/admin">[관리자 메인]</a>
+    <a href="/admin/userList">[회원 관리]</a>
+    <a href="/admin/report/1">[댓글 관리]</a>
+    <a href="/admin/report/2">[음원 관리]</a>
+</th:block>
+
+</body>
+</html>

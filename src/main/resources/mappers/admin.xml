@@ -5,11 +5,18 @@
 
 <mapper namespace="com.ucamp.JM.dao.AdminDAO">
     <select id="selectAllUser" resultType="Admin">
-        select j.user_number, j.user_email, j.user_name, j.user_phone_number, j.user_birthday, r.report_count
+        select j.user_number, j.user_email, j.user_name, j.user_phone_number, TO_CHAR(j.user_birthday, 'YYYY-MM-DD') as
+        "user_birthday" , r.report_count
         from jmuser j, report r
         where j.user_number = r.user_number
-        order by userId
+        order by r.report_count desc
     </select>
 
+    <select id="selectReportByType" parameterType="int" resultType="Report">
+        select user_number,report_ID, report_type, TO_CHAR(REPORT_DATE, 'YYYY-MM-DD HH24:MI:SS') AS "REPORT_DATE"
+        ,report_count, contents
+        from report
+        where report_type = #{report_type}
+    </select>
 
 </mapper>
