@@ -18,7 +18,8 @@
         (dashboard_No, user_number, dashboard_title, dashboard_user, dashboard_date, dashboard_views, dashboard_content)
 
         values (dashboard_seq.nextval, #{user_number}, #{dashboard_title}, #{dashboard_user},
-        TO_CHAR(sysdate, 'YYYY-MM-DD'), #{dashboard_views,jdbcType=NUMERIC}, #{dashboard_content})
+        TO_DATE(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
+        , #{dashboard_views,jdbcType=NUMERIC}, #{dashboard_content})
     </insert>
 
     <select id="readboard" resultType="Board">
