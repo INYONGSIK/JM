@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -22,14 +22,6 @@
     </tr>
     </thead>
     <tbody>
-    <tr class="table-secondary" th:each="song:${ranklist}">
-        <td class="sorting_1">[[${song.music_title}]]</td>
-        <td>[[${song.music_singer}]]</td>
-        <td>[[${song.music_genre}]]</td>
-        <td>[[${song.music_like}]]</td>
-        <td>[[${song.music_release}]]</td>
-
-    </tr>
     </tbody>
 </table>
 <body>

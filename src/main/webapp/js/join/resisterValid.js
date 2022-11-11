@@ -29,6 +29,9 @@ function checkAll() {
     checkPhone();
     checkPhone2();
     checkRadio();
+
+    console.log(checkNickname());
+
     if (confirm("회원가입을하시겠습니까?")) {
         if (checkNickname() === true && checkEmail() === true && checkPassword() === true
             && checkPassword2() === true && checkName() === true
@@ -60,7 +63,7 @@ const setSuccess = element => {
 }
 
 function checkNickname() {
-    var checkedNick = true;
+    var checked = true;
     const nicknameValue = nickname.value.trim();
     var nicknamePattern = /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{1,10}$/;
     if (nicknameValue.value === "") {
@@ -78,18 +81,19 @@ function checkNickname() {
        },
        success: function(data){
         var isOk = data
-        //  isOk가 true => 이미있는 닉네임
         if(isOk){
+            console.log("false:" + nickname);
             setError(nickname, "이미있는 닉네임 입니다.");
-            checkedNick = false;
+             checked = false;
         }else{
+            console.log("true"+ nickname);
             setSuccess(nickname);
-            checkedNick = true;
+            checked = true;
         }
        }
      })
     }
-    return checkedNick;
+    return checked;
 }
 
 // 이메일 유효성 검사
@@ -160,7 +164,7 @@ function checkPassword2() {
 // 이름 유효성 검사
 function checkName() {
     const nameValue = name.value.trim();
-    var namePattern = /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{1,10}$/;
+    var namePattern = /^[가-힣]{2,4}$/;
     if (nameValue === "") {
         setError(name, "필수 정보입니다.");
         return false;
@@ -242,10 +246,7 @@ $("#phoneChk").click(function () {
     var phone = $("#phone").val();
     $.ajax({
         type: "GET",
-        url: "phoneCheck",
-        data:{
-             "user_phone_number" : phone,
-        },
+        url: "phoneCheck?user_phone_number=" + phone,
         success: function (data) {
             if (data == "error") {
                 alert("휴대폰 번호가 올바르지 않습니다.")
@@ -253,6 +254,7 @@ $("#phoneChk").click(function () {
                 $(".successPhoneChk").css("color", "red");
                 $("#phone").attr("autofocus", true);
             } else {
+                 console.log(data);
                 $("#phone2").attr("disabled", false);
                 $("#phoneChk2").css("display", "inline-block");
                 $(".successPhoneChk").text("인증번호를 입력한 뒤 본인인증을 눌러주십시오.");

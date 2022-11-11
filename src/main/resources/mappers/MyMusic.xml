@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ucamp.JM.dao.MyMusicDAO">
+
+    <insert id="insertMyMusic">
+        insert into MyMusic(MyMusic_title,MyMusic_singer,MyMusic_genre,MyMusic_release,
+        MyMusic_image,MyMusic_file,MyMusic_lyrics)
+        values(#{MyMusic_title},#{MyMusic_singer},#{MyMusic_genre},#{MyMusic_release},
+        ${MyMusic_image},#{MyMusic_file},#{MyMusic_lyrics})
+    </insert>
+
+    <delete id="deleteMyMusic">
+        delete from MyMusic where MyMusic_number = #{MyMusic_number}
+    </delete>
+</mapper>

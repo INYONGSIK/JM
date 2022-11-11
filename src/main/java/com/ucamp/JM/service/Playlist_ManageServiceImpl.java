@@ -15,8 +15,8 @@ public class Playlist_ManageServiceImpl implements Playlist_ManageService{
     private final Playlist_ManageDAO playlist_manageDAO;
 
     @Override
-    public ArrayList<Playlist_Manage> selectAllPM(int user_number) {
-        return playlist_manageDAO.selectAllPM(user_number);
+    public ArrayList<Playlist_Manage> selectAllPM() {
+        return playlist_manageDAO.selectAllPM();
     }
 
     @Override
@@ -29,10 +29,5 @@ public class Playlist_ManageServiceImpl implements Playlist_ManageService{
     @Override
     public User PMgetUserNumByEmail(String user_email) {
         return playlist_manageDAO.PMgetUserNumByEmail(user_email);
-    }
-
-    @Override
-    public Playlist_Manage selectListName(int user_number) {
-        return playlist_manageDAO.selectListName(user_number);
     }
 }

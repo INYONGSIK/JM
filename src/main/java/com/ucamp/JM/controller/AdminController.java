@@ -19,6 +19,7 @@ public class AdminController {
     @Autowired
     UserService userService;
 
+
     @RequestMapping("/admin")
     public String admin(HttpServletRequest request) throws Exception {
         String email = (String) request.getSession().getAttribute("user_email");
@@ -64,6 +65,7 @@ public class AdminController {
 
         String email = (String) request.getSession().getAttribute("user_email");
         User user = null;
+
         if (email == null) {
             //loginform 으로 이동
             return "loginform";
@@ -72,18 +74,18 @@ public class AdminController {
         }
 
         if (!user.getType().equals("admin")) {
+
             return "redirect:/";
         }
 
         model.addAttribute("users", adminService.selectAllUser());
-
         return "/admin/userList";
     }
 
     @RequestMapping("/admin/deleteUser/{user_number}")
     public String deleteUser(@PathVariable int user_number) {
         adminService.deleteUser(user_number);
-        
+
         return "redirect:/admin/userList";
     }
 
