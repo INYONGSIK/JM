@@ -22,7 +22,6 @@
         <input type="text" name="title" id="title">문자열 작성
     </form>
     <button id="postAjax">AjaxPost</button>
-
     <a href="/boardList">게시판</a>
     <th:block th:unless="${session.user_email}">
         <a href="/loginform">로그인</a></th:block>
@@ -32,8 +31,6 @@
     <a href="/listPM">플레이리스트</a>
     <div id="content"></div>
 </div>
-<th:block th:if="${session.user_email}">
-    <a href="/logout">로그아웃</a></th:block>
 <br><br>
 <div>
     <input type="text" id="msg"/>
@@ -49,6 +46,9 @@
       $("#asd").text(msg);
       socket.send(msg);
     });
+
+
+
 
 
 

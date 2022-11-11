@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class MusicServiceImpl implements MusicService {
 
     private final MusicDAO musicDAO;
-    
+
     @Override
     public ArrayList<Music> selectAllMusic() {
         return musicDAO.selectAllMusic();

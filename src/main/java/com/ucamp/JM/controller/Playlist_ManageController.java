@@ -23,7 +23,7 @@ public class Playlist_ManageController {
     public String listPM(Model model){
         ArrayList<Playlist_Manage> playlist_manageList = playlist_manageService.selectAllPM();
         model.addAttribute("PMList", playlist_manageList);
-        return "PMList";
+        return "/playlist/PMList";
     }
 
     //플레이리스트 생성폼으로 이동
@@ -31,7 +31,7 @@ public class Playlist_ManageController {
     public String addPM(HttpServletRequest request, Model model){
         String user_email = (String)request.getSession().getAttribute("user_email");
         model.addAttribute("PM_user_number",    playlist_manageService.PMgetUserNumByEmail(user_email).getUser_number());
-        return "/addPMform";
+        return "/playlist/addPMform";
     }
 
     //플레이리스트 생성

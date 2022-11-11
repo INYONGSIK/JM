@@ -19,7 +19,6 @@ public class MusicController {
     public String test(Model model) {
 
         ArrayList<Music> musicList = musicService.selectAllMusic();
-        
 
         model.addAttribute("musicList", musicList);
         return "music";
