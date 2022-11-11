@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>신고 관리 페이지</title>
+</head>
+<body>
+
+<th:block th:replace="~{admin/adminHeader :: navi}"></th:block>
+
+<table border="1">
+    <thead>
+    <th>회원번호</th>
+    <th>댓글 내용</th>
+    <th>처음 신고 발생일</th>
+    <th>신고 받은 횟수</th>
+    </thead>
+
+
+    <tbody>
+    <tr th:each="report : ${reports}">
+        <td th:text="${report.user_number}"></td>
+        <td th:text="${report.contents}"></td>
+        <td th:text="${report.report_date}"></td>
+        <td th:text="${report.report_count}"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

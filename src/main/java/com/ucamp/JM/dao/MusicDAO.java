@@ -11,13 +11,10 @@ public interface MusicDAO {
 
     void insertAccumulMusic(Music music);
 
-
-
     ArrayList<Music> selectMusic();
 
     ArrayList<Music> selectAllMusic();
-
-
+    
     void insertTodayMusic(Music music);
 
     void insertMusic(Music music);
