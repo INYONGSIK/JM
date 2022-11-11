@@ -79,6 +79,7 @@ public class AdminController {
         }
 
         model.addAttribute("users", adminService.selectAllUser());
+
         return "/admin/userList";
     }
 
