@@ -33,7 +33,9 @@ public class PlaylistController {
 
         model.addAttribute("P_user_number",user_number);
         model.addAttribute("P_list_name", list_name);
+
         ArrayList<Playlist> PlaylistList = playlistService.selectPlaylist(user_number, list_name);
+
         model.addAttribute("PList",PlaylistList);
         return "playlist/PList";
     }
