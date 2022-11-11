@@ -35,8 +35,8 @@
     </select>
 
 
-    <update id="editBoard">
-        update dashboard set(dashboard_title,dashboard_content) =(${dashboard_title},${dashboard_content}) where
+    <update id="editBoard" parameterType="Board">
+        update dashboard set(dashboard_title,dashboard_content) =(#{dashboard_title},#{dashboard_content}) where
         dashboard_No=#{dashboard_No}
     </update>
 
