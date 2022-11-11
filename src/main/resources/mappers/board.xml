@@ -35,9 +35,14 @@
     </select>
 
 
-    <update id="editBoard" parameterType="Board">
-        update dashboard set(dashboard_title,dashboard_content) =(#{dashboard_title},#{dashboard_content}) where
-        dashboard_No=#{dashboard_No}
+    <update id="editBoard" parameterType="Map">
+        update dashboard set dashboard_title='${dashboard_title}',
+        dashboard_content='${dashboard_content}'
+        where dashboard_No=${dashboard_No}
+    </update>
+
+    <update id="updateView">
+        update dashboard set dashboard_views=dashboard_views+1 where dashboard_No=#{dashboard_No}
     </update>
 
 </mapper>
