@@ -16,11 +16,6 @@ public class MusicServiceImpl implements MusicService {
 
     private final MusicDAO musicDAO;
 
-
-    //세영: 추후 사용 예정 (화면에 보여줄 list)
-
-
-
     @Override
     public ArrayList<Music> selectAllMusic() {
         return musicDAO.selectAllMusic();

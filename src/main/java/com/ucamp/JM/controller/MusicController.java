@@ -20,7 +20,6 @@ public class MusicController {
 
         ArrayList<Music> musicList = musicService.selectAllMusic();
 
-
         model.addAttribute("musicList", musicList);
         return "music";
     }
