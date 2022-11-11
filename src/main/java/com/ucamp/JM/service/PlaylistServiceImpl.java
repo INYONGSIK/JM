@@ -35,4 +35,9 @@ public class PlaylistServiceImpl implements PlaylistService{
     public List<String> PgetListNameByUserNum(int user_number) {
         return playlistDAO.PgetListNameByUserNum(user_number);
     }
+
+    @Override
+    public ArrayList<Playlist_Manage> selectAllP(int user_number) {
+        return playlistDAO.selectAllP(user_number);
+    }
 }

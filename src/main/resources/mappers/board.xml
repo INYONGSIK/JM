@@ -12,7 +12,6 @@
         select user_nickname, user_number from jmuser where user_email=#{user_email}
     </select>
 
-
     <insert id="insertBoardWrite" parameterType="Board">
         insert into dashboard
         (dashboard_No, user_number, dashboard_title, dashboard_user, dashboard_date, dashboard_views, dashboard_content)
