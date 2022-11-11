@@ -5,7 +5,12 @@
 <mapper namespace="com.ucamp.JM.dao.Playlist_ManageDAO">
 
     <select id="selectAllPM" resultType="playlist_manage">
+<<<<<<< HEAD
         select list_n345nnnnnnnname from playlist_manage
+=======
+
+        select * from playlist_manage where user_number='${user_number}' order by  list_name
+>>>>>>> 93f87e071b851bcafb042605014553125892bfae
     </select>
 
     <insert id="insertPlaylist_Manage">
