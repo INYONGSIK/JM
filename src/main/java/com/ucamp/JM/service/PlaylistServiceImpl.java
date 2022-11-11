@@ -17,8 +17,8 @@ public class PlaylistServiceImpl implements PlaylistService{
     private final PlaylistDAO playlistDAO;
 
     @Override
-    public ArrayList<Playlist> selectPlaylist(String list_name, int user_number) {
-        return playlistDAO.selectPlaylist(list_name, user_number);
+    public ArrayList<Playlist> selectPlaylist(int user_number, String list_name) {
+        return playlistDAO.selectPlaylist(user_number, list_name);
     }
 
     @Override
@@ -34,5 +34,10 @@ public class PlaylistServiceImpl implements PlaylistService{
     @Override
     public List<String> PgetListNameByUserNum(int user_number) {
         return playlistDAO.PgetListNameByUserNum(user_number);
+    }
+
+    @Override
+    public ArrayList<Playlist_Manage> selectAllP(int user_number) {
+        return playlistDAO.selectAllP(user_number);
     }
 }

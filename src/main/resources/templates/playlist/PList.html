@@ -5,9 +5,10 @@
     <title>PList</title>
 </head>
 <body>
+<a href="/addP"> 플레이리스트에 노래추가</a>
 <h1>PList</h1>
-<input type="text" name="user_number" th:value="${P_user_number}"><br>
-<input type="text" name="list_name" th:value="${P_list_name}"><br>
+<input type="hidden" name="user_number" th:value="${P_user_number}"><br>
+<input type="hidden" name="list_name" th:value="${P_list_name}"><br>
 <ul th:each="P: ${Plist}">
     <li>playlist = [[${P.music_number}]]</li>
 </ul>

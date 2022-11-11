@@ -7,12 +7,10 @@ import java.util.ArrayList;
 
 public interface Playlist_ManageService {
 
-    ArrayList<Playlist_Manage> selectAllPM(int user_number);
+    ArrayList<Playlist_Manage> selectAllPM();
     void insertPlaylist_Manage(Playlist_Manage playlist_manage);
 
     User PMgetUserNumByEmail(String user_email);
-
-    Playlist_Manage selectListName(int user_number);
 
 
 }

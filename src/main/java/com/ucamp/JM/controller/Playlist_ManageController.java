@@ -20,43 +20,24 @@ public class Playlist_ManageController {
 
     //플레이리스트를 보여줍니다
     @RequestMapping("/listPM")
-    public String listPM(Model model,HttpServletRequest request){
-        String user_email = (String)request.getSession().getAttribute("user_email");
-//        System.out.println(playlist_manageService.PMgetUserNumByEmail(user_email).getUser_number());
-        int user_number = playlist_manageService.PMgetUserNumByEmail(user_email).getUser_number();
-        model.addAttribute("user_number",user_number);
-
-        ArrayList<Playlist_Manage> playlist_manageList = playlist_manageService.selectAllPM(user_number);
+    public String listPM(Model model){
+        ArrayList<Playlist_Manage> playlist_manageList = playlist_manageService.selectAllPM();
         model.addAttribute("PMList", playlist_manageList);
-        return "playlist/PMList";
+        return "/playlist/PMList";
     }
-
-
 
     //플레이리스트 생성폼으로 이동
     @RequestMapping("/addPM")
-    public String addPM(HttpServletRequest request,Model model){
+    public String addPM(HttpServletRequest request, Model model){
         String user_email = (String)request.getSession().getAttribute("user_email");
-
-
-        model.addAttribute("PM_user_number",playlist_manageService.PMgetUserNumByEmail(user_email).getUser_number());
-
-
-        return "playlist/addPMform";
+        model.addAttribute("PM_user_number",    playlist_manageService.PMgetUserNumByEmail(user_email).getUser_number());
+        return "/playlist/addPMform";
     }
 
     //플레이리스트 생성
     @RequestMapping("/add_PM")
-    public String add_PM(HttpServletRequest request,Model model,Playlist_Manage playlist_manage){
-        String user_email = (String)request.getSession().getAttribute("user_email");
-
-//        System.out.println(user_email);
-//        System.out.println(playlist_manageService.PMgetUserNumByEmail(user_email));
-//        model.addAttribute("PM_user_number",playlist_manageService.PMgetUserNumByEmail(user_email));
-
-
+    public String add_PM(Playlist_Manage playlist_manage){
         playlist_manageService.insertPlaylist_Manage(playlist_manage);
-
         return "redirect:/listPM";
     }
 

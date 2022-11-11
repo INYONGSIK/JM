@@ -12,7 +12,6 @@
         select user_nickname, user_number from jmuser where user_email=#{user_email}
     </select>
 
-
     <insert id="insertBoardWrite" parameterType="Board">
         insert into dashboard
         (dashboard_No, user_number, dashboard_title, dashboard_user, dashboard_date, dashboard_views, dashboard_content)
@@ -35,8 +34,8 @@
     </select>
 
 
-    <update id="editBoard">
-        update dashboard set(dashboard_title,dashboard_content) =(${dashboard_title},${dashboard_content}) where
+    <update id="editBoard" parameterType="Board">
+        update dashboard set(dashboard_title,dashboard_content) =(#{dashboard_title},#{dashboard_content}) where
         dashboard_No=#{dashboard_No}
     </update>
 
