@@ -10,7 +10,7 @@ import java.util.List;
 public interface PlaylistService {
 
 
-    ArrayList<Playlist> selectPlaylist();
+    ArrayList<Playlist> selectPlaylist(String list_name, int user_number);
 
     void insertPlaylist(Playlist playlist);
 

@@ -5,7 +5,7 @@
 <mapper namespace="com.ucamp.JM.dao.Playlist_ManageDAO">
 
     <select id="selectAllPM" resultType="playlist_manage">
-        select list_name from playlist_manage
+        select * from playlist_manage where user_number='${user_number}' order by  list_name
     </select>
 
     <insert id="insertPlaylist_Manage">
@@ -16,6 +16,10 @@
     <select id="PMgetUserNumByEmail" resultType="User">
         select user_number from jmuser where user_email=#{user_email}
     </select>
+
+<!--    <select id="selectListName" resultType="playlist_manage">-->
+<!--        select list_name from playlist_manage where user_number=#{user_number}-->
+<!--    </select>-->
 </mapper>
 
 <!--        insert into playlist_manage (list_name, user_number)-->
