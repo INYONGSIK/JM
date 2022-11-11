@@ -115,7 +115,8 @@ public class RootController {
                 //session.setAttribute("userType", type);
                 return "redirect:/";
             } else {
-                return "/admin/admin";
+                session.setAttribute("user_email", user_email);
+                return "redirect:/admin";
             }
         } catch (Exception e) {
             e.printStackTrace();
