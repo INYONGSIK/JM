@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>노래 번호</th>
+                    <th>가수</th>
+                    <th>곡</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="music : ${musicList}">
+                    <th>[[${music.music_number}]]</th>
+                    <th>[[${music.music_singer}]]</th>
+                    <th>[[${music.music_title}]]</th>
+                </tr>
+            </tbody>
+
+        </table>
+
+</body>
+</html>

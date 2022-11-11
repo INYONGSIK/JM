@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -107,8 +108,18 @@ public class BoardController {
     }
 
     @GetMapping("/editBoard")
-    public String editBoard(@RequestParam int dashboard_No) {
-        boardService.editBoard(dashboard_No);
+    public String editBoard(HttpServletRequest request, @RequestParam int dashboard_No, Board board, Model model) {
+        Board board1 = boardService.readboard(dashboard_No);
+
+        Board board2 = new Board();
+        board2.setDashboard_title(request.getParameter("dashboard_title"));
+        board2.setDashboard_content(request.getParameter("dashboard_content"));
+
+//        model.addAttribute("dashboard_user", board1.getDashboard_user());
+//        model.addAttribute("dashboard_title", board1.getDashboard_title());
+//        model.addAttribute("dashboard_content", board1.getDashboard_content());
+
+        boardService.editBoard(dashboard_No, board);
 
 
         return "redirect:/boardList";
