@@ -20,8 +20,13 @@ public class Playlist_ManageController {
 
     //플레이리스트를 보여줍니다
     @RequestMapping("/listPM")
-    public String listPM(Model model){
-        ArrayList<Playlist_Manage> playlist_manageList = playlist_manageService.selectAllPM();
+    public String listPM(Model model,HttpServletRequest request){
+        String user_email =(String)request.getSession().getAttribute("user_email");
+
+        int user_number = playlist_manageService.PMgetUserNumByEmail(user_email).getUser_number();
+        model.addAttribute("user_number",user_number);
+
+        ArrayList<Playlist_Manage> playlist_manageList = playlist_manageService.selectAllPM(user_number);
         model.addAttribute("PMList", playlist_manageList);
         return "/playlist/PMList";
     }

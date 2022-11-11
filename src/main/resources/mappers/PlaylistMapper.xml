@@ -5,7 +5,7 @@
 <mapper namespace="com.ucamp.JM.dao.PlaylistDAO">
 
     <select id="selectPlaylist" resultType="Playlist" parameterType="Map">
-        select music_number from playlist where list_name = '${list_name}' AND user_number = '${user_number}'
+        select music_number from playlist where list_name = '${list_name}' AND user_number = ${user_number}
     </select>
 
 
@@ -14,7 +14,7 @@
             SELECT playlist_num.NEXTVAL FROM DUAL
         </selectKey>
         insert into playlist
-        values (playlist_num.NEXTVAL, 2, #{list_name}, #{user_number})
+        values (playlist_num.NEXTVAL, #{music_number}, #{list_name}, #{user_number})
     </insert>
 
     <select id="PgetUserNumByEmail" resultType="User">
@@ -27,6 +27,10 @@
 
     <select id="selectAllP" resultType="playlist_manage">
         select * from playlist_manage where user_number='${user_number}'
+    </select>
+
+    <select id="selectByMusicNumber" resultType="Music">
+        select * from music where music_number = #{music_number}
     </select>
 
 </mapper>

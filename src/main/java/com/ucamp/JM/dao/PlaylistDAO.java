@@ -1,5 +1,6 @@
 package com.ucamp.JM.dao;
 
+import com.ucamp.JM.dto.Music;
 import com.ucamp.JM.dto.Playlist;
 import com.ucamp.JM.dto.Playlist_Manage;
 import com.ucamp.JM.dto.User;
@@ -20,4 +21,6 @@ public interface PlaylistDAO {
     List<String> PgetListNameByUserNum(int user_number);
 
     ArrayList<Playlist_Manage> selectAllP(int user_number);
+
+    Music selectByMusicNumber(int music_number);
 }
