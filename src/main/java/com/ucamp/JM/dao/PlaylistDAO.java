@@ -10,7 +10,7 @@ import java.util.List;
 
 @Mapper
 public interface PlaylistDAO {
-    ArrayList<Playlist> selectPlaylist();
+    ArrayList<Playlist> selectPlaylist(String list_name, int user_number);
 
 
     void insertPlaylist(Playlist playlist);

@@ -107,8 +107,13 @@ public class BoardController {
     }
 
     @GetMapping("/editBoard")
-    public String editBoard(@RequestParam int dashboard_No) {
-        boardService.editBoard(dashboard_No);
+    public String editBoard(@RequestParam int dashboard_No, Board board, Model model) {
+        Board board1 = boardService.readboard(dashboard_No);
+        model.addAttribute("dashboard_user", board1.getDashboard_user());
+        model.addAttribute("dashboard_title", board1.getDashboard_title());
+        model.addAttribute("dashboard_content", board1.getDashboard_content());
+
+        boardService.editBoard(dashboard_No, board);
 
 
         return "redirect:/boardList";
