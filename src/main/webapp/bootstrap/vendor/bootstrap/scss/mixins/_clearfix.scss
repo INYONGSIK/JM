@@ -1,0 +1,17 @@
+<<<<<<< Updated upstream
+@mixin clearfix() {
+  &::after {
+    display: block;
+    clear: both;
+    content: "";
+  }
+}
+=======
+@mixin clearfix() {
+  &::after {
+    display: block;
+    clear: both;
+    content: "";
+  }
+}
+>>>>>>> Stashed changes

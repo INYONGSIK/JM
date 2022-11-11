@@ -330,10 +330,5 @@ public class RootController {
         return "modifyinformationform";
     }
 
-
 }
-
-
-
-
 
