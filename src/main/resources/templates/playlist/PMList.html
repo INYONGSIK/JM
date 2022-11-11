@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>PMList</title>
+</head>
+<body>
+<a href="/addPM">플레이리스트 추가</a>
+
+<h1>pmList</h1>
+<ul th:each="PM : ${PMList}">
+<input type="hidden" th:value="${user_number}" name="user_number">
+  <li><a th:href="|/listP/${user_number}/${PM.list_name}|"> [[${PM.list_name}]]</a></li>
+
+
+</ul>
+
+</body>
+</html>
