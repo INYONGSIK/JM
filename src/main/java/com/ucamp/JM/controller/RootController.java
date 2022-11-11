@@ -105,12 +105,18 @@ public class RootController {
 
     // 용식 : 로그인
     @PostMapping("login")
-    public String login(@RequestParam String user_email, @RequestParam String user_password, Model model) {
+    public String login(@RequestParam String user_email, @RequestParam String user_password,
+                        Model model) throws Exception {
+        User user = userService.queryUser(user_email);
         try {
-            userService.login(user_email, user_password);
-            session.setAttribute("user_email", user_email);
-            return "redirect:/";
-
+            if (user.getType().equals("user")) {
+                userService.login(user_email, user_password);
+                session.setAttribute("user_email", user_email);
+                //session.setAttribute("userType", type);
+                return "redirect:/";
+            } else {
+                return "/admin/admin";
+            }
         } catch (Exception e) {
             e.printStackTrace();
             model.addAttribute("err", e.getMessage());

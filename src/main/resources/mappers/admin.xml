@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ucamp.JM.dao.AdminDAO">
+    <select id="selectAllUser" resultType="Admin">
+        select j.user_number, j.user_email, j.user_name, j.user_phone_number, j.user_birthday, r.report_count
+        from jmuser j, report r
+        where j.user_number = r.user_number
+        order by userId
+    </select>
+
+
+</mapper>
