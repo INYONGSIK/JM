@@ -78,14 +78,15 @@ public class AdminController {
             return "redirect:/";
         }
 
-        model.addAttribute("users", adminService.selectAllUser());           
+        model.addAttribute("users", adminService.selectAllUser());
+
         return "/admin/userList";
     }
 
     @RequestMapping("/admin/deleteUser/{user_number}")
     public String deleteUser(@PathVariable int user_number) {
         adminService.deleteUser(user_number);
-        
+
         return "redirect:/admin/userList";
     }
 
