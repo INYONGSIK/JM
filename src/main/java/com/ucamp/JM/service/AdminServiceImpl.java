@@ -25,6 +25,11 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    public ArrayList<Report> selectAllReport() {
+        return adminDAO.selectAllReport();
+    }
+
+    @Override
     public ArrayList<Report> selectReportByType(int report_type) {
         return adminDAO.selectReportByType(report_type);
     }

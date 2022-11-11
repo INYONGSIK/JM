@@ -115,7 +115,8 @@ public class RootController {
                 //session.setAttribute("userType", type);
                 return "redirect:/";
             } else {
-                return "/admin/admin";
+                session.setAttribute("user_email", user_email);
+                return "redirect:/admin";
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -288,6 +289,7 @@ public class RootController {
         return "modifyinformationform";
     }
 
+
     // 회원정보 수정
     @PostMapping("modifyinformation")
     public String modifyinformation(HttpServletRequest request, MultipartFile user_image) throws Exception {
@@ -339,6 +341,7 @@ public class RootController {
     }
 
 }
+
 
 
 

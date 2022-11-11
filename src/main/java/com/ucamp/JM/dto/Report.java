@@ -5,8 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import java.util.Date;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,7 +17,7 @@ public class Report {
     //report_type 1이면 댓글, 2면 음원  --이현호
     private int report_type;
     //스키마에 sysdate써서 현재 시각으로 자동 데이터값 들어감  --이현호
-    private Date report_date;
+    private String report_date;
     private int report_count;
     private String contents;
 }
