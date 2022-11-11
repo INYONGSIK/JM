@@ -17,4 +17,6 @@ public interface PlaylistService {
     User PgetUserNumByEmail(String user_email);
 
     List<String> PgetListNameByUserNum(int user_number);
+
+    ArrayList<Playlist_Manage> selectAllP(int user_number);
 }

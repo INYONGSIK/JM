@@ -28,8 +28,7 @@ public class PlaylistController {
 
     //플레이리스트의 노래들을 보여줍니다
     @RequestMapping("/listP/{user_number}/{list_name}")
-    public String viewPlaylist(HttpServletRequest request, Model model, @PathVariable int user_number, String list_name){
-
+    public String viewPlaylist(HttpServletRequest request, Model model, @PathVariable int user_number, @PathVariable String list_name){
 
         model.addAttribute("P_user_number",user_number);
         model.addAttribute("P_list_name", list_name);
@@ -55,14 +54,14 @@ public class PlaylistController {
         model.addAttribute("P_user_number", playlistService.PgetUserNumByEmail(user_email).getUser_number());
         model.addAttribute("P_list_name", playlistService.PgetListNameByUserNum(playlistService.PgetUserNumByEmail(user_email).getUser_number()).get(0));
         model.addAttribute("musicList", musicService.selectAllMusic());
-        return "/addPform";
+        return "playlist/addPform";
     }
 
     //플레이리스트에 노래를 넣습니다
     @RequestMapping("add_P")
     public String add_P(Playlist playlist){
         playlistService.insertPlaylist(playlist);
-        return "redirect:/listP";
+        return "redirect:/listP/{user_number}/{list_name}";
     }
 
 

@@ -5,7 +5,7 @@
 <mapper namespace="com.ucamp.JM.dao.PlaylistDAO">
 
     <select id="selectPlaylist" resultType="Playlist" parameterType="Map">
-        select music_number from playlist where list_name = #{list_name} AND user_number = #{user_number}
+        select music_number from playlist where list_name = '${list_name}' AND user_number = '${user_number}'
     </select>
 
 
@@ -24,4 +24,9 @@
     <select id="PgetListNameByUserNum" resultType="String" >
         select list_name from playlist_manage where user_number = #{user_number}
     </select>
+
+    <select id="selectAllP" resultType="playlist_manage">
+        select * from playlist_manage where user_number='${user_number}'
+    </select>
+
 </mapper>
