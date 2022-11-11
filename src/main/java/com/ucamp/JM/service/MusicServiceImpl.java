@@ -16,11 +16,11 @@ public class MusicServiceImpl implements MusicService {
 
     private final MusicDAO musicDAO;
 
-<<<<<<< HEAD
-    //세영: 추후 사용 예정 (화면에 보여줄 list)
-=======
 
->>>>>>> f2426c85a1eb56296f654f2cca2f46ce5e97fcfd
+    //세영: 추후 사용 예정 (화면에 보여줄 list)
+
+
+
     @Override
     public ArrayList<Music> selectAllMusic() {
         return musicDAO.selectAllMusic();

@@ -5,14 +5,14 @@
     <title>Title</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
-<<<<<<< HEAD
+
 <link rel="stylesheet" th:href="@{/bootswatch/bootstrap.min.css}"/>
 
-=======
+
 <th:block th:replace="header :: header">
 
 </th:block>
->>>>>>> f2426c85a1eb56296f654f2cca2f46ce5e97fcfd
+
 <body>
 <h1>메인페이지 exam</h1>
 <div>
@@ -29,18 +29,8 @@
 <a href="/registerform">회원가입</a>
 <a href="/modifyinformationform">회워정보 수정</a>
 <th:block th:if="${session.user_email}"><a href="/logout">로그아웃</a></th:block>
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
 
-<a href="/listPM">플레이리스트</a>
-=======
-    <div id="content"></div>
-</div>
->>>>>>> Stashed changes
->>>>>>> Stashed changes
-=======
+
 <a href="/listPM">플레이리스트</a>
 <th:block th:if="${session.user_email}">
     <a href="/logout">로그아웃</a></th:block>
@@ -61,6 +51,8 @@
     });
 
 </script>
->>>>>>> f2426c85a1eb56296f654f2cca2f46ce5e97fcfd
+
+
 </body>
 </html>
+gi

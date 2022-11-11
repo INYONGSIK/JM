@@ -1,4 +1,5 @@
-package com.ucamp.JM.controller;
+
+        package com.ucamp.JM.controller;
 
 import com.ucamp.JM.dto.Playlist;
 import com.ucamp.JM.dto.Playlist_Manage;
@@ -32,7 +33,9 @@ public class PlaylistController {
 
         model.addAttribute("P_user_number",user_number);
         model.addAttribute("P_list_name", list_name);
-        ArrayList<Playlist> PlaylistList = playlistService.selectPlaylist(list_name,user_number);
+
+        ArrayList<Playlist> PlaylistList = playlistService.selectPlaylist(user_number, list_name);
+
         model.addAttribute("PList",PlaylistList);
         return "playlist/PList";
     }

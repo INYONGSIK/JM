@@ -8,15 +8,15 @@ import java.util.ArrayList;
 
 @Mapper
 public interface MusicDAO {
-<<<<<<< HEAD
+
     void insertAccumulMusic(Music music);
 
-    ArrayList<Music> selectAllMusic();
+
 
     ArrayList<Music> selectMusic();
-=======
+
     ArrayList<Music> selectAllMusic();
->>>>>>> f2426c85a1eb56296f654f2cca2f46ce5e97fcfd
+
 
     void insertTodayMusic(Music music);
 

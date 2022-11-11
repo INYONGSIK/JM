@@ -17,8 +17,8 @@ public class PlaylistServiceImpl implements PlaylistService{
     private final PlaylistDAO playlistDAO;
 
     @Override
-    public ArrayList<Playlist> selectPlaylist() {
-        return playlistDAO.selectPlaylist();
+    public ArrayList<Playlist> selectPlaylist(int user_number, String list_name) {
+        return playlistDAO.selectPlaylist(user_number, list_name);
     }
 
     @Override
