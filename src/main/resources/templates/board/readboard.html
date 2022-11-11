@@ -9,129 +9,129 @@
 <div>
     <label>문의글 상세보기</label>
 </div>
+
 <br><br>
 
+
 <div>
+
+
+
+    <div>
+        <label>글쓴이</label>
+        <div>
+            [[${dashboard_user}]]
+        </div>
+    </div>
+
+    <br>
     <div>
         <div>
-
-            <label>글쓴이</label>
-            <div>
-                [[${dashboard_user}]]
-            </div>
-
+            <label>제 목</label>
         </div>
-        <br>
-
         <div>
-            <div>
-                <label>제 목</label>
-            </div>
-            <div>
-                [[${dashboard_title}]]
-            </div>
+            [[${dashboard_title}]]
         </div>
-        <br>
+    </div>
 
+    <br>
+    <div>
         <div>
-            <div>
-                <label>내 용</label>
-            </div>
-            <div style="height:200px">
-                [[${dashboard_content}]]
-            </div>
+            <label>내 용</label>
         </div>
-        <br>
-
-        <br><br>
-
-        <form method="get" th:action="|/deletedashboard/${dashboard_No}/${dashboard_user}|">
-
-            <input type="hidden" name="dashboard_No" value="${dashboard_No}"/>
-
-            <div>
-                <div>
-                    <input type="button" value="수정" onclick="window.location='/boardList'">
-                </div>
-
-                <div>
-                    <input type="submit" value="삭제">
-                </div>
-                &nbsp;
-                <div>
-                    <input type="button" value="돌아가기" onclick="window.location='/boardList'">
-                </div>
-                &nbsp;
-
-                <div>
-                    <input type="button" value="답글쓰기"
-                           onclick="window.location='commentForm_csboard.do?csboardnum=${getCsBoard.csboardnum}'"/>
-                    <!--  	<input type="button" value="목록보기" onclick="window.location='list_board.do'">  -->
-                </div>
-
-            </div>
-        </form>
-        <br><br>
-
-<!--        <div class="row">-->
-<!--            <div class="col-md-offset-3 col-md-6" align="center">-->
-<!--                <div class="col-md-2">-->
-<!--                    no.-->
-<!--                </div>-->
-<!--                <div class="col-md-4">-->
-<!--                    작성자-->
-<!--                </div>-->
-<!--                <div class="col-md-4">-->
-<!--                    작성날짜-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <br><br>-->
-
-<!--        <c:if test="${empty listComment}">-->
-<!--            <div class="row">-->
-<!--                <div class="col-md-offset-3 col-md-6" align="center">-->
-<!--                    <label>등록된 답글이 없습니다.</label>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </c:if>-->
-
-<!--        <c:if test="${not empty listComment}">-->
-<!--            <c:forEach var="codto" items="${listComment}">-->
-
-<!--                <div class="row">-->
-<!--                    <div class="col-md-offset-3 col-md-6" align="center">-->
-<!--                        <div class="col-md-2">${codto.cno}</div>-->
-<!--                        <div class="col-md-4">${codto.writer}</div>-->
-<!--                        <div class="col-md-4">${codto.reg_date}</div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <br>-->
-
-<!--                <div class="row">-->
-<!--                    <div class="col-md-offset-3 col-md-6">-->
-<!--                        ${codto.content}-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <br><br>-->
-
-<!--                <c:if test="${AdminloginData.name == 'admin'}">-->
-<!--                    <div class="row">-->
-<!--                        <div class="col-md-offset-3 col-md-6">-->
-<!--                            <form name="send" method="post" action="commentDelete.do">-->
-<!--                                <input type="hidden" name="cno" value="${codto.cno}"/>-->
-<!--                                <input type="hidden" name="bno" value="${codto.bno}"/>-->
-<!--                                <input class="btn btn-danger" type="submit" value="삭제"/>-->
-<!--                            </form>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </c:if>-->
-<!--            </c:forEach>-->
-<!--        </c:if>-->
+        <div style="height:200px">
+            [[${dashboard_content}]]
+        </div>
+    </div>
 
 
-<!--        <br><br>-->
-<!--    </div>-->
+    <br>
+    <form th:action="|/editBoardForm/${dashboard_No}|"/>
+    <div>
+        <input type="submit" th:if="${session.user_email}" value="수정"/>
+    </div>
+    </form>
+
+    <form method="get"
+          th:action="|/deletedashboard/${dashboard_No}/${dashboard_user}|">
+
+        <input type="hidden" name="dashboard_No" value="${dashboard_No}"/>
+        <div>
+            <input type="submit" th:if="${session.user_email}" value="삭제">
+        </div>
+    </form>
+
+
+    <div>
+        <input type="button" th:if="${session.user_email}" value="답글쓰기"
+               onclick="window.location='commentForm_csboard.do?csboardnum=${getCsBoard.csboardnum}'"/>
+        <!--  	<input type="button" value="목록보기" onclick="window.location='list_board.do'">  -->
+    </div>
+
+    <div>
+        <input type="button" value="돌아가기" onclick="window.location='/boardList'">
+    </div>
+    <br><br>
+
+    <!--        <div class="row">-->
+    <!--            <div class="col-md-offset-3 col-md-6" align="center">-->
+    <!--                <div class="col-md-2">-->
+    <!--                    no.-->
+    <!--                </div>-->
+    <!--                <div class="col-md-4">-->
+    <!--                    작성자-->
+    <!--                </div>-->
+    <!--                <div class="col-md-4">-->
+    <!--                    작성날짜-->
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--        <br><br>-->
+
+    <!--        <c:if test="${empty listComment}">-->
+    <!--            <div class="row">-->
+    <!--                <div class="col-md-offset-3 col-md-6" align="center">-->
+    <!--                    <label>등록된 답글이 없습니다.</label>-->
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--        </c:if>-->
+
+    <!--        <c:if test="${not empty listComment}">-->
+    <!--            <c:forEach var="codto" items="${listComment}">-->
+
+    <!--                <div class="row">-->
+    <!--                    <div class="col-md-offset-3 col-md-6" align="center">-->
+    <!--                        <div class="col-md-2">${codto.cno}</div>-->
+    <!--                        <div class="col-md-4">${codto.writer}</div>-->
+    <!--                        <div class="col-md-4">${codto.reg_date}</div>-->
+    <!--                    </div>-->
+    <!--                </div>-->
+    <!--                <br>-->
+
+    <!--                <div class="row">-->
+    <!--                    <div class="col-md-offset-3 col-md-6">-->
+    <!--                        ${codto.content}-->
+    <!--                    </div>-->
+    <!--                </div>-->
+    <!--                <br><br>-->
+
+    <!--                <c:if test="${AdminloginData.name == 'admin'}">-->
+    <!--                    <div class="row">-->
+    <!--                        <div class="col-md-offset-3 col-md-6">-->
+    <!--                            <form name="send" method="post" action="commentDelete.do">-->
+    <!--                                <input type="hidden" name="cno" value="${codto.cno}"/>-->
+    <!--                                <input type="hidden" name="bno" value="${codto.bno}"/>-->
+    <!--                                <input class="btn btn-danger" type="submit" value="삭제"/>-->
+    <!--                            </form>-->
+    <!--                        </div>-->
+    <!--                    </div>-->
+    <!--                </c:if>-->
+    <!--            </c:forEach>-->
+    <!--        </c:if>-->
+
+
+    <!--        <br><br>-->
+    <!--    </div>-->
 </div>
 
 </body>

@@ -10,8 +10,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class Playlist {
-    private int playlist_number;
+    private int playlist_cd;
     private int music_number;
-    private int list_number;
+    private String list_name;
     private int user_number;
 }

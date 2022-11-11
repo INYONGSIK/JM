@@ -18,23 +18,27 @@ public class Playlist_ManageController {
 
     private final Playlist_ManageService playlist_manageService;
 
+    //플레이리스트를 보여줍니다
     @RequestMapping("/listPM")
     public String listPM(Model model){
         ArrayList<Playlist_Manage> playlist_manageList = playlist_manageService.selectAllPM();
-
         model.addAttribute("PMList", playlist_manageList);
         return "PMList";
     }
 
+    //플레이리스트 생성폼으로 이동
     @RequestMapping("/addPM")
-    public String addPM(HttpServletRequest request){
-        return "redirect:/addplaylistform";
+    public String addPM(HttpServletRequest request, Model model){
+        String user_email = (String)request.getSession().getAttribute("user_email");
+        model.addAttribute("PM_user_number",    playlist_manageService.PMgetUserNumByEmail(user_email).getUser_number());
+        return "/addPMform";
     }
 
-    @RequestMapping("/add")
-    public String add(Playlist_Manage playlist_manage){
+    //플레이리스트 생성
+    @RequestMapping("/add_PM")
+    public String add_PM(Playlist_Manage playlist_manage){
         playlist_manageService.insertPlaylist_Manage(playlist_manage);
-        return "redirect:/";
+        return "redirect:/listPM";
     }
 
 }

@@ -16,4 +16,8 @@ public interface BoardService {
 
     void deletedashboard(int dashboard_No);
 
+    ArrayList<Board> boardSearchList(String boardSearchString);
+
+    void editBoard(int dashboard_No, Board board);
+
 }
