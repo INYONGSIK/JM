@@ -15,11 +15,12 @@ public class AdminController {
 
     @Autowired
     AdminService adminService;
-    Autowired
+    @Autowired
     UserService userService;
+
     @RequestMapping("/admin/userList")
     public String adminUserList(HttpServletRequest request, Model model) throws Exception {
-        String email= (String) request.getSession().getAttribute("user_email");
+        String email = (String) request.getSession().getAttribute("user_email");
         User user = userService.queryUser(email);
         if (email == null) {
             //loginform 으로 이동
@@ -28,10 +29,9 @@ public class AdminController {
 
         if (!user.getType().equals("admin")) {
             return "<script>alert('관리자만 접속 가능합니다.'); location.href='/loginform';</script>";
-        }else{
+        } else {
             model.addAttribute("Users", adminService.selectAllUser());
         }
-
 
 
         return "/admin/userList";
