@@ -1,4 +1,5 @@
-package com.ucamp.JM.controller;
+
+        package com.ucamp.JM.controller;
 
 import com.ucamp.JM.dto.Playlist;
 import com.ucamp.JM.dto.Playlist_Manage;
@@ -26,53 +27,43 @@ public class PlaylistController {
     @Autowired
     private MusicService musicService;
 
-
     //플레이리스트의 노래들을 보여줍니다
     @RequestMapping("/listP/{user_number}/{list_name}")
     public String viewPlaylist(HttpServletRequest request, Model model, @PathVariable int user_number, @PathVariable String list_name){
 
         model.addAttribute("P_user_number",user_number);
         model.addAttribute("P_list_name", list_name);
-        ArrayList<Playlist> PlaylistList = playlistService.selectPlaylist(list_name,user_number);
+        ArrayList<Playlist> PlaylistList = playlistService.selectPlaylist(user_number, list_name);
+        model.addAttribute("PList",PlaylistList);
+        return "playlist/PList";
+    }
 
-//    @RequestMapping("/listP")
-//    public String viewPlaylist(HttpServletRequest request,Model model){
-//        String user_email = (String)request.getSession().getAttribute("user_email");
-//        int number = playlistService.PgetUserNumByEmail(user_email).getUser_number();
-//        System.out.println(number);
-//        System.out.println(playlistService.PgetListNameByUserNum(playlistService.PgetUserNumByEmail(user_email).getUser_number()));
-//        model.addAttribute("P_user_number",number);
-//        System.out.println( playlistService.PgetListNameByUserNum(number));
-//        model.addAttribute("P_list_name", playlistService.PgetListNameByUserNum(number));
-//        ArrayList<Playlist> PlaylistList = playlistService.selectPlaylist();
-//
-//        model.addAttribute("PList",PlaylistList);
-//        return "PList";
-//    }
-//
-//    @RequestMapping("/addP")
-//    public String addP(HttpServletRequest request, Model model){
-//        String user_email = (String)request.getSession().getAttribute("user_email");
-//        System.out.println(user_email);
-//
-//        System.out.println(playlistService.PgetUserNumByEmail(user_email).getUser_number());
-//        int userNumber = playlistService.PgetUserNumByEmail(user_email).getUser_number();
-//        List<String> list = playlistService.PgetListNameByUserNum(userNumber);
-//        System.out.println(list.get(0));
-////        System.out.println("playlist" + playlistService);
-////        User user = playlistService.PgetUserNumByEmail(user_email);
-////        System.out.println(user);
-//        model.addAttribute("P_user_number", playlistService.PgetUserNumByEmail(user_email).getUser_number());
-//        model.addAttribute("P_list_name", playlistService.PgetListNameByUserNum(playlistService.PgetUserNumByEmail(user_email).getUser_number()).get(0));
-//        model.addAttribute("musicList", musicService.selectAllMusic());
-//        return "playlist/addPform";
-//    }
+    // 플레이리스트의 폼으로 이동합니다
 
-//    @RequestMapping("add_P")
-//    public String add_P(Playlist playlist){
-//        playlistService.insertPlaylist(playlist);
-//        return "redirect:/listP/{user_number}/{list_name}";
-//    }
+    @RequestMapping("/addP")
+    public String addP(HttpServletRequest request, Model model){
+        String user_email = (String)request.getSession().getAttribute("user_email");
+        System.out.println(user_email);
+
+        System.out.println(playlistService.PgetUserNumByEmail(user_email).getUser_number());
+        int userNumber = playlistService.PgetUserNumByEmail(user_email).getUser_number();
+        List<String> list = playlistService.PgetListNameByUserNum(userNumber);
+        System.out.println(list.get(0));
+//        System.out.println("playlist" + playlistService);
+//        User user = playlistService.PgetUserNumByEmail(user_email);
+//        System.out.println(user);
+        model.addAttribute("P_user_number", playlistService.PgetUserNumByEmail(user_email).getUser_number());
+        model.addAttribute("P_list_name", playlistService.PgetListNameByUserNum(playlistService.PgetUserNumByEmail(user_email).getUser_number()).get(0));
+        model.addAttribute("musicList", musicService.selectAllMusic());
+        return "playlist/addPform";
+    }
+
+    //플레이리스트에 노래를 넣습니다
+    @RequestMapping("add_P")
+    public String add_P(Playlist playlist){
+        playlistService.insertPlaylist(playlist);
+        return "redirect:/listP/{user_number}/{list_name}";
+    }
 
 
 }
