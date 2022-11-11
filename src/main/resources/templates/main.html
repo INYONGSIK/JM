@@ -5,11 +5,23 @@
     <title>Title</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
+<<<<<<< HEAD
+<link rel="stylesheet" th:href="@{/bootswatch/bootstrap.min.css}"/>
+
+=======
 <th:block th:replace="header :: header">
 
 </th:block>
+>>>>>>> f2426c85a1eb56296f654f2cca2f46ce5e97fcfd
 <body>
-<h1>메인페이지</h1>
+<h1>메인페이지 exam</h1>
+<div>
+    <input type="button" value="버튼" id="button1" onclick="button1_click();">
+    <button id="getAjax">Ajax</button>
+    <form method="post" name="testForm">
+        <input type="text" name="title" id="title">문자열 작성
+    </form>
+    <button id="postAjax">AjaxPost</button>
 
 <a href="/boardList">게시판</a>
 <th:block th:unless="${session.user_email}">
@@ -17,6 +29,18 @@
 <a href="/registerform">회원가입</a>
 <a href="/modifyinformationform">회워정보 수정</a>
 <th:block th:if="${session.user_email}"><a href="/logout">로그아웃</a></th:block>
+<<<<<<< HEAD
+<<<<<<< Updated upstream
+=======
+<<<<<<< Updated upstream
+
+<a href="/listPM">플레이리스트</a>
+=======
+    <div id="content"></div>
+</div>
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
+=======
 <a href="/listPM">플레이리스트</a>
 <th:block th:if="${session.user_email}">
     <a href="/logout">로그아웃</a></th:block>
@@ -37,5 +61,6 @@
     });
 
 </script>
+>>>>>>> f2426c85a1eb56296f654f2cca2f46ce5e97fcfd
 </body>
 </html>
