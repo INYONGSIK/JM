@@ -49,7 +49,7 @@
                 </tr>
                 <tr>
                     <th>
-                        <div id="buttonB1">비밀번호</div>
+                        <div id="buttonB2">비밀번호</div>
                     </th>
                     <td><input type="password" id="userPwd" name="user_password" class="loginInput"></td>
                 </tr>
@@ -80,9 +80,10 @@
                  "user_password" : userPwd,
               },
                 success: function(data) {
-                    if(data == "검증실패")
-                        alert('잘못된 아이디이거나, 비밀번호가 틀렸습니다.') ;
-
+                    if(data == "검증실패"){
+                     modalContents.text("아이디와 비밀번호를 확인해 주세요.");
+                     modal.modal("show");
+                }
                     else{
                         $("#loginForm").submit();
                        }
@@ -90,6 +91,14 @@
             });
             }) ;
         }) ;
+
+
+
+
+
+
+
+
 
 
 
