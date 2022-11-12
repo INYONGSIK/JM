@@ -21,8 +21,8 @@ public class Playlist_ManageServiceImpl implements Playlist_ManageService{
     }
 
     @Override
-    public void insertPlaylist_Manage(Playlist_Manage playlist_manage) {
-        playlist_manageDAO.insertPlaylist_Manage(playlist_manage);
+    public void insertPlaylist_Manage( String list_name,int user_number) {
+        playlist_manageDAO.insertPlaylist_Manage(list_name, user_number);
     }
 
 
@@ -35,5 +35,15 @@ public class Playlist_ManageServiceImpl implements Playlist_ManageService{
     @Override
     public ArrayList<Music> selectAllMusic2() {
         return playlist_manageDAO.selectAllMusic2();
+    }
+
+    @Override
+    public void deletePlaylistByUser_number(int user_number) {
+        playlist_manageDAO.deletePlaylistByUser_number(user_number);
+    }
+
+    @Override
+    public void deletePlaylistManageByList_name(String list_name) {
+        playlist_manageDAO.deletePlaylistManageByList_name(list_name);
     }
 }

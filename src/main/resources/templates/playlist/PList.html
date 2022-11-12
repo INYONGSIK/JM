@@ -10,7 +10,7 @@
 <input type="hidden" name="user_number" th:value="${P_user_number}"><br>
 <input type="hidden" name="list_name" th:value="${P_list_name}"><br>
 <ul th:each="P: ${PList}">
-    <li>[[${P.music_title}]] - [[${P.music_singer}]]</li>
+    <li>[[${P.music_title}]] - [[${P.music_singer}]] <a th:href="|/deletemusic/${P.music_number}/${P_list_name}/${P_user_number}|">삭제</a></li>
 <!--    <li>playlist = [[${P.music_number}]]</li>-->
 </ul>
 

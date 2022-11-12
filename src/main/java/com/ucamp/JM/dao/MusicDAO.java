@@ -10,6 +10,7 @@ import java.util.ArrayList;
 @Mapper
 public interface MusicDAO {
 
+
     void insertAccumulMusic(Music music);
 
     ArrayList<Music> selectMusic();
@@ -29,4 +30,17 @@ public interface MusicDAO {
     void updateAccumulMusicLikeToZero();
 
     void insertMonthMusic(AccumulMusic music);
+
+    void insertWeekMusic(Music music);
+
+    void updateWeekMusicLikeToZero();
+
+    ArrayList<Music> selectTopMusic();
+
+    ArrayList<Music> selectTopMusicByGenre(String genre);
+
+    ArrayList<Music> selectTopMusicByDate(String dateValue);
+
+    ArrayList<Music> selectTopMusicByDateAndGenre(@Param("date") String date, @Param("genre") String genre);
+
 }

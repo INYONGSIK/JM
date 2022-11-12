@@ -33,4 +33,9 @@
         select * from music where music_number = #{music_number}
     </select>
 
+<!--    플레이리스트에서 음악삭제-->
+    <delete id="deletePlaylistMusic">
+        delete from playlist where music_number = #{music_number}
+    </delete>
+
 </mapper>
