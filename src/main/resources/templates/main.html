@@ -6,7 +6,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
-
 <link rel="stylesheet" th:href="@{/bootswatch/bootstrap.min.css}"/>
 
 
@@ -20,29 +19,22 @@
 
 <!--현호 ==> 검색창-->
 <form action="/musicSearch">
-    <select name = "genre">
-        <option value = "">전체</option>
-        <option value = "발라드">발라드</option>
-        <option value = "힙합">힙합</option>
-        <option value = "댄스">댄스</option>
-        <option value = "일레트로닉">일레트로닉</option>
-        <option value = "트로트">트로트</option>
-        <option value = "인디">인디</option>
-        <option value = "R&B">R&B</option>
-        <option value = "기타">기타</option>
+    <select name="genre">
+        <option value="">전체</option>
+        <option value="발라드">발라드</option>
+        <option value="힙합">힙합</option>
+        <option value="댄스">댄스</option>
+        <option value="일레트로닉">일레트로닉</option>
+        <option value="트로트">트로트</option>
+        <option value="인디">인디</option>
+        <option value="R&B">R&B</option>
+        <option value="기타">기타</option>
     </select>
     <input type="text" name="keyword">
     <input type="submit" value="가수,제목 검색">
 </form>
 
 <div>
-    <input type="button" value="버튼" id="button1" onclick="button1_click();">
-    <button id="getAjax">Ajax</button>
-    <form method="post" name="testForm">
-        <input type="text" name="title" id="title">문자열 작성
-    </form>
-    <button id="postAjax">AjaxPost</button>
-
     <a href="/boardList">게시판</a>
     <th:block th:unless="${session.user_email}">
         <a href="/loginform">로그인</a></th:block>
@@ -52,15 +44,19 @@
 
 
     <a href="/listPM">플레이리스트</a>
+    <!--현호 ==> 검색창-->
+    <form action="/musicSearch">
+        <input type="text" name="keyword">
+        <input type="submit" value="가수,제목 검색">
+    </form>
 
-    <div id="content"></div>
-</div>
-<a href="/listPM">플레이리스트</a>
-<a href="/mypage">마이페이지</a>
-<th:block th:if="${session.user_email}">
-    <a href="/logout">로그아웃</a></th:block>
-
+    <div>
+        <a href="/listPM">플레이리스트</a>
+    </div>
     <a href="/listPM">플레이리스트</a>
+    <a href="/mypage">마이페이지</a>
+    <th:block th:if="${session.user_email}">
+        <a href="/logout">로그아웃</a></th:block>
     <div id="content"></div>
 </div>
 
@@ -79,7 +75,6 @@
       $("#asd").text(msg);
       socket.send(msg);
     });
-
 
 
 </script>

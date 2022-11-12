@@ -1,0 +1,73 @@
+let list = null;
+     $(document).ready(function() {
+        console.log("ajax");
+            $.ajax({
+                type: 'get',
+                url : '/rank2',
+                data: {
+                    dateValue:"music",
+                    genre:"전체"
+                },
+                success:function(data){
+                    list=data;
+                    console.log(list);
+                    htmlFirstfunc(list);
+
+                },
+                error:function(){
+                    console.log("error")
+                }
+	        });
+     });
+     $(document).ready(function() {
+        console.log("ajax");
+        $("#button").click(function(){
+            $.ajax({
+                type: 'get',
+                url : '/rank2',
+                data: {
+                    dateValue:$("#date").val(),
+                    genre:$("#genre").val()
+                },
+                success:function(data){
+                    list=data;
+                    console.log(list);
+                    htmlSelectfunc(list);
+
+                },
+                error:function(){
+                    console.log("error")
+                }
+	        });
+        })
+     });
+     function htmlFirstfunc(list){
+            $.each(list,function(index, item){
+                $("#musicRankList").append(
+                    "<tr id='musicRankTable'>"+
+                    "<td>"+(index+1)+"</td>"+
+                    "<td>"+item.music_title+"</td>"+
+                    "<td>"+item.music_singer+"</td>"+
+                    "<td>"+item.music_genre+"</td>"+
+                    "<td>"+item.music_image+"</td>"+
+                    "<td>"+item.music_file+"</td>"+
+                    "<td>"+item.music_like+"</td>"+
+                    "</tr>"
+                );
+            });
+     }
+     function htmlSelectfunc(list){
+            var html = "";
+            $.each(list,function(index, item){
+                    html +="<tr id='musicRankTable'>"+
+                    "<td>"+(index+1)+"</td>"+
+                    "<td>"+item.music_title+"</td>"+
+                    "<td>"+item.music_singer+"</td>"+
+                    "<td>"+item.music_genre+"</td>"+
+                    "<td>"+item.music_image+"</td>"+
+                    "<td>"+item.music_file+"</td>"+
+                    "<td>"+item.music_like+"</td>"+
+                    "</tr>"
+            });
+            $("#musicRankList").html(html);
+     }
