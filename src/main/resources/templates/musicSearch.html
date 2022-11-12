@@ -13,6 +13,8 @@
     <th>장르</th>
     <th>제목</th>
     <th>가수</th>
+    <th>좋아요 개수</th>
+    <th></th>
     </thead>
     <tboy>
         <tr th:each="music : ${musics}">
@@ -22,6 +24,8 @@
             <td>[[${music.music_genre}]]</td>
             <td>[[${music.music_title}]]</td>
             <td>[[${music.music_singer}]]</td>
+            <td>[[${music.music_like}]]</td>
+            <td>[[${music.music_file}]] 재생 버튼</td>
         </tr>
     </tboy>
 

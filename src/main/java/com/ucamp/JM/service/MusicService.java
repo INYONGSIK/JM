@@ -9,7 +9,8 @@ import java.util.ArrayList;
 public interface MusicService {
 
     //현호 : 검색 키워드 가져와서 비슷한 검색 결과 추출
-    ArrayList<Music> selectKeyword(String keyword);
+    ArrayList<Music> SearchByKeyword(String keyword, String genre);
+
 
     //세영: music 테이블에서 가져온 값을 today_music 테이블에 넣음
     void updateTodayMusic(Music music);
