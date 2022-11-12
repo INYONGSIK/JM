@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>음악 검색</title>
+</head>
+<body>
+
+
+<table border="1">
+    <thead>
+    <th></th>
+    <th>장르</th>
+    <th>제목</th>
+    <th>가수</th>
+    </thead>
+    <tboy>
+        <tr th:each="music : ${musics}">
+            <td>
+                <img th:src="${music.music_image}" width="50" alt="음악사진">
+            </td>
+            <td>[[${music.music_genre}]]</td>
+            <td>[[${music.music_title}]]</td>
+            <td>[[${music.music_singer}]]</td>
+        </tr>
+    </tboy>
+
+</table>
+
+</body>
+</html>
