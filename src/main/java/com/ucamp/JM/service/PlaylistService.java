@@ -22,4 +22,7 @@ public interface PlaylistService {
     ArrayList<Playlist_Manage> selectAllP(int user_number);
 
     Music selectByMusicNumber(int music_number);
+
+    //플레이리스트에 뮤직 삭제
+    void deletePlaylistMusic(int music_number);
 }
