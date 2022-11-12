@@ -300,7 +300,6 @@ public class RootController {
         return "modifyinformationform";
     }
 
-
     // 회원정보 수정
     @PostMapping("modifyinformation")
     public String modifyinformation(HttpServletRequest request, MultipartFile user_image) throws Exception {
@@ -352,8 +351,4 @@ public class RootController {
     }
 
 }
-
-
-
-
 
