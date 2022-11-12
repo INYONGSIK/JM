@@ -3,30 +3,55 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ucamp.JM.dao.MusicDAO">
-    <select id="selectAllMusic" resultType="Music">
-        <![CDATA[select music_title, music_singer, music_genre,to_char(to_date(music_release,'YYYY/MM/DD')) as "music_release",
-    music_like from music where rownum <= 10]]>
+    <select id="selectTopMusic" resultType="Music">
+        <![CDATA[
+        select A.* from (select music_title, music_singer, music_genre, music_release, music_like from music order by music_like desc) A
+        where rownum <= 50
+        ]]>
     </select>
-    <insert id="insertAccumulMusic" parameterType="Music">
-        insert into
-        accumul(accumul_number,music_number,music_title,music_singer,music_genre,music_release,music_image,music_file,music_lyrics,music_like)
-        values(accumul_seq.NEXTVAL,#{music_number},#{music_title},#{music_singer},TO_DATE(#{music_release},'YYYY/MM/DD'),#{music_release},#{music_image},#{music_file},#{music_lyrics},0)
-    </insert>
-    <insert id="insertTodayMusic" parameterType="Music">
-        insert into today_music
-        (today_music_number,rank_date,music_number,music_title,music_singer,music_genre,music_release,music_image,music_file,music_lyrics,music_like)
-        values(today_music_seq.NEXTVAL,SYSDATE,#{music_number},#{music_title},#{music_singer},#{music_genre},#{music_release},#{music_image},#{music_file},#{music_lyrics},0)
-    </insert>
+    <select id="selectTopMusicByGenre" resultType="Music">
+        <![CDATA[
+        select A.* from (select music_title, music_singer, music_genre, music_release, music_like
+        from music where music_genre = #{genre} order by music_like desc) A
+        where rownum <= 50
+        ]]>
+    </select>
+    <select id="selectTopMusicByDate" parameterType="String" resultType="Music">
+        <![CDATA[
+        select music_title, music_singer, music_genre, music_release, music_like from #{date}
+        ]]>
+    </select>
+    <select id="selectTopMusicByDateAndGenre" parameterType="Map" resultType="Music">
+        <![CDATA[select * from music where rownum <= 50]]>
+    </select>
+
+    <update id="updateTodayMusic" parameterType="Music">
+        update today_music set music_like = #{music_like} where music_number = #{music_number}
+    </update>
     <update id="updateAccumulMusic" parameterType="AccumulMusic">
         update accumul set music_like = #{music_like} where music_number = #{music_number}
     </update>
     <update id="updateAccumulMusicLikeToZero">
         update accumul set music_like = 0
     </update>
+    <update id="updateWeekMusicLikeToZero">
+        update week_music set music_like = 0
+    </update>
+    <insert id="insertWeekMusic" parameterType="Music">
+        insert into
+        week_music(week_music_number,rank_date,music_number,music_title,music_singer,music_genre,music_release,music_image,music_file,music_lyrics,music_like)
+        values (week_music_seq.NEXTVAL,TO_DATE(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
+        ,#{music_number},#{music_title},#{music_singer},#{music_genre},TO_DATE(#{music_release}, 'YYYY-MM-DD
+        HH24:MI:SS')
+        ,#{music_image},#{music_file},#{music_lyrics},#{music_like})
+    </insert>
     <insert id="insertMonthMusic" parameterType="AccumulMusic">
         insert into month_music
         (month_music_number,rank_date,music_number,music_title,music_singer,music_genre,music_release,music_image,music_file,music_lyrics,music_like)
         values
-        (month_music_seq.NEXTVAL,SYSDATE,#{music_number},#{music_title},#{music_singer},#{music_genre},#{music_release},#{music_image},#{music_file},#{music_lyrics},#{accumul_music_like})
+        (month_music_seq.NEXTVAL,TO_DATE(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
+        ,#{music_number},#{music_title},#{music_singer},#{music_genre},TO_DATE(#{music_release}, 'YYYY-MM-DD
+        HH24:MI:SS')
+        ,#{music_image},#{music_file},#{music_lyrics},#{accumul_music_like})
     </insert>
 </mapper>

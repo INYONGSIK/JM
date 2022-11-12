@@ -16,20 +16,9 @@ public class MusicServiceImpl implements MusicService {
 
     private final MusicDAO musicDAO;
 
-<<<<<<< HEAD
-    //세영: 추후 사용 예정 (화면에 보여줄 list)
-=======
-
->>>>>>> f2426c85a1eb56296f654f2cca2f46ce5e97fcfd
     @Override
-    public ArrayList<Music> selectAllMusic() {
-        return musicDAO.selectAllMusic();
-    }
-
-
-    @Override
-    public void insertTodayMusic(Music music) {
-        musicDAO.insertTodayMusic(music);
+    public void updateTodayMusic(Music music) {
+        musicDAO.updateTodayMusic(music);
     }
 
     @Override
@@ -56,7 +45,39 @@ public class MusicServiceImpl implements MusicService {
     @Override
     public void insertMonthMusic(AccumulMusic music) {
         music.setAccumul_music_like(music.getMusic_like() + music.getCurrent_music_like());
+        log.info(music.getMusic_title());
+        log.info(String.valueOf(music.getAccumul_music_like()));
         musicDAO.insertMonthMusic(music);
+    }
+
+    @Override
+    public void updateWeekMusicLikeToZero() {
+        musicDAO.updateWeekMusicLikeToZero();
+    }
+
+    @Override
+    public void insertWeekMusic(Music music) {
+        musicDAO.insertWeekMusic(music);
+    }
+
+    @Override
+    public ArrayList<Music> selectTopMusic() {
+        return musicDAO.selectTopMusic();
+    }
+
+    @Override
+    public ArrayList<Music> selectTopMusicByGenre(String genre) {
+        return musicDAO.selectTopMusicByGenre(genre);
+    }
+
+    @Override
+    public ArrayList<Music> selectTopMusicByDate(String dateValue) {
+        return musicDAO.selectTopMusicByDate(dateValue);
+    }
+
+    @Override
+    public ArrayList<Music> selectTopMusicByDateAndGenre(String date, String genre) {
+        return musicDAO.selectTopMusicByDateAndGenre(date, genre);
     }
 
 }

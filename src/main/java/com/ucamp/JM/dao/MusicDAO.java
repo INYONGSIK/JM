@@ -3,22 +3,15 @@ package com.ucamp.JM.dao;
 import com.ucamp.JM.dto.AccumulMusic;
 import com.ucamp.JM.dto.Music;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.ArrayList;
 
 @Mapper
 public interface MusicDAO {
-<<<<<<< HEAD
     void insertAccumulMusic(Music music);
 
-    ArrayList<Music> selectAllMusic();
-
-    ArrayList<Music> selectMusic();
-=======
-    ArrayList<Music> selectAllMusic();
->>>>>>> f2426c85a1eb56296f654f2cca2f46ce5e97fcfd
-
-    void insertTodayMusic(Music music);
+    void updateTodayMusic(Music music);
 
     void insertMusic(Music music);
 
@@ -27,4 +20,17 @@ public interface MusicDAO {
     void updateAccumulMusicLikeToZero();
 
     void insertMonthMusic(AccumulMusic music);
+
+    void insertWeekMusic(Music music);
+
+    void updateWeekMusicLikeToZero();
+
+    ArrayList<Music> selectTopMusic();
+
+    ArrayList<Music> selectTopMusicByGenre(String genre);
+
+    ArrayList<Music> selectTopMusicByDate(String dateValue);
+
+    ArrayList<Music> selectTopMusicByDateAndGenre(@Param("date") String date, @Param("genre") String genre);
+
 }
