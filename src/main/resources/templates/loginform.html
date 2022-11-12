@@ -81,8 +81,6 @@
               },
                 success: function(data) {
                     if(data == "검증실패")
-                        modalContents.text("아이디와 비밀번호가 일치하지 않습니다.");
-                        modal.modal("show");
                         alert('잘못된 아이디이거나, 비밀번호가 틀렸습니다.') ;
 
                     else{
@@ -92,6 +90,7 @@
             });
             }) ;
         }) ;
+
 
 
 
