@@ -3,6 +3,7 @@ package com.ucamp.JM.dao;
 import com.ucamp.JM.dto.AccumulMusic;
 import com.ucamp.JM.dto.Music;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.ArrayList;
 
@@ -13,7 +14,9 @@ public interface MusicDAO {
 
     ArrayList<Music> selectMusic();
 
-    ArrayList<Music> selectKeyword(String keyword);
+    //현호 = 검색하는 서비스 매퍼
+    ArrayList<Music> SearchByKeyword(@Param("keyword") String keyword, @Param("genre") String genre);
+
 
     ArrayList<Music> selectAllMusic();
 

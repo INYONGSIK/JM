@@ -21,9 +21,10 @@ public class MusicServiceImpl implements MusicService {
         return musicDAO.selectAllMusic();
     }
 
+    //현호 = 검색하는 서비스
     @Override
-    public ArrayList<Music> selectKeyword(String keyword) {
-        return musicDAO.selectKeyword(keyword);
+    public ArrayList<Music> SearchByKeyword(String keyword, String genre) {
+        return musicDAO.SearchByKeyword(keyword, genre);
     }
 
 

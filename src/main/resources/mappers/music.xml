@@ -5,14 +5,15 @@
 <mapper namespace="com.ucamp.JM.dao.MusicDAO">
 
     <select id="selectAllMusic" resultType="Music">
-        select * from music order by music_number
+        select * from music order by music_like Desc
     </select>
 
-    <select id="selectKeyword" resultType="Music">
+    <!--    현호 == 음악 키워드, 장르로 검색하기-->
+    <select id="SearchByKeyword" resultType="Music">
         SELECT *
-        FROM music
-        where music_title like #{keyword} or music_singer like #{keyword}
-        Order By music_release Desc
+        FROM (select * from music where music_genre like #{genre})
+        where (music_title like #{keyword} or music_singer like #{keyword})
+        Order By music_like desc
     </select>
 
 
