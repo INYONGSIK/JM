@@ -10,9 +10,6 @@ import java.util.ArrayList;
 @Mapper
 public interface MusicDAO {
 
-
-    void insertAccumulMusic(Music music);
-
     ArrayList<Music> selectMusic();
 
     //현호 = 검색하는 서비스 매퍼
@@ -20,11 +17,7 @@ public interface MusicDAO {
 
     void updateTodayMusic(Music music);
 
-    ArrayList<Music> selectAllMusic();
-
-    void insertTodayMusic(Music music);
-
-    void insertMusic(Music music);
+    void insertAccumulMusic(Music music);
 
     void updateAccumulMusic(AccumulMusic music);
 
@@ -36,6 +29,7 @@ public interface MusicDAO {
 
     void updateWeekMusicLikeToZero();
 
+    //세영 : html에 뿌려주기
     ArrayList<Music> selectTopMusic();
 
     ArrayList<Music> selectTopMusicByGenre(String genre);

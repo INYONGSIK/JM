@@ -1,13 +1,6 @@
 package com.ucamp.JM.dto;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-
-import java.util.Date;
-
 import lombok.*;
 
 @Data
@@ -27,4 +20,5 @@ public class Music {
     private String music_file;
     private String music_lyrics;
     private int music_like;
+
 }
