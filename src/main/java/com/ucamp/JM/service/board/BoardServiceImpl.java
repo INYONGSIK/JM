@@ -47,7 +47,12 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public void editBoard(int dashboard_No, Board board) {
-        boardDAO.editBoard(dashboard_No, board);
+    public void editBoard(int dashboard_No, String dashboard_title, String dashboard_content) {
+        boardDAO.editBoard(dashboard_No, dashboard_title, dashboard_title);
+    }
+
+    @Override
+    public void updateView(int dashboard_No) {
+        boardDAO.updateView(dashboard_No);
     }
 }

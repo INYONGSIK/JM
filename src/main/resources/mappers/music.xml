@@ -3,7 +3,20 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ucamp.JM.dao.MusicDAO">
+
     <select id="selectAllMusic" resultType="Music">
+        select * from music order by music_number
+    </select>
+
+    <select id="selectKeyword" resultType="Music">
+        SELECT *
+        FROM music
+        where music_title like #{keyword} or music_singer like #{keyword}
+        Order By music_release Desc
+    </select>
+
+
+    <select id="selectMusic" resultType="Music">
         <![CDATA[select music_title, music_singer, music_genre,to_char(to_date(music_release,'YYYY/MM/DD')) as "music_release",
     music_like from music where rownum <= 10]]>
     </select>

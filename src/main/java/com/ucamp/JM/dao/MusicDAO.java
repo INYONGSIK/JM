@@ -13,8 +13,10 @@ public interface MusicDAO {
 
     ArrayList<Music> selectMusic();
 
+    ArrayList<Music> selectKeyword(String keyword);
+
     ArrayList<Music> selectAllMusic();
-    
+
     void insertTodayMusic(Music music);
 
     void insertMusic(Music music);

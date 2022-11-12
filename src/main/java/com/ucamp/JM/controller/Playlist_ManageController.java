@@ -6,7 +6,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -20,8 +22,13 @@ public class Playlist_ManageController {
 
     //플레이리스트를 보여줍니다
     @RequestMapping("/listPM")
-    public String listPM(Model model){
-        ArrayList<Playlist_Manage> playlist_manageList = playlist_manageService.selectAllPM();
+    public String listPM(Model model,HttpServletRequest request){
+        String user_email =(String)request.getSession().getAttribute("user_email");
+
+        int user_number = playlist_manageService.PMgetUserNumByEmail(user_email).getUser_number();
+        model.addAttribute("user_number",user_number);
+
+        ArrayList<Playlist_Manage> playlist_manageList = playlist_manageService.selectAllPM(user_number);
         model.addAttribute("PMList", playlist_manageList);
         return "/playlist/PMList";
     }
@@ -36,8 +43,17 @@ public class Playlist_ManageController {
 
     //플레이리스트 생성
     @RequestMapping("/add_PM")
-    public String add_PM(Playlist_Manage playlist_manage){
-        playlist_manageService.insertPlaylist_Manage(playlist_manage);
+    public String add_PM(@RequestParam String list_name,@RequestParam int user_number){
+        playlist_manageService.insertPlaylist_Manage(list_name, user_number);
+        return "redirect:/listPM";
+    }
+
+    //플레이리스트를 삭제합니다
+    @RequestMapping("/deleteplaylist/{list_name}/{user_number}")
+    public String deleteplaylist(@PathVariable String list_name, @PathVariable int user_number ) {
+
+        playlist_manageService.deletePlaylistByUser_number(user_number);
+        playlist_manageService.deletePlaylistManageByList_name(list_name);
         return "redirect:/listPM";
     }
 

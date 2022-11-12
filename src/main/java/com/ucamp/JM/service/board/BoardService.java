@@ -18,6 +18,8 @@ public interface BoardService {
 
     ArrayList<Board> boardSearchList(String boardSearchString);
 
-    void editBoard(int dashboard_No, Board board);
+    void editBoard(int dashboard_No, String dashboard_title, String dashboard_content);
+
+    void updateView(int dashboard_No);
 
 }

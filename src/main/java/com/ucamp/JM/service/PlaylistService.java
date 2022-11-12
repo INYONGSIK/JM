@@ -1,5 +1,6 @@
 package com.ucamp.JM.service;
 
+import com.ucamp.JM.dto.Music;
 import com.ucamp.JM.dto.Playlist;
 import com.ucamp.JM.dto.Playlist_Manage;
 import com.ucamp.JM.dto.User;
@@ -19,4 +20,9 @@ public interface PlaylistService {
     List<String> PgetListNameByUserNum(int user_number);
 
     ArrayList<Playlist_Manage> selectAllP(int user_number);
+
+    Music selectByMusicNumber(int music_number);
+
+    //플레이리스트에 뮤직 삭제
+    void deletePlaylistMusic(int music_number);
 }
