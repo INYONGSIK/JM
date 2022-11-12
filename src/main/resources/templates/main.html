@@ -18,6 +18,7 @@
 <a href="/modifyinformationform">회워정보 수정</a>
 <th:block th:if="${session.user_email}"><a href="/logout">로그아웃</a></th:block>
 <a href="/listPM">플레이리스트</a>
+<a href="/mypage">마이페이지</a>
 <th:block th:if="${session.user_email}">
     <a href="/logout">로그아웃</a></th:block>
 <br><br>
@@ -35,6 +36,7 @@
       $("#asd").text(msg);
       socket.send(msg);
     });
+
 
 </script>
 </body>

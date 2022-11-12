@@ -5,8 +5,8 @@
 
 <mapper namespace="com.ucamp.JM.dao.MusicDAO">
 
-    <select id="selectAllMusic" resultType="music" >
-        select music_number, music_singer, music_title, music_like from music
+    <select id="selectAllMusic" resultType="music">
+        select MyMusic_number, MyMusic_title, MyMusic_singer, MyMusic_genre FROM MyMusic
     </select>
 
 </mapper>
