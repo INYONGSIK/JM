@@ -3,6 +3,7 @@ package com.ucamp.JM.dao;
 import com.ucamp.JM.dto.Board;
 import com.ucamp.JM.dto.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.ArrayList;
 
@@ -21,7 +22,8 @@ public interface BoardDAO {
 
     ArrayList<Board> boardSearchList(String boardSearchString);
 
-    void editBoard(int dashboard_No, Board board);
+    void editBoard(@Param("dashboard_No") int dashboard_No, @Param("dashboard_title") String dashboard_title, @Param("dashboard_content") String dashboard_content);
 
+    void updateView(int dashboard_No);
 
 }

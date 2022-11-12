@@ -17,6 +17,11 @@ public class MusicServiceImpl implements MusicService {
     private final MusicDAO musicDAO;
 
     @Override
+    public ArrayList<Music> selectKeyword(String keyword) {
+        return musicDAO.selectKeyword(keyword);
+    }
+
+    @Override
     public void updateTodayMusic(Music music) {
         musicDAO.updateTodayMusic(music);
     }

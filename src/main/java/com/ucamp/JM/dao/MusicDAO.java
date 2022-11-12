@@ -9,9 +9,17 @@ import java.util.ArrayList;
 
 @Mapper
 public interface MusicDAO {
+
+
     void insertAccumulMusic(Music music);
 
-    void updateTodayMusic(Music music);
+    ArrayList<Music> selectMusic();
+
+    ArrayList<Music> selectKeyword(String keyword);
+
+    ArrayList<Music> selectAllMusic();
+
+    void insertTodayMusic(Music music);
 
     void insertMusic(Music music);
 

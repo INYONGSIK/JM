@@ -5,13 +5,25 @@
     <title>Title</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
+
+
 <link rel="stylesheet" th:href="@{/bootswatch/bootstrap.min.css}"/>
+
 
 <th:block th:replace="header :: header">
 
 </th:block>
+
 <body>
+
 <h1>메인페이지 exam</h1>
+
+<!--현호 ==> 검색창-->
+<form action="/musicSearch">
+    <input type="text" name="keyword">
+    <input type="submit" value="가수,제목 검색">
+</form>
+
 <div>
     <input type="button" value="버튼" id="button1" onclick="button1_click();">
     <button id="getAjax">Ajax</button>
@@ -27,6 +39,7 @@
     <a href="/modifyinformationform">회워정보 수정</a>
     <th:block th:if="${session.user_email}"><a href="/logout">로그아웃</a></th:block>
 
+
     <a href="/listPM">플레이리스트</a>
 
     <div id="content"></div>
@@ -34,6 +47,11 @@
 <a href="/listPM">플레이리스트</a>
 <th:block th:if="${session.user_email}">
     <a href="/logout">로그아웃</a></th:block>
+
+    <a href="/listPM">플레이리스트</a>
+    <div id="content"></div>
+</div>
+
 <br><br>
 <div>
     <input type="text" id="msg"/>
@@ -53,5 +71,6 @@
 
 
 </script>
+
 </body>
 </html>

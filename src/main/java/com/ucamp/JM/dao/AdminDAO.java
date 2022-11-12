@@ -16,7 +16,11 @@ public interface AdminDAO {
 
     ArrayList<Admin> selectAllUser();
 
-    @Select("select * from report where report_type = #{report_type}")
+    @Select("select * from report")
+    ArrayList<Report> selectAllReport();
+
+
     ArrayList<Report> selectReportByType(int report_type);
+
 
 }
