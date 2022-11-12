@@ -1,10 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>회원 관리</title>
 </head>
 <body>
 
+<th:block th:replace="~{admin/adminHeader :: navi}"></th:block>
+
+<table border="1">
+    <thead>
+    <th>회원 번호</th>
+    <th>이메일</th>
+    <th>이름</th>
+    <th>전화번호</th>
+    <th>생일</th>
+    <th>신고 받은 횟수</th>
+    </thead>
+
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.user_number}"></td>
+        <td th:text="${user.user_email}"></td>
+        <td th:text="${user.user_name}"></td>
+        <td th:text="${user.user_phone_number}"></td>
+        <td th:text="${user.user_birthday}"></td>
+        <td th:text="${user.report_count}"></td>
+        <td>
+            <a th:href="|/admin/deleteUser/${user.user_number}|">회원 탈퇴</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>

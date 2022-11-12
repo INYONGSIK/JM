@@ -10,7 +10,7 @@
 <h1>pmList</h1>
 <ul th:each="PM : ${PMList}">
 <input type="hidden" th:value="${user_number}" name="user_number">
-  <li><a th:href="|/listP/${user_number}/${PM.list_name}|"> [[${PM.list_name}]]</a></li>
+  <li><a th:href="|/listP/${user_number}/${PM.list_name}|"> [[${PM.list_name}]]</a> <a th:href="|/deleteplaylist/${PM.list_name}/${user_number}|">삭제</a></li>
 
 
 </ul>

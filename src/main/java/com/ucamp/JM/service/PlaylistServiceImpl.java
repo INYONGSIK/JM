@@ -1,6 +1,7 @@
 package com.ucamp.JM.service;
 
 import com.ucamp.JM.dao.PlaylistDAO;
+import com.ucamp.JM.dto.Music;
 import com.ucamp.JM.dto.Playlist;
 import com.ucamp.JM.dto.Playlist_Manage;
 import com.ucamp.JM.dto.User;
@@ -17,8 +18,8 @@ public class PlaylistServiceImpl implements PlaylistService{
     private final PlaylistDAO playlistDAO;
 
     @Override
-    public ArrayList<Playlist> selectPlaylist() {
-        return playlistDAO.selectPlaylist();
+    public ArrayList<Playlist> selectPlaylist(int user_number, String list_name) {
+        return playlistDAO.selectPlaylist(user_number, list_name);
     }
 
     @Override
@@ -39,5 +40,15 @@ public class PlaylistServiceImpl implements PlaylistService{
     @Override
     public ArrayList<Playlist_Manage> selectAllP(int user_number) {
         return playlistDAO.selectAllP(user_number);
+    }
+
+    @Override
+    public Music selectByMusicNumber(int music_number) {
+        return playlistDAO.selectByMusicNumber(music_number);
+    }
+
+    @Override
+    public void deletePlaylistMusic(int music_number) {
+        playlistDAO.deletePlaylistMusic(music_number);
     }
 }

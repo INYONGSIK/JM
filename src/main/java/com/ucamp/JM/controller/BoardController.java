@@ -50,9 +50,11 @@ public class BoardController {
 
     @RequestMapping("/readboard/{dashboard_No}")
     public String readboard(Model model, @PathVariable int dashboard_No) {
-
+        boardService.updateView(dashboard_No);
 
         Board board = boardService.readboard(dashboard_No);
+
+
         model.addAttribute("dashboard_No", dashboard_No);
         model.addAttribute("dashboard_user", board.getDashboard_user());
         model.addAttribute("dashboard_title", board.getDashboard_title());
@@ -70,7 +72,10 @@ public class BoardController {
         //현재 세션에 들어와있는(로그인 되어있는 사용자의 이름)
         String login_user_nickname = boardService.getUserNicknameByEmail(user_email).getUser_nickname();
 
-        if (dashboard_user == login_user_nickname) {
+        System.out.println("dashboard_user" + dashboard_user);
+        System.out.println("login_user" + login_user_nickname);
+
+        if (dashboard_user.equals(login_user_nickname)) {
             boardService.deletedashboard(dashboard_No);
         } else {
             Writer out = response.getWriter();
@@ -97,29 +102,56 @@ public class BoardController {
     }
 
     @GetMapping("/editBoardForm/{dashboard_No}")
-    public String editBoardForm(@PathVariable int dashboard_No, Model model) {
+    public String editBoardForm(HttpServletResponse response, HttpServletRequest request, @PathVariable int dashboard_No, Model model) throws IOException {
 
-        Board board = boardService.readboard(dashboard_No);
-        model.addAttribute("dashboard_user", board.getDashboard_user());
-        model.addAttribute("dashboard_title", board.getDashboard_title());
-        model.addAttribute("dashboard_content", board.getDashboard_content());
+
+        Board board1 = boardService.readboard(dashboard_No);
+
+        String user_email = (String) request.getSession().getAttribute("user_email");
+        String login_user_nickname = boardService.getUserNicknameByEmail(user_email).getUser_nickname();
+        String dashboard_user = boardService.readboard(dashboard_No).getDashboard_user();
+
+        if (login_user_nickname.equals(dashboard_user)) {
+            model.addAttribute("dashboard_user", board1.getDashboard_user());
+            model.addAttribute("dashboard_title", board1.getDashboard_title());
+            model.addAttribute("dashboard_content", board1.getDashboard_content());
+            return "/board/editBoardForm";
+
+        } else {
+            Writer out = response.getWriter();
+            String message = URLEncoder.encode("작성자만 수정 가능합니다. 게시판 목록으로 이동합니다.", "UTF-8");
+            response.setContentType("text/html; charset=UTF-8");
+            out.write("<script type=\"text/javascript\">alert(decodeURIComponent('" + message + "'.replace(/\\+/g, '%20'))); location.href='/boardList' </script>");
+            out.flush();
+            response.flushBuffer();
+            out.close();
+        }
 
         return "/board/editBoardForm";
     }
 
     @GetMapping("/editBoard")
-    public String editBoard(HttpServletRequest request, @RequestParam int dashboard_No, Board board, Model model) {
+    public String editBoard(HttpServletResponse response, HttpServletRequest request, @RequestParam int dashboard_No, @RequestParam String dashboard_title, @RequestParam String dashboard_content) throws IOException {
         Board board1 = boardService.readboard(dashboard_No);
 
-        Board board2 = new Board();
-        board2.setDashboard_title(request.getParameter("dashboard_title"));
-        board2.setDashboard_content(request.getParameter("dashboard_content"));
+        String user_email = (String) request.getSession().getAttribute("user_email");
+        String login_user_nickname = boardService.getUserNicknameByEmail(user_email).getUser_nickname();
+        String dashboard_user = boardService.readboard(dashboard_No).getDashboard_user();
 
-//        model.addAttribute("dashboard_user", board1.getDashboard_user());
-//        model.addAttribute("dashboard_title", board1.getDashboard_title());
-//        model.addAttribute("dashboard_content", board1.getDashboard_content());
+        if (login_user_nickname.equals(dashboard_user)) {
+            board1.setDashboard_title(request.getParameter("dashboard_title"));
+            board1.setDashboard_content(request.getParameter("dashboard_content"));
 
-        boardService.editBoard(dashboard_No, board);
+            boardService.editBoard(dashboard_No, dashboard_title, dashboard_content);
+        } else {
+            Writer out = response.getWriter();
+            String message = URLEncoder.encode("작성자만 수정 가능합니다. 게시판 목록으로 이동합니다.", "UTF-8");
+            response.setContentType("text/html; charset=UTF-8");
+            out.write("<script type=\"text/javascript\">alert(decodeURIComponent('" + message + "'.replace(/\\+/g, '%20'))); location.href='/boardList' </script>");
+            out.flush();
+            response.flushBuffer();
+            out.close();
+        }
 
 
         return "redirect:/boardList";
