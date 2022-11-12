@@ -7,7 +7,7 @@
 
     <select id="selectTopMusic" resultType="Music">
         <![CDATA[
-        select A.* from (select music_title, music_singer, music_genre, music_release, music_like from music order by music_like desc) A
+        select A.* from (select music_title, music_singer, music_genre, music_image, music_file,music_like from music order by music_like desc) A
         where rownum <= 50
         ]]>
     </select>
@@ -24,43 +24,46 @@
 
     <select id="selectTopMusicByGenre" resultType="Music">
         <![CDATA[
-        select A.* from (select music_title, music_singer, music_genre, music_release, music_like
+        select A.* from (select music_title, music_singer, music_genre, music_image, music_file,music_like
         from music where music_genre = #{genre} order by music_like desc) A
         where rownum <= 50
         ]]>
     </select>
-    
-    
+
     <select id="selectTopMusicByDate" parameterType="String" resultType="Music">
         <![CDATA[
-        select music_title, music_singer, music_genre, music_release, music_like from #{date}
+        select A.* from (select music_title, music_singer, music_genre, music_image, music_file,music_like
+        from ${date} order by music_like desc) A
+        where rownum <= 50
         ]]>
     </select>
-    
-    
-    <select id="selectTopMusicByDateAndGenre" parameterType="Map" resultType="Music">
-        <![CDATA[select * from music where rownum <= 50]]>
+
+    <select id="selectTopMusicByDateAndGenre" resultType="Music">
+        <![CDATA[
+        select A.* from (select music_title, music_singer, music_genre, music_image, music_file,music_like
+        from ${date} where music_genre = #{genre} order by music_like desc) A
+        where rownum <= 50
+        ]]>
     </select>
 
     <update id="updateTodayMusic" parameterType="Music">
         update today_music set music_like = #{music_like} where music_number = #{music_number}
     </update>
-    
-    
+
+
     <update id="updateAccumulMusic" parameterType="AccumulMusic">
         update accumul set music_like = #{music_like} where music_number = #{music_number}
     </update>
-    
-    
+
+
     <update id="updateAccumulMusicLikeToZero">
         update accumul set music_like = 0
     </update>
-    
-    
+
+
     <update id="updateWeekMusicLikeToZero">
         update week_music set music_like = 0
     </update>
-    
     
     <insert id="insertWeekMusic" parameterType="Music">
         insert into
@@ -70,8 +73,7 @@
         HH24:MI:SS')
         ,#{music_image},#{music_file},#{music_lyrics},#{music_like})
     </insert>
-    
-    
+
     <insert id="insertMonthMusic" parameterType="AccumulMusic">
         insert into month_music
         (month_music_number,rank_date,music_number,music_title,music_singer,music_genre,music_release,music_image,music_file,music_lyrics,music_like)
