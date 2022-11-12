@@ -146,6 +146,17 @@ public class RootController {
         return result;
     }
 
+    // 용식 : 로그인할때 아이디와 비밀번호가 맞는지 확인
+    @ResponseBody
+    @PostMapping("/valid")
+    public String valid(@RequestParam String user_email, @RequestParam String user_password) throws Exception {
+        if (userService.login(user_email, user_password)) {
+            return "검증완료";
+        } else {
+            return "검증실패";
+        }
+    }
+
     // 용식 : 닉네임 중복확인
     @ResponseBody
     @PostMapping("/nicknameoverlap")
