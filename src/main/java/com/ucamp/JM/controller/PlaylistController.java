@@ -1,19 +1,18 @@
+package com.ucamp.JM.controller;
 
-        package com.ucamp.JM.controller;
-
-import com.ucamp.JM.dto.Music;
 import com.ucamp.JM.dto.Playlist;
 import com.ucamp.JM.service.MusicService;
 import com.ucamp.JM.service.PlaylistService;
+import com.ucamp.JM.service.Playlist_ManageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -52,8 +51,8 @@ public class PlaylistController {
     // 플레이리스트의 폼으로 이동합니다
 
     @RequestMapping("/addP/{list_name}")
-    public String addP(HttpServletRequest request, Model model,@PathVariable String list_name){
-        String user_email = (String)request.getSession().getAttribute("user_email");
+    public String addP(HttpServletRequest request, Model model, @PathVariable String list_name) {
+        String user_email = (String) request.getSession().getAttribute("user_email");
 
         System.out.println(user_email);
 
@@ -75,19 +74,19 @@ public class PlaylistController {
     //http://localhost:8090/add_P?user_number=3&list_name=kkk&music_number=1
     @RequestMapping("add_P")
 
-    public String add_P(Playlist playlist, @RequestParam int user_number, @RequestParam String list_name, @RequestParam int music_number){
+    public String add_P(Playlist playlist, @RequestParam int user_number, @RequestParam String list_name, @RequestParam int music_number) {
         playlistService.insertPlaylist(playlist);
 //        System.out.println("hi"+user_number);
 //        return "playlist/PList";
-        return "redirect:/listP/"+user_number+"/"+list_name;
+        return "redirect:/listP/" + user_number + "/" + list_name;
     }
 
     //플레이리스트에 음악을 삭제합니다
     @RequestMapping("/deletemusic/{music_number}/{list_name}/{user_number}")
-    public String deletemusic(@PathVariable int user_number,@PathVariable String list_name, @PathVariable int music_number){
+    public String deletemusic(@PathVariable int user_number, @PathVariable String list_name, @PathVariable int music_number) {
 
         playlistService.deletePlaylistMusic(music_number);
-        return "redirect:/listP/"+user_number+"/"+list_name;
+        return "redirect:/listP/" + user_number + "/" + list_name;
     }
 
 }
