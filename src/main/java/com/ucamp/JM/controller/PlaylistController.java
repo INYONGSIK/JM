@@ -80,13 +80,4 @@ public class PlaylistController {
 //        return "playlist/PList";
         return "redirect:/listP/" + user_number + "/" + list_name;
     }
-
-    //플레이리스트에 음악을 삭제합니다
-    @RequestMapping("/deletemusic/{music_number}/{list_name}/{user_number}")
-    public String deletemusic(@PathVariable int user_number, @PathVariable String list_name, @PathVariable int music_number) {
-
-        playlistService.deletePlaylistMusic(music_number);
-        return "redirect:/listP/" + user_number + "/" + list_name;
-    }
-
 }
