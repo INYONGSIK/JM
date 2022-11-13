@@ -112,10 +112,12 @@ public class RootController {
             if (user.getType().equals("user")) {
                 userService.login(user_email, user_password);
                 session.setAttribute("user_email", user_email);
+                session.setAttribute("user_number", user.getUser_number());
                 //session.setAttribute("userType", type);
                 return "redirect:/";
             } else {
                 session.setAttribute("user_email", user_email);
+                session.setAttribute("user_number", user.getUser_number());
                 return "redirect:/admin";
             }
         } catch (Exception e) {

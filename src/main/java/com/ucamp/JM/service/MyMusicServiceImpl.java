@@ -14,13 +14,13 @@ public class MyMusicServiceImpl implements MyMusicService {
 
 
     @Override
-    public ArrayList<MyMusic> selectMyMusic() {
-        return myMusicDAO.selectMyMusic();
+    public ArrayList<MyMusic> myMusicList(MyMusic paramDto) {
+        return myMusicDAO.myMusicList(paramDto);
     }
 
     @Override
-    public void insert(MyMusic myMusic) {
-        myMusicDAO.insert(myMusic);
+    public void insertMyMusic(MyMusic myMusic) {
+        myMusicDAO.insertMyMusic(myMusic);
     }
 
     @Override
