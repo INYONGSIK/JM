@@ -133,10 +133,12 @@
                             </th>
                             <td>
                                 <input type="checkbox" name="user_genre" value="발라드">발라드
-                                <input type="checkbox" name="user_genre" value="팝송">팝송
-                                <input type="checkbox" name="user_genre" value="트로트">트로트
-                                <input type="checkbox" name="user_genre" value="댄스">댄스
                                 <input type="checkbox" name="user_genre" value="힙합">힙합
+                                <input type="checkbox" name="user_genre" value="댄스">댄스
+                                <input type="checkbox" name="user_genre" value="R&B">R&B
+                                <input type="checkbox" name="user_genre" value="인디">인디
+                                <input type="checkbox" name="user_genre" value="일레트로닉">일레트로닉
+                                <input type="checkbox" name="user_genre" value="트로트">트로트
                             </td>
                         </tr>
                         <!--프로필 사진-->
@@ -151,7 +153,7 @@
                                            style="display: none" accept=".gif, .jpg, .png" onchange="readURL(this);">
                                 </div>
                                 <!--이미지 미리보기-->
-                                <img id="preview" width="200" height="200" src="webapp/img/basic.png"/>
+                                <img id="preview" width="200" height="200" src="webapp/img/profile/basic.png"/>
                             </td>
                         </tr>
                     </table>
@@ -208,23 +210,6 @@ function readURL(input) {
     document.getElementById('preview').src = "img/basic.png";
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </script>
 </body>
 </html>

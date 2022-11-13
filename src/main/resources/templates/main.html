@@ -5,9 +5,7 @@
     <title>Title</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
-
-
-<link rel="stylesheet" th:href="@{/bootswatch/bootstrap.min.css}"/>
+<link rel="stylesheet" href="/webapp/css/bootstrap.min.css"/>
 
 
 <th:block th:replace="header :: header">
@@ -20,29 +18,49 @@
 
 <!--현호 ==> 검색창-->
 <form action="/musicSearch">
-    <select name = "genre">
-        <option value = "">전체</option>
-        <option value = "발라드">발라드</option>
-        <option value = "힙합">힙합</option>
-        <option value = "댄스">댄스</option>
-        <option value = "일레트로닉">일레트로닉</option>
-        <option value = "트로트">트로트</option>
-        <option value = "인디">인디</option>
-        <option value = "R&B">R&B</option>
-        <option value = "기타">기타</option>
+    <select name="genre">
+        <option value="">전체</option>
+        <option value="발라드">발라드</option>
+        <option value="힙합">힙합</option>
+        <option value="댄스">댄스</option>
+        <option value="일레트로닉">일레트로닉</option>
+        <option value="트로트">트로트</option>
+        <option value="인디">인디</option>
+        <option value="R&B">R&B</option>
+        <option value="기타">기타</option>
     </select>
     <input type="text" name="keyword">
     <input type="submit" value="가수,제목 검색">
 </form>
 
 <div>
-    <input type="button" value="버튼" id="button1" onclick="button1_click();">
-    <button id="getAjax">Ajax</button>
-    <form method="post" name="testForm">
-        <input type="text" name="title" id="title">문자열 작성
-    </form>
-    <button id="postAjax">AjaxPost</button>
-
+    <div class="card border-primary mb-3" style="max-width: 40rem; margin:20px; display:inline-block">
+        <h1 style="padding: 20px; float:left; display:inline">랭킹</h1>
+        <button type="button" onclick="location.href='/rank'" class="btn btn-outline-primary"
+                style="max-width: 10rem;margin: 20px; float:right;">
+            더보기
+        </button>
+        <div class="card-body">
+            <table id='example' class='table table-hover' style='width:100%' aria-describedby='example_info'>
+                <thead>
+                <tr class='table-active'>
+                    <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
+                        aria-sort='ascending'> 순위
+                    </th>
+                    <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
+                        aria-sort='ascending'> 제목
+                    </th>
+                    <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
+                        aria-sort='ascending'> 가수
+                    </th>
+                </tr>
+                </thead>
+                <tbody id="mainRank">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br>
     <a href="/boardList">게시판</a>
     <th:block th:unless="${session.user_email}">
         <a href="/loginform">로그인</a></th:block>
@@ -52,15 +70,19 @@
 
 
     <a href="/listPM">플레이리스트</a>
+    <!--현호 ==> 검색창-->
+    <form action="/musicSearch">
+        <input type="text" name="keyword">
+        <input type="submit" value="가수,제목 검색">
+    </form>
 
-    <div id="content"></div>
-</div>
-<a href="/listPM">플레이리스트</a>
-<a href="/mypage">마이페이지</a>
-<th:block th:if="${session.user_email}">
-    <a href="/logout">로그아웃</a></th:block>
-
+    <div>
+        <a href="/listPM">플레이리스트</a>
+    </div>
     <a href="/listPM">플레이리스트</a>
+    <a href="/mypage">마이페이지</a>
+    <th:block th:if="${session.user_email}">
+        <a href="/logout">로그아웃</a></th:block>
     <div id="content"></div>
 </div>
 
@@ -82,7 +104,40 @@
 
 
 
-</script>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+<script src="/webapp/js/main.js"></script>
 </body>
 </html>

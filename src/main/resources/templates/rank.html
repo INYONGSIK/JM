@@ -1,40 +1,21 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="bootstrap.min.css"/>
+    <link rel="stylesheet" href="/webapp/css/bootstrap.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
-<script>
-     $(document).ready(function() {
-        console.log("ajax")
-        $("button").click(function(){
-            $.ajax({
-                type: 'get',
-                url : '/rank',
-                data: 'date='+$('input[name=date]').val+'& genre='$('input[name=genre]').val,
-                success: function(result){
-                    console.log("end")
-                },
-                error:function(){
-                    console.log("error")
-                }
-	        });
-        });
-     });
-
-</script>
 <body>
 <form>
-    <select name="date">
-        <option value="music">실시간</option>
+    <select id="date">
+        <option value="music" selected>실시간</option>
         <option value="today_music">일간</option>
         <option value="week_music">주간</option>
         <option value="month_music">월간</option>
     </select>
-    <select name="genre">
-        <option value="전체">전체</option>
+    <select id="genre">
+        <option value="전체" selected>전체</option>
         <option value="발라드">발라드</option>
         <option value="힙합">힙합</option>
         <option value="댄스">댄스</option>
@@ -45,30 +26,38 @@
         <option value="기타">기타</option>
     </select>
 </form>
-<button></button>
-<table id="example" class="table table-hover" style="width:100%" aria-describedby="example_info">
+<button id="button">검색</button>
+<table class='table table-hover' style='width:100%' aria-describedby='example_info'>
     <thead>
-    <tr class="table-active">
-        <th class="sorting sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
-            aria-sort="ascending">
-            제목
+    <tr class='table-active'>
+        <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
+            aria-sort='ascending'> 순위
         </th>
-        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">가수
+        <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
+            aria-sort='ascending'> 제목
         </th>
-        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">장르
+        <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
+            aria-sort='ascending'> 가수
         </th>
-        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">좋아요 수
+        <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
+            aria-sort='ascending'> 장르
+        </th>
+        <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
+            aria-sort='ascending'> 이미지
+        </th>
+        <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
+            aria-sort='ascending'> 재생
+        </th>
+        <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
+            aria-sort='ascending'> 좋아요
+        </th>
     </tr>
     </thead>
-    <tbody>
-    <tr th:each="music:${musicList}">
-        <td>[[${music.music_title}]]</td>
-        <td>[[${music.music_singer}]]</td>
-        <td>[[${music.music_genre}]]</td>
-        <td>[[${music.music_like}]]</td>
-    </tr>
+    <tbody id="musicRankList">
     </tbody>
 </table>
-<body>
+</body>
+<script src="/webapp/js/rank.js"></script>
+</html>
 
 

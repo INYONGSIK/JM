@@ -49,10 +49,18 @@ public class BoardController {
     }
 
     @RequestMapping("/readboard/{dashboard_No}")
-    public String readboard(Model model, @PathVariable int dashboard_No) {
+    public String readboard(HttpServletRequest request, Model model, @PathVariable int dashboard_No) {
         boardService.updateView(dashboard_No);
 
         Board board = boardService.readboard(dashboard_No);
+
+        String user_email = (String) request.getSession().getAttribute("user_email");
+
+        if (user_email != null) {
+            String sessionName = boardService.getUserNicknameByEmail(user_email).getUser_nickname();
+            model.addAttribute("sessionName", sessionName);
+        }
+        model.addAttribute("comments", boardService.CommentSelectAll(dashboard_No));
 
 
         model.addAttribute("dashboard_No", dashboard_No);
@@ -157,4 +165,18 @@ public class BoardController {
         return "redirect:/boardList";
     }
 
+    @GetMapping("/comment")
+    public String comment(@RequestParam String comment, @RequestParam String writer, @RequestParam int dashboard_No) {
+
+        boardService.comment(dashboard_No, comment, writer);
+
+        return "redirect:/readboard/" + dashboard_No;
+    }
+
+    @GetMapping("/deleteComment/{dashboard_No}/{cno}")
+    public String deleteComment(@PathVariable int dashboard_No, @PathVariable int cno) {
+
+        boardService.deleteComment(cno, dashboard_No);
+        return "redirect:/readboard/" + dashboard_No;
+    }
 }

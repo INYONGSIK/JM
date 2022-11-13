@@ -28,10 +28,6 @@ public class MusicServiceImpl implements MusicService {
         musicDAO.updateTodayMusic(music);
     }
 
-    @Override
-    public void insertMusic(Music music) {
-        musicDAO.insertMusic(music);
-    }
 
     @Override
     public void insertAccumulMusic(Music music) {
