@@ -49,4 +49,21 @@
         update dashboard set dashboard_views=dashboard_views+1 where dashboard_No=#{dashboard_No}
     </update>
 
+    <insert id="comment" parameterType="Comments">
+        insert into comments
+        (cno, dashboard_no, content, createat, writer)
+        values (comments_seq.nextval, #{dashboard_No},#{comment}, sysdate, #{writer})
+    </insert>
+
+    <select id="CommentSelectAll" resultType="Comments">
+        select
+        cno, dashboard_No, content,
+        to_char(createat,'YYYY/MM/DD') as "createat",
+        writer
+        from comments order by cno
+    </select>
+
+    <delete id="deleteComment" parameterType="Map">
+        delete from comments where dashboard_No=#{dashboard_No} and cno=#{cno}
+    </delete>
 </mapper>
