@@ -36,11 +36,13 @@ public class UserServiceImpl implements UserService {
     public boolean login(String user_email, String user_password) throws Exception {
         try {
             User user = queryUser(user_email);
-            if (user == null) throw new Exception("없는 유저");
+            if (user == null) {
+                return false;
+            }
             if (user.getUser_password().equals(user_password)) {
                 return true;
             } else {
-                throw new Exception("비밀번호가 틀림");
+                return false;
             }
         } catch (Exception e) {
             throw new Exception("로그인 오류");

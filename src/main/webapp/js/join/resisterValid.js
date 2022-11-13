@@ -117,6 +117,7 @@ function checkEmail() {
             },
             async: false,
             success: function (data) {
+            console.log(data);
                 var isOK = data
                 if (isOK) {
                     setError(email, "이미있는 이메일 입니다.");

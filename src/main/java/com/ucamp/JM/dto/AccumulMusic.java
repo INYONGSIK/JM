@@ -26,7 +26,4 @@ public class AccumulMusic {
 
     private int accumul_music_like;
 
-    public AccumulMusic(int music_like) {
-        this.music_like = music_like;
-    }
 }
