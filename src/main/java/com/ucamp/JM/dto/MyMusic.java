@@ -11,14 +11,13 @@ import lombok.ToString;
 @ToString
 public class MyMusic {
 
-    private int MyMusic_number;
-    private String MyMusic_title;
-    private String MyMusic_singer;
-    private String MyMusic_genre;
-    private String MyMusic_release;
-    private String MyMusic_image;
-    private String MyMusic_file;
-    private String MyMusic_lyrics;
-    private int MyMusic_like;
+    private String user_number;
+
+    private String list_name;
+    private String playlist_cd;
+    private int music_number;
+    private String music_title;
+    private String music_singer;
+    private String music_genre;
 
 }
