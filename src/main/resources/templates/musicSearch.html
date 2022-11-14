@@ -13,53 +13,8 @@
 
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">자음모음</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
-                aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarColor01">
-            <ul class="navbar-nav me-auto">
-                <li class="nav-item">
-                    <a class="nav-link active" href="/">Home
-                        <span class="visually-hidden">(current)</span>
-                    </a>
-                </li>
 
-                <!--                여기서부터는 아직 안정함-->
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
-                </li>
-
-            </ul>
-
-            <form action="/musicSearch" class="d-flex">
-
-                <select name="genre">
-                    <option value="">전체</option>
-                    <option value="발라드">발라드</option>
-                    <option value="힙합">힙합</option>
-                    <option value="댄스">댄스</option>
-                    <option value="일레트로닉">일레트로닉</option>
-                    <option value="트로트">트로트</option>
-                    <option value="인디">인디</option>
-                    <option value="R&B">R&B</option>
-                    <option value="기타">기타</option>
-                </select>
-                <input class="form-control me-sm-2" type="text" placeholder="Search" name="keyword">
-                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-            </form>
-        </div>
-    </div>
-</nav>
+<th:block th:replace="~{navHeader :: navi}"></th:block>
 
 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
@@ -67,13 +22,12 @@
 
 
 <h2>음악 검색 결과</h2>
-<script>
-    $(document).ready(function () {
-         $('#example').DataTable();
-        });
+<!--<script>-->
+<!--    $(document).ready(function () {-->
+<!--         $('#example').DataTable();-->
+<!--        });-->
 
-
-</script>
+<!--</script>-->
 <!--<table border="1" cellpadding="10">-->
 <table class="table table-hover" width="100" id="example">
 
