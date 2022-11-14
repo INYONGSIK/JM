@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en " xmlns:th="www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -41,6 +41,39 @@
         </tbody>
     </table>
 </div>
+
+<h1>음원파일</h1>
+
+
+<table>
+    <thead>
+    <th>제목</th>
+    <th>가수</th>
+    <th>장르</th>
+    <th>출시일</th>
+    <th>이미지</th>
+    <th>음원</th>
+    </thead>
+
+    <tbody>
+    <tr th:each="music :${musicList}">
+        <td>[[${music_title}]]</td>
+        <td>[[${music_singer}]]</td>
+        <td>[[${music_genre}]]</td>
+        <td>[[${music_release}]]</td>
+        <td><img th:src="|webapp/img/${music.music_image}|"></td>
+        <td>
+            <audio controls>
+                <source th:src="|webapp/music/${music.music_file}|"/>
+            </audio>
+        </td>
+    </tr>
+
+    </tbody>
+</table>
+
+<h1>내가 조하좋아요한 음</h1>
+
 
 <script>
 var server_result = "";
@@ -121,6 +154,15 @@ var server_result = "";
             }
         });
     }
+
+
+
+
+
+
+
+
+
 
 
 

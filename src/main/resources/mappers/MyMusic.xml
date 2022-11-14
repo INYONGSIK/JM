@@ -3,7 +3,9 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ucamp.JM.dao.MyMusicDAO">
-
+    <select id="getMusicByMusicSinger" resultType="Music">
+        select * from music where music_singer= #{music_singer}
+    </select>
     <select id="myMusicList" parameterType="MyMusic" resultType="MyMusic">
         select A.list_name,
         B.playlist_cd,
@@ -23,10 +25,10 @@
     </select>
 
     <insert id="insertMyMusic" parameterType="MyMusic">
-        insert into MyMusic(MyMusic_title,MyMusic_singer,MyMusic_genre,MyMusic_release,
-        MyMusic_image,MyMusic_file,MyMusic_lyrics)
-        values(#{MyMusic_title},#{MyMusic_singer},#{MyMusic_genre},#{MyMusic_release},
-        ${MyMusic_image},#{MyMusic_file},#{MyMusic_lyrics})
+        insert into Music(music_number,music_title,music_singer,music_genre,music_release,
+        music_image,music_file,music_lyrics)
+        values(music_seq.nextval,#{music_title},#{music_singer},#{music_genre},#{music_release},
+        #{music_image},#{music_file},#{music_lyrics})
 
         <!-- insert into playlist(
          PLAYLIST_CD,
@@ -42,7 +44,10 @@
          ); -->
     </insert>
 
-    <delete id="deleteMyMusic">
-        delete from MyMusic where MyMusic_number = #{MyMusic_number}
+    <delete id="delMyMusic">
+        delete PLAYLIST_MANAGE
+        where user_number = #{user_number}
+        and list_name = #{list_name}
+
     </delete>
 </mapper>

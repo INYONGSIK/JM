@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en " xmlns:th="www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
 
-<form action="/add">
+<form action="/add" enctype="multipart/form-data" method="post">
     <table>
         <tr>
             <td>제목</td>
@@ -14,7 +14,7 @@
         </tr>
         <tr>
             <td>가수</td>
-            <td><input type="text" name="music_singer"></td>
+            <td><input type="text" name="music_singer" th:value="${music_singer}" readonly></td>
         </tr>
         <tr>
             <td>장르</td>
@@ -37,7 +37,7 @@
         </tr>
         <tr>
             <td>이미지</td>
-            <td><input type="text" name="music_image"></td>
+            <td><input type="file" name="music_image" accept=".gif,.jpg,.png"></td>
         </tr>
         <tr>
             <td>음원파일</td>
