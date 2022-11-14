@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel='stylesheet' type='text/css' href='webapp/css/chatt.css'>
+</head>
+<body>
+<div id='chatt'>
+    <form action="/uploadMyMusic"></form>
+        <input type='text' id='mid' th:value="${session.user_number}">
+        <input type='button' value='sock' id='btnLogin'>
+        <input type='button' value='전송' id='btnSend'>
+    </form>
+    <div id="div1"></div>
+</div>
+</body>
+<script>
+  function getId(id){
+	return document.getElementById(id);
+}
+
+var data = {};//전송 데이터(JSON)
+
+var ws ;
+var mid = getId('mid');
+var btnSend = getId('btnSend');
+btnLogin.onclick = function(){
+	 ws = new WebSocket("ws://" + location.host + "/signal");
+     ws.onopen = function () {
+                  console.log("connection opened");
+                 };
+
+      ws.onclose = function (event) {
+                  console.log("connection closed");
+
+                };
+
+	ws.onmessage = function(msg){
+	console.log(msg.data);
+	    console.log(msg.data);
+	    if(msg != null && msg.trim() != ''){
+				$("#div1").append("<p>" + msg + "</p>");
+		}
+	}
+}
+btnSend.onclick = function(){
+	send();
+}
+
+function send(){
+	if(getId('mid').value.trim() != ''){
+	    var msg = getId('mid').value+"가 곡을 업로드 했습니다.";
+	    data.cmd = "alarm"
+		data.mid = getId('mid').value;
+		data.msg = msg;
+		data.date = new Date().toLocaleString();
+		var temp = JSON.stringify(data);
+		ws.send(temp);
+	}
+	msg.value ='';
+
+}
+</script>
+</html>
