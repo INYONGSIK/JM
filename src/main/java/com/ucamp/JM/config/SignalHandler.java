@@ -64,10 +64,10 @@ public class SignalHandler extends TextWebSocketHandler {
                 arrayList.add(str.split(":")[1]);
             }
 
-            if (arrayList.get(0).equals("alarm") && strs.length == 4) {
-                int sender = Integer.parseInt(strs[1]);
-                String sendMessage = strs[2];
-                String date = strs[3];
+            if (arrayList.get(0).equals("alarm") && arrayList.size() == 4) {
+                int sender = Integer.parseInt(arrayList.get(1));
+                String sendMessage = arrayList.get(2);
+                String date = arrayList.get(3);
                 //sender 가 userId이여야함
                 ArrayList<User> followers = alarmService.selectFollower(sender);
 
@@ -77,7 +77,7 @@ public class SignalHandler extends TextWebSocketHandler {
                 for (User follower : followers) {
                     WebSocketSession follower_session = null;
                     for (Map.Entry<String, WebSocketSession> entry : userSessions.entrySet()) {
-                        if (entry.getKey().equals(follower.getUser_number())) {
+                        if (entry.getKey().equals(String.valueOf(follower.getUser_number()))) {
                             follower_session = entry.getValue();
                         }
                     }

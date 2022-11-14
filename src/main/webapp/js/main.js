@@ -1,4 +1,6 @@
 var list = null;
+var follow_list = null;
+var user_number = null;
 $(document).ready(function() {
         console.log("ajax");
             $.ajax({
@@ -13,40 +15,53 @@ $(document).ready(function() {
                     console.log("error")
                 }
 	        });
-	        $.ajax({
-                type:'get',
-                url:'/followee',
-                data:$('#followerListBtn').val(),
-                success:function(data){
-                    followeeListFunc(data);
-                },
-                error:function(){
-                    console.log("error");
-                }
-            });
+
      });
- $(document).ready(function() {
-         console.log("ajax2");
-         $("#unfollow").click(function(){
-             $.ajax({
-                 type: 'get',
-                 url : '/deleteFollowee',
-                 success:function(data){
-                     followeeFunc();
-                 },
-                 error:function(){
-                     console.log("error")
-                 }
-            });
-         })
+$(document).on("click","[id^=unfollow]",(function(e){
+                     alert('alert');
+                       var followee = $(this).attr("value");
+                       var user_number = $("input[name='user_number']").val();
+                       console.log(followee);
+                       console.log(user_number);
+                       $.ajax({
+                           type: 'get',
+                           url : '/deleteFollowee',
+                           data : {follower:user_number,followee:followee},
+                           success:function(data){
+                                followeeFunc(user_number);
+                           },
+                           error:function(){
+                               console.log("error")
+                           }
+                      });
+                     })
+                    );
+  $("#followerListBtn").click(function(){
+     user_number = $('#followerListBtn').val()
+     console.log(user_number);
+     $.ajax({
+          type:'get',
+          url:'/followee',
+          data:{follower : user_number},
+          success:function(data){
+              follow_list=data;
+              console.log(data);
+              followeeListFunc(follow_list,user_number);
+          },
+          error:function(){
+              console.log("error");
+          }
       });
-function followeeFunc(){
+  })
+
+function followeeFunc(user_number){
             console.log("followeeFunc")
             $.ajax({
 	            type:'get',
 	            url:'/followee',
+	            data:{follower : user_number},
 	            success:function(data){
-	                followeeListFunc(data);
+	                followeeListFunc(data,user_number);
 	            },
 	            error:function(){
 	                console.log("error");
@@ -67,15 +82,25 @@ function rankFunc(list){
             });
             $("#mainRank").html(html);
      }
-function followeeListFunc(data){
+function followeeListFunc(data,user_number){
             var html = "";
             $.each(data,function(index, item){
                     html += "<tr>"+
-                    "<td>"+item.user_nickName+"</td>"+
+                    "<td>"+item.user_nickname+"</td>"+
                     "<td>"+
-                    "<input type='submit' class='form-control' value='팔로우 취소' id='unfollow'>"
-                    "</td>"
+                    "<input type='hidden' value='"+
+                     user_number+
+                     "' name='user_number'/>"+
+                    "</td>"+
+                    "<td>"+
+                    "<button type='button' class='form-control' value='"+
+                    item.user_number
+                    +"' name='unfollow' id='unfollow"+
+                    index+
+                    "'>팔로우 취소"+
+                    "</button>"+
+                    "</td>"+
                     "</tr>"
             });
             $("#followeeList").html(html);
-}
+    }
