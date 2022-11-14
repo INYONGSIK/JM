@@ -22,6 +22,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 import javax.sql.DataSource;
+import java.util.List;
 
 
 @Configuration
@@ -43,21 +44,21 @@ public class DailyJobConfig {
 
     private static final String TODAY = "SELECT * FROM MUSIC";
 
-    /*@Bean
+    @Bean
     public Job dailyjob() {
         return jobBuilderFactory.get("dailyjob")
                 .incrementer(new RunIdIncrementer())
                 .start(accumulateStep())
                 .next(updateTodayMusicStep())
                 .build();
-    }*/
-    @Bean(name = "dailyjob")
+    }
+    /*@Bean(name = "dailyjob")
     public Job dailyjob() {
         return jobBuilderFactory.get("dailyjob")
                 .incrementer(new RunIdIncrementer())
                 .start(step())
                 .build();
-    }
+    }*/
 
     @JobScope
     @Bean
@@ -95,6 +96,16 @@ public class DailyJobConfig {
                 .build();
     }
 
+    /* @JobScope
+     @Bean
+     public Step accumulateStep(
+     ) {
+         return stepBuilderFactory.get("accumulateStep")
+                 .<AccumulMusic, AccumulMusic>chunk(10)
+                 .reader(accumulateReader())
+                 .writer(exWriter())
+                 .build();
+     }*/
     @StepScope
     @Bean
     public JdbcCursorItemReader<Music> updateTodayMusicReader() {
@@ -113,7 +124,7 @@ public class DailyJobConfig {
                 .dataSource(dataSource)
                 .rowMapper(new BeanPropertyRowMapper<>(AccumulMusic.class))
                 .sql(ACCUMULATE)
-                .name("jdbcCursorItemReader")
+                .name("jdbc4CursorItemReader")
                 .build();
     }
 
@@ -134,13 +145,40 @@ public class DailyJobConfig {
     @StepScope
     @Bean
     public ItemWriter<Music> updateTodayMusicWriter() {
-        return items -> items.forEach(musicService::updateTodayMusic);
+        /*return new JdbcBatchItemWriterBuilder<Music>()
+                .dataSource(dataSource)
+                .sql("update today_music set music_like = :music_like where music_number = :music_number")
+                .beanMapped()
+                .build();*/
+
+        return new ItemWriter<Music>() {
+            @Override
+            public void write(List<? extends Music> items) throws Exception {
+                items.forEach(musicService::updateTodayMusic);
+            }
+        };
     }
 
     @StepScope
     @Bean
     public ItemWriter<AccumulMusic> accumulateWriter() {
-        return items -> items.forEach(musicService::updateAccumulMusic);
+        /*return new JdbcBatchItemWriterBuilder<AccumulMusic>()
+                .dataSource(dataSource)
+                .sql("update accumul set music_like = :music_like where music_number = :music_number")
+                .beanMapped()
+                .build();*/
+        return new ItemWriter<AccumulMusic>() {
+            @Override
+            public void write(List<? extends AccumulMusic> items) throws Exception {
+                items.forEach(musicService::updateAccumulMusic);
+            }
+        };
+    }
+
+    @StepScope
+    @Bean
+    public ItemWriter<AccumulMusic> exWriter() {
+        return items -> items.forEach(System.out::println);
     }
 
 }

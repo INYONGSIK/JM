@@ -46,7 +46,7 @@ public interface BoardDAO {
     void deleteComment(@Param("cno") int cno, @Param("dashboard_No") int dashboard_No);
 
     // 다인: 댓글 신고하기
-    Boolean reportComment(@Param("user_number") int user_number, @Param("contents") String contents);
+    Boolean reportComment(@Param("user_number") int user_number, @Param("contents") String contents, @Param("dashboard_No") int dashboard_No);
 
     // 다인: 유저 닉네임으로 유저넘버 가져오기
     User getUserNumByNickname(String user_nickname);

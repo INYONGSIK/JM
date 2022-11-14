@@ -74,8 +74,8 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public boolean reportComment(int user_number, String contents) {
-        boardDAO.reportComment(user_number, contents);
+    public boolean reportComment(int user_number, String contents, int dashboard_No) {
+        boardDAO.reportComment(user_number, contents, dashboard_No);
         return true;
     }
 
