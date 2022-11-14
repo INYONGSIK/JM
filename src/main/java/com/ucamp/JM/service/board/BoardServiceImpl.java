@@ -71,4 +71,20 @@ public class BoardServiceImpl implements BoardService {
     public void deleteComment(int cno, int dashboard_No) {
         boardDAO.deleteComment(cno, dashboard_No);
     }
+
+    @Override
+    public boolean reportComment(int user_number, String contents) {
+        boardDAO.reportComment(user_number, contents);
+        return true;
+    }
+
+    @Override
+    public User getUserNumByNickname(String user_nickname) {
+        return boardDAO.getUserNumByNickname(user_nickname);
+    }
+
+    @Override
+    public void updateReport_count(int user_number, String contents) {
+        boardDAO.updateReport_count(user_number, contents);
+    }
 }

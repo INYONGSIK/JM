@@ -179,4 +179,32 @@ public class BoardController {
         boardService.deleteComment(cno, dashboard_No);
         return "redirect:/readboard/" + dashboard_No;
     }
+
+    @GetMapping("/reportComment/{writer}/{contents}/{dashboard_no}")
+    public String reportComment(HttpServletResponse response, @PathVariable String writer, @PathVariable String contents, @PathVariable int dashboard_no) throws IOException {
+
+        System.out.println(writer + contents + dashboard_no);
+        int user_number = boardService.getUserNumByNickname(writer).getUser_number();
+
+        System.out.println(user_number);
+
+        Boolean ok = boardService.reportComment(user_number, contents);
+        if (ok == true) {
+            boardService.updateReport_count(user_number, contents);
+            Writer out = response.getWriter();
+            String message = URLEncoder.encode("신고완료.", "UTF-8");
+            response.setContentType("text/html; charset=UTF-8");
+            out.write("<script type=\"text/javascript\">alert(decodeURIComponent('" + message + "'.replace(/\\+/g, '%20'))); location.href='/boardList' </script>");
+            out.flush();
+            response.flushBuffer();
+            out.close();
+        }
+
+
+        return "redirect:/readboard/" + dashboard_no;
+
+
+    }
+
+
 }
