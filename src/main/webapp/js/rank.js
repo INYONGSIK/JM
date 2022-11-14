@@ -10,14 +10,24 @@ let list = null;
                 },
                 success:function(data){
                     list=data;
-                    console.log(list);
-                    htmlFirstfunc(list);
+                    console.log(list)
+                    htmlFirstfunc(list)
 
                 },
                 error:function(){
                     console.log("error")
                 }
 	        });
+	        $.ajax({
+                type: 'get',
+                url : '/rank3',
+                success:function(data){
+                    $("#Title").html(data);
+                },
+                error:function(){
+                    console.log("error")
+                }
+            });
      });
      $(document).ready(function() {
         console.log("ajax");
@@ -39,6 +49,19 @@ let list = null;
                     console.log("error")
                 }
 	        });
+	        $.ajax({
+                type: 'get',
+                url : '/rank3',
+                data: {
+                    dateValue:$("#date").val()
+                },
+                success:function(data){
+                    $("#Title").html(data);
+                },
+                error:function(){
+                    console.log("error")
+                }
+            });
         })
      });
      function htmlFirstfunc(list){

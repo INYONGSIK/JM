@@ -2,6 +2,7 @@ package com.ucamp.JM.socket;
 
 
 import com.ucamp.JM.dto.User;
+import com.ucamp.JM.service.AlarmService;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
@@ -21,6 +22,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class SignalHandler extends TextWebSocketHandler {
     private final HttpSession httpSession;
+    private final AlarmService alarmService;
 
     // 테스트용 : 전체유저에게 매세지보낼 리스트 => 접속되어있는 모든 세션을 담음
     List<WebSocketSession> sessions = new ArrayList<>();
@@ -54,7 +56,33 @@ public class SignalHandler extends TextWebSocketHandler {
         // protocol : cmd , 댓글작성자, 게시글작성자, bno (reply, user2 , user1, 234)  bno => 게시글번호
         String msg = message.getPayload();
         if (StringUtils.isNotEmpty(msg)) {
+            msg = msg.replace("{", "");
+            msg = msg.replace("}", "");
+            msg = msg.replaceAll("\"", "");
             String[] strs = msg.split(",");
+            ArrayList<String> arrayList = new ArrayList<String>();
+            for (String str : strs) {
+                arrayList.add(str.split(":")[1]);
+            }
+
+            if (arrayList.get(0).equals("alarm") && strs.length == 4) {
+                int sender = 11;
+                String sendMessage = strs[2];
+                String date = strs[3];
+                //sender 가 userId이여야함
+                ArrayList<User> followers = alarmService.selectFollower(sender);
+
+
+                TextMessage tmpMsg = new TextMessage(sendMessage);
+
+                for (User follower : followers) {
+                    WebSocketSession followerSession = userSessions.get("id");
+                    System.out.println("boardWriterSession : " + followerSession);
+                    System.out.println("follower : " + follower.getUser_email());
+
+                    followerSession.sendMessage(tmpMsg);
+                }
+            }
             if (strs != null && strs.length == 4) {
                 String cmd = strs[0];
                 String replyWriter = strs[1];
