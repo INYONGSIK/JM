@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ucamp.JM.dao.AlarmDAO">
 
-    <select id="selectFollower" resultType="User">
+    <select id="selectFollower" parameterType="int" resultType="User">
         select * from jmuser where user_number in (select follower from follow where followee = #{followee})
     </select>
     <select id="selectFollowee" resultType="User">
