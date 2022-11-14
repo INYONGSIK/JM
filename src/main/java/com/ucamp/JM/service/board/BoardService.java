@@ -28,4 +28,10 @@ public interface BoardService {
     ArrayList<Comments> CommentSelectAll(int dashboard_No);
 
     void deleteComment(int cno, int dashboard_No);
+
+    boolean reportComment(int user_number, String contents);
+
+    User getUserNumByNickname(String user_nickname);
+
+    void updateReport_count(int user_number, String contents);
 }
