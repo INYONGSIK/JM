@@ -29,7 +29,7 @@ public class BatchSchedular {
 
     JobExecution jobExecution;
 
-    @Scheduled(cron = "0 15 20 * * *")
+    @Scheduled(cron = "0 2 23 * * *")
     public void daily() throws JobInstanceAlreadyCompleteException, JobExecutionAlreadyRunningException, JobParametersInvalidException, JobRestartException {
         //(현재 좋아요 - today 좋아요) + 누적좋아요 합산 후 누적 테이블에 update
         //today 좋아요에 현재 좋아요 update;
@@ -49,7 +49,7 @@ public class BatchSchedular {
         log.info("job");
     }
 
-    @Scheduled(cron = "0 37 18 * * *")
+    @Scheduled(cron = "0 2 23 * * *")
     public void ex() {
         //(현재 좋아요 - today 좋아요) + 누적좋아요 합산 후 누적 테이블에 update
         //today 좋아요에 현재 좋아요 update
