@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="webapp/css/bootstrapLux.css"/>
 </head>
 <body>
+
 <th:block th:fragment="naviMain">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container-fluid">
@@ -23,17 +24,16 @@
                             <span class="visually-hidden">(current)</span>
                         </a>
                     </li>
-
-                    <!--                여기서부터는 아직 안정함-->
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Features</a>
+                        <a class="nav-link" href="/boardList">Dashboard</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing</a>
+                    <li class="nav-item" th:if="${session.user_email}">
+                        <a class="nav-link" href="/listPM">Playlists</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">About</a>
                     </li>
+
 
                 </ul>
 
