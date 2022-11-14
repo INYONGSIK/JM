@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>readboard</title>
+
+
 </head>
 <body>
 
@@ -81,6 +83,7 @@
                 <td><a th:href="|/reportComment/${comment.writer}/${comment.content}/${comment.dashboard_no}|">신고</a> </td>
 
                 <td th:if="${sessionName == comment.writer}"><a th:href="|/deleteComment/${comment.dashboard_no}/${comment.cno}|"> 삭제</a></td>
+                <td th:if="${sessionName == 'admin'}"><a th:href="|/deleteComment/${comment.dashboard_no}/${comment.cno}|"> 삭제</a></td>
             </tr>
 
         </table>

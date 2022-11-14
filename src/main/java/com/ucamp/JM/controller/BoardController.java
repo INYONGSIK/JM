@@ -22,6 +22,7 @@ public class BoardController {
     @Autowired
     BoardService boardService;
 
+    // 다인 : 게시판 글 목록 보여주기
     @GetMapping("/boardList")
     public String boardList(Model model) {
         model.addAttribute("dashboards", boardService.boardSelectAll());
@@ -30,6 +31,7 @@ public class BoardController {
         return "/board/boardList";
     }
 
+    // 다인 : 게시판 글 쓰기 폼으로 이동
     @GetMapping("/boardWriteForm")
     public String boardWriteForm(HttpSession session, Model model) {
         String user_email = (String) session.getAttribute("user_email");
@@ -41,6 +43,7 @@ public class BoardController {
         return "/board/boardWriteForm";
     }
 
+    // 다인 : 게시판 글 쓰기 기능
     @PostMapping("/boardWriteInput")
     public String insertBoardWrite(Model model, Board board) {
 
@@ -48,6 +51,8 @@ public class BoardController {
         return "redirect:/boardList";
     }
 
+
+    // 다인 : 게시판 글 상세보기, 댓글 보기
     @RequestMapping("/readboard/{dashboard_No}")
     public String readboard(HttpServletRequest request, Model model, @PathVariable int dashboard_No) {
         boardService.updateView(dashboard_No);
@@ -73,6 +78,7 @@ public class BoardController {
 
     }
 
+    // 다인 : 게시판 글 삭제
     @GetMapping("/deletedashboard/{dashboard_No}/{dashboard_user}")
     public String deletedashboard(HttpSession session, HttpServletResponse response, @PathVariable int dashboard_No, @PathVariable String dashboard_user) throws IOException {
 
@@ -99,6 +105,7 @@ public class BoardController {
         return "redirect:/boardList";
     }
 
+    // 다인 : 게시판 글 검색
     @GetMapping("/boardSearchList")
     public String boardSearchList(@RequestParam String boardSearchString, Model model) {
 
@@ -109,6 +116,8 @@ public class BoardController {
         return "/board/boardList";
     }
 
+
+    // 다인 : 게시판 글 수정하는 폼으로 이동
     @GetMapping("/editBoardForm/{dashboard_No}")
     public String editBoardForm(HttpServletResponse response, HttpServletRequest request, @PathVariable int dashboard_No, Model model) throws IOException {
 
@@ -138,6 +147,7 @@ public class BoardController {
         return "/board/editBoardForm";
     }
 
+    // 다인 : 게시판 글 수정 기능
     @GetMapping("/editBoard")
     public String editBoard(HttpServletResponse response, HttpServletRequest request, @RequestParam int dashboard_No, @RequestParam String dashboard_title, @RequestParam String dashboard_content) throws IOException {
         Board board1 = boardService.readboard(dashboard_No);
@@ -165,6 +175,7 @@ public class BoardController {
         return "redirect:/boardList";
     }
 
+    // 다인 : 댓글달기
     @GetMapping("/comment")
     public String comment(@RequestParam String comment, @RequestParam String writer, @RequestParam int dashboard_No) {
 
@@ -173,6 +184,8 @@ public class BoardController {
         return "redirect:/readboard/" + dashboard_No;
     }
 
+
+    // 다인 : 댓글 삭제
     @GetMapping("/deleteComment/{dashboard_No}/{cno}")
     public String deleteComment(@PathVariable int dashboard_No, @PathVariable int cno) {
 
@@ -180,6 +193,8 @@ public class BoardController {
         return "redirect:/readboard/" + dashboard_No;
     }
 
+
+    // 다인 : 댓글 신고
     @GetMapping("/reportComment/{writer}/{contents}/{dashboard_no}")
     public String reportComment(HttpServletResponse response, @PathVariable String writer, @PathVariable String contents, @PathVariable int dashboard_no) throws IOException {
 
