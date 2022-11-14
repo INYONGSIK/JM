@@ -3,6 +3,7 @@ package com.ucamp.JM.service.board;
 import com.ucamp.JM.dao.BoardDAO;
 import com.ucamp.JM.dto.Board;
 import com.ucamp.JM.dto.Comments;
+import com.ucamp.JM.dto.Report;
 import com.ucamp.JM.dto.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,5 +87,15 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public void updateReport_count(int user_number, String contents) {
         boardDAO.updateReport_count(user_number, contents);
+    }
+
+    @Override
+    public Report selectOk(int user_number, String contents) {
+        return boardDAO.selectOk(user_number, contents);
+    }
+
+    @Override
+    public ArrayList<Board> boardSelect10() {
+        return boardDAO.boardSelect10();
     }
 }
