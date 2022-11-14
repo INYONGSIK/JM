@@ -60,10 +60,44 @@
         cno, dashboard_No, content,
         to_char(createat,'YYYY/MM/DD') as "createat",
         writer
-        from comments order by cno
+        from comments
+        where dashboard_No=#{dashboard_No}
+        order by cno
     </select>
 
     <delete id="deleteComment" parameterType="Map">
         delete from comments where dashboard_No=#{dashboard_No} and cno=#{cno}
     </delete>
+
+    <insert id="reportComment" parameterType="Map">
+        insert into report
+        (user_number, report_ID,report_type,contents,report_count)
+        values (${user_number},report_seq.nextval,1,'${contents}',0)
+    </insert>
+
+    <select id="getUserNumByNickname" resultType="User">
+        select user_number from jmuser where user_nickname=#{user_nickname}
+    </select>
+
+    <update id="updateReport_count" parameterType="Map">
+        update report set report_count=report_count+1 where user_number=#{user_number} and contents=#{contents}
+    </update>
+
+    <select id="selectOk" parameterType="Map" resultType="Report">
+        select * from report where user_number=${user_number} and contents='${contents}'
+    </select>
+
+    <select id="boardSelect10" resultType="Board">
+        <![CDATA[
+        select
+        dashboard_No, user_number, dashboard_title,dashboard_user,
+        to_char(dashboard_date,'YYYY/MM/DD') as "dashboard_date",
+        dashboard_views, dashboard_comment, dashboard_content
+        from dashboard
+        where rownum <= 10
+        order by dashboard_No
+        ]]>
+    </select>
+
+
 </mapper>

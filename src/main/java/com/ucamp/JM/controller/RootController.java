@@ -3,6 +3,7 @@ package com.ucamp.JM.controller;
 import com.ucamp.JM.dto.User;
 import com.ucamp.JM.service.SendAuthNumberPhone;
 import com.ucamp.JM.service.UserService;
+import com.ucamp.JM.service.board.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,13 +26,18 @@ import java.util.UUID;
 @RequestMapping("/")
 public class RootController {
 
+    private final BoardService boardService;
+
     private final UserService userService;
     private final HttpSession session;
     private final ServletContext servletContext;
     private Logger logger = LoggerFactory.getLogger(RootController.class);
 
     @GetMapping("/")
-    public String main() {
+    public String main(Model model) {
+        model.addAttribute("dashboards", boardService.boardSelect10());
+
+
         return "main";
     }
 

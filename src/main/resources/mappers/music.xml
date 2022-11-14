@@ -30,6 +30,7 @@
         ]]>
     </select>
 
+
     <select id="selectTopMusicByDate" parameterType="String" resultType="Music">
         <![CDATA[
         select A.* from (select music_title, music_singer, music_genre, music_image, music_file,music_like
@@ -38,12 +39,14 @@
         ]]>
     </select>
 
+
     <select id="selectTopMusicByDateAndGenre" resultType="Music">
         <![CDATA[
         select A.* from (select music_title, music_singer, music_genre, music_image, music_file,music_like
         from ${date} where music_genre = #{genre} order by music_like desc) A
         where rownum <= 50
         ]]>
+
     </select>
 
     <update id="updateTodayMusic" parameterType="Music">
@@ -64,7 +67,7 @@
     <update id="updateWeekMusicLikeToZero">
         update week_music set music_like = 0
     </update>
-    
+
     <insert id="insertWeekMusic" parameterType="Music">
         insert into
         week_music(week_music_number,rank_date,music_number,music_title,music_singer,music_genre,music_release,music_image,music_file,music_lyrics,music_like)
@@ -73,6 +76,7 @@
         HH24:MI:SS')
         ,#{music_image},#{music_file},#{music_lyrics},#{music_like})
     </insert>
+
 
     <insert id="insertMonthMusic" parameterType="AccumulMusic">
         insert into month_music

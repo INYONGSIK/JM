@@ -4,14 +4,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ucamp.JM.dao.AlarmDAO">
 
-    <select id="selectFollower" resultType="User">
+    <select id="selectFollower" parameterType="int" resultType="User">
         select * from jmuser where user_number in (select follower from follow where followee = #{followee})
     </select>
     <select id="selectFollowee" resultType="User">
         select * from jmuser where user_number in (select followee from follow where follower = #{follower})
     </select>
     <select id="deleteFollowee">
-        delete follower where follower=#{follower} and followee = #{followee}
+        delete follow where follower=#{follower} and followee = #{followee}
     </select>
-
 </mapper>

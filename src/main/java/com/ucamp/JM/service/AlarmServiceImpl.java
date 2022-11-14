@@ -19,7 +19,7 @@ public class AlarmServiceImpl implements AlarmService {
 
     @Override
     public ArrayList<User> selectFollowee(int follower) {
-        return alarmDAO.selectFollower(follower);
+        return alarmDAO.selectFollowee(follower);
     }
 
     @Override

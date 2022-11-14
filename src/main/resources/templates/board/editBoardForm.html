@@ -3,6 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>editBoardForm</title>
+    <script type="text/javascript">
+
+	function check(){
+		if (f.dashboard_title.value==""){
+			alert("제목을 입력해 주세요!!")
+			f.dashboard_title.focus()
+			return false
+		}else if (f.dashboard_content.value==""){
+		    alert("내용을 입력해주세요!!")
+		    f.dashboard_content.focus()
+		    return false
+	    }
+		return true
+	}
+</script>
+
 </head>
 <body>
 
@@ -12,7 +28,7 @@
 
 <br><br>
 
-<form action="/editBoard">
+<form action="/editBoard" name="f" onsubmit="return check()">
     <input type="hidden" th:value="${dashboard_No}" name="dashboard_No">
     <div>
         <div>

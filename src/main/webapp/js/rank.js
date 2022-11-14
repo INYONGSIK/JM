@@ -11,7 +11,7 @@ let list = null;
                 success:function(data){
                     list=data;
                     console.log(list)
-                    htmlFirstfunc(list)
+                    htmlSelectfunc(list)
 
                 },
                 error:function(){
@@ -64,21 +64,7 @@ let list = null;
             });
         })
      });
-     function htmlFirstfunc(list){
-            $.each(list,function(index, item){
-                $("#musicRankList").append(
-                    "<tr id='musicRankTable'>"+
-                    "<td>"+(index+1)+"</td>"+
-                    "<td>"+item.music_title+"</td>"+
-                    "<td>"+item.music_singer+"</td>"+
-                    "<td>"+item.music_genre+"</td>"+
-                    "<td>"+item.music_image+"</td>"+
-                    "<td>"+item.music_file+"</td>"+
-                    "<td>"+item.music_like+"</td>"+
-                    "</tr>"
-                );
-            });
-     }
+
      function htmlSelectfunc(list){
             var html = "";
             $.each(list,function(index, item){
@@ -88,7 +74,11 @@ let list = null;
                     "<td>"+item.music_singer+"</td>"+
                     "<td>"+item.music_genre+"</td>"+
                     "<td>"+item.music_image+"</td>"+
-                    "<td>"+item.music_file+"</td>"+
+                    "<td>"+
+                    "<audio controls>"+
+                        "<source src=" + item.music_file + ">" +
+                    "</audio>"
+                    + "</td>"+
                     "<td>"+item.music_like+"</td>"+
                     "</tr>"
             });
