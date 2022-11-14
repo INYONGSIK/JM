@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ucamp.JM.dao.MainDAO">
+    <select id="mainBoardSelectTop10" resultType="Board">
+        <![CDATA[
+        select
+        dashboard_No, user_number, dashboard_title,dashboard_user,
+        to_char(dashboard_date,'YYYY/MM/DD') as "dashboard_date",
+        dashboard_views, dashboard_comment, dashboard_content
+        from dashboard
+        where rownum <= 10
+        order by dashboard_No
+
+         ]]>
+    </select>
+
+</mapper>

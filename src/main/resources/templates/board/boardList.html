@@ -3,42 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <title>boardList</title>
+
 </head>
+<link rel="stylesheet" href="/webapp/css/bootstrapLux.css"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+
 <body>
+<div style="padding:50px;">
+    <h1 style="text-align:center;">자음모음 게시판</h1>
+    <div class="form-group" style="text-align:center">
+        <form action="/boardSearchList" class="table-active" style="display:inline">
+
 
 <th:block th:replace="~{navHeader :: navi}"></th:block>
-<form action="/boardSearchList">
-    <!--    <select name="boardSearch">-->
-    <!--        <option value="전체">전체</option>-->
-    <!--        <option value="제목">제목</option>-->
-    <!--        <option value="작성자">작성자</option>-->
-    <!--    </select>-->
 
-    <input type="text" placeholder="제목 또는 작성자 또는 내용 키워드를 입력하세요." name="boardSearchString" size="40">
 
-    <input type="submit" value="검색">
-</form>
-<br> <br>
-<th:block th:if="${session.user_email}">
-    <a href="/boardWriteForm">글쓰기</a>
-</th:block>
+            <input type="text" class="form-control2" placeholder="제목 또는 작성자 또는 내용 키워드를 입력하세요." name="boardSearchString"
+                   size="40">
 
-<th:block th:unless="${session.user_email}">
-    회원가입 후 글쓰기 가능합니다.
-</th:block>
+            <input type="submit" class="form-control2" value="검색" style="width:5%;display:inline-block">
+        </form>
+    </div>
+    <br> <br>
+    <th:block th:if="${session.user_email}">
+        <a href="/boardWriteForm" class="btn"><h3><small class="text-muted1">글쓰기</small></h3></a>
+    </th:block>
 
-<div>
-    <table border="1">
-        <thead>
-        <tr>
-            <th>No.</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>작성일자</th>
-            <th>조회수</th>
-        </tr>
-        </thead>
-        <tbod>
+    <th:block th:unless="${session.user_email}">
+        <h3><small class="text-muted">회원가입 후 글쓰기 가능합니다.</small></h3>
+    </th:block>
+
+    <div>
+        <table class='table table-hover' style='width:100%' aria-describedby='example_info'>
+            <thead>
+            <tr class='table-active'>
+                <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
+                    aria-sort='ascending'>No.
+                </th>
+                <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
+                    aria-sort='ascending'>제목
+                </th>
+                <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
+                    aria-sort='ascending'>작성자
+                </th>
+                <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
+                    aria-sort='ascending'>작성일자
+                </th>
+                <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
+                    aria-sort='ascending'>조회수
+                </th>
+            </tr>
+            </thead>
+            <tbody>
             <tr th:each="d:${dashboards}">
                 <td>[[${d.dashboard_No}]]</td>
                 <td><a th:href="|/readboard/${d.dashboard_No}|"> [[${d.dashboard_title}]] </a></td>
@@ -46,25 +62,11 @@
                 <td>[[${d.dashboard_date}]]</td>
                 <td>[[${d.dashboard_views}]]</td>
             </tr>
-        </tbod>
-    </table>
+            </tbody>
+        </table>
+    </div>
+
+
 </div>
-
-<!--<div>-->
-<!--    <th:if test="${rowCount>0}">-->
-<!--        <th:if test="${startPage>1}">-->
-<!--            [<a th:href="/boardList?pageNum=${startPage-1}">이전</a>]-->
-<!--        </th:if>-->
-<!--        <th:forEach var="i" begin="${startPage}" end="${endPage}">-->
-<!--            [<a th:href="/boardList?pageNum=${i}">-->
-<!--            <th:out value="${i}"/>-->
-<!--        </a>]-->
-<!--        </th:forEach>-->
-<!--        <th:if test="${endPage<pageCount}">-->
-<!--            [<a th:href="/boardList?pageNum=${endPage+1}">다음</a>]-->
-<!--        </th:if>-->
-<!--    </th:if>-->
-<!--</div>-->
-
 </body>
 </html>

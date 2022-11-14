@@ -52,7 +52,9 @@
         <td>[[${music.music_title}]]</td>
         <td>[[${music.music_singer}]]</td>
         <td>[[${music.music_like}]]</td>
-        <td>[[${music.music_file}]] 재생 버튼</td>
+        <td><audio controls>
+            <source th:src="${music.music_file}">
+        </audio></td>
     </tr>
     </tbody>
 
