@@ -3,24 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <title>신고 관리 페이지</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" href="/webapp/css/bootstrapLux.css"/>
 </head>
 <body>
 
 <th:block th:replace="~{admin/adminHeader :: navi}"></th:block>
 
-<table border="1">
+<table class="table table-hover" width="100">
     <thead>
-    <th>회원번호</th>
-    <th>댓글 내용</th>
-    <th>처음 신고 발생일</th>
-    <th>신고 받은 횟수</th>
+    <tr class="table-dark">
+        <th scope="col">회원번호</th>
+        <th scope="col">댓글 내용</th>
+        <th scope="col">처음 신고 발생일</th>
+        <th scope="col">신고 받은 횟수</th>
+    </tr>
     </thead>
 
 
     <tbody>
     <tr th:each="report : ${reports}">
         <td th:text="${report.user_number}"></td>
-        <td th:text="${report.contents}"></td>
+        <td>
+            <a th:href="|/readboard/${report.dashboard_No}|" th:if="${report.report_type==1}">[[${report.contents}]]</a>
+            <a th:href="|/readboard/|" th:if="${report.report_type==2}">[[${report.contents}]]</a>
+        </td>
         <td th:text="${report.report_date}"></td>
         <td th:text="${report.report_count}"></td>
     </tr>
