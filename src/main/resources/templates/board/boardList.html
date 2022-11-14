@@ -12,17 +12,21 @@
 <div style="padding:50px;">
     <h1 style="text-align:center;">자음모음 게시판</h1>
     <div class="form-group" style="text-align:center">
-        <form action="/boardSearchList" class="table-active" style="display:inline">
 
+<<<<<<< HEAD
+        <form action="/boardSearchList" class="table-active" style="display:inline">
+=======
 
 <th:block th:replace="~{navHeader :: navi}"></th:block>
 
+>>>>>>> 641d01d73537bd895827fa0758e873d6dd737152
 
             <input type="text" class="form-control2" placeholder="제목 또는 작성자 또는 내용 키워드를 입력하세요." name="boardSearchString"
                    size="40">
 
             <input type="submit" class="form-control2" value="검색" style="width:5%;display:inline-block">
         </form>
+        
     </div>
     <br> <br>
     <th:block th:if="${session.user_email}">
