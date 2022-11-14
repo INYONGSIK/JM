@@ -5,8 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import java.util.Date;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,7 +13,7 @@ public class Comments {
     private int cno;
     private int dashboard_no;
     private String content;
-    private Date createat;
+    private String createat;
     private String writer;
 
 

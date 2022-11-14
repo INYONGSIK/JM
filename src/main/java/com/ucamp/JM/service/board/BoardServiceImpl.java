@@ -2,6 +2,7 @@ package com.ucamp.JM.service.board;
 
 import com.ucamp.JM.dao.BoardDAO;
 import com.ucamp.JM.dto.Board;
+import com.ucamp.JM.dto.Comments;
 import com.ucamp.JM.dto.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,5 +55,20 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public void updateView(int dashboard_No) {
         boardDAO.updateView(dashboard_No);
+    }
+
+    @Override
+    public void comment(int dashboard_No, String comment, String writer) {
+        boardDAO.comment(dashboard_No, comment, writer);
+    }
+
+    @Override
+    public ArrayList<Comments> CommentSelectAll(int dashboard_No) {
+        return boardDAO.CommentSelectAll(dashboard_No);
+    }
+
+    @Override
+    public void deleteComment(int cno, int dashboard_No) {
+        boardDAO.deleteComment(cno, dashboard_No);
     }
 }

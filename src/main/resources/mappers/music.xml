@@ -7,7 +7,7 @@
 
     <select id="selectTopMusic" resultType="Music">
         <![CDATA[
-        select A.* from (select music_title, music_singer, music_genre, music_release, music_like from music order by music_like desc) A
+        select A.* from (select music_title, music_singer, music_genre, music_image, music_file,music_like from music order by music_like desc) A
         where rownum <= 50
         ]]>
     </select>
@@ -24,7 +24,7 @@
 
     <select id="selectTopMusicByGenre" resultType="Music">
         <![CDATA[
-        select A.* from (select music_title, music_singer, music_genre, music_release, music_like
+        select A.* from (select music_title, music_singer, music_genre, music_image, music_file,music_like
         from music where music_genre = #{genre} order by music_like desc) A
         where rownum <= 50
         ]]>
@@ -33,13 +33,20 @@
 
     <select id="selectTopMusicByDate" parameterType="String" resultType="Music">
         <![CDATA[
-        select music_title, music_singer, music_genre, music_release, music_like from #{date}
+        select A.* from (select music_title, music_singer, music_genre, music_image, music_file,music_like
+        from ${date} order by music_like desc) A
+        where rownum <= 50
         ]]>
     </select>
 
 
-    <select id="selectTopMusicByDateAndGenre" parameterType="Map" resultType="Music">
-        <![CDATA[select * from music where rownum <= 50]]>
+    <select id="selectTopMusicByDateAndGenre" resultType="Music">
+        <![CDATA[
+        select A.* from (select music_title, music_singer, music_genre, music_image, music_file,music_like
+        from ${date} where music_genre = #{genre} order by music_like desc) A
+        where rownum <= 50
+        ]]>
+
     </select>
 
     <update id="updateTodayMusic" parameterType="Music">
@@ -60,7 +67,6 @@
     <update id="updateWeekMusicLikeToZero">
         update week_music set music_like = 0
     </update>
-
 
     <insert id="insertWeekMusic" parameterType="Music">
         insert into

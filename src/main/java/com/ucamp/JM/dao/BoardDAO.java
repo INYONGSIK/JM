@@ -1,6 +1,7 @@
 package com.ucamp.JM.dao;
 
 import com.ucamp.JM.dto.Board;
+import com.ucamp.JM.dto.Comments;
 import com.ucamp.JM.dto.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -26,4 +27,9 @@ public interface BoardDAO {
 
     void updateView(int dashboard_No);
 
+    void comment(@Param("dashboard_No") int dashboard_No, @Param("comment") String comment, @Param("writer") String writer);
+
+    ArrayList<Comments> CommentSelectAll(int dashboard_No);
+
+    void deleteComment(@Param("cno") int cno, @Param("dashboard_No") int dashboard_No);
 }

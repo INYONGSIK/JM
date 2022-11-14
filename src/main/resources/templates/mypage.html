@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -8,5 +8,13 @@
 
 <a href="addMyMusic">음원추가</a>
 
+
+<div th:each="myMusic : ${myMusics}">
+    [[${myMusic.MyMusic_title}]]
+    [[${myMusic.MyMusic_singer}]]
+    [[${myMusic.MyMusic_genre}]]
+    [[${myMusic.MyMusic_release}]]
+    
+</div>
 </body>
 </html>

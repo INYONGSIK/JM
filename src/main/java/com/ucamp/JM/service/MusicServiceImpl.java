@@ -21,6 +21,7 @@ public class MusicServiceImpl implements MusicService {
     @Override
     public ArrayList<Music> SearchByKeyword(String keyword, String genre) {
         return musicDAO.SearchByKeyword(keyword, genre);
+
     }
 
     @Override
@@ -28,10 +29,6 @@ public class MusicServiceImpl implements MusicService {
         musicDAO.updateTodayMusic(music);
     }
 
-    @Override
-    public void insertMusic(Music music) {
-        musicDAO.insertMusic(music);
-    }
 
     @Override
     public void insertAccumulMusic(Music music) {
