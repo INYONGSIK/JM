@@ -195,8 +195,8 @@ public class BoardController {
 
 
     // 다인 : 댓글 신고
-    @GetMapping("/reportComment/{writer}/{contents}/{dashboard_no}")
-    public String reportComment(HttpServletResponse response, @PathVariable String writer, @PathVariable String contents, @PathVariable int dashboard_no) throws IOException {
+    @GetMapping("/reportComment/{writer}/{contents}/{dashboard_No}")
+    public String reportComment(HttpServletResponse response, @PathVariable String writer, @PathVariable String contents, @PathVariable int dashboard_No) throws IOException {
 
         int user_number = boardService.getUserNumByNickname(writer).getUser_number();
 
@@ -210,7 +210,7 @@ public class BoardController {
             response.flushBuffer();
             out.close();
         } else {
-            Boolean ok = boardService.reportComment(user_number, contents);
+            Boolean ok = boardService.reportComment(user_number, contents, dashboard_No);
             boardService.updateReport_count(user_number, contents);
 
             if (ok == true) {
@@ -226,7 +226,7 @@ public class BoardController {
         }
 
 
-        return "redirect:/readboard/" + dashboard_no;
+        return "redirect:/readboard/" + dashboard_No;
 
 
     }

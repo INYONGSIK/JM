@@ -43,7 +43,7 @@ public interface BoardService {
     void deleteComment(int cno, int dashboard_No);
 
     // 다인: 댓글 신고하기
-    boolean reportComment(int user_number, String contents);
+    boolean reportComment(int user_number, String contents, int dashboard_No);
 
     // 다인: 유저 닉네임으로 유저넘버 가져오기
     User getUserNumByNickname(String user_nickname);
