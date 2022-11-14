@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="webapp/css/bootstrapLux.css"/>
 </head>
 <body>
+
 <th:block th:fragment="naviMain">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container-fluid">
@@ -43,12 +44,13 @@
 </th:block>
 
 
+
 <th:block th:fragment="navi">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">자음모음</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
-                    aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand" href="/">자음모음</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
+                    aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarColor02">
@@ -58,8 +60,6 @@
                             <span class="visually-hidden">(current)</span>
                         </a>
                     </li>
-
-                    <!--                여기서부터는 아직 안정함-->
                     <li class="nav-item">
                         <a class="nav-link" href="#">Features</a>
                     </li>
@@ -71,7 +71,6 @@
                     </li>
 
                 </ul>
-
                 <form action="/musicSearch" class="d-flex">
 
                     <select name="genre">
@@ -85,7 +84,7 @@
                         <option value="R&B">R&B</option>
                         <option value="기타">기타</option>
                     </select>
-                    <input class="form-control me-sm-2" type="text" placeholder="Search" name="keyword">
+                    <input class="form-control me-sm-2" type="text" placeholder="제목, 가수 검색" name="keyword">
                     <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
                 </form>
 
@@ -93,5 +92,7 @@
         </div>
     </nav>
 </th:block>
+
+
 </body>
 </html>
