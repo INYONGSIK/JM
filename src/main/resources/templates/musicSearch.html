@@ -7,14 +7,10 @@
     <script src="https://code.jquery.com/jquery-3.6.1.js"
             integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
 
-
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
     <link rel="stylesheet" href="webapp/css/bootstrapLux.css"/>
 
-
-    <!-- 부트스트랩 CDN 로드 : 항상 최신 버전 사용 : maxcdn -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
+    <script src="/webapp/js/paging.js"></script>
 
 
 </head>
@@ -28,8 +24,11 @@
 
 
 <h2>음악 검색 결과</h2>
+<form action="" id="setRows">
+    <input type="hidden" name="rowPerPage" value="15">
+</form>
 
-<table class="table table-hover" width="100" id="example">
+<table class="table table-hover" width="100" id="products">
 
 
     <thead>
@@ -52,13 +51,21 @@
         <td>[[${music.music_title}]]</td>
         <td>[[${music.music_singer}]]</td>
         <td>[[${music.music_like}]]</td>
-        <td><audio controls>
-            <source th:src="${music.music_file}">
-        </audio></td>
+        <td>
+            <audio controls>
+                <source th:src="${music.music_file}">
+            </audio>
+        </td>
     </tr>
+
+
     </tbody>
 
 </table>
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination pagination-seperated"></ul>
+</nav>
 
 
 </body>
