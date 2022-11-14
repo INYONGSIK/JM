@@ -53,6 +53,8 @@ public class MusicController {
         model.addAttribute("musics", musicService.SearchByKeyword("%" + keyword + "%", "%" + genre + "%"));
         return "musicSearch";
     }
+
+
 }
 
 

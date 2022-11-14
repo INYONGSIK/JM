@@ -19,7 +19,8 @@ import java.util.ArrayList;
 @RequiredArgsConstructor
 @Slf4j
 public class MainController {
-
+    @Autowired
+    MainService mainService;
     private final MusicService musicService;
 
     @RequestMapping("/mainRank")
@@ -29,8 +30,19 @@ public class MainController {
         return musicList;
     }
 
+    @RequestMapping("/main")
+    public  String main(Model model) {
+        model.addAttribute("dashboardstop10", mainService.mainBoardSelectTop10());
+        return "main/index";
 
+    }
 
+    @RequestMapping("/main2")
+    public  String main2(Model model) {
+        model.addAttribute("dashboardstop10", mainService.mainBoardSelectTop10());
+        return "main/index2";
+
+    }
 
 
 
