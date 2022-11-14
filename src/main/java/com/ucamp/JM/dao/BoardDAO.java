@@ -32,4 +32,12 @@ public interface BoardDAO {
     ArrayList<Comments> CommentSelectAll(int dashboard_No);
 
     void deleteComment(@Param("cno") int cno, @Param("dashboard_No") int dashboard_No);
+
+    Boolean reportComment(@Param("user_number") int user_number, @Param("contents") String contents);
+
+    User getUserNumByNickname(String user_nickname);
+
+    void updateReport_count(@Param("user_number") int user_number, @Param("contents") String contents);
+
+
 }
