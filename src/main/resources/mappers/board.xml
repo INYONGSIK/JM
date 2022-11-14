@@ -72,7 +72,7 @@
     <insert id="reportComment" parameterType="Map">
         insert into report
         (user_number, report_ID,report_type,contents,report_count)
-        values (${user_number},report_seq.nextval,1,'${contents}',1)
+        values (${user_number},report_seq.nextval,1,'${contents}',0)
     </insert>
 
     <select id="getUserNumByNickname" resultType="User">
