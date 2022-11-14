@@ -16,6 +16,7 @@ $(document).ready(function() {
 	        $.ajax({
                 type:'get',
                 url:'/followee',
+                data:$('#followerListBtn').val(),
                 success:function(data){
                     followeeListFunc(data);
                 },
@@ -23,7 +24,6 @@ $(document).ready(function() {
                     console.log("error");
                 }
             });
-
      });
  $(document).ready(function() {
          console.log("ajax2");
