@@ -1,15 +1,32 @@
 package com.ucamp.JM.config;
 
+import com.ucamp.JM.dto.Music;
+import com.ucamp.JM.service.MusicServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.batch.core.Job;
+import org.springframework.batch.core.Step;
+import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
+import org.springframework.batch.core.configuration.annotation.JobScope;
+import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.configuration.annotation.StepScope;
+import org.springframework.batch.core.launch.support.RunIdIncrementer;
+import org.springframework.batch.item.ItemWriter;
+import org.springframework.batch.item.database.JdbcCursorItemReader;
+import org.springframework.batch.item.database.builder.JdbcCursorItemReaderBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+
+import javax.sql.DataSource;
 
 
 @Configuration
 @RequiredArgsConstructor
 @Slf4j
 public class WeeklyJobConfig {
-/*    private final JobBuilderFactory jobBuilderFactory;
+    private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
     @Autowired
     private DataSource dataSource;
@@ -19,24 +36,21 @@ public class WeeklyJobConfig {
             "music_image,music_file,music_lyrics,music_like FROM ACCUMUL";
 
     @Bean
-    public Job job1(Step insertWeeklyMusicStep, Step updateTodayMusicStep) {
+    public Job weeklyJob() {
         return jobBuilderFactory.get("job1")
                 .incrementer(new RunIdIncrementer())
-                .start(insertWeeklyMusicStep)
-                .next(updateTodayMusicStep)
+                .start(insertWeeklyMusicStep())
                 .build();
     }
 
 
     @JobScope
     @Bean
-    public Step insertWeeklyMusicStep(JdbcCursorItemReader<Music> insertWeeklyMusicReader,
-                                      ItemWriter<Music> insertWeeklyMusicWriter
-    ) {
+    public Step insertWeeklyMusicStep() {
         return stepBuilderFactory.get("updateTodayMusicStep")
                 .<Music, Music>chunk(10)
-                .reader(insertWeeklyMusicReader)
-                .writer(insertWeeklyMusicWriter)
+                .reader(insertWeeklyMusicReader())
+                .writer(insertWeeklyMusicWriter())
                 .build();
     }
 
@@ -53,9 +67,8 @@ public class WeeklyJobConfig {
 
     @StepScope
     @Bean
-    public ItemWriter<Music> updateWeeklyMusicWriter() {
+    public ItemWriter<Music> insertWeeklyMusicWriter() {
         return items -> items.forEach(musicService::insertWeekMusic);
     }
-*/
 
 }
