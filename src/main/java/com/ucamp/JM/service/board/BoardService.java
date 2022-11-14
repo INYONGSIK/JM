@@ -2,6 +2,7 @@ package com.ucamp.JM.service.board;
 
 import com.ucamp.JM.dto.Board;
 import com.ucamp.JM.dto.Comments;
+import com.ucamp.JM.dto.Report;
 import com.ucamp.JM.dto.User;
 
 import java.util.ArrayList;
@@ -34,4 +35,8 @@ public interface BoardService {
     User getUserNumByNickname(String user_nickname);
 
     void updateReport_count(int user_number, String contents);
+
+    Report selectOk(int user_number, String contents);
+
+    ArrayList<Board> boardSelect10();
 }

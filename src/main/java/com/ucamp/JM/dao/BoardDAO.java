@@ -2,6 +2,7 @@ package com.ucamp.JM.dao;
 
 import com.ucamp.JM.dto.Board;
 import com.ucamp.JM.dto.Comments;
+import com.ucamp.JM.dto.Report;
 import com.ucamp.JM.dto.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -39,5 +40,8 @@ public interface BoardDAO {
 
     void updateReport_count(@Param("user_number") int user_number, @Param("contents") String contents);
 
+    ArrayList<Board> boardSelect10();
+
+    Report selectOk(@Param("user_number") int user_number, @Param("contents") String contents);
 
 }

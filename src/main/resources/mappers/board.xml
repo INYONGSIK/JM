@@ -82,4 +82,22 @@
     <update id="updateReport_count" parameterType="Map">
         update report set report_count=report_count+1 where user_number=#{user_number} and contents=#{contents}
     </update>
+
+    <select id="selectOk" parameterType="Map" resultType="Report">
+        select * from report where user_number=${user_number} and contents='${contents}'
+    </select>
+
+    <select id="boardSelect10" resultType="Board">
+        <![CDATA[
+        select
+        dashboard_No, user_number, dashboard_title,dashboard_user,
+        to_char(dashboard_date,'YYYY/MM/DD') as "dashboard_date",
+        dashboard_views, dashboard_comment, dashboard_content
+        from dashboard
+        where rownum <= 10
+        order by dashboard_No
+        ]]>
+    </select>
+
+
 </mapper>
