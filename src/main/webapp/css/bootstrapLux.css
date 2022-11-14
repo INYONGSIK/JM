@@ -2009,6 +2009,28 @@ progress {
   border-radius: 0;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+<<<<<<< HEAD
+
+.form-control2 {
+  display: inline-block;
+  width: 70%;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #55595c;
+  background-color: #f7f7f9;
+  background-clip: padding-box;
+  border: 0 solid #ced4da;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+=======
+>>>>>>> b32fb00cc6f9a6b8b6bf6ae152679c3e25349556
 @media (prefers-reduced-motion: reduce) {
   .form-control {
     transition: none;
@@ -7871,9 +7893,20 @@ textarea.form-control-lg {
   color: rgba(var(--bs-body-color-rgb), var(--bs-text-opacity)) !important;
 }
 
+<<<<<<< HEAD
+.text-muted1 {
+  --bs-text-opacity: 1;
+  text-align: right !important;
+  color: #919aa1 !important;
+  margin-top: -1rem;
+  margin-bottom: 1rem;
+
+
+=======
 .text-muted {
   --bs-text-opacity: 1;
   color: #919aa1 !important;
+>>>>>>> b32fb00cc6f9a6b8b6bf6ae152679c3e25349556
 }
 
 .text-black-50 {
