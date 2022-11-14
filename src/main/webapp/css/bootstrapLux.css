@@ -2009,6 +2009,7 @@ progress {
   border-radius: 0;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 
 .form-control2 {
@@ -2031,6 +2032,8 @@ progress {
 
 =======
 >>>>>>> b32fb00cc6f9a6b8b6bf6ae152679c3e25349556
+=======
+>>>>>>> Stashed changes
 @media (prefers-reduced-motion: reduce) {
   .form-control {
     transition: none;
@@ -7893,6 +7896,7 @@ textarea.form-control-lg {
   color: rgba(var(--bs-body-color-rgb), var(--bs-text-opacity)) !important;
 }
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 .text-muted1 {
   --bs-text-opacity: 1;
@@ -7907,6 +7911,11 @@ textarea.form-control-lg {
   --bs-text-opacity: 1;
   color: #919aa1 !important;
 >>>>>>> b32fb00cc6f9a6b8b6bf6ae152679c3e25349556
+=======
+.text-muted {
+  --bs-text-opacity: 1;
+  color: #919aa1 !important;
+>>>>>>> Stashed changes
 }
 
 .text-black-50 {
