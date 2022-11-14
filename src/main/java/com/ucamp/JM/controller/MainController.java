@@ -34,19 +34,7 @@ public class MainController {
     }
 
 
-    @RequestMapping("/main")
-    public  String main(Model model) {
-        model.addAttribute("dashboardstop10", mainService.mainBoardSelectTop10());
-        return "main/index";
 
-    }
-
-    @RequestMapping("/main2")
-    public  String main2(Model model) {
-        model.addAttribute("dashboardstop10", mainService.mainBoardSelectTop10());
-        return "main/index2";
-
-    }
 
 
 
