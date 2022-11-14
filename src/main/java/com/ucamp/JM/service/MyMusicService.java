@@ -5,9 +5,9 @@ import com.ucamp.JM.dto.MyMusic;
 import java.util.ArrayList;
 
 public interface MyMusicService {
-    ArrayList<MyMusic> selectMyMusic();
+    ArrayList<MyMusic> myMusicList(MyMusic paramDto);
 
-    void insert(MyMusic myMusic);
+    void insertMyMusic(MyMusic myMusic);
 
     void delete(int MyMusic_number);
 }

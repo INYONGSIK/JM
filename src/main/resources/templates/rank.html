@@ -7,55 +7,62 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-<form>
-    <select id="date">
-        <option value="music" selected>실시간</option>
-        <option value="today_music">일간</option>
-        <option value="week_music">주간</option>
-        <option value="month_music">월간</option>
-    </select>
-    <select id="genre">
-        <option value="전체" selected>전체</option>
-        <option value="발라드">발라드</option>
-        <option value="힙합">힙합</option>
-        <option value="댄스">댄스</option>
-        <option value="R&B">R&B</option>
-        <option value="인디">인디</option>
-        <option value="일레트로닉">일레트로닉</option>
-        <option value="트로트">트로트</option>
-        <option value="기타">기타</option>
-    </select>
-</form>
-<button id="button">검색</button>
-<table class='table table-hover' style='width:100%' aria-describedby='example_info'>
-    <thead>
-    <tr class='table-active'>
-        <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
-            aria-sort='ascending'> 순위
-        </th>
-        <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
-            aria-sort='ascending'> 제목
-        </th>
-        <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
-            aria-sort='ascending'> 가수
-        </th>
-        <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
-            aria-sort='ascending'> 장르
-        </th>
-        <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
-            aria-sort='ascending'> 이미지
-        </th>
-        <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
-            aria-sort='ascending'> 재생
-        </th>
-        <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
-            aria-sort='ascending'> 좋아요
-        </th>
-    </tr>
-    </thead>
-    <tbody id="musicRankList">
-    </tbody>
-</table>
+<div style="padding:30px">
+    <h2 id="Title"></h2>
+    <div>
+        <form class="table-active" style="display:inline">
+            <select id="date" class="form-select" style="width:20%;display:inline">
+                <option value="music" selected>실시간</option>
+                <option value="today_music">일간</option>
+                <option value="week_music">주간</option>
+                <option value="month_music">월간</option>
+            </select>
+            <select id="genre" class="form-select" style="width:20%;display:inline">
+                <option value="전체" selected>전체</option>
+                <option value="발라드">발라드</option>
+                <option value="힙합">힙합</option>
+                <option value="댄스">댄스</option>
+                <option value="R&B">R&B</option>
+                <option value="인디">인디</option>
+                <option value="일레트로닉">일레트로닉</option>
+                <option value="트로트">트로트</option>
+                <option value="기타">기타</option>
+            </select>
+        </form>
+        <input type="submit" class="form-control" id="button" value="검색"
+               style="width:5%;display:inline-block">
+    </div>
+
+    <table id='example' class='table table-hover' style='width:100% ; margin:10px 0px;' aria-describedby='example_info'>
+        <thead>
+        <tr class='table-active'>
+            <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
+                aria-sort='ascending'> 순위
+            </th>
+            <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
+                aria-sort='ascending'> 제목
+            </th>
+            <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
+                aria-sort='ascending'> 가수
+            </th>
+            <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
+                aria-sort='ascending'> 장르
+            </th>
+            <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
+                aria-sort='ascending'> 이미지
+            </th>
+            <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
+                aria-sort='ascending'> 재생
+            </th>
+            <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
+                aria-sort='ascending'> 좋아요
+            </th>
+        </tr>
+        </thead>
+        <tbody id="musicRankList">
+        </tbody>
+    </table>
+</div>
 </body>
 <script src="/webapp/js/rank.js"></script>
 </html>

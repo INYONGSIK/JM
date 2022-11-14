@@ -8,9 +8,9 @@ import java.util.ArrayList;
 @Mapper
 public interface MyMusicDAO {
 
-    ArrayList<MyMusic> selectMyMusic();
+    ArrayList<MyMusic> myMusicList(MyMusic paramDto);
 
-    void insert(MyMusic myMusic);
+    void insertMyMusic(MyMusic myMusic);
 
     void delete(int MyMusic_number);
 }
