@@ -21,7 +21,6 @@ public class BatchSchedular {
     private DailyJobConfig dailyJobConfig;
     private WeeklyJobConfig weeklyJobConfig;
     private MonthJobConfig monthJobConfig;
-    private Job job;
     private MusicService musicService;
     JobParameters jobParam = new JobParameters();
     //@Scheduled(cron = "0 0 0 * * *")
@@ -29,43 +28,26 @@ public class BatchSchedular {
 
     JobExecution jobExecution;
 
-    @Scheduled(cron = "0 2 23 * * *")
+    @Scheduled(cron = "0 5 10 * * *")
     public void daily() throws JobInstanceAlreadyCompleteException, JobExecutionAlreadyRunningException, JobParametersInvalidException, JobRestartException {
         //(현재 좋아요 - today 좋아요) + 누적좋아요 합산 후 누적 테이블에 update
         //today 좋아요에 현재 좋아요 update;
-        jobLauncher.run(dailyJobConfig.dailyjob(), jobParam);
-        log.info("start2::" + jobExecution.toString());
-        while (jobExecution.isRunning()) {
-            if (log.isDebugEnabled()) {
-                log.debug("Run::" + jobExecution.toString());
-            }
-        }
+        JobParameters jobParameters = new JobParametersBuilder()
+                .addLong("time", System.currentTimeMillis()).toJobParameters();
+        jobLauncher.run(dailyJobConfig.dailyjob(), jobParameters);
         if (BatchStatus.COMPLETED.equals(jobExecution.getStatus().getBatchStatus())) {
             log.info("completed");
         }
-        if (BatchStatus.FAILED.equals(jobExecution.getStatus().getBatchStatus())) {
-            log.error("Fail");
-        }
-        log.info("job");
-    }
-
-    @Scheduled(cron = "0 2 23 * * *")
-    public void ex() {
-        //(현재 좋아요 - today 좋아요) + 누적좋아요 합산 후 누적 테이블에 update
-        //today 좋아요에 현재 좋아요 update
-        try {
-            log.info("job22");
-        } catch (Exception e) {
-            log.error(e.getMessage());
-        }
-
     }
 
     @Scheduled(cron = "0 10 0 * * MON ")
-    public void weekly() {
+    public void weekly() throws JobInstanceAlreadyCompleteException, JobExecutionAlreadyRunningException, JobParametersInvalidException, JobRestartException {
         //0초 10분 0시 매주 월요일
         //week table 에 누적 테이블 값 insert
         //누적 테이블 좋아요 0으로 리셋
+        JobParameters jobParameters = new JobParametersBuilder()
+                .addLong("time", System.currentTimeMillis()).toJobParameters();
+        jobLauncher.run(weeklyJobConfig.weeklyJob(), jobParameters);
         if (BatchStatus.COMPLETED.equals(jobExecution.getStatus().getBatchStatus())) {
             musicService.updateAccumulMusicLikeToZero();
         }
@@ -73,8 +55,11 @@ public class BatchSchedular {
 
     @Scheduled(cron = "0 20 0 1 * *")
     //0초 20분 0시 매달 1일
-    public void FirstOfMonth() {
+    public void FirstOfMonth() throws JobInstanceAlreadyCompleteException, JobExecutionAlreadyRunningException, JobParametersInvalidException, JobRestartException {
         //누적 좋아요 + week 좋아요 합산해서 MONTH에넣기
+        JobParameters jobParameters = new JobParametersBuilder()
+                .addLong("time", System.currentTimeMillis()).toJobParameters();
+        jobLauncher.run(monthJobConfig.updateMonthJob(), jobParameters);
         if (BatchStatus.COMPLETED.equals(jobExecution.getStatus().getBatchStatus())) {
             musicService.updateWeekMusicLikeToZero();
         }
