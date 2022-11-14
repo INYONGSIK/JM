@@ -13,7 +13,9 @@
 </th:block>
 
 <body>
+
 <th:block th:replace="~{navHeader :: naviMain}"></th:block>
+
 
 <div style="padding:50px;">
     <h1 style="text-align:center;">자음모임 MAIN</h1>
@@ -185,9 +187,15 @@
         </div>
     </div>
 
+    <br>
 
 
-        <br>
+
+
+
+
+
+            <br>
         <a href="/boardList">게시판</a>
         <th:block th:unless="${session.user_email}">
             <a href="/loginform">로그인</a></th:block>
