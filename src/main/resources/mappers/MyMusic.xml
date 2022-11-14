@@ -4,11 +4,42 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ucamp.JM.dao.MyMusicDAO">
 
-    <insert id="insertMyMusic">
+    <select id="myMusicList" parameterType="MyMusic" resultType="MyMusic">
+        select A.list_name,
+        B.playlist_cd,
+        B.music_number,
+        C.music_title,
+        C.music_singer,
+        C.music_genre
+        from playlist_manage A,
+        playlist B,
+        music C
+        where A.user_number = B.user_number
+        and A.list_name = B.list_name
+        and b.music_number = C.music_number
+        and a.user_number = #{user_number}
+        and a.list_name = #{list_name}
+        order by C.music_number desc
+    </select>
+
+    <insert id="insertMyMusic" parameterType="MyMusic">
         insert into MyMusic(MyMusic_title,MyMusic_singer,MyMusic_genre,MyMusic_release,
         MyMusic_image,MyMusic_file,MyMusic_lyrics)
         values(#{MyMusic_title},#{MyMusic_singer},#{MyMusic_genre},#{MyMusic_release},
         ${MyMusic_image},#{MyMusic_file},#{MyMusic_lyrics})
+
+        <!-- insert into playlist(
+         PLAYLIST_CD,
+         MUSIC_NUMBER,
+         LIST_NAME,
+         USER_NUMBER
+         )values(
+         (select nvl(max(playlist_cd),0) + 1 as new_playlist_cd
+         from playlist),
+         '44',
+         'like',
+         '9999'
+         ); -->
     </insert>
 
     <delete id="deleteMyMusic">

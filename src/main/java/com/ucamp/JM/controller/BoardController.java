@@ -49,10 +49,18 @@ public class BoardController {
     }
 
     @RequestMapping("/readboard/{dashboard_No}")
-    public String readboard(Model model, @PathVariable int dashboard_No) {
+    public String readboard(HttpServletRequest request, Model model, @PathVariable int dashboard_No) {
         boardService.updateView(dashboard_No);
 
         Board board = boardService.readboard(dashboard_No);
+
+        String user_email = (String) request.getSession().getAttribute("user_email");
+
+        if (user_email != null) {
+            String sessionName = boardService.getUserNicknameByEmail(user_email).getUser_nickname();
+            model.addAttribute("sessionName", sessionName);
+        }
+        model.addAttribute("comments", boardService.CommentSelectAll(dashboard_No));
 
 
         model.addAttribute("dashboard_No", dashboard_No);
@@ -156,5 +164,47 @@ public class BoardController {
 
         return "redirect:/boardList";
     }
+
+    @GetMapping("/comment")
+    public String comment(@RequestParam String comment, @RequestParam String writer, @RequestParam int dashboard_No) {
+
+        boardService.comment(dashboard_No, comment, writer);
+
+        return "redirect:/readboard/" + dashboard_No;
+    }
+
+    @GetMapping("/deleteComment/{dashboard_No}/{cno}")
+    public String deleteComment(@PathVariable int dashboard_No, @PathVariable int cno) {
+
+        boardService.deleteComment(cno, dashboard_No);
+        return "redirect:/readboard/" + dashboard_No;
+    }
+
+    @GetMapping("/reportComment/{writer}/{contents}/{dashboard_no}")
+    public String reportComment(HttpServletResponse response, @PathVariable String writer, @PathVariable String contents, @PathVariable int dashboard_no) throws IOException {
+
+        System.out.println(writer + contents + dashboard_no);
+        int user_number = boardService.getUserNumByNickname(writer).getUser_number();
+
+        System.out.println(user_number);
+
+        Boolean ok = boardService.reportComment(user_number, contents);
+        if (ok == true) {
+            boardService.updateReport_count(user_number, contents);
+            Writer out = response.getWriter();
+            String message = URLEncoder.encode("신고완료.", "UTF-8");
+            response.setContentType("text/html; charset=UTF-8");
+            out.write("<script type=\"text/javascript\">alert(decodeURIComponent('" + message + "'.replace(/\\+/g, '%20'))); location.href='/boardList' </script>");
+            out.flush();
+            response.flushBuffer();
+            out.close();
+        }
+
+
+        return "redirect:/readboard/" + dashboard_no;
+
+
+    }
+
 
 }

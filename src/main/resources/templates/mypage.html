@@ -1,20 +1,129 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <title>음원관리</title>
 </head>
 <body>
 
 <a href="addMyMusic">음원추가</a>
 
+<select id="listName">
+    <option value="upload" selected="selected">음원등록</option>
+    <option value="like">좋아요</option>
+</select>
 
-<div th:each="myMusic : ${myMusics}">
-    [[${myMusic.MyMusic_title}]]
-    [[${myMusic.MyMusic_singer}]]
-    [[${myMusic.MyMusic_genre}]]
-    [[${myMusic.MyMusic_release}]]
-    
+<button id="delMyMusic">삭제</button>
+
+
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th>
+            </th>
+            <th>제목
+            </th>
+            <th>가수
+            </th>
+            <th>장르
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr id="list">
+            <td><input type="radio" name="xxx" value="yyy" checked></td>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+        </tr>
+        </tbody>
+    </table>
 </div>
+
+<script>
+var server_result = "";
+
+    $(document).ready(function() {
+        //음원리스트조회
+        myMusicList();
+
+        $("#delMyMusic").on("click", function(){
+            for(var i=0 ; i < server_result.length ; i++) {
+                if($("input[name=chk]")[i].checked) { //체크
+                    //음원삭제
+                    var list_name = server_result[i].list_name;
+                    var playlist_cd = server_result[i].playlist_cd;
+                    var music_number = server_result[i].music_number;
+
+                    delMyMusic(i, list_name, playlist_cd, music_number);
+                }
+            }
+        });
+
+        //음원등록 업로드 선택
+        $("#listName").on("change", function(){
+            myMusicList();
+        });
+    });
+
+    //음원리스트조회
+    function myMusicList(){
+
+        $.ajax({
+            type : "POST",
+            url : "/myMusicList",
+            data : {
+                   "list_name": $("#listName").val()
+                   },
+            success: function(data) {
+                server_result = JSON.parse(data).myMusicList;
+
+                //테이블그리기
+                listHtml(server_result);
+            }
+        });
+    }
+
+    //테이블그리기
+    function listHtml(server_result) {
+        var sHtml = "";
+
+        for(var i=0 ; i < server_result.length ; i++) {
+            sHtml += "<td>" + "<input type='radio' name='chk'>" + "</td>"; //체크박스
+            sHtml += "<td>" + server_result[i].music_title + "</td>"; //제목
+            sHtml += "<td>" + server_result[i].music_singer + "</td>"; //가수
+            sHtml += "<td>" + server_result[i].music_genre + "</td>"; //장르
+        }
+
+        $("#list").html(sHtml);
+    }
+
+    //음원삭제
+    function delMyMusic(i, list_name, playlist_cd, music_number){
+
+        //음원리스트삭제
+        $.ajax({
+            type : "POST",
+            url : "/delMyMusic",
+            data : {
+                   "list_name": list_name,
+                   "playlist_cd": playlist_cd,
+                   "music_number" : music_number
+                   },
+            success: function(data) {
+                if(data == "성공"){
+                    server_result.splice(i,1);
+                    //테이블그리기
+                    listHtml(server_result);
+                }
+            }
+        });
+    }
+
+
+
+</script>
 </body>
 </html>

@@ -59,26 +59,29 @@ public class RootController {
             }
         }
         user.setUser_genre(sortGenre.toString().substring(1, sortGenre.toString().length() - 1).trim());
-        user.setUser_image(request.getParameter("user_image"));
 
         // 회원가입시 유저타입(admin or user) user 로 설정
         user.setType("user");
 
         try {
-            // 원래 파일 이름
-            String profile = user_image.getOriginalFilename();
-            // 파일이름으로 사용할 uuid 생성
-            String uuid = UUID.randomUUID().toString();
-            // 확장자 추출 ( ex.png)
-            String extension = profile.substring(profile.lastIndexOf(".") + 1);
-            // uuid 와 확장자 결합
-            String saveProfile = uuid + "." + extension;
-            // 저장할 위치
-            // servletContext 쓸려면 private final ServletContext servletContext; 해줘여함
-            String path = servletContext.getRealPath("/img/profile/");
-            File destFile = new File(path + saveProfile);
-            user_image.transferTo(destFile);
-            user.setUser_image(saveProfile.toString());
+            if (!user_image.getOriginalFilename().equals("")) {
+                // 원래 파일 이름
+                String profile = user_image.getOriginalFilename();
+                // 파일이름으로 사용할 uuid 생성
+                String uuid = UUID.randomUUID().toString();
+                // 확장자 추출 ( ex.png)
+                String extension = profile.substring(profile.lastIndexOf(".") + 1);
+                // uuid 와 확장자 결합
+                String saveProfile = uuid + "." + extension;
+                // 저장할 위치
+                // servletContext 쓸려면 private final ServletContext servletContext; 해줘여함
+                String path = servletContext.getRealPath("/img/profile/");
+                File destFile = new File(path + saveProfile);
+                user_image.transferTo(destFile);
+                user.setUser_image(saveProfile.toString());
+            } else {
+                user.setUser_image("basic.png");
+            }
             userService.register(user);
         } catch (Exception e) {
             e.printStackTrace();
@@ -112,10 +115,12 @@ public class RootController {
             if (user.getType().equals("user")) {
                 userService.login(user_email, user_password);
                 session.setAttribute("user_email", user_email);
+                session.setAttribute("user_number", user.getUser_number());
                 //session.setAttribute("userType", type);
                 return "redirect:/";
             } else {
                 session.setAttribute("user_email", user_email);
+                session.setAttribute("user_number", user.getUser_number());
                 return "redirect:/admin";
             }
         } catch (Exception e) {
@@ -290,9 +295,8 @@ public class RootController {
             user.setUser_birthday(user.getUser_birthday().substring(0, 10));
             if (user == null) {
                 return "/loginform";
-            } else {
-                model.addAttribute("user", user);
             }
+            model.addAttribute("user", user);
 
         } catch (Exception e) {
             e.printStackTrace();

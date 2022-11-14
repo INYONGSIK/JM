@@ -49,4 +49,37 @@
         update dashboard set dashboard_views=dashboard_views+1 where dashboard_No=#{dashboard_No}
     </update>
 
+    <insert id="comment" parameterType="Comments">
+        insert into comments
+        (cno, dashboard_no, content, createat, writer)
+        values (comments_seq.nextval, #{dashboard_No},#{comment}, sysdate, #{writer})
+    </insert>
+
+    <select id="CommentSelectAll" resultType="Comments">
+        select
+        cno, dashboard_No, content,
+        to_char(createat,'YYYY/MM/DD') as "createat",
+        writer
+        from comments
+        where dashboard_No=#{dashboard_No}
+        order by cno
+    </select>
+
+    <delete id="deleteComment" parameterType="Map">
+        delete from comments where dashboard_No=#{dashboard_No} and cno=#{cno}
+    </delete>
+
+    <insert id="reportComment" parameterType="Map">
+        insert into report
+        (user_number, report_ID,report_type,contents,report_count)
+        values (${user_number},report_seq.nextval,1,'${contents}',0)
+    </insert>
+
+    <select id="getUserNumByNickname" resultType="User">
+        select user_number from jmuser where user_nickname=#{user_nickname}
+    </select>
+
+    <update id="updateReport_count" parameterType="Map">
+        update report set report_count=report_count+1 where user_number=#{user_number} and contents=#{contents}
+    </update>
 </mapper>

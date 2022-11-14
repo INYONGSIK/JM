@@ -1,6 +1,8 @@
 package com.ucamp.JM.controller;
 
 import com.ucamp.JM.dto.Music;
+import com.ucamp.JM.dto.User;
+import com.ucamp.JM.service.AlarmService;
 import com.ucamp.JM.service.MusicService;
 import com.ucamp.JM.service.board.BoardService;
 import com.ucamp.JM.service.main.MainService;
@@ -22,6 +24,7 @@ public class MainController {
     @Autowired
     MainService mainService;
     private final MusicService musicService;
+    private final AlarmService alarmService;
 
     @RequestMapping("/mainRank")
     @ResponseBody
@@ -29,6 +32,7 @@ public class MainController {
         ArrayList<Music> musicList = musicService.selectTopMusic();
         return musicList;
     }
+
 
     @RequestMapping("/main")
     public  String main(Model model) {
@@ -47,5 +51,24 @@ public class MainController {
 
 
     //게시판
+
+
+    @RequestMapping("/followee")
+    @ResponseBody
+    public ArrayList<User> followee() {
+        ArrayList<User> followeeList = alarmService.selectFollowee(1);
+        log.info(String.valueOf(followeeList.size()));
+        return followeeList;
+    }
+
+    @RequestMapping("/deleteFollowee")
+    @ResponseBody
+    public void foldeleteFolloweelower() {
+        int follower1 = 1;
+        int followee2 = 11;
+
+        alarmService.deleteFollowee(follower1, followee2);
+        return;
+    }
 
 }
