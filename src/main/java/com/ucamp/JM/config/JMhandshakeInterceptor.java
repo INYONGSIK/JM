@@ -3,25 +3,26 @@ package com.ucamp.JM.config;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.http.server.ServletServerHttpRequest;
+import org.springframework.stereotype.Component;
 import org.springframework.web.socket.WebSocketHandler;
-import org.springframework.web.socket.server.HandshakeInterceptor;
+import org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor;
 
 import javax.servlet.http.HttpSession;
 import java.util.Map;
 
-public class JMhandshakeInterceptor implements HandshakeInterceptor {
+@Component
+public class JMhandshakeInterceptor extends HttpSessionHandshakeInterceptor {
 
     @Override
     public boolean beforeHandshake(org.springframework.http.server.ServerHttpRequest request, org.springframework.http.server.ServerHttpResponse response, WebSocketHandler wsHandler, Map<String, Object> attributes) throws Exception {
         if (request instanceof ServletServerHttpRequest) {
             ServletServerHttpRequest servletRequest = (ServletServerHttpRequest) request;
             HttpSession session = servletRequest.getServletRequest().getSession();
-
-            attributes.put("sessionId", session.getAttribute("user_email"));
-            //attributes.put("sessionId",session.getAttribute("id"))
+            attributes.put("user_number", session.getAttribute("user_number"));
+            attributes.put("user_email", session.getAttribute("user_email"));
         }
+        return super.beforeHandshake(request, response, wsHandler, attributes);
 
-        return true;
     }
 
     @Override

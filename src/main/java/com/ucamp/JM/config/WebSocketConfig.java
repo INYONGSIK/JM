@@ -1,6 +1,5 @@
 package com.ucamp.JM.config;
 
-import com.ucamp.JM.socket.SignalHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
@@ -16,6 +15,9 @@ public class WebSocketConfig implements WebSocketConfigurer {
     @Autowired
     private SignalHandler signalHandler;
 
+    @Autowired
+    JMhandshakeInterceptor jMhandshakeInterceptor;
+
     /**
      * WebSocketHandler를 추가한다.
      * 내가 만든 webSocketHandler를 사용할 수 있게 registry에 등록
@@ -29,6 +31,8 @@ public class WebSocketConfig implements WebSocketConfigurer {
         // WebSocketHandlerRegistry에 WebSocketHandler의 구현체를 등록한다.
         // 등록된 Handler는 특정 endpoint("/signal")로 handshake를 완료한 후 맺어진 connection의 관리
         registry.addHandler(signalHandler, "/signal")
+                .addInterceptors(jMhandshakeInterceptor)
                 .setAllowedOrigins("*"); // allow all origins <-pub,sub의 sub
     }
+
 }
