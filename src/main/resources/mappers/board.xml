@@ -9,7 +9,7 @@
         dashboard_No, user_number, dashboard_title,dashboard_user,
         to_char(dashboard_date,'YYYY/MM/DD') as "dashboard_date",
         dashboard_views, dashboard_comment, dashboard_content
-        from dashboard order by dashboard_No
+        from dashboard order by dashboard_No desc
     </select>
 
     <select id="getUserNicknameByEmail" resultType="User">
@@ -71,8 +71,8 @@
 
     <insert id="reportComment" parameterType="Map">
         insert into report
-        (user_number, report_ID,report_type,contents,report_count)
-        values (${user_number},report_seq.nextval,1,'${contents}',0)
+        (user_number, report_ID,report_type,contents,report_count,dashboard_No)
+        values (${user_number},report_seq.nextval,1,'${contents}',0,${dashboard_No})
     </insert>
 
     <select id="getUserNumByNickname" resultType="User">
@@ -95,7 +95,7 @@
         dashboard_views, dashboard_comment, dashboard_content
         from dashboard
         where rownum <= 10
-        order by dashboard_No
+        order by dashboard_No desc
         ]]>
     </select>
 

@@ -1,6 +1,7 @@
 package com.ucamp.JM.service;
 
 import com.ucamp.JM.dao.MyMusicDAO;
+import com.ucamp.JM.dto.Music;
 import com.ucamp.JM.dto.MyMusic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,12 +20,17 @@ public class MyMusicServiceImpl implements MyMusicService {
     }
 
     @Override
-    public void insertMyMusic(MyMusic myMusic) {
-        myMusicDAO.insertMyMusic(myMusic);
+    public void insertMyMusic(Music music) {
+        myMusicDAO.insertMyMusic(music);
     }
 
     @Override
-    public void delete(int MyMusic_number) {
-        myMusicDAO.delete(MyMusic_number);
+    public void delMyMusic(int MyMusic_number) {
+        myMusicDAO.delMyMusic(MyMusic_number);
+    }
+
+    @Override
+    public ArrayList<Music> getMusicByMusicSinger(String music_singer) {
+        return myMusicDAO.getMusicByMusicSinger(music_singer);
     }
 }

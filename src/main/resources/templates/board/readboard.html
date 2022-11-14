@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <title>readboard</title>
 
-
 </head>
+<link rel="stylesheet" href="/webapp/css/bootstrapLux.css"/>
 <body>
 
 <div>
-    <label>문의글 상세보기</label>
+    <label>게시글 상세보기</label>
 </div>
 
 <br><br>
@@ -18,78 +18,63 @@
 <div>
 
 
-
-    <div>
-        <label>글쓴이</label>
-        <div>
-            [[${dashboard_user}]]
-        </div>
+    <div class="form-group">
+        <label class="form-label">글쓴이</label>
+        <input class="form-control" type="text" th:placeholder="${dashboard_user}" disabled="">
     </div>
 
     <br>
-    <div>
-        <div>
-            <label>제 목</label>
-        </div>
-        <div>
-            [[${dashboard_title}]]
-        </div>
+
+    <div class="form-group">
+        <label class="form-label">제 목</label>
+        <input class="form-control" type="text" th:placeholder="${dashboard_title}" disabled="">
     </div>
 
     <br>
-    <div>
-        <div>
-            <label>내 용</label>
-        </div>
-        <div style="height:200px">
-            [[${dashboard_content}]]
-        </div>
+
+    <div class="form-group">
+        <label class="form-label">내 용</label>
+        <input class="form-control" type="text" th:placeholder="${dashboard_content}" disabled="">
     </div>
 
-
     <br>
+
     <form th:action="|/editBoardForm/${dashboard_No}|"/>
-    <div>
-        <input type="submit" th:if="${session.user_email}" value="수정"/>
-    </div>
-    </form>
+        <button type="submit" class="btn btn-secondary" th:if="${session.user_email}">수정</button>
+        </form>
+
 
     <form method="get"
           th:action="|/deletedashboard/${dashboard_No}/${dashboard_user}|">
 
         <input type="hidden" name="dashboard_No" value="${dashboard_No}"/>
-        <div>
-            <input type="submit" th:if="${session.user_email}" value="삭제">
-        </div>
+        <button type="submit" class="btn btn-secondary" th:if="${session.user_email}">삭제</button>
     </form>
-
-
-
-
-    <div>
-        <input type="button" value="돌아가기" onclick="window.location='/boardList'">
-    </div>
+        <button type="button" class="btn btn-secondary" onclick="window.location='/boardList'">돌아가기</button>
     <br><br>
 
 
     <div>
         댓글
-        <table >
+        <table>
             <tr th:each="comment : ${comments}">
                 <td width="100">[[${comment.writer}]]</td>
                 <td width="200">[[ ${comment.content}]]</td>
                 <td width="200">[[${comment.createat}]]</td>
 
-                <td><a th:href="|/reportComment/${comment.writer}/${comment.content}/${comment.dashboard_no}|">신고</a> </td>
+                <td><a th:href="|/reportComment/${comment.writer}/${comment.content}/${comment.dashboard_no}|">신고</a>
+                </td>
 
-                <td th:if="${sessionName == comment.writer}"><a th:href="|/deleteComment/${comment.dashboard_no}/${comment.cno}|"> 삭제</a></td>
-                <td th:if="${sessionName == 'admin'}"><a th:href="|/deleteComment/${comment.dashboard_no}/${comment.cno}|"> 삭제</a></td>
+                <td th:if="${sessionName == comment.writer}"><a
+                        th:href="|/deleteComment/${comment.dashboard_no}/${comment.cno}|"> 삭제</a></td>
+                <td th:if="${sessionName == 'admin'}"><a
+                        th:href="|/deleteComment/${comment.dashboard_no}/${comment.cno}|"> 삭제</a></td>
             </tr>
 
         </table>
 
     </div>
-    <form  th:if="${session.user_email}" action="/comment">
+    <form th:if="${session.user_email}" action="/comment">
         <input type="hidden" name="dashboard_No" th:value="${dashboard_No}">
         <input type="hidden" name="writer" th:value="${sessionName}">
 

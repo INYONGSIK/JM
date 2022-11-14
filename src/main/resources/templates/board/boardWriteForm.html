@@ -20,6 +20,9 @@
 
 
 
+
+
+
     </script>
 
 
@@ -34,64 +37,59 @@
 <br> <br>
 
 <form name="f" action="/boardWriteInput" method="post" onsubmit="return check()">
+    <fieldset>
 
-
-    <div class="row">
-        <div>
-
-            <div class="row">
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">글쓴이</label>
-
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control-plaintext" th:value="${dashboard_user}"
-                               id="dashboard_user" name="dashboard_user" size="30"
-                               readonly>
-                        <input type="hidden" th:value="${user_number}" name="user_number"/>
-
-                    </div>
-                </div>
-
-
-                <div class="form-group">
-
-                    <label class="form-label mt-4">제 목</label>
-
-                    <div>
-                        <input type="text" class="form-control" name="dashboard_title" size="50">
-                    </div>
-                </div>
-                <br>
-
-                <div>
-                    <div>
-                        <label>내 용</label>
-                    </div>
-                    <div>
-                        <textarea name="dashboard_content" rows="11" cols="50"></textarea>
-                    </div>
-                </div>
-
-                <br><br>
+        <div class="row">
+            <div>
 
                 <div class="row">
-                    <div>
-                        <input type="submit" value="글쓰기">
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">글쓴이</label>
+
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control-plaintext" th:value="${dashboard_user}"
+                                   id="dashboard_user" name="dashboard_user" size="30"
+                                   readonly>
+                            <input type="hidden" th:value="${user_number}" name="user_number"/>
+
+                        </div>
                     </div>
-                    &nbsp;
-                    <div>
-                        <input type="reset" value="다시작성">
+
+
+                    <div class="form-group">
+
+                        <label class="form-label mt-4">제 목</label>
+
+                        <div>
+                            <input type="text" class="form-control" name="dashboard_title" size="50">
+                        </div>
                     </div>
-                    &nbsp;
-                    <div>
-                        <input type="button" value="목록보기" onclick="window.location='boardList'">
+                    <br>
+
+                    <div class="form-group">
+
+                        <label class="form-label mt-4">내 용</label>
+                        <textarea name="dashboard_content" class="form-control" id="exampleTextarea" rows="3"
+                                  cols="50"></textarea>
+                    </div>
+
+                    <br><br>
+
+                    <div class="row">
+                        <button type="submit" class="btn btn-outline-primary" value="글쓰기">글쓰기</button>
+                        <button type="reset" class="btn btn-outline-primary" value="다시작성">다시작성</button>
+                        <button type="button" class="btn btn-outline-primary" value="목록보기"
+                                onclick="window.location='boardList'">목록보기
+                        </button>
                         <!--  	<input type="button" value="목록보기" onclick="window.location='list_board.do'">  -->
+
                     </div>
+
+                    <br><br>
                 </div>
-                <br><br>
             </div>
         </div>
-    </div>
+    </fieldset>
 </form>
 </body>
 </html>

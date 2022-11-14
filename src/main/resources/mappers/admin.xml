@@ -14,7 +14,7 @@
 
     <select id="selectReportByType" parameterType="int" resultType="Report">
         select user_number,report_ID, report_type, TO_CHAR(REPORT_DATE, 'YYYY-MM-DD HH24:MI:SS') AS "REPORT_DATE"
-        ,report_count, contents
+        ,report_count, contents, dashboard_No
         from report
         where report_type = #{report_type}
     </select>
