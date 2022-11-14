@@ -15,9 +15,15 @@ public interface MusicDAO {
     //현호 = 검색하는 서비스 매퍼
     ArrayList<Music> SearchByKeyword(@Param("keyword") String keyword, @Param("genre") String genre);
 
-    void updateTodayMusic(Music music);
+
+    void insertTodayMusic(Music music);
+
+    void insertMusic(Music music);
 
     void insertAccumulMusic(Music music);
+
+
+    void updateTodayMusic(Music music);
 
     void updateAccumulMusic(AccumulMusic music);
 
