@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -102,7 +103,15 @@ public class MusicController {
     }
 
     @RequestMapping("/musicDetails/{music_number}")
-    public String read(Model model, @PathVariable int music_number) {
+    public String read(HttpServletRequest request, Model model, @PathVariable int music_number) {
+        String user_email = (String) request.getSession().getAttribute("user_email");
+
+        if (user_email != null) {
+            if (user_email.equals("admin@aaa.com")) {
+                model.addAttribute("admin", "admin@aaa.com");
+            }
+        }
+
         model.addAttribute("details", musicService.showMusicDetails(music_number));
         return "musicDetails";
     }
