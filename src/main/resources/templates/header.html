@@ -31,6 +31,14 @@
                      let socketAlert  =  $("#socketAlert");
                      var html = event.data+"<br>";
                      socketAlert.append(html);
+
+                     let $socketAlert2  =  $("div#socketAlert2");
+                     $socketAlert2.css("display","block");
+                     $socketAlert2.append(event.data);
+
+                     setTimeout(function(){
+                        $socketAlert2.css("display", "none");
+                     },5000)
                     $("#deleteAlert").click(function(){
                         socketAlert.html("");
                     })
@@ -43,6 +51,7 @@
                   console.log("error : " , err);
                 };
               };
+
 
 
 
