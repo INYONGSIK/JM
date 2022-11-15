@@ -15,12 +15,10 @@
     <div class="col-sm-6">
         <div class="card border-primary mb-3" style="margin:20px;padding: 20px 30px;">
             <div style="display:inline-block">
-                <h1 style=" float:left;">[[${details.music_title}]] 상세정보</h1>
+                <h1 style=" float:left;" id="detail">[[${details.music_title}]] 상세정보</h1>
                 <input id="follower" type="hidden" th:value="${session.user_email}">
-                <button type="button" class="btn btn-outline-primary" id="follow_button"
-                        th:value="${details.music_singer}"
-                        style="max-width: 10rem; float:right;"> 팔로우
-                </button>
+                <input id="followee" type="hidden" th:value="${details.music_singer}">
+                <div class="btn btn-outline-primary" id="replace_button"></div>
             </div>
             <div class="card-body">
                 <img th:src="|/webapp/img/musicimage/${details.music_image}|" alt="음악사진">
@@ -55,18 +53,93 @@
 <th:block th:replace="header :: header">
 </th:block>
 <script>
-$("#follow_button").click(function(){
-             if(socket){
-             console.log("들어옴");
-             var follower = $("#follower").val();
-             var followee = $("#follow_button").val();
-             console.log("follower:"+follower+",followee:"+followee);
-            // (reply, 댓글작성자,게시글작성자,글번호)
-            socket.send("follow," + follower + "," + followee);
-        }
+var html = "<button type='button' class='btn btn-outline-primary' id='follow_button' value='follow'"+
+                        " style='max-width: 10rem; float:right;'> 팔로우"+
+                        "</button>";
+var html2 = "<button type='button' class='btn btn-outline-primary' id='unfollow_button' value='unfollow' "+
+                        " style='max-width: 10rem; float:right;'> 팔로우  취소" +
+                        "</button>";
+$(document).ready(function() {
+        var follower = $("#follower").val();
+        var followee = $("#followee").val();
+        console.log(follower);
+        console.log(followee);
+        console.log("ajax");
+            $.ajax({
+                type: 'get',
+                url : '/followCheck',
+                data : {follower:follower, followee:followee},
+                success:function(data){
+                    showFollowCheckLoad(data);
+                    console.log(data);
+                },
+                error:function(){
+                    console.log("error")
+                }
+	        });
+
+     });
+
+ $(document).on("click","#follow_button",(function(e){
+                 var follower = $("#follower").val();
+         var followee = $("#followee").val();
+         var cmd = $(this).attr("value");
+         console.log(cmd);
+         $.ajax({
+            type: 'get',
+            url : '/followOrUnfollow',
+            data : {type:cmd, follower:follower, followee:followee},
+            success:function(data){
+                showFollowCheck(1);
+                 if(socket){
+                     console.log("들어옴");
+                     console.log("follower:"+follower+",followee:"+followee);
+                    // (reply, 댓글작성자,게시글작성자,글번호)
+                    socket.send("follow," + follower + "," + followee);
+                 }
+            },
+            error:function(){
+                console.log("error")
+            }
+        });
+     })
+   );
+$(document).on("click","#unfollow_button",(function(e){
+            var follower = $("#follower").val();
+            var followee = $("#followee").val();
+            var cmd = $(this).attr("value");
+            $.ajax({
+                type: 'get',
+                url : '/followOrUnfollow',
+                data : {type:cmd,follower:follower,followee:followee},
+                success:function(data){
+                    console.log(data);
+                    showFollowCheck(2);
+                },
+                error:function(){
+                    console.log("error")
+                }
+	        });
     })
+  )
+function showFollowCheckLoad(data){
+        if(data == 0) {
+           $("#replace_button").replaceWith(html);
+        }
+        if(data == 1) {
+            $("#replace_button").replaceWith(html2);
+        }
 
-
+}
+function showFollowCheck(checkValue){
+            console.log("showfunc");
+            if(checkValue == 1) {
+                $("#follow_button").replaceWith(html2);
+            }
+            if(checkValue == 2){
+                $("#unfollow_button").replaceWith(html);
+            }
+}
 
 
 </script>
