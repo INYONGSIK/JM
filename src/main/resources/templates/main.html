@@ -16,13 +16,14 @@
 <th:block th:replace="~{navHeaderMain :: naviMain}"></th:block>
 
 
-
+<div style="padding:50px;">
 <div style="padding:50px;">
     <h1 style="text-align:center;">자음모음 MAIN</h1>
     <div style="position: absolute; right: 50px; top: 50px;">
         <th:block th:unless="${session.user_email}">
             <button type="button" class="btn btn-outline-light btn-sm" onclick="location.href='/loginform'">로그인</button>
-            <button type="button" class="btn btn-outline-light btn-sm" onclick="location.href='/registerform'">회원가입</button>
+            <button type="button" class="btn btn-outline-light btn-sm" onclick="location.href='/registerform'">회원가입
+            </button>
         </th:block>
 
         <th:block th:if="${session.user_email}">
@@ -95,32 +96,32 @@
                 <div class="card-body">
                     <table class='table table-hover' style='width:100%' aria-describedby='example_info'>
                         <thead>
-                            <tr class='table-active'>
-                                <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
-                                    aria-sort='ascending'>No.
-                                </th>
-                                <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
-                                    aria-sort='ascending'>제목
-                                </th>
-                                <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
-                                    aria-sort='ascending'>작성자
-                                </th>
-                                <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
-                                    aria-sort='ascending'>작성일자
-                                </th>
-                                <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
-                                    aria-sort='ascending'>조회수
-                                </th>
-                            </tr>
+                        <tr class='table-active'>
+                            <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
+                                aria-sort='ascending'>No.
+                            </th>
+                            <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
+                                aria-sort='ascending'>제목
+                            </th>
+                            <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
+                                aria-sort='ascending'>작성자
+                            </th>
+                            <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
+                                aria-sort='ascending'>작성일자
+                            </th>
+                            <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
+                                aria-sort='ascending'>조회수
+                            </th>
+                        </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="d:${dashboards}">
-                                <td>[[${d.dashboard_No}]]</td>
-                                <td><a th:href="|/readboard/${d.dashboard_No}|"> [[${d.dashboard_title}]] </a></td>
-                                <td>[[${d.dashboard_user}]]</td>
-                                <td>[[${d.dashboard_date}]]</td>
-                                <td>[[${d.dashboard_views}]]</td>
-                            </tr>
+                        <tr th:each="d:${dashboards}">
+                            <td>[[${d.dashboard_No}]]</td>
+                            <td><a th:href="|/readboard/${d.dashboard_No}|"> [[${d.dashboard_title}]] </a></td>
+                            <td>[[${d.dashboard_user}]]</td>
+                            <td>[[${d.dashboard_date}]]</td>
+                            <td>[[${d.dashboard_views}]]</td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
@@ -144,22 +145,27 @@
                     <div class="accordion" id="accordionExample">
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingOne">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                     Accordion Item #1
                                 </button>
                             </h2>
-                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample" style="">
+                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                                 data-bs-parent="#accordionExample" style="">
                                 <div class="accordion-body">알림</div>
                                 <div id="socketAlert"></div>
                             </div>
                         </div>
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingTwo">
-                                <button class="accordion-button collapsed" type="button" id="followerListBtn" th:value="${session.user_number}" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <button class="accordion-button collapsed" type="button" id="followerListBtn"
+                                        th:value="${session.user_number}" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                     팔로워
                                 </button>
                             </h2>
-                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample" style="">
+                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                                 data-bs-parent="#accordionExample" style="">
                                 <div class="accordion-body" id="accordion-body">
                                     <table class='table table-hover' style='width:100%' aria-describedby='example_info'>
                                         <tbody id="followeeList">
@@ -170,11 +176,14 @@
                         </div>
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingThree">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseThree" aria-expanded="false"
+                                        aria-controls="collapseThree">
                                     쪽지
                                 </button>
                             </h2>
-                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample" style="">
+                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                                 data-bs-parent="#accordionExample" style="">
                                 <div class="accordion-body">
                                     쪽지
                                 </div>
@@ -185,59 +194,7 @@
             </div>
         </div>
     </div>
-
-    <br>
-
-
-
-
-
-
-
-            <br>
-        <a href="/boardList">게시판</a>
-        <th:block th:unless="${session.user_email}">
-            <a href="/loginform">로그인</a></th:block>
-        <a href="/registerform">회원가입</a>
-        <a href="/modifyinformationform">회워정보 수정</a>
-        <th:block th:if="${session.user_email}"><a href="/logout">로그아웃</a></th:block>
-
-
-        <a href="/listPM">플레이리스트</a>
-        <!--현호 ==> 검색창-->
-        <form action="/musicSearch">
-            <input type="text" name="keyword">
-            <input type="submit" value="가수,제목 검색">
-        </form>
-
-        <div>
-            <a href="/listPM">플레이리스트</a>
-        </div>
-        <a href="/listPM">플레이리스트</a>
-        <a href="/mypage">마이페이지</a>
-        <th:block th:if="${session.user_email}">
-            <a href="/logout">로그아웃</a></th:block>
-        <div id="content"></div>
-    </div>
-
-    <br><br>
-    <div>
-        <input type="text" id="msg"/>
-        <button id="btnSend">Send Message</button>
-        <div id="asd"></div>
-    </div>
 </div>
-<script>
-      $("#btnSend").on("click", function (evt) {
-      evt.preventDefault();
-    <!-- readyState == 1 이면 연결상태 , readyState == 3 이면 close 상태 -->
-      if (socket.readyState != 1) return;
-      let msg = $("input#msg").val();
-      $("#asd").text(msg);
-      socket.send(msg);
-    });
-
-</script>
 <script src="/webapp/js/main.js"></script>
 </body>
 </html>
