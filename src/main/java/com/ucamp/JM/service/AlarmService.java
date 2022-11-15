@@ -9,5 +9,7 @@ public interface AlarmService {
 
     ArrayList<User> selectFollowee(int follower);
 
-    void deleteFollowee(int follower, int followee);
+    void deleteFollow(int follower, int followee);
+
+    void insertFollow(int follower, int followee);
 }
