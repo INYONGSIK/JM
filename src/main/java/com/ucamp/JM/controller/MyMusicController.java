@@ -78,12 +78,21 @@ public class MyMusicController {
 
     @RequestMapping("/add")
     public String add(HttpServletRequest request, MultipartFile music_image, MultipartFile music_file) throws Exception {
+        String lyrics = request.getParameter("music_lyrics");
+        if (request.getParameter("music_title") == null) {
+            String errormsg = "제목 미입력";
+            return "redirect:/mypage";
+        }
+        if (lyrics == null) {
+            lyrics = "가사 없음";
+        }
         Music music = new Music();
+
         music.setMusic_title(request.getParameter("music_title"));
         music.setMusic_singer(request.getParameter("music_singer"));
         music.setMusic_genre(request.getParameter("music_genre"));
         music.setMusic_release(request.getParameter("music_release"));
-        music.setMusic_lyrics(request.getParameter("music_lyrics"));
+        music.setMusic_lyrics(lyrics);
 
         String email = (String) session.getAttribute("user_email");
         User user = userService.queryUser(email);
