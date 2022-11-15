@@ -1,5 +1,6 @@
 package com.ucamp.JM.controller;
 
+import com.ucamp.JM.dao.UserDAO;
 import com.ucamp.JM.dto.Music;
 import com.ucamp.JM.dto.User;
 import com.ucamp.JM.service.MyMusicService;
@@ -10,10 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletContext;
@@ -36,6 +35,9 @@ public class MyMusicController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    UserDAO userDAO;
+
     private Logger logger = LoggerFactory.getLogger(RootController.class);
 
     @RequestMapping("/mypage")
@@ -56,16 +58,12 @@ public class MyMusicController {
         return "mypage";
     }
 
-    @ResponseBody
-    @PostMapping("/delMyMusic")
-    public String delMyMusic(@RequestParam String list_name, @RequestParam String playlist_cd, @RequestParam String music_number) throws Exception {
-        //실제파일삭제 구현
-        myMusicService.delMyMusic(Integer.parseInt(music_number));
-        playlistService.deletePlaylistMusic(Integer.parseInt(music_number));
 
-        //db삭제
-        //MUSIC
-        //PLAYLIST
+    @RequestMapping("/delMyMusic/{music_number}")
+    public String delMyMusic(HttpServletRequest request, @PathVariable int music_number) throws Exception {
+        System.out.println("controller:" + music_number);
+        myMusicService.delMyMusic(music_number);
+
 
         return "redirect:/mypage";
     }

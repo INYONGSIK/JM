@@ -12,7 +12,7 @@ public interface MyMusicService {
 
     void insertMyMusic(Music music);
 
-    void delMyMusic(int MyMusic_number);
+    void delMyMusic(int music_number);
 
     ArrayList<Music> getMusicByMusicSinger(String music_singer);
 

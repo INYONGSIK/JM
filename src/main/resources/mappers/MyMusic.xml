@@ -64,9 +64,7 @@
     </insert>
 
     <delete id="delMyMusic">
-        delete PLAYLIST_MANAGE
-        where user_number = #{user_number}
-        and list_name = #{list_name}
+        delete from music where music_number= #{music_number}
 
     </delete>
 
