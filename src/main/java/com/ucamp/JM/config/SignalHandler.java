@@ -1,4 +1,3 @@
-
 package com.ucamp.JM.config;
 
 
@@ -81,6 +80,7 @@ public class SignalHandler extends TextWebSocketHandler {
                             follower_session = entry.getValue();
                         }
                     }
+
                     System.out.println("boardWriterSession : " + follower_session);
                     if (follower_session != null) {
                         follower_session.sendMessage(tmpMsg);
