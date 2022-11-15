@@ -37,20 +37,20 @@ public class MonthJobConfig {
                     "where a.music_number = b.current_music_number";
 
     @Bean
-    public Job updateMonthJob(Step updateMonthStep) {
+    public Job updateMonthJob() {
         return jobBuilderFactory.get("updateWeekRankJob")
                 .incrementer(new RunIdIncrementer())
-                .start(updateMonthStep)
+                .start(updateMonthStep())
                 .build();
     }
 
     @JobScope
     @Bean
-    public Step updateMonthStep(JdbcCursorItemReader<AccumulMusic> updateMonthReader, ItemWriter<AccumulMusic> updateMonthWriter) {
+    public Step updateMonthStep() {
         return stepBuilderFactory.get("updateMonthRankStep")
                 .<AccumulMusic, AccumulMusic>chunk(10)
-                .reader(updateMonthReader)
-                .writer(updateMonthWriter)
+                .reader(updateMonthReader())
+                .writer(updateMonthWriter())
                 .build();
     }
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en " xmlns:th="www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -9,45 +9,77 @@
 
 <a href="addMyMusic">음원추가</a>
 
-<select id="listName">
-    <option value="upload" selected="selected">음원등록</option>
-    <option value="like">좋아요</option>
-</select>
+<h1>업로드한 음원파일</h1>
 
-<button id="delMyMusic">삭제</button>
+<table>
+    <thead>
+    <th>제목</th>
+    <th>가수</th>
+    <th>장르</th>
+    <th>출시일</th>
+    <th>이미지</th>
+    <th>음원</th>
+    <th>삭제</th>
+    </thead>
 
+    <tbody>
+    <tr th:each="music :${uploadMusicList}">
+        <td>[[${music.music_title}]]</td>
+        <td>[[${music.music_singer}]]</td>
+        <td>[[${music.music_genre}]]</td>
+        <td>[[${music.music_release}]]</td>
+        <td><img th:src="|webapp/img/${music.music_image}|"></td>
+        <td>
+            <audio controls>
+                <source th:src="|webapp/music/${music.music_file}|"/>
+            </audio>
+        </td>
+        <td>
+            <button name="del"
+                    th:data-list-name="${music.list_name}"
+                    th:data-playlist-cd="${music.playlist_cd}"
+                    th:data-music-number="${music.music_number}">삭제
+            </button>
+        </td>
+    </tr>
 
-<div>
-    <table>
-        <thead>
-        <tr>
-            <th>
-            </th>
-            <th>제목
-            </th>
-            <th>가수
-            </th>
-            <th>장르
-            </th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr id="list">
-            <td><input type="radio" name="xxx" value="yyy" checked></td>
-            <td>1</td>
-            <td>2</td>
-            <td>3</td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+    </tbody>
+</table>
+
+<h1>좋아요한 음원파일</h1>
+
+<table>
+    <thead>
+    <th>제목</th>
+    <th>가수</th>
+    <th>장르</th>
+    <th>출시일</th>
+    <th>이미지</th>
+    <th>음원</th>
+    </thead>
+
+    <tbody>
+    <tr th:each="music :${likeMusicList}">
+        <td>[[${music.music_title}]]</td>
+        <td>[[${music.music_singer}]]</td>
+        <td>[[${music.music_genre}]]</td>
+        <td>[[${music.music_release}]]</td>
+        <td><img th:src="|webapp/img/${music.music_image}|"></td>
+        <td>
+            <audio controls>
+                <source th:src="|webapp/music/${music.music_file}|"/>
+            </audio>
+        </td>
+    </tr>
+
+    </tbody>
+</table>
+
 
 <script>
 var server_result = "";
 
     $(document).ready(function() {
-        //음원리스트조회
-        myMusicList();
 
         $("#delMyMusic").on("click", function(){
             for(var i=0 ; i < server_result.length ; i++) {
@@ -62,46 +94,19 @@ var server_result = "";
             }
         });
 
-        //음원등록 업로드 선택
-        $("#listName").on("change", function(){
-            myMusicList();
+        //삭제버튼 클릭
+        $('button[name="del"]').on("click", function(){
+            var list_name = this.getAttribute("data-list-name");
+            var playlist_cd = this.getAttribute("data-playlist-cd");
+            var music_number = this.getAttribute("data-music-number");
+
+            delMyMusic(list_name, playlist_cd, music_number);
         });
+
     });
 
-    //음원리스트조회
-    function myMusicList(){
-
-        $.ajax({
-            type : "POST",
-            url : "/myMusicList",
-            data : {
-                   "list_name": $("#listName").val()
-                   },
-            success: function(data) {
-                server_result = JSON.parse(data).myMusicList;
-
-                //테이블그리기
-                listHtml(server_result);
-            }
-        });
-    }
-
-    //테이블그리기
-    function listHtml(server_result) {
-        var sHtml = "";
-
-        for(var i=0 ; i < server_result.length ; i++) {
-            sHtml += "<td>" + "<input type='radio' name='chk'>" + "</td>"; //체크박스
-            sHtml += "<td>" + server_result[i].music_title + "</td>"; //제목
-            sHtml += "<td>" + server_result[i].music_singer + "</td>"; //가수
-            sHtml += "<td>" + server_result[i].music_genre + "</td>"; //장르
-        }
-
-        $("#list").html(sHtml);
-    }
-
     //음원삭제
-    function delMyMusic(i, list_name, playlist_cd, music_number){
+    function delMyMusic(list_name, playlist_cd, music_number){
 
         //음원리스트삭제
         $.ajax({
@@ -113,14 +118,45 @@ var server_result = "";
                    "music_number" : music_number
                    },
             success: function(data) {
-                if(data == "성공"){
-                    server_result.splice(i,1);
-                    //테이블그리기
-                    listHtml(server_result);
-                }
+
             }
         });
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
