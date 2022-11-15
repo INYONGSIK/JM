@@ -107,7 +107,7 @@ public class BoardController {
         }
 
 
-        return "redirect:/boardList";
+        return "board/boardList";
     }
 
     // 다인 : 게시판 글 검색
