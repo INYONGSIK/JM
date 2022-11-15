@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>곡 상세정보</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" href="/webapp/css/bootstrapLux.css"/>
+
+</head>
+<body>
+
+<th:block th:replace="~{navHeader :: navi}"></th:block>
+<img th:src="${details.music_image}" alt="음악사진">
+<br>
+[[${details.music_singer}]]<br>
+[[${details.music_title}]]<br>
+[[${details.music_lyrics}]]<br>
+[[${details.music_genre}]]<br>
+[[${details.music_release}]]<br>
+<audio controls>
+    <source th:src="${details.music_file}">
+</audio>
+<br>
+
+<a th:href="|/likeIncrement/${details.music_number}|">좋아요</a> [[${details.music_like}]]
+
+
+</body>
+</html>
