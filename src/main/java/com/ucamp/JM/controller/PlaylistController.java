@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 @Controller
@@ -75,9 +77,16 @@ public class PlaylistController {
     @RequestMapping("add_P")
     public String add_P(Playlist playlist, @RequestParam int user_number, @RequestParam String list_name, @RequestParam int music_number) {
         playlistService.insertPlaylist(playlist);
+        String encodedParam = null;
+        try {
+            encodedParam = URLEncoder.encode(list_name, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
+
 //        System.out.println("hi"+user_number);
 //        return "playlist/PList";
-        return "redirect:/listP/" + user_number + "/" + list_name;
+        return "redirect:/listP/" + user_number + "/" + encodedParam;
     }
 
 

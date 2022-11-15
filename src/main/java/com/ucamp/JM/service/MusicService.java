@@ -12,6 +12,12 @@ public interface MusicService {
 
     ArrayList<Music> SearchByKeyword(String keyword, String genre);
 
+    //현호 : 음악 상세페이지 검색
+    Music showMusicDetails(int music_number);
+
+    //현호 : 좋아요 누를 시 뮤직테이블 like 1증가
+    void likeIncrement(int music_number);
+
 
     //세영: music 테이블에서 가져온 값을 today_music 테이블에 넣음
     void updateTodayMusic(Music music);

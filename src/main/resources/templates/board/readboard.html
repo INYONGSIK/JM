@@ -76,15 +76,33 @@
 
     </div>
     <form th:if="${session.user_email}" action="/comment">
-        <input type="hidden" name="dashboard_No" th:value="${dashboard_No}">
-        <input type="hidden" name="writer" th:value="${sessionName}">
+        <input type="hidden" id="dashboard_No" name="dashboard_No" th:value="${dashboard_No}">
+        <input type="hidden" id="writer" name="writer" th:value="${sessionName}">
 
         댓글: <input type="text" name="comment">
-        <button type="submit">submit</button>
+        <button type="submit" id="comment">submit</button>
     </form>
 
 
 </div>
 
 </body>
+<th:block th:replace="header :: header">
+</th:block>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+        var dashboardNo = $("#dashboard_No").val();
+        var replyWriter = $("#writer").val();
+        var boardWriter = /*[[${dashboard_user}]]*/;
+     /*]]>*/
+        $("#comment").click(function(){
+             if(socket){
+             console.log("들어옴");
+            // (reply, 댓글작성자,게시글작성자,글번호)
+            socket.send("reply," + replyWriter + "," + boardWriter + "," + dashboardNo);
+        }
+        })
+
+
+</script>
 </html>

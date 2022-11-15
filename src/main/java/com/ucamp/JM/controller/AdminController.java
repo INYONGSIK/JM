@@ -60,8 +60,8 @@ public class AdminController {
     }
 
 
-    @RequestMapping("/admin/userList")
-    public String adminUserList(HttpServletRequest request, Model model) throws Exception {
+    @RequestMapping("/admin/reportedUserList")
+    public String reportedUserList(HttpServletRequest request, Model model) throws Exception {
 
         String email = (String) request.getSession().getAttribute("user_email");
         User user = null;
@@ -78,10 +78,11 @@ public class AdminController {
             return "redirect:/";
         }
 
-        model.addAttribute("users", adminService.selectAllUser());
+        model.addAttribute("users", adminService.selectAllUserByReport());
 
-        return "/admin/userList";
+        return "/admin/reportedUserList";
     }
+
 
     @RequestMapping("/admin/deleteUser/{user_number}")
     public String deleteUser(@PathVariable int user_number) {
@@ -90,4 +91,18 @@ public class AdminController {
         return "redirect:/admin/userList";
     }
 
+    @RequestMapping("/admin/deleteReport/{report_type}/{report_ID}")
+    public String deleteReport(@PathVariable int report_type, @PathVariable int report_ID) {
+        adminService.deleteReport(report_ID);
+
+        return "redirect:/admin/report/" + report_type;
+    }
+
+
+    @RequestMapping("/admin/adminUserList")
+    public String adminUserList(Model model) {
+
+        model.addAttribute("users", adminService.selectAllUser());
+        return "/admin/adminUserList";
+    }
 }
