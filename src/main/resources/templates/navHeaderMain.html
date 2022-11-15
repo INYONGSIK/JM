@@ -10,7 +10,9 @@
 <th:block th:fragment="naviMain">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/">자음모음</a>
+            <a class="navbar-brand" href="/">
+                <img src="/webapp/img/logoNavi.PNG" width="80" height="80"/>
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
                     aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -28,15 +30,34 @@
                     <li class="nav-item" th:if="${session.user_email}">
                         <a class="nav-link" href="/listPM">Playlists</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="mypage" th:if="${session.user_email}">add</a>
+                    <li class="nav-item" th:if="${session.user_email}">
+                        <a class="nav-link" href="/mypage">마이페이지</a>
                     </li>
-
 
                 </ul>
 
             </div>
         </div>
+
+        <div style="padding:50px;">
+            <div style="position: absolute; right: 50px; top: 50px;">
+                <th:block th:unless="${session.user_email}">
+                    <button type="button" class="btn btn-outline-light btn-sm" onclick="location.href='/loginform'">로그인</button>
+                    <button type="button" class="btn btn-outline-light btn-sm" onclick="location.href='/registerform'">회원가입
+                    </button>
+                </th:block>
+
+                <th:block th:if="${session.user_email}">
+                    <button type="button" class="btn btn-outline-light btn-sm" onclick="location.href='/modifyinformationform'">
+                        회원정보 수정
+                    </button>
+                    <button type="button" class="btn btn-outline-light btn-sm" onclick="location.href='/logout'">로그아웃
+                    </button>
+
+                    <!--            <a href="/modifyinformationform">회원정보 수정</a>-->
+                    <!--            <a href="/logout">로그아웃</a>-->
+                </th:block>
+            </div>
     </nav>
 </th:block>
 
