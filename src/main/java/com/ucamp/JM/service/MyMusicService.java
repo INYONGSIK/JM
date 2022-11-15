@@ -13,4 +13,6 @@ public interface MyMusicService {
     void delMyMusic(int MyMusic_number);
 
     ArrayList<Music> getMusicByMusicSinger(String music_singer);
+
+    int maxMusicNumber();
 }
