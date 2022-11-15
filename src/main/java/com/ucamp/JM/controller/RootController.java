@@ -122,6 +122,7 @@ public class RootController {
                 userService.login(user_email, user_password);
                 session.setAttribute("user_email", user_email);
                 session.setAttribute("user_number", user.getUser_number());
+                session.setAttribute("user_name", user.getUser_name());
                 //session.setAttribute("userType", type);
                 return "redirect:/";
             } else {

@@ -20,6 +20,7 @@ public class JMhandshakeInterceptor extends HttpSessionHandshakeInterceptor {
             HttpSession session = servletRequest.getServletRequest().getSession();
             attributes.put("user_number", session.getAttribute("user_number"));
             attributes.put("user_email", session.getAttribute("user_email"));
+            attributes.put("user_name", session.getAttribute("user_name"));
         }
         return super.beforeHandshake(request, response, wsHandler, attributes);
 
