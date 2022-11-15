@@ -12,5 +12,7 @@ public interface AlarmDAO {
 
     ArrayList<User> selectFollowee(int follower);
 
-    void deleteFollowee(@Param("follower") int follower, @Param("followee") int followee);
+    void deleteFollow(@Param("follower") int follower, @Param("followee") int followee);
+
+    void insertFollow(@Param("follower") int follower, @Param("followee") int followee);
 }
