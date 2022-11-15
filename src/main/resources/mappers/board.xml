@@ -99,5 +99,9 @@
         ]]>
     </select>
 
+    <delete id="deleteReportComment" parameterType="Map">
+        delete from report where dashboard_No=${dashboard_No} and contents=${contents}
+    </delete>
+
 
 </mapper>

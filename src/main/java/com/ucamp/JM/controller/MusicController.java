@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -99,5 +100,18 @@ public class MusicController {
         model.addAttribute("musics", musicService.SearchByKeyword("%" + keyword + "%", "%" + genre + "%"));
         return "musicSearch";
     }
+
+    @RequestMapping("/musicDetails/{music_number}")
+    public String read(Model model, @PathVariable int music_number) {
+        model.addAttribute("details", musicService.showMusicDetails(music_number));
+        return "musicDetails";
+    }
+
+    @RequestMapping("/likeIncrement/{music_number}")
+    public String like(Model model, @PathVariable int music_number) {
+        musicService.likeIncrement(music_number);
+        return "redirect:/musicDetails/" + music_number;
+    }
+
 }
 

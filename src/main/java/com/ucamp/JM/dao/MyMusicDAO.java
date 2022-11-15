@@ -21,3 +21,4 @@ public interface MyMusicDAO {
 
     //int maxMusicNumber();
 }
+

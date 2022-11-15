@@ -1,18 +1,63 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>PList</title>
+    <title>Playlist</title>
+
 </head>
+<link rel="stylesheet" href="/webapp/css/bootstrapLux.css"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+
 <body>
-<a th:href="|/addP/${P_list_name}|"> 플레이리스트에 노래추가</a>
-<h1>PList</h1>
+<th:block th:replace="~{navHeader :: navi}"></th:block>
+
+
+<!--<a th:href="|/addP/${P_list_name}|"> 플레이리스트에 노래추가</a>-->
+<!--<h1>PList</h1>-->
 <input type="hidden" name="user_number" th:value="${P_user_number}"><br>
 <input type="hidden" name="list_name" th:value="${P_list_name}"><br>
 <ul th:each="P: ${PList}">
-    <li>[[${P.music_title}]] - [[${P.music_singer}]] <a th:href="|/deletemusic/${P.music_number}/${P_list_name}/${P_user_number}|">삭제</a></li>
+<!--    <li>[[${P.music_title}]] - [[${P.music_singer}]] <a th:href="|/deletemusic/${P.music_number}/${P_list_name}/${P_user_number}|">삭제</a></li>-->
 <!--    <li>playlist = [[${P.music_number}]]</li>-->
 </ul>
+
+<div style="padding:50px;">
+    <h1 style="text-align:center;">[[${P_list_name}]]</h1>
+    <br>
+    <button type="button" class="btn btn-secondary" onclick="location.href='/listPM'" >플레이리스트 목록</button>
+
+    <br>
+
+
+<div>
+    <table class='table table-hover' style='width:100%' aria-describedby='example_info'>
+        <thead>
+        <tr class='table-active'>
+            <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
+                aria-sort='ascending'>노래
+            </th>
+            <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
+                aria-sort='ascending'>
+            </th>
+            <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
+                aria-sort='ascending'> <div style="text-align:center;"><a th:href="|/addP/${P_list_name}|"> 플레이리스트에 노래추가</a></div>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="P: ${PList}">
+            <td>[[${P.music_title}]] - [[${P.music_singer}]]</td>
+            <td>
+                <audio controls>
+                    <source th:src="${P.music_file}">
+                </audio>
+            </td>
+            <td><a th:href="|/deletemusic/${P.music_number}/${P_list_name}/${P_user_number}|">삭제</a></td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
 
 </body>
 </html>

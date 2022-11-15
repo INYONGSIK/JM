@@ -1,36 +1,63 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<table border="1">
-<!--    <thead>-->
-    <tr>
-        <th>노래 번호</th>
-        <th>가수</th>
-        <th>곡</th>
-        <th></th>
-    </tr>
-<!--    </thead>-->
-<!--    <tbody>-->
+    <title>Playlist</title>
 
-    <tr th:each="music : ${musicList}">
-        <form action="/add_P" method="get">
-        <input type="hidden" name="user_number" th:value="${P_user_number}">
-        <input type="hidden" name="list_name" th:value="${P_list_name}">
+</head>
+<link rel="stylesheet" href="/webapp/css/bootstrapLux.css"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+<body>
+
+<th:block th:replace="~{navHeader :: navi}"></th:block>
+
+
+
+<table class="table table-hover" width="100" id="products">
+
+
+    <thead>
+    <tr class="table-dark">
+        <th scope="col"></th>
+        <th scope="col">장르</th>
+        <th scope="col">제목</th>
+        <th scope="col">가수</th>
+        <th scope="col">좋아요 개수</th>
+        <th scope="col">재생</th>
+        <th scope="col">담기</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="music : ${musicList}" class="table-active">
+        <form action="/add_P" method="get" accept-charset="utf-8">
+            <input type="hidden" name="user_number" th:value="${P_user_number}">
+            <input type="hidden" name="list_name" th:value="${P_list_name}">
             <input type="hidden" name = "music_number" th:value="${music.music_number}">
-        <th>[[${music.music_number}]]</th>
-        <th>[[${music.music_singer}]]</th>
-        <th>[[${music.music_title}]]</th>
-        <th><input type="submit" value="담기"></th>
+       <td>
+            <img th:src="${music.music_image}" width="50" alt="음악사진">
+        </td>
+        <td>[[${music.music_genre}]]</td>
+        <td>[[${music.music_title}]]</td>
+        <td>[[${music.music_singer}]]</td>
+        <td>[[${music.music_like}]]</td>
+        <td>
+            <audio controls>
+                <source th:src="${music.music_file}">
+            </audio>
+        </td>
+        <td><input type="submit" value="담기"></td>
         </form>
     </tr>
 
-<!--    </tbody>-->
+
+    </tbody>
 
 </table>
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination pagination-seperated"></ul>
+</nav>
 
 </body>
 </html>

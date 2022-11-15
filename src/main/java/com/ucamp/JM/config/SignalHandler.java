@@ -1,6 +1,8 @@
 package com.ucamp.JM.config;
 
 
+import com.ucamp.JM.dao.UserDAO;
+import com.ucamp.JM.dto.User;
 import com.ucamp.JM.service.AlarmService;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang.StringUtils;
@@ -22,6 +24,7 @@ import java.util.Map;
 public class SignalHandler extends TextWebSocketHandler {
     private final HttpSession httpSession;
     private final AlarmService alarmService;
+    private final UserDAO userDAO;
 
     // 테스트용 : 전체유저에게 매세지보낼 리스트 => 접속되어있는 모든 세션을 담음
     List<WebSocketSession> sessions = new ArrayList<>();
@@ -50,50 +53,50 @@ public class SignalHandler extends TextWebSocketHandler {
         }
 */
         // protocol : cmd , 댓글작성자, 게시글작성자, bno (reply, user2 , user1, 234)  bno => 게시글번호
-//        String msg = message.getPayload();
-//        if (StringUtils.isNotEmpty(msg)) {
-//            msg = msg.replace("{", "");
-//            msg = msg.replace("}", "");
-//            msg = msg.replaceAll("\"", "");
-//            String[] strs = msg.split(",");
-//            ArrayList<String> arrayList = new ArrayList<String>();
-//            for (String str : strs) {
-//                System.out.println(str.split(":")[1]);
-//                arrayList.add(str.split(":")[1]);
-//            }
-//
-//            if (arrayList.get(0).equals("alarm") && arrayList.size() == 4) {
-//                int sender = Integer.parseInt(arrayList.get(1));
-//                String sendMessage = arrayList.get(2);
-//                String date = arrayList.get(3);
-//                //sender 가 userId이여야함
-//                ArrayList<User> followers = alarmService.selectFollower(sender);
-//
-//
-//                TextMessage tmpMsg = new TextMessage(sendMessage);
-//
-//                for (User follower : followers) {
-//                    WebSocketSession follower_session = null;
-//                    for (Map.Entry<String, WebSocketSession> entry : userSessions.entrySet()) {
-//                        if (entry.getKey().equals(String.valueOf(follower.getUser_number()))) {
-//                            follower_session = entry.getValue();
-//                        }
-//                    }
-//                    System.out.println("boardWriterSession : " + follower_session);
-//                    if (follower_session != null) {
-//                        follower_session.sendMessage(tmpMsg);
-//                    }
-//                }
-//            }
-//        }
+        String msg = message.getPayload();
+        if (StringUtils.isNotEmpty(msg)) {
+            String[] strs = msg.split(",");
+            if (strs != null && strs.length == 2) {
+                //cmd, uploader
+                String cmd = strs[0];
+                int sender = Integer.parseInt(strs[1]);
 
-        String message2 = message.getPayload();
-        if (StringUtils.isNotEmpty(message2)) {
-            String[] strs = message2.split(",");
+                ArrayList<User> followers = alarmService.selectFollower(sender);
+                for (User follower : followers) {
+                    WebSocketSession follower_session = null;
+                    for (Map.Entry<String, WebSocketSession> entry : userSessions.entrySet()) {
+                        if (entry.getKey().equals(String.valueOf(follower.getUser_number()))) {
+                            follower_session = entry.getValue();
+                        }
+                    }
+                    System.out.println("follower_session : " + follower_session);
+                    if (cmd.equals("upload") && follower_session != null) {
+                        TextMessage tmpMsg = new TextMessage(sender + "님이 곡을 업로드 했습니다.");
+                        follower_session.sendMessage(tmpMsg);
+                    }
+                }
+            }
+            if (strs != null && strs.length == 3) {
+                String cmd = strs[0];
+                User follower = userDAO.getUserInfoByEmail(strs[1]);
+                User followee = userDAO.getUserInfoByUsername(strs[2]);
+                String follower_nickname = follower.getUser_nickname();
+                WebSocketSession followeeSession = userSessions.get(followee.getUser_name());
+
+                if (cmd.equals("follow") && followeeSession != null) {
+                    TextMessage tmpMsg = new TextMessage(follower_nickname + "님이 회원님을 팔로우하기 시작했습니다.");
+                    followeeSession.sendMessage(tmpMsg);
+
+                    alarmService.insertFollow(follower.getUser_number(), followee.getUser_number());
+                }
+            }
+
+
             if (strs != null && strs.length == 4) {
                 String cmd = strs[0];
                 String replyWriter = strs[1];
-                String boardWriter = strs[2];
+
+                String boardWriter = userDAO.getUserInfoByNickname(strs[2]).getUser_name();
                 String dashboardNo = strs[3];
 
                 WebSocketSession replyWriterSession = userSessions.get(replyWriter);

@@ -20,7 +20,6 @@ public class STTController {
     @RequestMapping(value = "/stt", method = RequestMethod.GET)
     public String stt() {
 
-
         return "stt";
 
     }
@@ -34,11 +33,13 @@ public class STTController {
 
         //기존에는 파일명을 stt.html의 <input type="file">을 이용해 파일명을 파라미터로 받아왔지만
         //어짜피 ajax에서 파일을 다운로드에 voice.mp3로 저장시키기로 하였기에 기존에 파일 받아오는 과정 다 삭제
-        String filePathName = "C:/Users/Admin/Downloadsvoice.mp3";
+        String filePathName = "C:/Users/ssy/Music/이승철-01-그런 사람 또 없습니다3.mp3";
+
         File file1 = new File(filePathName);
         System.out.println("경로" + filePathName);
 
         result = sttService.clovaSpeechToText(filePathName);
+
         System.out.println("ai 결과 = " + result);
 
         return result;

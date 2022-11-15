@@ -3,6 +3,7 @@ package com.ucamp.JM.service;
 import com.ucamp.JM.dao.AdminDAO;
 import com.ucamp.JM.dto.Admin;
 import com.ucamp.JM.dto.Report;
+import com.ucamp.JM.dto.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,13 +21,24 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public ArrayList<Admin> selectAllUser() {
-        return adminDAO.selectAllUser();
+    public void deleteReport(int report_ID) {
+        adminDAO.deleteReport(report_ID);
+    }
+
+
+    @Override
+    public ArrayList<Admin> selectAllUserByReport() {
+        return adminDAO.selectAllUserByReport();
     }
 
     @Override
     public ArrayList<Report> selectAllReport() {
         return adminDAO.selectAllReport();
+    }
+
+    @Override
+    public ArrayList<User> selectAllUser() {
+        return adminDAO.selectAllUser();
     }
 
     @Override

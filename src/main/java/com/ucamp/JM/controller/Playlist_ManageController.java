@@ -44,6 +44,7 @@ public class Playlist_ManageController {
     //플레이리스트 생성
     @RequestMapping("/add_PM")
     public String add_PM(@RequestParam String list_name,@RequestParam int user_number){
+
         playlist_manageService.insertPlaylist_Manage(list_name, user_number);
         return "redirect:/listPM";
     }
