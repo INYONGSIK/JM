@@ -11,11 +11,14 @@ public interface MyMusicDAO {
 
     ArrayList<Music> getMusicByMusicSinger(String music_singer);
 
-    ArrayList<MyMusic> myMusicList(MyMusic paramDto);
+    ArrayList<MyMusic> myUploadMusicList(MyMusic paramDto);
+
+    ArrayList<MyMusic> myLikeMusicList(MyMusic paramDto);
 
     void insertMyMusic(Music music);
 
     void delMyMusic(int MyMusic_number);
 
-    int maxMusicNumber();
+    //int maxMusicNumber();
 }
+

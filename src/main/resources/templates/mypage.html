@@ -3,48 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <title>음원관리</title>
+    <title>마이페이지</title>
 </head>
+<link rel="stylesheet" href="/webapp/css/bootstrapLux.css"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 <body>
+<th:block th:replace="~{navHeader :: navi}"></th:block>
 
-<a href="addMyMusic">음원추가</a>
 
-<h1>업로드한 음원파일</h1>
-
-<table>
-    <thead>
-    <th>제목</th>
-    <th>가수</th>
-    <th>장르</th>
-    <th>출시일</th>
-    <th>이미지</th>
-    <th>음원</th>
-    <th>삭제</th>
-    </thead>
-
-    <tbody>
-    <tr th:each="music :${uploadMusicList}">
-        <td>[[${music.music_title}]]</td>
-        <td>[[${music.music_singer}]]</td>
-        <td>[[${music.music_genre}]]</td>
-        <td>[[${music.music_release}]]</td>
-        <td><img th:src="|webapp/img/${music.music_image}|"></td>
-        <td>
-            <audio controls>
-                <source th:src="|webapp/music/${music.music_file}|"/>
-            </audio>
-        </td>
-        <td>
-            <button name="del"
-                    th:data-list-name="${music.list_name}"
-                    th:data-playlist-cd="${music.playlist_cd}"
-                    th:data-music-number="${music.music_number}">삭제
+<div>
+    <div style="margin:20px;">
+        <div style="display:inline-block">
+            <h1 style="padding: 20px 30px; float:left;">내가 등록한 음원</h1>
+            <button type="button" onclick="location.href='/addMyMusic'" class="btn btn-outline-primary"
+                    style="max-width: 10rem;margin: 20px; float:right;">추가
             </button>
-        </td>
-    </tr>
+        </div>
+        <div class="card-body">
+            <table class='table table-hover' style='width:100%' aria-describedby='example_info'>
+                <thead>
+                <tr class='table-active'>
+                    <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
+                        aria-sort='ascending'> 제목
+                    </th>
+                    <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
+                        aria-sort='ascending'> 가수
+                    </th>
+                    <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
+                        aria-sort='ascending'> 장르
+                    </th>
+                    <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
+                        aria-sort='ascending'> 출시일
+                    </th>
+                    <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
+                        aria-sort='ascending'> 사진
+                    </th>
+                    <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
+                        aria-sort='ascending'> 재생/다운
+                    </th>
+                    <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
+                        aria-sort='ascending'> 삭제
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="music :${uploadMusicList}">
+                    <td>[[${music.music_title}]]</td>
+                    <td>[[${music.music_singer}]]</td>
+                    <td>[[${music.music_genre}]]</td>
+                    <td>[[${music.music_release}]]</td>
+                    <td><img th:src="|webapp/img/musicimage/${music.music_image}|" width="40"></td>
+                    <td>
+                        <audio controls>
+                            <source th:src="|webapp/music/${music.music_file}|"/>
+                        </audio>
+                    </td>
+                    <td>
+                        <input type="button" name="삭제">
+                    </td>
+                </tr>
 
-    </tbody>
-</table>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
 
 <h1>좋아요한 음원파일</h1>
 
@@ -58,21 +82,7 @@
     <th>음원</th>
     </thead>
 
-    <tbody>
-    <tr th:each="music :${likeMusicList}">
-        <td>[[${music.music_title}]]</td>
-        <td>[[${music.music_singer}]]</td>
-        <td>[[${music.music_genre}]]</td>
-        <td>[[${music.music_release}]]</td>
-        <td><img th:src="|webapp/img/${music.music_image}|"></td>
-        <td>
-            <audio controls>
-                <source th:src="|webapp/music/${music.music_file}|"/>
-            </audio>
-        </td>
-    </tr>
 
-    </tbody>
 </table>
 
 
@@ -121,26 +131,6 @@ var server_result = "";
 
             }
         });
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

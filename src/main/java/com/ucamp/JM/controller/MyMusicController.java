@@ -1,8 +1,6 @@
 package com.ucamp.JM.controller;
 
 import com.ucamp.JM.dto.Music;
-import com.ucamp.JM.dto.MyMusic;
-import com.ucamp.JM.dto.Playlist;
 import com.ucamp.JM.dto.User;
 import com.ucamp.JM.service.MyMusicService;
 import com.ucamp.JM.service.PlaylistService;
@@ -45,20 +43,16 @@ public class MyMusicController {
         String email = (String) session.getAttribute("user_email");
         User user = userService.queryUser(email);
 
-        //업로드
-        MyMusic uploadParamDto = new MyMusic();
-        uploadParamDto.setUser_number(String.valueOf(user.getUser_number()));
-        uploadParamDto.setList_name("upload");
-        ArrayList<MyMusic> uploadMusicList = myMusicService.myMusicList(uploadParamDto);
+        ArrayList<Music> uploadMusicList = myMusicService.getMusicByMusicSinger(user.getUser_name());
 
         //좋아요
-        MyMusic likeParamDto = new MyMusic();
-        likeParamDto.setUser_number(String.valueOf(user.getUser_number()));
-        likeParamDto.setList_name("like");
-        ArrayList<MyMusic> likeMusicList = myMusicService.myMusicList(likeParamDto);
+        //MyMusic likeParamDto = new MyMusic();
+        //likeParamDto.setUser_number(String.valueOf(user.getUser_number()));
+        // likeParamDto.setList_name("like");
+        // ArrayList<MyMusic> likeMusicList = myMusicService.myLikeMusicList(likeParamDto);
 
         model.addAttribute("uploadMusicList", uploadMusicList);
-        model.addAttribute("likeMusicList", likeMusicList);
+        // model.addAttribute("likeMusicList", likeMusicList);
         return "mypage";
     }
 
@@ -66,6 +60,8 @@ public class MyMusicController {
     @PostMapping("/delMyMusic")
     public String delMyMusic(@RequestParam String list_name, @RequestParam String playlist_cd, @RequestParam String music_number) throws Exception {
         //실제파일삭제 구현
+        myMusicService.delMyMusic(Integer.parseInt(music_number));
+        playlistService.deletePlaylistMusic(Integer.parseInt(music_number));
 
         //db삭제
         //MUSIC
@@ -137,14 +133,14 @@ public class MyMusicController {
             }
             myMusicService.insertMyMusic(music);
 
-            int musicNumber = myMusicService.maxMusicNumber();
+            //int musicNumber = myMusicService.maxMusicNumber();
 
-            //업로드 플레이리스트 등록
-            Playlist playlist = new Playlist();
-            playlist.setMusic_number(musicNumber);
-            playlist.setList_name("upload");
-            playlist.setUser_number(user.getUser_number());
-            playlistService.insertPlaylist(playlist);
+            ////업로드 플레이리스트 등록
+            // Playlist playlist = new Playlist();
+            // playlist.setMusic_number(musicNumber);
+            //playlist.setList_name("upload");
+            //playlist.setUser_number(user.getUser_number());
+            //playlistService.insertPlaylist(playlist);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -152,4 +148,5 @@ public class MyMusicController {
     }
 
 }
+
 
