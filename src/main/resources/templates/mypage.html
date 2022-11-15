@@ -59,7 +59,7 @@
                         </audio>
                     </td>
                     <td>
-                        <input type="button" name="삭제">
+                        <a th:href="|/delMyMusic/${music.music_number}|">삭제</a>
                     </td>
                 </tr>
 
@@ -131,6 +131,10 @@ var server_result = "";
 
             }
         });
+
+
+
+
 
 
 

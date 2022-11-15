@@ -17,7 +17,7 @@ public interface MyMusicDAO {
 
     void insertMyMusic(Music music);
 
-    void delMyMusic(int MyMusic_number);
+    void delMyMusic(int music_singer);
 
     //int maxMusicNumber();
 }
