@@ -29,10 +29,8 @@
                  ws.onmessage = function (event) {
                      console.log("ReceiveMessage : " + event.data);
                      let socketAlert  =  $("#socketAlert");
-                     socketAlert.append(event.data);
-
-
-
+                     var html = event.data+"<br>";
+                     socketAlert.append(html);
                     $("#deleteAlert").click(function(){
                         socketAlert.html("");
                     })
@@ -45,6 +43,8 @@
                   console.log("error : " , err);
                 };
               };
+
+
 
 
 
