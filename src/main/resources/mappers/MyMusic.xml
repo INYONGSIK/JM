@@ -7,20 +7,21 @@
         select * from music where music_singer= #{music_singer}
     </select>
     <select id="myMusicList" parameterType="MyMusic" resultType="MyMusic">
-        select A.list_name,
+        select
+        B.list_name,
         B.playlist_cd,
         B.music_number,
         C.music_title,
         C.music_singer,
-        C.music_genre
-        from playlist_manage A,
-        playlist B,
+        C.music_genre,
+        C.music_release,
+        C.music_image,
+        C.music_file
+        from playlist B,
         music C
-        where A.user_number = B.user_number
-        and A.list_name = B.list_name
-        and b.music_number = C.music_number
-        and a.user_number = #{user_number}
-        and a.list_name = #{list_name}
+        where B.music_number = C.music_number
+        and B.user_number = #{user_number}
+        and B.list_name = #{list_name}
         order by C.music_number desc
     </select>
 
@@ -50,4 +51,8 @@
         and list_name = #{list_name}
 
     </delete>
+
+    <select id="maxMusicNumber" resultType="int">
+        select max(playlist_cd) AS playlist_cd from playlist
+    </select>
 </mapper>
