@@ -46,7 +46,9 @@
             <img th:src="${music.music_image}" width="50" alt="음악사진">
         </td>
         <td>[[${music.music_genre}]]</td>
-        <td>[[${music.music_title}]]</td>
+        <td>
+            <a th:href="|/musicDetails/${music.music_number}|">[[${music.music_title}]]</a>
+        </td>
         <td>[[${music.music_singer}]]</td>
         <td>[[${music.music_like}]]</td>
         <td>
