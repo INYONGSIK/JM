@@ -60,8 +60,10 @@ public interface BoardDAO {
     // 다인: 이미 신고되어있는지 댓글인지 확인하기
     Report selectOk(@Param("user_number") int user_number, @Param("contents") String contents);
 
+    // 다인: 신고된 댓글이 삭제되면 report 테이블에서도 삭제
     void deleteReportComment(@Param("dashboard_No") int dashboard_No, @Param("contents") String contents);
 
+    // 다인: 게시글이 삭제될 때 게시글에 달린 댓글 모두 삭제하기
     void deleteCommentAll2(@Param("dashboard_No") int dashboard_No);
 
 

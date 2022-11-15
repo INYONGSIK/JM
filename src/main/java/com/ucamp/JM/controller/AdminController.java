@@ -3,13 +3,19 @@ package com.ucamp.JM.controller;
 import com.ucamp.JM.dto.User;
 import com.ucamp.JM.service.AdminService;
 import com.ucamp.JM.service.UserService;
+import com.ucamp.JM.service.board.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.Writer;
+import java.net.URLEncoder;
 
 @Controller
 public class AdminController {
@@ -18,6 +24,8 @@ public class AdminController {
     AdminService adminService;
     @Autowired
     UserService userService;
+    @Autowired
+    BoardService boardService;
 
 
     @RequestMapping("/admin")
@@ -105,4 +113,54 @@ public class AdminController {
         model.addAttribute("users", adminService.selectAllUser());
         return "/admin/adminUserList";
     }
+
+    @GetMapping("/reportMusic/{music_singer}/{music_title}/{music_number}")
+    public String reportMusic(HttpServletResponse response, @PathVariable String music_singer, @PathVariable String music_title, @PathVariable int music_number) throws IOException {
+
+        System.out.println("musicSinger" + music_singer);
+        int user_number = boardService.getUserNumByNickname(music_singer).getUser_number();
+
+        if (boardService.selectOk(user_number, music_title) != null) {
+
+            boardService.updateReport_count(user_number, music_title);
+            Writer out = response.getWriter();
+            String message = URLEncoder.encode("신고완료.", "UTF-8");
+            response.setContentType("text/html; charset=UTF-8");
+            out.write("<script type=\"text/javascript\">alert(decodeURIComponent('" + message + "'.replace(/\\+/g, '%20'))); location.href='/boardList' </script>");
+            out.flush();
+            response.flushBuffer();
+            out.close();
+        } else {
+
+            Boolean ok = adminService.reportMusic(user_number, music_title, music_number);
+            boardService.updateReport_count(user_number, music_title);
+
+            if (ok == true) {
+
+                Writer out = response.getWriter();
+                String message = URLEncoder.encode("신고완료.", "UTF-8");
+                response.setContentType("text/html; charset=UTF-8");
+                out.write("<script type=\"text/javascript\">alert(decodeURIComponent('" + message + "'.replace(/\\+/g, '%20'))); location.href='/musicDetails/" + music_number + "' </script>");
+                out.flush();
+                response.flushBuffer();
+                out.close();
+            }
+        }
+
+        return "redirect:/musicDetails/" + music_number;
+
+    }
+
+    @GetMapping("/deleteMusic/{music_number}/{music_title}")
+    public String deleteMusic(@PathVariable int music_number, @PathVariable String music_title) {
+        adminService.deleteMusic(music_number);
+
+        if (boardService.selectOk(music_number, music_title) != null) {
+            adminService.deleteMusic(music_number);
+        }
+
+        return "redirect:/";
+    }
+
+
 }
