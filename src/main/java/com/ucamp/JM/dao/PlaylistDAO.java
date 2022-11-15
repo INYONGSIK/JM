@@ -24,7 +24,9 @@ public interface PlaylistDAO {
     ArrayList<Playlist_Manage> selectAllP(int user_number);
 
     Music selectByMusicNumber(int music_number);
-    
+
     //음악 삭제
     void deletePlaylistMusic(int music_number);
+
+    Music selectSameMusic(int user_number, String list_name, int music_number);
 }
