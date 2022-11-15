@@ -1,8 +1,6 @@
-
 package com.ucamp.JM.config;
 
 
-import com.ucamp.JM.dto.User;
 import com.ucamp.JM.service.AlarmService;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang.StringUtils;
@@ -52,39 +50,58 @@ public class SignalHandler extends TextWebSocketHandler {
         }
 */
         // protocol : cmd , 댓글작성자, 게시글작성자, bno (reply, user2 , user1, 234)  bno => 게시글번호
-        String msg = message.getPayload();
-        if (StringUtils.isNotEmpty(msg)) {
-            msg = msg.replace("{", "");
-            msg = msg.replace("}", "");
-            msg = msg.replaceAll("\"", "");
-            String[] strs = msg.split(",");
-            ArrayList<String> arrayList = new ArrayList<String>();
-            for (String str : strs) {
-                System.out.println(str.split(":")[1]);
-                arrayList.add(str.split(":")[1]);
-            }
+//        String msg = message.getPayload();
+//        if (StringUtils.isNotEmpty(msg)) {
+//            msg = msg.replace("{", "");
+//            msg = msg.replace("}", "");
+//            msg = msg.replaceAll("\"", "");
+//            String[] strs = msg.split(",");
+//            ArrayList<String> arrayList = new ArrayList<String>();
+//            for (String str : strs) {
+//                System.out.println(str.split(":")[1]);
+//                arrayList.add(str.split(":")[1]);
+//            }
+//
+//            if (arrayList.get(0).equals("alarm") && arrayList.size() == 4) {
+//                int sender = Integer.parseInt(arrayList.get(1));
+//                String sendMessage = arrayList.get(2);
+//                String date = arrayList.get(3);
+//                //sender 가 userId이여야함
+//                ArrayList<User> followers = alarmService.selectFollower(sender);
+//
+//
+//                TextMessage tmpMsg = new TextMessage(sendMessage);
+//
+//                for (User follower : followers) {
+//                    WebSocketSession follower_session = null;
+//                    for (Map.Entry<String, WebSocketSession> entry : userSessions.entrySet()) {
+//                        if (entry.getKey().equals(String.valueOf(follower.getUser_number()))) {
+//                            follower_session = entry.getValue();
+//                        }
+//                    }
+//                    System.out.println("boardWriterSession : " + follower_session);
+//                    if (follower_session != null) {
+//                        follower_session.sendMessage(tmpMsg);
+//                    }
+//                }
+//            }
+//        }
 
-            if (arrayList.get(0).equals("alarm") && arrayList.size() == 4) {
-                int sender = Integer.parseInt(arrayList.get(1));
-                String sendMessage = arrayList.get(2);
-                String date = arrayList.get(3);
-                //sender 가 userId이여야함
-                ArrayList<User> followers = alarmService.selectFollower(sender);
+        String message2 = message.getPayload();
+        if (StringUtils.isNotEmpty(message2)) {
+            String[] strs = message2.split(",");
+            if (strs != null && strs.length == 4) {
+                String cmd = strs[0];
+                String replyWriter = strs[1];
+                String boardWriter = strs[2];
+                String dashboardNo = strs[3];
 
-
-                TextMessage tmpMsg = new TextMessage(sendMessage);
-
-                for (User follower : followers) {
-                    WebSocketSession follower_session = null;
-                    for (Map.Entry<String, WebSocketSession> entry : userSessions.entrySet()) {
-                        if (entry.getKey().equals(String.valueOf(follower.getUser_number()))) {
-                            follower_session = entry.getValue();
-                        }
-                    }
-                    System.out.println("boardWriterSession : " + follower_session);
-                    if (follower_session != null) {
-                        follower_session.sendMessage(tmpMsg);
-                    }
+                WebSocketSession replyWriterSession = userSessions.get(replyWriter);
+                WebSocketSession boardWriterSession = userSessions.get(boardWriter);
+                if (cmd.equals("reply") && boardWriterSession != null) {
+                    TextMessage tmpMsg = new TextMessage(replyWriter + "님이 " + dashboardNo + "번 게시물에 " + "댓글을 달았습니다." +
+                            "<div id=\"socketAlert\"></div><button id=\"deleteAlert\">삭제</button>");
+                    boardWriterSession.sendMessage(tmpMsg);
                 }
             }
         }
@@ -93,7 +110,7 @@ public class SignalHandler extends TextWebSocketHandler {
     private String getId(WebSocketSession session) {
         Map<String, Object> httpSession = session.getAttributes();
         System.out.println("httpSession : " + httpSession);
-        String user_session = String.valueOf(httpSession.get("user_number"));
+        String user_session = String.valueOf(httpSession.get("user_name"));
 
 
         // 로그인 했으면 로그인한 유저의 아이디를 주고
