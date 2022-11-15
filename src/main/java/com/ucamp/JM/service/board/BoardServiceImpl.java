@@ -109,3 +109,4 @@ public class BoardServiceImpl implements BoardService {
         boardDAO.deleteCommentAll2(dashboard_No);
     }
 }
+

@@ -62,3 +62,4 @@ public interface BoardService {
 
     void deleteCommentAll2(int dashboard_No);
 }
+
