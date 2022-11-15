@@ -57,9 +57,7 @@ public class PlaylistController {
     @RequestMapping("/addP/{list_name}")
     public String addP(HttpServletRequest request, Model model, @PathVariable String list_name) {
         String user_email = (String) request.getSession().getAttribute("user_email");
-        System.out.println(user_email);
 
-        System.out.println(playlistService.PgetUserNumByEmail(user_email).getUser_number());
         int userNumber = playlistService.PgetUserNumByEmail(user_email).getUser_number();
 //        List<String> list = playlistService.PgetListNameByUserNum(userNumber);
 ////        System.out.println(list.get(0));

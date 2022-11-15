@@ -1,5 +1,6 @@
 package com.ucamp.JM.controller;
 
+import com.ucamp.JM.dao.UserDAO;
 import com.ucamp.JM.dto.Music;
 import com.ucamp.JM.dto.User;
 import com.ucamp.JM.service.AlarmService;
@@ -23,6 +24,7 @@ public class MainController {
     MainService mainService;
     private final MusicService musicService;
     private final AlarmService alarmService;
+    private final UserDAO userDAO;
 
 
     @RequestMapping("/mainRank")
@@ -35,6 +37,32 @@ public class MainController {
 
     //게시판
 
+
+    @RequestMapping("/followCheck")
+    @ResponseBody
+    public int followCheck(@RequestParam String follower, @RequestParam String followee) {
+        User followerUser = userDAO.getUserInfoByEmail(follower);
+        User followeeUser = userDAO.getUserInfoByUsername(followee);
+        System.out.println("follower:" + followerUser.getUser_number());
+        System.out.println("followee:" + followeeUser.getUser_number());
+        return alarmService.following(followerUser.getUser_number(), followeeUser.getUser_number());
+    }
+
+    @RequestMapping("/followOrUnfollow")
+    @ResponseBody
+    public void followOrUnfollow(@RequestParam String type, @RequestParam String follower, @RequestParam String followee) {
+        User followerUser = userDAO.getUserInfoByEmail(follower);
+        User followeeUser = userDAO.getUserInfoByUsername(followee);
+        System.out.println("type:" + type);
+        System.out.println("follower1:" + followerUser.getUser_number());
+        System.out.println("followee2:" + followeeUser.getUser_number());
+        if (type.equals("follow")) {
+            alarmService.insertFollow(followerUser.getUser_number(), followeeUser.getUser_number());
+        }
+        if (type.equals("unfollow")) {
+            deleteFollowee(followerUser.getUser_number(), followeeUser.getUser_number());
+        }
+    }
 
     @RequestMapping("/followee")
     @ResponseBody
@@ -49,5 +77,6 @@ public class MainController {
         alarmService.deleteFollow(follower, followee);
         return;
     }
+
 
 }

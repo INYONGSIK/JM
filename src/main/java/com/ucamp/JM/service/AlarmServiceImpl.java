@@ -31,4 +31,9 @@ public class AlarmServiceImpl implements AlarmService {
     public void insertFollow(int follower, int followee) {
         alarmDAO.insertFollow(follower, followee);
     }
+
+    @Override
+    public int following(int follower, int followee) {
+        return alarmDAO.following(follower, followee);
+    }
 }

@@ -40,8 +40,8 @@
     <br>
 
     <form style="float:left;margin:0;" th:action="|/editBoardForm/${dashboard_No}|"/>
-        <button type="submit" class="btn btn-secondary" th:if="${session.user_email}">수정</button>
-        </form>
+    <button type="submit" class="btn btn-secondary" th:if="${session.user_email}">수정</button>
+    </form>
 
 
     <form style="float:left;margin:0;" method="get"
@@ -50,7 +50,7 @@
         <input type="hidden" name="dashboard_No" value="${dashboard_No}"/>
         <button type="submit" class="btn btn-secondary" th:if="${session.user_email}">삭제</button>
     </form>
-        <button type="button" class="btn btn-secondary" onclick="window.location='/boardList'">돌아가기</button>
+    <button type="button" class="btn btn-secondary" onclick="window.location='/boardList'">돌아가기</button>
     <br><br><br><br><br>
 
 
