@@ -28,18 +28,14 @@
         <td>[[${music.music_singer}]]</td>
         <td>[[${music.music_genre}]]</td>
         <td>[[${music.music_release}]]</td>
-        <td><img th:src="|webapp/img/${music.music_image}|"></td>
+        <td><img th:src="|webapp/img/musicimage/${music.music_image}|"></td>
         <td>
             <audio controls>
                 <source th:src="|webapp/music/${music.music_file}|"/>
             </audio>
         </td>
         <td>
-            <button name="del"
-                    th:data-list-name="${music.list_name}"
-                    th:data-playlist-cd="${music.playlist_cd}"
-                    th:data-music-number="${music.music_number}">삭제
-            </button>
+
         </td>
     </tr>
 
@@ -58,21 +54,7 @@
     <th>음원</th>
     </thead>
 
-    <tbody>
-    <tr th:each="music :${likeMusicList}">
-        <td>[[${music.music_title}]]</td>
-        <td>[[${music.music_singer}]]</td>
-        <td>[[${music.music_genre}]]</td>
-        <td>[[${music.music_release}]]</td>
-        <td><img th:src="|webapp/img/${music.music_image}|"></td>
-        <td>
-            <audio controls>
-                <source th:src="|webapp/music/${music.music_file}|"/>
-            </audio>
-        </td>
-    </tr>
 
-    </tbody>
 </table>
 
 
@@ -122,6 +104,14 @@ var server_result = "";
             }
         });
     }
+
+
+
+
+
+
+
+
 
 
 

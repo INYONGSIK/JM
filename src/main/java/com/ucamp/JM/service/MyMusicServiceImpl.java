@@ -15,8 +15,13 @@ public class MyMusicServiceImpl implements MyMusicService {
 
 
     @Override
-    public ArrayList<MyMusic> myMusicList(MyMusic paramDto) {
-        return myMusicDAO.myMusicList(paramDto);
+    public ArrayList<MyMusic> myUploadMusicList(MyMusic paramDto) {
+        return myMusicDAO.myUploadMusicList(paramDto);
+    }
+
+    @Override
+    public ArrayList<MyMusic> myLikeMusicList(MyMusic paramDto) {
+        return myMusicDAO.myLikeMusicList(paramDto);
     }
 
     @Override
@@ -34,10 +39,10 @@ public class MyMusicServiceImpl implements MyMusicService {
         return myMusicDAO.getMusicByMusicSinger(music_singer);
     }
 
-    @Override
-    public int maxMusicNumber() {
-        return myMusicDAO.maxMusicNumber();
-    }
+    //@Override
+    //public int maxMusicNumber() {
+    //    return myMusicDAO.maxMusicNumber();
+    //}
 
 
 }
