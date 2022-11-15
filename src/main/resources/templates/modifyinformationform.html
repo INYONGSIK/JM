@@ -18,118 +18,124 @@
     <form action="/modifyinformation" method="post" id="form" enctype="multipart/form-data">
         <!-- Main -->
         <div id="main">
-            <!-- One -->
-            <section id="one">
-                <div class="container">
-                    <div class="image main" data-position="center">
-                        <!-- 여기에 이미지 -->
-                        <img src="#" alt=""/>
-                    </div>
-                    <!--닉네임-->
-                    <table>
-                        <tr>
-                            <th>
-                                <label for="user_nickname">닉네임</label>
-                            </th>
-                            <td>
-                                <input type="text" id="user_nickname" name="user_nickname"
-                                       th:value="${user.user_nickname}"/>
-                                <div class="error"></div>
-                            </td>
-                        </tr>
-                        <!--이메일-->
-                        <tr>
-                            <th>
-                                <label for="user_email">이메일</label>
-                            </th>
-                            <td>
-                                <input type="email" id="user_email" name="user_email" th:value="${user.user_email}"
-                                       readonly/>
-                                <div class="error"></div>
-                            </td>
-                        </tr>
-                        <!--비밀번호-->
-                        <tr>
-                            <th>
-                                <label for="user_password">비밀번호</label>
-                            </th>
-                            <td>
-                                <input type="password" id="user_password" name="user_password"/>
-                                <div class="error"></div>
-                            </td>
-                        </tr>
-                        <!--비밀번호 확인-->
-                        <tr>
-                            <th>
-                                <label for="user_password2">비밀번호 확인</label>
-                            </th>
-                            <td>
-                                <input type="password" id="user_password2"/>
-                                <div class="error"></div>
-                            </td>
-                        </tr>
-                        <!--이름-->
-                        <tr>
-                            <th>
-                                <label for="user_name">이름</label>
-                            </th>
-                            <td>
-                                <input type="text" id="user_name" name="user_name" th:value="${user.user_name}"/>
-                                <div class="error"></div>
-                            </td>
-                        </tr>
-                        <!--생년월일-->
-                        <tr>
-                            <th>
-                                <label for="user_birthday">생년월일</label>
-                            </th>
-                            <td>
-                                <input type="text" id="user_birthday" name="user_birthday"
-                                       th:value="${user.user_birthday}" readonly/>
-                                <div class="error"></div>
-                            </td>
-                        </tr>
-                        <!--휴대폰번호-->
-                        <tr>
-                            <th>
-                                <label for="phone">휴대폰 번호</label>
-                            </th>
-                            <td>
-                                <div>
-                                    <input class="signup_inputs user_border" type="text"
-                                           name="user_phone_number" id="originphone"
-                                           title="전화번호 입력" style="" th:value="${user.user_phone_number}" readonly/>
-                                    <input type="button" id="phoneBtn" class="w-btn" value="휴대폰번호변경"/>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                    <!-- 휴대폰 모달창-->
-                    <div class="modal fade" id="phoneModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="phoneModalLabel">
-                                        휴대폰번호 수정
-                                    </h5>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="input-control">
-                                        <div style="display: flex">
-                                            <input class="signup_inputs user_border" id="phone" type="text" name="phone" placeholder="휴대폰번호를 입력해 주세요." title="전화번호 입력"/>
-                                            <input style="width: 185px" type="button" id="phoneChk" class="w-btn" value="인증번호 받기"/>
-                                        </div>
-                                        <div class="error"></div>
+            <div class="container" style="width:850px;">
+                <div style="width:600px; height:600px; margin-left:150px" class="image main" data-position="center">
+                    <!-- 여기에 이미지 -->
+                    <a href="/">
+                        <img src="webapp/img/logoWhite.PNG"/>
+                    </a>
+                </div>
+                <!--닉네임-->
+                <table>
+                    <tr>
+                        <th>
+                            <label for="user_nickname">닉네임</label>
+                        </th>
+                        <td>
+                            <input type="text" id="user_nickname" name="user_nickname"
+                                   th:value="${user.user_nickname}"/>
+                            <div class="error"></div>
+                        </td>
+                    </tr>
+                    <!--이메일-->
+                    <tr>
+                        <th>
+                            <label for="user_email">이메일</label>
+                        </th>
+                        <td>
+                            <input type="email" id="user_email" name="user_email" th:value="${user.user_email}"
+                                   readonly/>
+                            <div class="error"></div>
+                        </td>
+                    </tr>
+                    <!--비밀번호-->
+                    <tr>
+                        <th>
+                            <label for="user_password">비밀번호</label>
+                        </th>
+                        <td>
+                            <input type="password" id="user_password" name="user_password"/>
+                            <div class="error"></div>
+                        </td>
+                    </tr>
+                    <!--비밀번호 확인-->
+                    <tr>
+                        <th>
+                            <label for="user_password2">비밀번호 확인</label>
+                        </th>
+                        <td>
+                            <input type="password" id="user_password2"/>
+                            <div class="error"></div>
+                        </td>
+                    </tr>
+                    <!--이름-->
+                    <tr>
+                        <th>
+                            <label for="user_name">이름</label>
+                        </th>
+                        <td>
+                            <input type="text" id="user_name" name="user_name" th:value="${user.user_name}"/>
+                            <div class="error"></div>
+                        </td>
+                    </tr>
+                    <!--생년월일-->
+                    <tr>
+                        <th>
+                            <label for="user_birthday">생년월일</label>
+                        </th>
+                        <td>
+                            <input type="text" id="user_birthday" name="user_birthday"
+                                   th:value="${user.user_birthday}" readonly/>
+                            <div class="error"></div>
+                        </td>
+                    </tr>
+                    <!--휴대폰번호-->
+                    <tr>
+                        <th>
+                            <label for="phone">휴대폰 번호</label>
+                        </th>
+                        <td>
+                            <div>
+                                <input class="signup_inputs user_border" type="text"
+                                       name="user_phone_number" id="originphone"
+                                       title="전화번호 입력" style="" th:value="${user.user_phone_number}" readonly/>
+                                <input type="button" id="phoneBtn" class="w-btn" value="휴대폰번호변경"/>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <!-- 휴대폰 모달창-->
+                <div class="modal fade" id="phoneModal" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="phoneModalLabel">
+                                    휴대폰번호 수정
+                                </h5>
+                            </div>
+                            <div class="modal-body">
+                                <div class="input-control">
+                                    <div style="display: flex">
+                                        <input class="signup_inputs user_border" id="phone" type="text" name="phone"
+                                               placeholder="휴대폰번호를 입력해 주세요." title="전화번호 입력"/>
+                                        <input style="width: 185px" type="button" id="phoneChk" class="w-btn"
+                                               value="인증번호 받기"/>
                                     </div>
-                                    <div class="input-control">
-                                        <div style="display: flex">
-                                            <input class="signup_inputs user_border" id="phone2" type="text" name="phone2" placeholder="인증번호를 입력해 주세요." title="인증번호 입력" disabled/>
-                                            <input style="width: 185px" type="button" id="phoneChk2" class="w-btn" value="본인인증"/>
-                                        </div>
-                                        <div class="error"></div>
+                                    <div class="error"></div>
+                                </div>
+                                <div class="input-control">
+                                    <div style="display: flex">
+                                        <input class="signup_inputs user_border" id="phone2" type="text"
+                                               name="phone2" placeholder="인증번호를 입력해 주세요." title="인증번호 입력" disabled/>
+                                        <input style="width: 185px" type="button" id="phoneChk2" class="w-btn"
+                                               value="본인인증"/>
+                                    </div>
+                                    <div class="error"></div>
                                 </div>
                                 <div class="modal-footer">
-                                    <a class="w-btn phonemodibtn" style="text-align: center" id="modalY2" href="/modifyForm">수정</a>
+                                    <a class="w-btn phonemodibtn" style="text-align: center" id="modalY2"
+                                       href="/modifyForm">수정</a>
                                     <button class="w-btn" type="button" data-bs-dismiss="modal">취소</button>
                                 </div>
                             </div>
@@ -137,48 +143,51 @@
 
                         </div>
                     </div>
-                    </div>
                 </div>
-            </section>
-            <!-- two -->
-            <section id="two">
-                <!--선호하는 음악 장르-->
-                <div class="container">
-                    <table>
-                        <tr>
-                            <th>
-                                선호하는 음악 장르
-                            </th>
-                            <td>
-                                <input type="checkbox" name="user_genre" value="발라드" th:checked="${user.user_genre.contains('발라드')}">발라드
-                                <input type="checkbox" name="user_genre" value="발라드" th:checked="${user.user_genre.contains('힙합')}">힙합
-                                <input type="checkbox" name="user_genre" value="발라드" th:checked="${user.user_genre.contains('댄스')}">댄스
-                                <input type="checkbox" name="user_genre" value="팝송" th:checked="${user.user_genre.contains('R&B')}">R&B
-                                <input type="checkbox" name="user_genre" value="트로트" th:checked="${user.user_genre.contains('인디')}">인디
-                                <input type="checkbox" name="user_genre" value="댄스" th:checked="${user.user_genre.contains('일레트로닉')}">일레트로닉
-                                <input type="checkbox" name="user_genre" value="힙합" th:checked="${user.user_genre.contains('트로트')}">트로트
-                            </td>
-                        </tr>
-                        <!--프로필 사진-->
-                        <tr>
-                            <th>
-                                <label for="user_profile">프로필</label>
-                            </th>
-                            <td>
-                                <div align="center" class="filebox" style="padding:10px">
-                                    <label id="filebtn" for="user_profile">사진 등록</label>
-                                    <input id="user_profile" name="user_image" type="file"
-                                           style="display: none" accept=".gif, .jpg, .png" onchange="readURL(this);">
-                                </div>
-                                <!--이미지 미리보기-->
-                                <img id="preview" width="200" height="200" th:src="|webapp/img/profile/${user.user_image}|"/>
-                            </td>
-                        </tr>
-                    </table>
-                    <input type="button" class="w-btn" value="수정" style="width : 100%" id="modi" onclick="modify()">
-                </div>
-            </section>
-            </section>
+            </div>
+            <!--선호하는 음악 장르-->
+            <div class="container" style="width:850px;">
+                <table>
+                    <tr>
+                        <th>
+                            선호하는 음악 장르
+                        </th>
+                        <td>
+                            <input type="checkbox" name="user_genre" value="발라드"
+                                   th:checked="${user.user_genre.contains('발라드')}">발라드
+                            <input type="checkbox" name="user_genre" value="발라드"
+                                   th:checked="${user.user_genre.contains('힙합')}">힙합
+                            <input type="checkbox" name="user_genre" value="발라드"
+                                   th:checked="${user.user_genre.contains('댄스')}">댄스
+                            <input type="checkbox" name="user_genre" value="팝송"
+                                   th:checked="${user.user_genre.contains('R&B')}">R&B
+                            <input type="checkbox" name="user_genre" value="트로트"
+                                   th:checked="${user.user_genre.contains('인디')}">인디
+                            <input type="checkbox" name="user_genre" value="댄스"
+                                   th:checked="${user.user_genre.contains('일레트로닉')}">일레트로닉
+                            <input type="checkbox" name="user_genre" value="힙합"
+                                   th:checked="${user.user_genre.contains('트로트')}">트로트
+                        </td>
+                    </tr>
+                    <!--프로필 사진-->
+                    <tr>
+                        <th>
+                            <label for="user_profile">프로필</label>
+                        </th>
+                        <td>
+                            <div align="center" class="filebox" style="padding:10px">
+                                <label id="filebtn" for="user_profile">사진 등록</label>
+                                <input id="user_profile" name="user_image" type="file"
+                                       style="display: none" accept=".gif, .jpg, .png" onchange="readURL(this);">
+                            </div>
+                            <!--이미지 미리보기-->
+                            <img id="preview" width="200" height="200"
+                                 th:src="|webapp/img/profile/${user.user_image}|"/>
+                        </td>
+                    </tr>
+                </table>
+                <input type="button" class="w-btn" value="수정" style="width : 100%" id="modi" onclick="modify()">
+            </div>
         </div>
     </form>
 </div>
@@ -201,6 +210,17 @@ function readURL(input) {
     document.getElementById('preview').src = "img/basic.png";
   }
 }
+
+
+
+
+
+
+
+
+
+
+
 </script>
 </body>
 </html>
