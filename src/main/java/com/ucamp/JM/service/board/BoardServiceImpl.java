@@ -103,4 +103,9 @@ public class BoardServiceImpl implements BoardService {
     public void deleteReportComment(int dashboard_No, String contents) {
         boardDAO.deleteReportComment(dashboard_No, contents);
     }
+
+    @Override
+    public void deleteCommentAll2(int dashboard_No) {
+        boardDAO.deleteCommentAll2(dashboard_No);
+    }
 }
