@@ -38,4 +38,10 @@
         delete from playlist where music_number = #{music_number}
     </delete>
 
+
+<!--    음악 중복 제거-->
+    <select id="selectSameMusic" resultType="Music" >
+        select music_number from playlist where list_name = '${list_name}' AND user_number = ${user_number} AND music_number = ${music_number}
+    </select>
+
 </mapper>
