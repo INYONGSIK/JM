@@ -21,7 +21,18 @@ public class MusicServiceImpl implements MusicService {
     @Override
     public ArrayList<Music> SearchByKeyword(String keyword, String genre) {
         return musicDAO.SearchByKeyword(keyword, genre);
+    }
 
+    //현호 = 음악 상세 페이지 가져오기
+    @Override
+    public Music showMusicDetails(int music_number) {
+        return musicDAO.showMusicDetails(music_number);
+    }
+
+    //현호 : 좋아요 누를 시 뮤직테이블 like 1증가
+    @Override
+    public void likeIncrement(int music_number) {
+        musicDAO.likeIncrement(music_number);
     }
 
     @Override
