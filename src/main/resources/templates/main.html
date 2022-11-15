@@ -26,8 +26,14 @@
         </th:block>
 
         <th:block th:if="${session.user_email}">
-            <a href="/modifyinformationform">회원정보 수정</a>
-            <a href="/logout">로그아웃</a>
+            <button type="button" class="btn btn-outline-light btn-sm" onclick="location.href='/modifyinformationform'">
+                회원정보 수정
+            </button>
+            <button type="button" class="btn btn-outline-light btn-sm" onclick="location.href='/logout'">로그아웃
+            </button>
+
+            <!--            <a href="/modifyinformationform">회원정보 수정</a>-->
+            <!--            <a href="/logout">로그아웃</a>-->
         </th:block>
     </div>
     <!--현호 ==> 검색창-->
