@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>곡 상세정보</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" href="/webapp/css/bootstrapLux.css"/>
+
+</head>
+<body>
+
+<th:block th:replace="~{navHeader :: navi}"></th:block>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card border-primary mb-3" style="margin:20px;padding: 20px 30px;">
+            <div style="display:inline-block">
+                <h1 style=" float:left;">[[${details.music_title}]] 상세정보</h1>
+                <input id="follower" type="hidden" th:value="${session.user_email}">
+                <button type="button" class="btn btn-outline-primary" id="follow_button"
+                        th:value="${details.music_singer}"
+                        style="max-width: 10rem; float:right;"> 팔로우
+                </button>
+            </div>
+            <div class="card-body">
+                <img th:src="${details.music_image}" alt="음악사진">
+                <br>
+                [[${details.music_singer}]]<br>
+                [[${details.music_title}]]<br>
+                [[${details.music_genre}]]<br>
+                [[${details.music_release}]]<br>
+                <audio controls>
+                    <source th:src="${details.music_file}">
+                </audio>
+                <br>
+                <a th:href="|/likeIncrement/${details.music_number}|">좋아요</a> [[${details.music_like}]]
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card border-primary mb-3" style="margin:20px;padding: 20px 30px;">
+            <div style="display:inline-block">
+                <h1 style="float:left;">가사</h1>
+            </div>
+            <div class="card-body">
+                <br>
+                <p th:if=${details.music_lyrics}>[[${details.music_lyrics}]]</p>
+                <br>
+                <br>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<th:block th:replace="header :: header">
+</th:block>
+<script>
+$("#follow_button").click(function(){
+             if(socket){
+             console.log("들어옴");
+             var follower = $("#follower").val();
+             var followee = $("#follow_button").val();
+             console.log("follower:"+follower+",followee:"+followee);
+            // (reply, 댓글작성자,게시글작성자,글번호)
+            socket.send("follow," + follower + "," + followee);
+        }
+    })
+
+
+</script>
+</html>
