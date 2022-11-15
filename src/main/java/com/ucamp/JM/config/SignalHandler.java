@@ -25,7 +25,6 @@ public class SignalHandler extends TextWebSocketHandler {
     private final HttpSession httpSession;
     private final AlarmService alarmService;
     private final UserDAO userDAO;
-
     // 테스트용 : 전체유저에게 매세지보낼 리스트 => 접속되어있는 모든 세션을 담음
     List<WebSocketSession> sessions = new ArrayList<>();
     // 각 사용자에 맞는 값을얻기위해 map 을 사용
@@ -102,8 +101,12 @@ public class SignalHandler extends TextWebSocketHandler {
                 WebSocketSession replyWriterSession = userSessions.get(replyWriter);
                 WebSocketSession boardWriterSession = userSessions.get(boardWriter);
                 if (cmd.equals("reply") && boardWriterSession != null) {
-                    TextMessage tmpMsg = new TextMessage(replyWriter + "님이 " + dashboardNo + "번 게시물에 " + "댓글을 달았습니다." +
-                            "<div id=\"socketAlert\"></div><button id=\"deleteAlert\">삭제</button>");
+                    TextMessage tmpMsg = new TextMessage(replyWriter + "님이 "
+                            + "<a href=/readboard/" + dashboardNo + ">" + dashboardNo
+                            + "</a>번 게시물에 "
+                            + "댓글을 달았습니다."
+//                            + "<button id=deleteAlert" + i + ">삭제</button>" + "<br><br>"
+                    );
                     boardWriterSession.sendMessage(tmpMsg);
                 }
             }
