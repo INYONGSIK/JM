@@ -28,8 +28,15 @@
 
                  ws.onmessage = function (event) {
                      console.log("ReceiveMessage : " + event.data);
-                    };
+                     let socketAlert  =  $("#socketAlert");
+                     socketAlert.append(event.data);
 
+
+
+                    $("#deleteAlert").click(function(){
+                        socketAlert.html("");
+                    })
+                }
                 ws.onclose = function (event) {
                   console.log("connection closed");
 
@@ -38,6 +45,9 @@
                   console.log("error : " , err);
                 };
               };
+
+
+
 
 
 
