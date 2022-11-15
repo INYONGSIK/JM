@@ -23,14 +23,14 @@
                 </button>
             </div>
             <div class="card-body">
-                <img th:src="${details.music_image}" alt="음악사진">
+                <img th:src="|/webapp/img/musicimage/${details.music_image}|" alt="음악사진">
                 <br>
                 [[${details.music_singer}]]<br>
                 [[${details.music_title}]]<br>
                 [[${details.music_genre}]]<br>
                 [[${details.music_release}]]<br>
                 <audio controls>
-                    <source th:src="${details.music_file}">
+                    <source th:src="|/webapp/music/${details.music_file}|">
                 </audio>
                 <br>
                 <a th:href="|/likeIncrement/${details.music_number}|">좋아요</a> [[${details.music_like}]]
@@ -65,6 +65,8 @@ $("#follow_button").click(function(){
             socket.send("follow," + follower + "," + followee);
         }
     })
+
+
 
 
 </script>
