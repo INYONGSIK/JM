@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>회원 관리</title>
+    <title>신고된 회원 목록</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
     <link rel="stylesheet" href="/webapp/css/bootstrapLux.css"/>
@@ -37,9 +37,6 @@
         <td th:text="${user.user_phone_number}"></td>
         <td th:text="${user.user_birthday}"></td>
         <td th:text="${user.report_count}"></td>
-        <td>
-            <a th:href="|/admin/deleteUser/${user.user_number}|">회원 탈퇴</a>
-        </td>
     </tr>
     </tbody>
 </table>
