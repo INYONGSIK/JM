@@ -15,4 +15,7 @@ public interface AlarmDAO {
     void deleteFollow(@Param("follower") int follower, @Param("followee") int followee);
 
     void insertFollow(@Param("follower") int follower, @Param("followee") int followee);
+
+    int following(@Param("follower") int follower, @Param("followee") int followee);
+
 }

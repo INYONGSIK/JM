@@ -115,4 +115,3 @@ public class PlaylistController {
         return "redirect:/listP/" + user_number + "/" + encodedParam;
     }
 }
-

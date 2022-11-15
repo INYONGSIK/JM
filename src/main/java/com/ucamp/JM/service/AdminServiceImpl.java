@@ -45,4 +45,19 @@ public class AdminServiceImpl implements AdminService {
     public ArrayList<Report> selectReportByType(int report_type) {
         return adminDAO.selectReportByType(report_type);
     }
+
+    @Override
+    public Boolean reportMusic(int user_number, String contents, int music_number) {
+        return adminDAO.reportMusic(user_number, contents, music_number);
+    }
+
+    @Override
+    public void deleteMusic(int music_number) {
+        adminDAO.deleteMusic(music_number);
+    }
+
+    @Override
+    public void deleteReportMusic(int music_number) {
+        adminDAO.deleteReportMusic(music_number);
+    }
 }

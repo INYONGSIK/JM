@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -93,6 +94,7 @@ public class MusicController {
         return result;
     }
 
+
     //현호 == 음악 검색시 검색창이 비어있으면 전체리스트 출시일 기준으로 출력,
     //      검색 시 키워드 포함한 모든 컬럼과 대조해서 값 가져오기
     @RequestMapping("/musicSearch")
@@ -102,7 +104,15 @@ public class MusicController {
     }
 
     @RequestMapping("/musicDetails/{music_number}")
-    public String read(Model model, @PathVariable int music_number) {
+    public String read(HttpServletRequest request, Model model, @PathVariable int music_number) {
+        String user_email = (String) request.getSession().getAttribute("user_email");
+
+        if (user_email != null) {
+            if (user_email.equals("admin@aaa.com")) {
+                model.addAttribute("admin", "admin@aaa.com");
+            }
+        }
+
         model.addAttribute("details", musicService.showMusicDetails(music_number));
         return "musicDetails";
     }

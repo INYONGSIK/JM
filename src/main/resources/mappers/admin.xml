@@ -19,4 +19,18 @@
         where report_type = #{report_type}
     </select>
 
+    <insert id="reportMusic" parameterType="Map">
+        insert into report
+        (user_number, report_ID,report_type,contents,report_count,music_number)
+        values (${user_number},report_seq.nextval,2,'${contents}',0,${music_number})
+    </insert>
+
+    <delete id="deleteMusic">
+        delete from music where music_number=${music_number}
+    </delete>
+
+    <delete id="deleteReportMusic">
+        delete from report where music_number=${music_number}
+    </delete>
+
 </mapper>

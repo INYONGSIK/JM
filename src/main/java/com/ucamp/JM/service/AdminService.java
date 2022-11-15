@@ -28,5 +28,10 @@ public interface AdminService {
     //admin 신고관리 페이지에서 받는 댓글(report_type=1), 음원(report_type=2)관련 정보
     ArrayList<Report> selectReportByType(int report_type);
 
+    Boolean reportMusic(int user_number, String contents, int music_number);
+
+    void deleteMusic(int music_number);
+
+    void deleteReportMusic(int music_number);
 
 }

@@ -201,12 +201,11 @@ public class BoardController {
         int user_number = boardService.getUserNumByNickname(writer).getUser_number();
 
         if (boardService.selectOk(user_number, contents) != null) {
-            System.out.println("777777777");
-            System.out.println(dashboard_No + contents);
+
 
             boardService.deleteReportComment(dashboard_No, contents);
 
-            System.out.println("8888888");
+            ;
         }
         boardService.deleteComment(cno, dashboard_No);
 
@@ -220,8 +219,6 @@ public class BoardController {
 
         int user_number = boardService.getUserNumByNickname(writer).getUser_number();
 
-        System.out.println("wwwwwwww" + dashboard_No);
-        System.out.println("3333333" + user_number + writer);
         if (boardService.selectOk(user_number, contents) != null) {
 
             boardService.updateReport_count(user_number, contents);

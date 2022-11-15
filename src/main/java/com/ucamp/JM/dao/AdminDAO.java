@@ -5,6 +5,7 @@ import com.ucamp.JM.dto.Report;
 import com.ucamp.JM.dto.User;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.ArrayList;
@@ -30,5 +31,11 @@ public interface AdminDAO {
 
     ArrayList<Report> selectReportByType(int report_type);
 
+    Boolean reportMusic(@Param("user_number") int user_number, @Param("contents") String contents, @Param("music_number") int music_number);
+
+
+    void deleteMusic(int music_number);
+
+    void deleteReportMusic(@Param("music_number") int music_number);
 
 }
