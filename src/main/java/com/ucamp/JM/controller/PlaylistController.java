@@ -1,3 +1,4 @@
+
 package com.ucamp.JM.controller;
 
 import com.ucamp.JM.dto.Music;
@@ -14,7 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.io.Writer;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
@@ -57,9 +61,9 @@ public class PlaylistController {
     @RequestMapping("/addP/{list_name}")
     public String addP(HttpServletRequest request, Model model, @PathVariable String list_name) {
         String user_email = (String) request.getSession().getAttribute("user_email");
-        System.out.println(user_email);
-
-        System.out.println(playlistService.PgetUserNumByEmail(user_email).getUser_number());
+//        System.out.println(user_email);
+//
+//        System.out.println(playlistService.PgetUserNumByEmail(user_email).getUser_number());
         int userNumber = playlistService.PgetUserNumByEmail(user_email).getUser_number();
 //        List<String> list = playlistService.PgetListNameByUserNum(userNumber);
 ////        System.out.println(list.get(0));
@@ -75,27 +79,40 @@ public class PlaylistController {
     //플레이리스트에 노래를 넣습니다
     //http://localhost:8090/add_P?user_number=3&list_name=kkk&music_number=1
     @RequestMapping("add_P")
-    public String add_P(Playlist playlist, @RequestParam int user_number, @RequestParam String list_name, @RequestParam int music_number) {
-        playlistService.insertPlaylist(playlist);
-        String encodedParam = null;
-        try {
+    public String add_P(HttpServletResponse response, Playlist playlist, @RequestParam int user_number, @RequestParam String list_name, @RequestParam int music_number) throws IOException {
+
+
+        if(playlistService.selectSameMusic(user_number, list_name, music_number) == null){
+            playlistService.insertPlaylist(playlist);
+            String encodedParam = null;
+                encodedParam = URLEncoder.encode(list_name, "UTF-8");
+
+            return "redirect:/listP/" + user_number + "/" + encodedParam;
+        } else {
+            String encodedParam = null;
             encodedParam = URLEncoder.encode(list_name, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
+            Writer out = response.getWriter();
+            String message = URLEncoder.encode("같은 노래를 넣을 수 없습니다..", "UTF-8");
+            response.setContentType("text/html; charset=UTF-8");
+            out.write("<script type=\"text/javascript\">alert(decodeURIComponent('" + message + "'.replace(/\\+/g, '%20'))); location.href='/listP/" + user_number + "/" + encodedParam+ "' </script>");
+            out.flush();
+            response.flushBuffer();
+            out.close();
+            return "playlist/PList";
         }
 
-//        System.out.println("hi"+user_number);
-//        return "playlist/PList";
-        return "redirect:/listP/" + user_number + "/" + encodedParam;
+
     }
 
 
     //플레이리스트에 음악을 삭제합니다
     @RequestMapping("/deletemusic/{music_number}/{list_name}/{user_number}")
-    public String deletemusic(@PathVariable int user_number, @PathVariable String list_name, @PathVariable int music_number) {
+    public String deletemusic(@PathVariable int user_number, @PathVariable String list_name, @PathVariable int music_number) throws UnsupportedEncodingException {
 
         playlistService.deletePlaylistMusic(music_number);
-        return "redirect:/listP/" + user_number + "/" + list_name;
+        String encodedParam = null;
+        encodedParam = URLEncoder.encode(list_name, "UTF-8");
+        return "redirect:/listP/" + user_number + "/" + encodedParam;
     }
-
 }
+

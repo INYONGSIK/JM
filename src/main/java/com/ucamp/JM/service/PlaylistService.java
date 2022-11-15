@@ -25,4 +25,6 @@ public interface PlaylistService {
 
     //플레이리스트에 뮤직 삭제
     void deletePlaylistMusic(int music_number);
+
+    Music selectSameMusic(int user_number, String list_name, int music_number);
 }
