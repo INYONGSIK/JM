@@ -25,5 +25,7 @@ public interface Playlist_ManageDAO {
     //플레이리스트manage 삭제
     void deletePlaylistManageByList_name(String list_name);
 
+    Playlist_Manage samePlaylistNameManage(String list_name, int user_number);
+
 
 }

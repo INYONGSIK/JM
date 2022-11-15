@@ -34,6 +34,11 @@
         delete from playlist_manage where list_name = #{list_name}
     </delete>
 
+<!--    플레이리스트 중복제거-->
+    <select id="samePlaylistNameManage" resultType="Playlist_Manage">
+        select list_name from playlist_manage where list_name = '${list_name}' and user_number = ${user_number}
+    </select>
+
 </mapper>
 
         <!--        insert into playlist_manage (list_name, user_number)-->

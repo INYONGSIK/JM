@@ -1,4 +1,3 @@
-
 package com.ucamp.JM.controller;
 
 import com.ucamp.JM.dto.Music;
@@ -82,10 +81,10 @@ public class PlaylistController {
     public String add_P(HttpServletResponse response, Playlist playlist, @RequestParam int user_number, @RequestParam String list_name, @RequestParam int music_number) throws IOException {
 
 
-        if(playlistService.selectSameMusic(user_number, list_name, music_number) == null){
+        if (playlistService.selectSameMusic(user_number, list_name, music_number) == null) {
             playlistService.insertPlaylist(playlist);
             String encodedParam = null;
-                encodedParam = URLEncoder.encode(list_name, "UTF-8");
+            encodedParam = URLEncoder.encode(list_name, "UTF-8");
 
             return "redirect:/listP/" + user_number + "/" + encodedParam;
         } else {
@@ -94,7 +93,7 @@ public class PlaylistController {
             Writer out = response.getWriter();
             String message = URLEncoder.encode("같은 노래를 넣을 수 없습니다..", "UTF-8");
             response.setContentType("text/html; charset=UTF-8");
-            out.write("<script type=\"text/javascript\">alert(decodeURIComponent('" + message + "'.replace(/\\+/g, '%20'))); location.href='/listP/" + user_number + "/" + encodedParam+ "' </script>");
+            out.write("<script type=\"text/javascript\">alert(decodeURIComponent('" + message + "'.replace(/\\+/g, '%20'))); location.href='/listP/" + user_number + "/" + encodedParam + "' </script>");
             out.flush();
             response.flushBuffer();
             out.close();

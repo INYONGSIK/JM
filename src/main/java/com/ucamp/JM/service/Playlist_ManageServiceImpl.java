@@ -46,4 +46,9 @@ public class Playlist_ManageServiceImpl implements Playlist_ManageService{
     public void deletePlaylistManageByList_name(String list_name) {
         playlist_manageDAO.deletePlaylistManageByList_name(list_name);
     }
+
+    @Override
+    public Playlist_Manage samePlaylistNameManage(String list_name, int user_number) {
+        return playlist_manageDAO.samePlaylistNameManage(list_name, user_number);
+    }
 }

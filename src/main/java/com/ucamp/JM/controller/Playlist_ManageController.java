@@ -11,6 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.io.Writer;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 @Controller
@@ -43,10 +48,24 @@ public class Playlist_ManageController {
 
     //플레이리스트 생성
     @RequestMapping("/add_PM")
-    public String add_PM(@RequestParam String list_name,@RequestParam int user_number){
+    public String add_PM(HttpServletResponse response, @RequestParam String list_name, @RequestParam int user_number) throws IOException {
 
-        playlist_manageService.insertPlaylist_Manage(list_name, user_number);
-        return "redirect:/listPM";
+        if (playlist_manageService.samePlaylistNameManage(list_name, user_number) == null){
+            playlist_manageService.insertPlaylist_Manage(list_name, user_number);
+            return "redirect:/listPM";
+        } else {
+            String encodedParam = null;
+            encodedParam = URLEncoder.encode(list_name, "UTF-8");
+            Writer out = response.getWriter();
+            String message = URLEncoder.encode("같은 이름의 플레이리스트는 만들 수 없습니다!", "UTF-8");
+            response.setContentType("text/html, charset=UTF-8");
+            out.write("<script type=\"text/javascript\">alert(decodeURIComponent('" + message + "'.replace(/\\+/g, '%20'))); location.href='/listPM' </script>");
+            out.flush();
+            response.flushBuffer();
+            out.close();
+            return "playlist/PMList";
+        }
+
     }
 
     //플레이리스트를 삭제합니다
