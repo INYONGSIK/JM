@@ -1,3 +1,4 @@
+
 package com.ucamp.JM.controller;
 
 import com.ucamp.JM.dto.Music;
@@ -79,15 +80,13 @@ public class PlaylistController {
     //http://localhost:8090/add_P?user_number=3&list_name=kkk&music_number=1
     @RequestMapping("add_P")
     public String add_P(HttpServletResponse response, Playlist playlist, @RequestParam int user_number, @RequestParam String list_name, @RequestParam int music_number) throws IOException {
-        System.out.println(user_number + " " + list_name + "" + music_number);
+
 
         if(playlistService.selectSameMusic(user_number, list_name, music_number) == null){
             playlistService.insertPlaylist(playlist);
             String encodedParam = null;
                 encodedParam = URLEncoder.encode(list_name, "UTF-8");
 
-//        System.out.println("hi"+user_number);
-//        return "playlist/PList";
             return "redirect:/listP/" + user_number + "/" + encodedParam;
         } else {
             String encodedParam = null;
@@ -115,5 +114,5 @@ public class PlaylistController {
         encodedParam = URLEncoder.encode(list_name, "UTF-8");
         return "redirect:/listP/" + user_number + "/" + encodedParam;
     }
-
 }
+

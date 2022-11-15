@@ -3,55 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" href="webapp/css/register.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
+<div id="wrapper">
+    <form action="/add" enctype="multipart/form-data" method="post">
+        <div id="main">
+            <div class="container">
+                <div class="image main" data-position="center">
+                    <!-- 여기에 이미지 -->
+                    <img src="#" alt=""/>
+                </div>
+                <table>
+                    <tr>
+                        <td>제목</td>
+                        <td><input type="text" name="music_title"></td>
+                    </tr>
+                    <tr>
+                        <td>가수</td>
+                        <td><input type="text" name="music_singer" th:value="${music_singer}" readonly></td>
+                    </tr>
+                    <tr>
+                        <td>장르</td>
+                        <td>
+                            <select name="music_genre">
+                                <option value="힙합">힙합</option>
+                                <option value="발라드">발라드</option>
+                                <option value="댄스">댄스</option>
+                                <option value="R&B">R&B</option>
+                                <option value="인디">인디</option>
+                                <option value="일렉트로닉">일렉트로닉</option>
+                                <option value="트로트">트로트</option>
+                                <option value="기타">기타</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>출시일</td>
+                        <td><input type="date" name="music_release"></td>
+                    </tr>
+                    <tr>
+                        <td>이미지</td>
+                        <td><input type="file" name="music_image" accept=".gif,.jpg,.png"></td>
+                    </tr>
+                    <tr>
+                        <td>음원파일</td>
+                        <td><input type="file" name="music_file"></td>
+                    </tr>
+                    <tr>
+                        <td>가사</td>
+                        <td><input type="text" name="music_lyrics"></td>
+                    </tr>
 
-<form action="/add" enctype="multipart/form-data" method="post">
-    <table>
-        <tr>
-            <td>제목</td>
-            <td><input type="text" name="music_title"></td>
-        </tr>
-        <tr>
-            <td>가수</td>
-            <td><input type="text" name="music_singer" th:value="${music_singer}" readonly></td>
-        </tr>
-        <tr>
-            <td>장르</td>
-            <td>
-                <select name="music_genre">
-                    <option value="힙합">힙합</option>
-                    <option value="발라드">발라드</option>
-                    <option value="댄스">댄스</option>
-                    <option value="R&B">R&B</option>
-                    <option value="인디">인디</option>
-                    <option value="일렉트로닉">일렉트로닉</option>
-                    <option value="트로트">트로트</option>
-                    <option value="기타">기타</option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td>출시일</td>
-            <td><input type="date" name="music_release"></td>
-        </tr>
-        <tr>
-            <td>이미지</td>
-            <td><input type="file" name="music_image" accept=".gif,.jpg,.png"></td>
-        </tr>
-        <tr>
-            <td>음원파일</td>
-            <td><input type="file" name="music_file"></td>
-        </tr>
-        <tr>
-            <td>가사</td>
-            <td><input type="text" name="music_lyrics"></td>
-        </tr>
-
-        <tr>
-            <td><input type="submit" value="추가"/></td>
-        </tr>
-    </table>
-</form>
+                    <tr>
+                        <td></td>
+                        <td><input type="submit" value="추가" style="width:200px"/></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </form>
+</div>
 </body>
 </html>

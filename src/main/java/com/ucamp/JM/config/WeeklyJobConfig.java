@@ -20,6 +20,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 import javax.sql.DataSource;
+import java.util.List;
 
 
 @Configuration
@@ -37,7 +38,7 @@ public class WeeklyJobConfig {
 
     @Bean
     public Job weeklyJob() {
-        return jobBuilderFactory.get("job1")
+        return jobBuilderFactory.get("weeklyJob")
                 .incrementer(new RunIdIncrementer())
                 .start(insertWeeklyMusicStep())
                 .build();
@@ -68,7 +69,11 @@ public class WeeklyJobConfig {
     @StepScope
     @Bean
     public ItemWriter<Music> insertWeeklyMusicWriter() {
-        return items -> items.forEach(musicService::insertWeekMusic);
+        return new ItemWriter<Music>() {
+            @Override
+            public void write(List<? extends Music> items) throws Exception {
+                items.forEach(musicService::insertWeekMusic);
+            }
+        };
     }
-
 }

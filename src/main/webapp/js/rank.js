@@ -1,4 +1,4 @@
-let list = null;
+
      $(document).ready(function() {
         console.log("ajax");
             $.ajax({
@@ -9,7 +9,7 @@ let list = null;
                     genre:"전체"
                 },
                 success:function(data){
-                    list=data;
+                    var list=data;
                     console.log(list)
                     htmlSelectfunc(list)
 

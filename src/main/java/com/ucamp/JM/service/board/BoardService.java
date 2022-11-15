@@ -59,4 +59,7 @@ public interface BoardService {
 
 
     void deleteReportComment(int dashboard_No, String contents);
+
+    void deleteCommentAll2(int dashboard_No);
 }
+

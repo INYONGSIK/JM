@@ -13,6 +13,9 @@ public interface UserDAO {
     // 용식 : 닉네임으로 유저 정보 가져오기
     User getUserInfoByNickname(String user_nickname);
 
+    // 세영 : 이름으로 유저 정보 가져오기
+    User getUserInfoByUsername(String user_name);
+
     // 용식: 회원가입 유저 정보 insert
     void insertUser(User user) throws Exception;
 

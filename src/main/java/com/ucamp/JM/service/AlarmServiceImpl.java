@@ -23,7 +23,12 @@ public class AlarmServiceImpl implements AlarmService {
     }
 
     @Override
-    public void deleteFollowee(int follower, int followee) {
-        alarmDAO.deleteFollowee(follower, followee);
+    public void deleteFollow(int follower, int followee) {
+        alarmDAO.deleteFollow(follower, followee);
+    }
+
+    @Override
+    public void insertFollow(int follower, int followee) {
+        alarmDAO.insertFollow(follower, followee);
     }
 }

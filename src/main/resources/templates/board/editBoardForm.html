@@ -17,55 +17,56 @@
 	    }
 		return true
 	}
-</script>
+
+    </script>
 
 </head>
+<link rel="stylesheet" href="/webapp/css/bootstrapLux.css"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+
 <body>
 
 <div>
-    <label>게시글 수정하기</label>
+    <legend>게시글 수정하기</legend>
 </div>
 
-<br><br>
+<br><br><br><br><br><br>
 
 <form action="/editBoard" name="f" onsubmit="return check()">
     <input type="hidden" th:value="${dashboard_No}" name="dashboard_No">
     <div>
         <div>
-            <label>글쓴이</label>
+            <label class="col-sm-2 col-form-label">글쓴이</label>
+            <input class="form-control" id="disabledInput" type="text" th:placeholder="${dashboard_user}" disabled="">
+        </div>
+        <br>
+
+        <div class="form-group">
+
+            <label class="form-label mt-4">제 목</label>
+
             <div>
-                [[${dashboard_user}]]
+                <input type="text" class="form-control" th:value="${dashboard_title}" name="dashboard_title">
             </div>
         </div>
         <br>
 
-        <div>
-            <div>
-                <label>제 목</label>
-            </div>
-            <div>
-                <input type="text" th:value="${dashboard_title}" name="dashboard_title">
+        <div class="form-group">
 
-            </div>
-        </div>
-        <br>
+            <label class="form-label mt-4">내 용</label>
+            <textarea class="form-control" th:value="${dashboard_content}" name="dashboard_content" rows="3" cols="50">[[${dashboard_content}]]</textarea>
 
-        <div>
-            <div>
-                <label>내 용</label>
-            </div>
-            <div style="height:200px">
-                <input type="text" th:value="${dashboard_content}" name="dashboard_content">
-            </div>
         </div>
-        <br>
+
+        <br><br>
 
         <div>
 
-            <input type="submit" value="수정완료">
-            <input type="reset" value="초기화">
-            <input type="button" value="돌아가기" onclick="window.location='/boardList'">
+            <button type="submit" class="btn btn-outline-primary" value="수정완료">수정완료</button>
+            <button type="reset" class="btn btn-outline-primary" value="초기화">초기화</button>
+            <button type="button" class="btn btn-outline-primary" value="돌아가기" onclick="window.location='/boardList'">돌아가기</button>
         </div>
+    </div>
 </form>
 <br><br>
 

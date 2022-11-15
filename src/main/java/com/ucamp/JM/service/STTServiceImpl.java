@@ -43,10 +43,13 @@ public class STTServiceImpl implements STTService {
             inputStream.close();
             BufferedReader br = null;
             int responseCode = conn.getResponseCode();
+            String errorMessage = conn.getResponseMessage();
             if (responseCode == 200) { // 정상 호출   --이현호
                 br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             } else {  // 오류 발생   --이현호
                 System.out.println("error!!!!!!! responseCode= " + responseCode);
+                System.out.println("error!!!!!!! responsemessage= " + errorMessage);
+
                 br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             }
             String inputLine;

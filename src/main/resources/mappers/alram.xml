@@ -10,7 +10,10 @@
     <select id="selectFollowee" resultType="User">
         select * from jmuser where user_number in (select followee from follow where follower = #{follower})
     </select>
-    <select id="deleteFollowee">
+    <select id="deleteFollow">
         delete follow where follower=#{follower} and followee = #{followee}
     </select>
+    <insert id="insertFollow">
+        insert into follow values (follow_seq.nextval,#{follower},#{followee})
+    </insert>
 </mapper>

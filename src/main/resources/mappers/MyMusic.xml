@@ -3,27 +3,45 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ucamp.JM.dao.MyMusicDAO">
+
     <select id="getMusicByMusicSinger" resultType="Music">
         select * from music where music_singer= #{music_singer}
     </select>
-    <select id="myMusicList" parameterType="MyMusic" resultType="MyMusic">
-        select
-        B.list_name,
-        B.playlist_cd,
-        B.music_number,
-        C.music_title,
-        C.music_singer,
-        C.music_genre,
-        C.music_release,
-        C.music_image,
-        C.music_file
-        from playlist B,
-        music C
-        where B.music_number = C.music_number
-        and B.user_number = #{user_number}
-        and B.list_name = #{list_name}
-        order by C.music_number desc
+
+    <select id="myUploadMusicList" parameterType="MyMusic" resultType="MyMusic">
+
+        select * from music where music_singer= #{music_singer}
+
+        <!--select
+         B.list_name,
+         B.playlist_cd,
+         B.music_number,
+         C.music_title,
+         C.music_singer,
+         C.music_genre,
+         C.music_release,
+         C.music_image,
+         C.music_file
+         from playlist B,
+         music C
+         where B.music_number = C.music_number
+         and B.user_number = #{user_number}
+         and B.list_name = #{list_name}
+         order by C.music_number desc -->
     </select>
+
+    <select id="myLikeMusicList" parameterType="MyMusic" resultType="MyMusic">
+        select
+        music_title,
+        music_singer,
+        music_genre,
+        music_image,
+        music_file
+        from music
+        where music_singer= #{music_singer}
+
+    </select>
+
 
     <insert id="insertMyMusic" parameterType="MyMusic">
         insert into Music(music_number,music_title,music_singer,music_genre,music_release,
@@ -46,13 +64,13 @@
     </insert>
 
     <delete id="delMyMusic">
-        delete PLAYLIST_MANAGE
-        where user_number = #{user_number}
-        and list_name = #{list_name}
+        delete from music where music_number= #{music_number}
 
     </delete>
 
     <select id="maxMusicNumber" resultType="int">
         select max(playlist_cd) AS playlist_cd from playlist
     </select>
+
+
 </mapper>

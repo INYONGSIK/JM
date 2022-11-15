@@ -20,6 +20,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 import javax.sql.DataSource;
+import java.util.List;
 
 @Configuration
 @RequiredArgsConstructor
@@ -68,7 +69,11 @@ public class MonthJobConfig {
     @StepScope
     @Bean
     public ItemWriter<AccumulMusic> updateMonthWriter() {
-        return items -> items.forEach(musicService::insertMonthMusic);
+        return new ItemWriter<AccumulMusic>() {
+            @Override
+            public void write(List<? extends AccumulMusic> items) throws Exception {
+                items.forEach(musicService::insertMonthMusic);
+            }
+        };
     }
-
 }

@@ -100,7 +100,11 @@
     </select>
 
     <delete id="deleteReportComment" parameterType="Map">
-        delete from report where dashboard_No=${dashboard_No} and contents=${contents}
+        delete from report where dashboard_No=${dashboard_No} and contents='${contents}'
+    </delete>
+
+    <delete id="deleteCommentAll2">
+        delete from comments where dashboard_No=#{dashboard_No}
     </delete>
 
 

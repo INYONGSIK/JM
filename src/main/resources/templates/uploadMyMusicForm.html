@@ -7,6 +7,7 @@
     <link rel='stylesheet' type='text/css' href='webapp/css/chatt.css'>
 </head>
 <body>
+<th:block th:replace="header :: header"></th:block>
 <div id='chatt'>
     <form action="/uploadMyMusic"></form>
         <input type='text' id='mid' th:value="${session.user_number}">
@@ -23,28 +24,6 @@
 
 var data = {};//전송 데이터(JSON)
 
-var ws ;
-var mid = getId('mid');
-var btnSend = getId('btnSend');
-btnLogin.onclick = function(){
-	 ws = new WebSocket("ws://" + location.host + "/signal");
-     ws.onopen = function () {
-                  console.log("connection opened");
-                 };
-
-      ws.onclose = function (event) {
-                  console.log("connection closed");
-
-                };
-
-	ws.onmessage = function(msg){
-	console.log(msg.data);
-	    console.log(msg.data);
-	    if(msg != null && msg.trim() != ''){
-				$("#div1").append("<p>" + msg + "</p>");
-		}
-	}
-}
 btnSend.onclick = function(){
 	send();
 }
