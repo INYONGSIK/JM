@@ -33,4 +33,11 @@ public class MyMusicServiceImpl implements MyMusicService {
     public ArrayList<Music> getMusicByMusicSinger(String music_singer) {
         return myMusicDAO.getMusicByMusicSinger(music_singer);
     }
+
+    @Override
+    public int maxMusicNumber() {
+        return myMusicDAO.maxMusicNumber();
+    }
+
+
 }

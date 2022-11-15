@@ -26,6 +26,8 @@ public class MusicServiceImpl implements MusicService {
 
     @Override
     public void updateTodayMusic(Music music) {
+
+        log.info(String.valueOf(music.getMusic_like()));
         musicDAO.updateTodayMusic(music);
     }
 
@@ -38,6 +40,10 @@ public class MusicServiceImpl implements MusicService {
 
     @Override
     public void updateAccumulMusic(AccumulMusic music) {
+
+        log.info(String.valueOf(music.getMusic_like()));
+        log.info(String.valueOf(music.getAccumul_music_like()));
+
         musicDAO.updateAccumulMusic(music);
     }
 

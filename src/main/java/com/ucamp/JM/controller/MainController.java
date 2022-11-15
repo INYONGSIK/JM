@@ -1,6 +1,6 @@
 package com.ucamp.JM.controller;
 
-import com.ucamp.JM.config.DailyJobConfig;
+import com.ucamp.JM.config.MonthJobConfig;
 import com.ucamp.JM.dto.Music;
 import com.ucamp.JM.dto.User;
 import com.ucamp.JM.service.AlarmService;
@@ -9,6 +9,7 @@ import com.ucamp.JM.service.main.MainService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.JobParameters;
+import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,11 +33,13 @@ public class MainController {
     JobLauncher jobLauncher;
 
     @Autowired
-    DailyJobConfig job;
+    MonthJobConfig job;
 
     @RequestMapping("/jobLauncher")
     public String handle() throws Exception {
-        jobLauncher.run(job.dailyjob(), new JobParameters());
+        JobParameters jobParameters = new JobParametersBuilder()
+                .addLong("time", System.currentTimeMillis()).toJobParameters();
+        jobLauncher.run(job.updateMonthJob(), jobParameters);
 
         return "redirect:/";
     }

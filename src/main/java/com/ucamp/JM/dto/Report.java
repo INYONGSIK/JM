@@ -20,4 +20,5 @@ public class Report {
     private String report_date;
     private int report_count;
     private String contents;
+    private int dashboard_No;
 }

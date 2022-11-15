@@ -2,11 +2,11 @@ package com.ucamp.JM.controller;
 
 import com.ucamp.JM.dto.Music;
 import com.ucamp.JM.dto.MyMusic;
+import com.ucamp.JM.dto.Playlist;
 import com.ucamp.JM.dto.User;
 import com.ucamp.JM.service.MyMusicService;
+import com.ucamp.JM.service.PlaylistService;
 import com.ucamp.JM.service.UserService;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +30,8 @@ public class MyMusicController {
     @Autowired
     MyMusicService myMusicService;
     @Autowired
+    PlaylistService playlistService;
+    @Autowired
     private ServletContext servletContext;
     @Autowired
     private HttpSession session;
@@ -43,61 +45,32 @@ public class MyMusicController {
         String email = (String) session.getAttribute("user_email");
         User user = userService.queryUser(email);
 
-        ArrayList<Music> music = myMusicService.getMusicByMusicSinger(user.getUser_name());
+        //업로드
+        MyMusic uploadParamDto = new MyMusic();
+        uploadParamDto.setUser_number(String.valueOf(user.getUser_number()));
+        uploadParamDto.setList_name("upload");
+        ArrayList<MyMusic> uploadMusicList = myMusicService.myMusicList(uploadParamDto);
 
-        model.addAttribute("musicList", music);
+        //좋아요
+        MyMusic likeParamDto = new MyMusic();
+        likeParamDto.setUser_number(String.valueOf(user.getUser_number()));
+        likeParamDto.setList_name("like");
+        ArrayList<MyMusic> likeMusicList = myMusicService.myMusicList(likeParamDto);
+
+        model.addAttribute("uploadMusicList", uploadMusicList);
+        model.addAttribute("likeMusicList", likeMusicList);
         return "mypage";
-    }
-
-    @ResponseBody
-    @PostMapping("/myMusicList")
-    public String myMusicList(HttpServletRequest request, @RequestParam String list_name) throws Exception {
-        String user_number = String.valueOf(request.getSession().getAttribute("user_number"));
-
-        MyMusic paramDto = new MyMusic();
-        paramDto.setUser_number(user_number);
-        paramDto.setList_name(list_name);
-
-        ArrayList<MyMusic> myMusicList = myMusicService.myMusicList(paramDto);
-
-        JSONObject resJsonObject = new JSONObject();
-        JSONArray jsonArray = new JSONArray();
-
-        for (int i = 0; i < myMusicList.size(); i++) {
-            JSONObject paramJSONObject = new JSONObject();
-            paramJSONObject.put("list_name", myMusicList.get(i).getList_name());
-            paramJSONObject.put("playlist_cd", myMusicList.get(i).getPlaylist_cd());
-            paramJSONObject.put("music_number", myMusicList.get(i).getMusic_number());
-            paramJSONObject.put("music_title", myMusicList.get(i).getMusic_title());
-            paramJSONObject.put("music_singer", myMusicList.get(i).getMusic_singer());
-            paramJSONObject.put("music_genre", myMusicList.get(i).getMusic_genre());
-            jsonArray.add(paramJSONObject);
-        }
-
-        resJsonObject.put("myMusicList", jsonArray);
-        String jsonString = resJsonObject.toJSONString();
-
-        return jsonString;
     }
 
     @ResponseBody
     @PostMapping("/delMyMusic")
     public String delMyMusic(@RequestParam String list_name, @RequestParam String playlist_cd, @RequestParam String music_number) throws Exception {
-        //String result = "실패";
+        //실제파일삭제 구현
 
-        //파일삭제 추후구현
+        //db삭제
+        //MUSIC
+        //PLAYLIST
 
-        //파일삭제 성공하면 db삭제
-
-        //db삭제 성공
-        //int i = myMusicService.delMyMusic(dto);
-
-        // if (i > 0) {
-        //     result = "성공";
-        // }
-
-        // return result;
-        // myMusicService.delMyMusic();
         return "redirect:/mypage";
     }
 
@@ -110,13 +83,18 @@ public class MyMusicController {
     }
 
     @RequestMapping("/add")
-    public String add(HttpServletRequest request, MultipartFile music_image, MultipartFile music_file) {
+    public String add(HttpServletRequest request, MultipartFile music_image, MultipartFile music_file) throws Exception {
         Music music = new Music();
         music.setMusic_title(request.getParameter("music_title"));
         music.setMusic_singer(request.getParameter("music_singer"));
         music.setMusic_genre(request.getParameter("music_genre"));
         music.setMusic_release(request.getParameter("music_release"));
         music.setMusic_lyrics(request.getParameter("music_lyrics"));
+
+        String email = (String) session.getAttribute("user_email");
+        User user = userService.queryUser(email);
+
+        //전역변수 뮤직넘버
 
         try {
             if (!music_image.getOriginalFilename().equals("")) {
@@ -158,9 +136,20 @@ public class MyMusicController {
                 music.setMusic_file(saveProfile.toString());
             }
             myMusicService.insertMyMusic(music);
+
+            int musicNumber = myMusicService.maxMusicNumber();
+
+            //업로드 플레이리스트 등록
+            Playlist playlist = new Playlist();
+            playlist.setMusic_number(musicNumber);
+            playlist.setList_name("upload");
+            playlist.setUser_number(user.getUser_number());
+            playlistService.insertPlaylist(playlist);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return "redirect:/mypage";
     }
+
 }
+

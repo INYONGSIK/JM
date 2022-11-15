@@ -80,11 +80,29 @@ public class SignalHandler extends TextWebSocketHandler {
                             follower_session = entry.getValue();
                         }
                     }
-
                     System.out.println("boardWriterSession : " + follower_session);
                     if (follower_session != null) {
                         follower_session.sendMessage(tmpMsg);
                     }
+                }
+            }
+        }
+
+        String message2 = message.getPayload();
+        if (StringUtils.isNotEmpty(message2)) {
+            String[] strs = message2.split(",");
+            if (strs != null && strs.length == 4) {
+                String cmd = strs[0];
+                String replyWriter = strs[1];
+                String boardWriter = strs[2];
+                String dashboardNo = strs[3];
+
+                WebSocketSession replyWriterSession = userSessions.get(replyWriter);
+                WebSocketSession boardWriterSession = userSessions.get(boardWriter);
+                if (cmd.equals("reply") && boardWriterSession != null) {
+                    TextMessage tmpMsg = new TextMessage(replyWriter + "님이 " + dashboardNo + "번 게시물에 " + "댓글을 달았습니다." +
+                            "<div id=\"socketAlert\"></div><button id=\"deleteAlert\">삭제</button>");
+                    boardWriterSession.sendMessage(tmpMsg);
                 }
             }
         }
@@ -93,7 +111,7 @@ public class SignalHandler extends TextWebSocketHandler {
     private String getId(WebSocketSession session) {
         Map<String, Object> httpSession = session.getAttributes();
         System.out.println("httpSession : " + httpSession);
-        String user_session = String.valueOf(httpSession.get("user_number"));
+        String user_session = String.valueOf(httpSession.get("user_name"));
 
 
         // 로그인 했으면 로그인한 유저의 아이디를 주고

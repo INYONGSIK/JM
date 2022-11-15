@@ -7,6 +7,7 @@
             integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
     <script src="js/stt.js"></script>
     <script src="js/voiceRecord.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 <button id="record">시작</button>
@@ -15,18 +16,61 @@
 
 <br><br>
 
-<form id="sttForm" method="post" enctype="multipart/form-data">
-    <!--    음성 파일 : <input type="file" name="uploadFile"><br><br>-->
-
+<form id="sttForm" enctype="multipart/form-data">
+    파일 : <input type="file" id="uploadFile" name="uploadFile">
+    <input type="submit" value="결과 확인">
 </form>
-<button id="sttFormAjax">결과 확인</button>
 <br><br>
-
+<audio controls>
+    <source src="C:/Users/seyoung/Downloads/PowerTOEIC_VOCA_Version 1/Step_02_(US)_1.mp3" type="audio/ogg">
+    <source src="C:/Users/seyoung/Downloads/PowerTOEIC_VOCA_Version 1/Step_02_(US)_1.mp3"
+            type="audio/mpeg">
+    <source src="C:/Users/seyoung/ownloads/PowerTOEIC_VOCA_Version 1/Step_02_(US)_1.mp3"
+            type="audio/wav">
+    이 문장은 여러분의 브라우저가 audio 태그를 지원하지 않을 때 화면에 표시됩니다!
+</audio>
 <h2>STT : 음성 파일을 텍스트로 변환한 결과</h2>
 <div id="resultDiv"></div>
 <br><br>
 
-
+<
 </body>
+<script>
+     $(function () {
+    // submit 했을 때 처리
+    $('#sttForm').on('submit', function (event) {
+     var formData = new FormData($('#sttForm')[0]);
+     console.log(formData);
+        event.preventDefault();
+        $.ajax({
+            type : "post",
+            enctype : "multipart/form-data",
+            url : "clovaSTT",
+            data : formData,
+            processData : false, // 필수
+            contentType : false, // 필수
+            success:function (result) {
+                $('#resultDiv').text(result);
+            },
+            error:function (e) {
+                alert("오류 발생" + e);
+            }
+        });
+    })
+})
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
 </html>
