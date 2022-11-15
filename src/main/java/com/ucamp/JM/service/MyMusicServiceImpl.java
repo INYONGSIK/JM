@@ -29,9 +29,11 @@ public class MyMusicServiceImpl implements MyMusicService {
         myMusicDAO.insertMyMusic(music);
     }
 
+
     @Override
-    public void delMyMusic(int MyMusic_number) {
-        myMusicDAO.delMyMusic(MyMusic_number);
+    public void delMyMusic(int music_number) {
+        System.out.println("impl:" + music_number);
+        myMusicDAO.delMyMusic(music_number);
     }
 
     @Override

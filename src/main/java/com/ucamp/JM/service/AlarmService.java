@@ -12,4 +12,6 @@ public interface AlarmService {
     void deleteFollow(int follower, int followee);
 
     void insertFollow(int follower, int followee);
+
+    int following(int follower, int followee);
 }

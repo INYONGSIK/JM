@@ -51,4 +51,9 @@ public class PlaylistServiceImpl implements PlaylistService{
     public void deletePlaylistMusic(int music_number) {
         playlistDAO.deletePlaylistMusic(music_number);
     }
+
+    @Override
+    public Music selectSameMusic(int user_number, String list_name, int music_number) {
+        return playlistDAO.selectSameMusic(user_number, list_name, music_number);
+    }
 }
