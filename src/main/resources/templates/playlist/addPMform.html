@@ -1,15 +1,52 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Playlist</title>
+
+    <script type="text/javascript">
+
+	function check2(){
+		if (PM.list_name.value==""){
+			alert("플레이리스트제목을 입력해 주세요!!")
+			PM.list_name.focus()
+			return false
+		}
+		return true
+	}
+
+
+
+    </script>
+
 </head>
+<link rel="stylesheet" href="/webapp/css/bootstrapLux.css"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 <body>
-  <form action="/add_PM" method="get">
-      플레이리스트 제목 :<input type="text" name="list_name"><br>
-    <input type="hidden" name="user_number" th:value="${PM_user_number}"><br>
-       <input type="submit" value="만들기">
-  </form>
+
+
+<th:block th:replace="~{navHeader :: navi}"></th:block>
+<!--  <form action="/add_PM" method="get">-->
+<!--      플레이리스트 제목 :<input type="text" name="list_name"><br>-->
+<!--    <input type="hidden" name="user_number" th:value="${PM_user_number}"><br>-->
+<!--       <input type="submit" value="만들기">-->
+<!--  </form>-->
+
+
+    <div id="justify-content" class="card" style="margin:20px;">
+        <div  class="card border-primary  d-flex justify-content-center">
+        <div class="card-body row justify-content-center " >
+                    <form name="PM" action="/add_PM" method="get" onsubmit="return check2()">
+
+                    <input placeholder="제목" class="form-control" type="text" name="list_name">
+                    <input type="hidden" name="user_number" th:value="${PM_user_number}">
+                    <input type="submit" onclick="location.href='/addPM'" class="btn btn-outline-primary"
+                           style="max-width: 10rem;margin: 20px; float:right;" value="만들기">
+                    </form>
+        </div>
+        </div>
+    </div>
+
 
 </body>
 </html>

@@ -27,10 +27,14 @@
         <td th:text="${report.user_number}"></td>
         <td>
             <a th:href="|/readboard/${report.dashboard_No}|" th:if="${report.report_type==1}">[[${report.contents}]]</a>
-            <a th:href="|/admin|" th:if="${report.report_type==2}">[[${report.contents}]]</a>
+            <a th:href="|/musicDetails/${report.music_number}|"
+               th:if="${report.report_type==2}">[[${report.contents}]]</a>
         </td>
         <td th:text="${report.report_date}"></td>
         <td th:text="${report.report_count}"></td>
+        <td>
+            <a th:href="|/admin/deleteReport/${report.report_type}/${report.report_ID}|">조치 완료</a>
+        </td>
     </tr>
     </tbody>
 </table>

@@ -21,25 +21,28 @@
     <thead>
     <tr class="table-dark">
         <th scope="col">회원 번호</th>
+        <th scope="col">닉네임</th>
         <th scope="col">이메일</th>
         <th scope="col">이름</th>
         <th scope="col">전화번호</th>
         <th scope="col">생일</th>
-        <th scope="col">신고 받은 횟수</th>
+        <th scope="col">회원 유형</th>
     </tr>
     </thead>
 
     <tbody>
-    <tr th:each="user : ${users}">
+    <tr th:each="user : ${users}" th:if="${user.type.equals('user')}">
         <td th:text="${user.user_number}"></td>
+        <td th:text="${user.user_nickname}"></td>
         <td th:text="${user.user_email}"></td>
         <td th:text="${user.user_name}"></td>
         <td th:text="${user.user_phone_number}"></td>
         <td th:text="${user.user_birthday}"></td>
-        <td th:text="${user.report_count}"></td>
+        <td th:text="${user.type}"></td>
         <td>
             <a th:href="|/admin/deleteUser/${user.user_number}|">회원 탈퇴</a>
         </td>
+
     </tr>
     </tbody>
 </table>

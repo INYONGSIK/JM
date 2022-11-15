@@ -56,4 +56,7 @@ public interface BoardService {
 
     // 다인: 게시글 10개 보여주기
     ArrayList<Board> boardSelect10();
+
+
+    void deleteReportComment(int dashboard_No, String contents);
 }
