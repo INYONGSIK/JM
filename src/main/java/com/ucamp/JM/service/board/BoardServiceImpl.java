@@ -98,4 +98,9 @@ public class BoardServiceImpl implements BoardService {
     public ArrayList<Board> boardSelect10() {
         return boardDAO.boardSelect10();
     }
+
+    @Override
+    public void deleteReportComment(int dashboard_No, String contents) {
+        boardDAO.deleteReportComment(dashboard_No, contents);
+    }
 }

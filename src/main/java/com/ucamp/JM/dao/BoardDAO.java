@@ -60,4 +60,6 @@ public interface BoardDAO {
     // 다인: 이미 신고되어있는지 댓글인지 확인하기
     Report selectOk(@Param("user_number") int user_number, @Param("contents") String contents);
 
+    void deleteReportComment(@Param("dashboard_No") int dashboard_No, @Param("contents") String contents);
+
 }

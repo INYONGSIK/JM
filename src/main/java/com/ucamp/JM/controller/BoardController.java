@@ -62,13 +62,18 @@ public class BoardController {
         String user_email = (String) request.getSession().getAttribute("user_email");
 
         if (user_email != null) {
-            String sessionName = boardService.getUserNicknameByEmail(user_email).getUser_nickname();
-            model.addAttribute("sessionName", sessionName);
+            if (user_email.equals("admin@aaa.com")) {
+                model.addAttribute("admin", "admin@aaa.com");
+            } else {
+                String sessionName = boardService.getUserNicknameByEmail(user_email).getUser_nickname();
+                model.addAttribute("sessionName", sessionName);
+            }
         }
         model.addAttribute("comments", boardService.CommentSelectAll(dashboard_No));
 
 
         model.addAttribute("dashboard_No", dashboard_No);
+        model.addAttribute("user_number", board.getUser_number());
         model.addAttribute("dashboard_user", board.getDashboard_user());
         model.addAttribute("dashboard_title", board.getDashboard_title());
         model.addAttribute("dashboard_content", board.getDashboard_content());
@@ -186,10 +191,22 @@ public class BoardController {
 
 
     // 다인 : 댓글 삭제
-    @GetMapping("/deleteComment/{dashboard_No}/{cno}")
-    public String deleteComment(@PathVariable int dashboard_No, @PathVariable int cno) {
+    @GetMapping("/deleteComment/{dashboard_No}/{cno}/{contents}/{writer}")
+    public String deleteComment(@PathVariable int dashboard_No, @PathVariable int cno, @PathVariable String contents, @PathVariable String writer) {
+        System.out.println(writer);
 
+        int user_number = boardService.getUserNumByNickname(writer).getUser_number();
+
+        if (boardService.selectOk(user_number, contents) != null) {
+            System.out.println("777777777");
+            System.out.println(dashboard_No + contents);
+
+            boardService.deleteReportComment(dashboard_No, contents);
+
+            System.out.println("8888888");
+        }
         boardService.deleteComment(cno, dashboard_No);
+
         return "redirect:/readboard/" + dashboard_No;
     }
 
@@ -200,7 +217,10 @@ public class BoardController {
 
         int user_number = boardService.getUserNumByNickname(writer).getUser_number();
 
+        System.out.println("wwwwwwww" + dashboard_No);
+        System.out.println("3333333" + user_number + writer);
         if (boardService.selectOk(user_number, contents) != null) {
+
             boardService.updateReport_count(user_number, contents);
             Writer out = response.getWriter();
             String message = URLEncoder.encode("신고완료.", "UTF-8");
@@ -210,6 +230,7 @@ public class BoardController {
             response.flushBuffer();
             out.close();
         } else {
+
             Boolean ok = boardService.reportComment(user_number, contents, dashboard_No);
             boardService.updateReport_count(user_number, contents);
 
@@ -225,9 +246,9 @@ public class BoardController {
             }
         }
 
-
-        return "redirect:/readboard/" + dashboard_No;
-
+        return "board/boardList";
+//        return "redirect:/readboard/" + dashboard_No;
+//        return "";
 
     }
 

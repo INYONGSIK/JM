@@ -45,7 +45,7 @@
 
 
     <form method="get"
-          th:action="|/deletedashboard/${dashboard_No}/${dashboard_user}|">
+          th:action="|/deletedashboard/${dashboard_No}|">
 
         <input type="hidden" name="dashboard_No" value="${dashboard_No}"/>
         <button type="submit" class="btn btn-secondary" th:if="${session.user_email}">삭제</button>
@@ -58,17 +58,18 @@
         댓글
         <table>
             <tr th:each="comment : ${comments}">
-                <td width="100">[[${comment.writer}]]</td>
-                <td width="200">[[ ${comment.content}]]</td>
-                <td width="200">[[${comment.createat}]]</td>
+                <td width="100"><p class="text-info">[[${comment.writer}]]</p></td>
+                <td width="200"><p class="text-info">[[ ${comment.content}]]</p></td>
+                <td width="200"><p class="text-info">[[${comment.createat}]]</p></td>
+
 
                 <td><a th:href="|/reportComment/${comment.writer}/${comment.content}/${comment.dashboard_no}|">신고</a>
                 </td>
 
                 <td th:if="${sessionName == comment.writer}"><a
-                        th:href="|/deleteComment/${comment.dashboard_no}/${comment.cno}|"> 삭제</a></td>
-                <td th:if="${sessionName == 'admin'}"><a
-                        th:href="|/deleteComment/${comment.dashboard_no}/${comment.cno}|"> 삭제</a></td>
+                        th:href="|/deleteComment/${comment.dashboard_no}/${comment.cno}/${comment.content}/${comment.writer}|"> 삭제</a></td>
+                <td th:if="${admin == 'admin@aaa.com'}"><a
+                        th:href="|/deleteComment/${comment.dashboard_no}/${comment.cno}/${comment.content}/${comment.writer}|"> 삭제</a></td>
             </tr>
 
         </table>
