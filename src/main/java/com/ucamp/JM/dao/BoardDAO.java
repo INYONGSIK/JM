@@ -62,4 +62,8 @@ public interface BoardDAO {
 
     void deleteReportComment(@Param("dashboard_No") int dashboard_No, @Param("contents") String contents);
 
+    void deleteCommentAll2(@Param("dashboard_No") int dashboard_No);
+
+
 }
+

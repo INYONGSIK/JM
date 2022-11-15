@@ -95,6 +95,9 @@ public class BoardController {
         System.out.println("login_user" + login_user_nickname);
 
         if (dashboard_user.equals(login_user_nickname)) {
+            if (boardService.CommentSelectAll(dashboard_No) != null) {
+                boardService.deleteCommentAll2(dashboard_No);
+            }
             boardService.deletedashboard(dashboard_No);
         } else {
             Writer out = response.getWriter();
@@ -106,8 +109,8 @@ public class BoardController {
             out.close();
         }
 
-
-        return "board/boardList";
+        return "redirect:/boardList";
+//        return "board/boardList";
     }
 
     // 다인 : 게시판 글 검색
