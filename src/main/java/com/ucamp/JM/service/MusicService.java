@@ -36,6 +36,10 @@ public interface MusicService {
 
     void updateWeekMusicLikeToZero();
 
+    void delete_week_music();
+
+    void delete_month_music();
+
     ArrayList<Music> selectTopMusic();
 
     ArrayList<Music> selectTopMusicByGenre(String genre);
@@ -58,4 +62,3 @@ public interface MusicService {
 
     void likeDown(int music_number);
 }
-

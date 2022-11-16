@@ -62,9 +62,13 @@
     </update>
 
 
-    <update id="updateWeekMusicLikeToZero">
-        update week_music set music_like = 0
-    </update>
+    <delete id="delete_month_music">
+        delete month_music
+    </delete>
+
+    <delete id="delete_week_music">
+        delete week_music
+    </delete>
 
     <insert id="insertWeekMusic" parameterType="Music">
         insert into
