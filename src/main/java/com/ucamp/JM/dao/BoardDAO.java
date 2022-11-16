@@ -66,6 +66,7 @@ public interface BoardDAO {
     // 다인: 게시글이 삭제될 때 게시글에 달린 댓글 모두 삭제하기
     void deleteCommentAll2(@Param("dashboard_No") int dashboard_No);
 
+    User getUserNumByname(String user_name);
 
 }
 

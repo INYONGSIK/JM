@@ -108,5 +108,10 @@ public class BoardServiceImpl implements BoardService {
     public void deleteCommentAll2(int dashboard_No) {
         boardDAO.deleteCommentAll2(dashboard_No);
     }
+
+    @Override
+    public User getUserNumByname(String user_name) {
+        return boardDAO.getUserNumByname(user_name);
+    }
 }
 
