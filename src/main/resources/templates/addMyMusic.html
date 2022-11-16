@@ -12,9 +12,9 @@
     <form action="/add" enctype="multipart/form-data" method="post">
         <div id="main">
             <div class="container">
-                <div class="image main" data-position="center">
+                <div style="text-align:center">
                     <!-- 여기에 이미지 -->
-                    <img src="#" alt=""/>
+                    <img src="webapp/img/logoWhite.PNG" width="400" height="400"/>
                 </div>
                 <table>
                     <tr>
@@ -50,11 +50,11 @@
                     </tr>
                     <tr>
                         <td>음원파일</td>
-                        <td><input type="file" name="music_file"></td>
+                        <td><input type="file" name="music_file" value="${dateType2}"></td>
                     </tr>
                     <tr>
                         <td>가사</td>
-                        <td><input type="text" name="music_lyrics"></td>
+                        <td><textarea name="music_lyrics"></textarea></td>
                     </tr>
 
                     <tr>
