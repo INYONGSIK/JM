@@ -35,7 +35,9 @@
                     <li class="nav-item" th:if="${session.user_email}">
                         <a class="nav-link" href="/mypage">마이페이지</a>
                     </li>
-
+                    <li class="nav-item" th:if="${session.user_email!=null && session.user_email.equals('admin@aaa.com')}">
+                        <a class="nav-link" href="/admin">관리자 페이지</a>
+                    </li>
 
                 </ul>
 

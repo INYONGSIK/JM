@@ -31,12 +31,10 @@
                     </li>
 
 
-                    <li class="nav-item">
-
+                    <li class="nav-item" th:if="${session.user_email}">
 
                         <a class="nav-link" href="/listPM">Playlists</a>
-
-
+                        
                     </li>
 
                     <li class="nav-item" th:if="${session.user_email}">
