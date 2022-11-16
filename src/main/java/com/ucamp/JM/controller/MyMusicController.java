@@ -3,9 +3,11 @@ package com.ucamp.JM.controller;
 import com.ucamp.JM.dao.UserDAO;
 import com.ucamp.JM.dto.Music;
 import com.ucamp.JM.dto.User;
+import com.ucamp.JM.service.MusicService;
 import com.ucamp.JM.service.MyMusicService;
 import com.ucamp.JM.service.PlaylistService;
 import com.ucamp.JM.service.UserService;
+import com.ucamp.JM.service.board.BoardService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,13 @@ import java.util.UUID;
 public class MyMusicController {
     @Autowired
     MyMusicService myMusicService;
+
+    @Autowired
+    MusicService musicService;
+
+    @Autowired
+    BoardService boardService;
+
     @Autowired
     PlaylistService playlistService;
     @Autowired
@@ -61,7 +70,12 @@ public class MyMusicController {
 
     @RequestMapping("/delMyMusic/{music_number}")
     public String delMyMusic(HttpServletRequest request, @PathVariable int music_number) throws Exception {
-        System.out.println("controller:" + music_number);
+        String email = (String) session.getAttribute("user_email");
+        String user_nickname = boardService.getUserNicknameByEmail(email).getUser_nickname();
+        int user_number = boardService.getUserNumByNickname(user_nickname).getUser_number();
+
+
+        musicService.deleteLike(music_number, user_number);
         myMusicService.delMyMusic(music_number);
 
 
@@ -139,6 +153,10 @@ public class MyMusicController {
                 music.setMusic_file(saveProfile.toString());
             }
             myMusicService.insertMyMusic(music);
+
+            myMusicService.insertMyMusicToday(music);
+            myMusicService.insertMyMusicAccumul(music);
+
 
             //int musicNumber = myMusicService.maxMusicNumber();
 

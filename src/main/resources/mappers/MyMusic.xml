@@ -42,12 +42,15 @@
 
     </select>
 
+    <select id="selectMusicNumber" resultType="int">
+        select music_number from
+    </select>
 
     <insert id="insertMyMusic" parameterType="MyMusic">
         insert into Music(music_number,music_title,music_singer,music_genre,music_release,
-        music_image,music_file,music_lyrics)
+        music_image,music_file,music_lyrics,music_like)
         values(music_seq.nextval,#{music_title},#{music_singer},#{music_genre},#{music_release},
-        #{music_image},#{music_file},#{music_lyrics})
+        #{music_image},#{music_file},#{music_lyrics},0)
 
         <!-- insert into playlist(
          PLAYLIST_CD,
@@ -62,6 +65,20 @@
          '9999'
          ); -->
     </insert>
+
+    <insert id="insertMyMusicToday" parameterType="MyMusic">
+        insert into today_music(today_music_number,music_number,music_title,music_singer,music_genre,music_release,
+        music_image,music_file,music_lyrics)
+        values(today_music_seq.nextval,music_seq.currval,#{music_title},#{music_singer},#{music_genre},#{music_release},
+        #{music_image},#{music_file},#{music_lyrics})
+    </insert>
+    <insert id="insertMyMusicAccumul" parameterType="MyMusic">
+        insert into accumul(accumul_number,music_number,music_title,music_singer,music_genre,music_release,
+        music_image,music_file,music_lyrics)
+        values(accumul_seq.nextval,music_seq.currval,#{music_title},#{music_singer},#{music_genre},#{music_release},
+        #{music_image},#{music_file},#{music_lyrics})
+    </insert>
+
 
     <delete id="delMyMusic">
         delete from music where music_number= #{music_number}

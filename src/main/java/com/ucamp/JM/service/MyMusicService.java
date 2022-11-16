@@ -12,6 +12,10 @@ public interface MyMusicService {
 
     void insertMyMusic(Music music);
 
+    void insertMyMusicToday(Music music);
+
+    void insertMyMusicAccumul(Music music);
+
     void delMyMusic(int music_number);
 
     ArrayList<Music> getMusicByMusicSinger(String music_singer);

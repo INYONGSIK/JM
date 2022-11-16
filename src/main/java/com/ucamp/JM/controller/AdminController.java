@@ -2,6 +2,7 @@ package com.ucamp.JM.controller;
 
 import com.ucamp.JM.dto.User;
 import com.ucamp.JM.service.AdminService;
+import com.ucamp.JM.service.MusicService;
 import com.ucamp.JM.service.UserService;
 import com.ucamp.JM.service.board.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class AdminController {
     UserService userService;
     @Autowired
     BoardService boardService;
+
+    @Autowired
+    MusicService musicService;
 
 
     @RequestMapping("/admin")
@@ -126,7 +130,7 @@ public class AdminController {
             Writer out = response.getWriter();
             String message = URLEncoder.encode("신고완료.", "UTF-8");
             response.setContentType("text/html; charset=UTF-8");
-            out.write("<script type=\"text/javascript\">alert(decodeURIComponent('" + message + "'.replace(/\\+/g, '%20'))); location.href='/boardList' </script>");
+            out.write("<script type=\"text/javascript\">alert(decodeURIComponent('" + message + "'.replace(/\\+/g, '%20'))); location.href='/musicDetails/" + music_number + "' </script>");
             out.flush();
             response.flushBuffer();
             out.close();
@@ -151,13 +155,21 @@ public class AdminController {
 
     }
 
-    @GetMapping("/deleteMusic/{music_number}/{music_title}")
-    public String deleteMusic(@PathVariable int music_number, @PathVariable String music_title) {
-        adminService.deleteMusic(music_number);
+    @GetMapping("/deleteMusic/{music_number}/{music_title}/{music_singer}")
+    public String deleteMusic(@PathVariable int music_number, @PathVariable String music_title, @PathVariable String music_singer) {
+
+        int user_number = boardService.getUserNumByNickname(music_singer).getUser_number();
+
+        if (musicService.alreadyLike2(music_number) != null) {
+            musicService.deleteLike2(music_number);
+        }
 
         if (boardService.selectOk(music_number, music_title) != null) {
-            adminService.deleteMusic(music_number);
+//            musicService.deleteLike(music_number, user_number);
+            adminService.deleteReportMusic(music_number);
         }
+        adminService.deleteMusic(music_number);
+
 
         return "redirect:/";
     }
