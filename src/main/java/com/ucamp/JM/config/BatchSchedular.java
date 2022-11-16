@@ -36,7 +36,7 @@ public class BatchSchedular {
 
     JobExecution jobExecution;
 
-    @Scheduled(cron = "0 18 10 * * *")
+    @Scheduled(cron = "0/2 * * * * ?")
     public void daily() throws JobInstanceAlreadyCompleteException, JobExecutionAlreadyRunningException, JobParametersInvalidException, JobRestartException {
         //(현재 좋아요 - today 좋아요) + 누적좋아요 합산 후 누적 테이블에 update
         //today 좋아요에 현재 좋아요 update;
@@ -47,7 +47,7 @@ public class BatchSchedular {
 
     }
 
-    @Scheduled(cron = "0 19 10 * * * ")
+    @Scheduled(cron = "0/14 * * * * ?")
     public void weekly() throws JobInstanceAlreadyCompleteException, JobExecutionAlreadyRunningException, JobParametersInvalidException, JobRestartException {
         //0초 10분 0시 매주 월요일
         //week table 에 누적 테이블 값 insert
@@ -60,7 +60,7 @@ public class BatchSchedular {
 
     //    @Scheduled(cron = "0 59 9 1 * *")
     //0초 20분 0시 매달
-    @Scheduled(cron = "0 20 10 * * *")
+    @Scheduled(cron = "0 * * * * ?")
     public void FirstOfMonth() throws JobInstanceAlreadyCompleteException, JobExecutionAlreadyRunningException, JobParametersInvalidException, JobRestartException {
         //누적 좋아요 + week 좋아요 합산해서 MONTH에넣기
         JobParameters jobParameters = new JobParametersBuilder()
