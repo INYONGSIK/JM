@@ -21,7 +21,7 @@
         select user_number from jmuser where user_email= #{user_email}
     </select>
 
-    <select id="PgetListNameByUserNum" resultType="String" >
+    <select id="PgetListNameByUserNum" resultType="String">
         select list_name from playlist_manage where user_number = #{user_number}
     </select>
 
@@ -33,15 +33,16 @@
         select * from music where music_number = #{music_number}
     </select>
 
-<!--    플레이리스트에서 음악삭제-->
+    <!--    플레이리스트에서 음악삭제-->
     <delete id="deletePlaylistMusic">
         delete from playlist where music_number = #{music_number}
     </delete>
 
 
-<!--    음악 중복 제거-->
-    <select id="selectSameMusic" resultType="Music" >
-        select music_number from playlist where list_name = '${list_name}' AND user_number = ${user_number} AND music_number = ${music_number}
+    <!--    음악 중복 제거-->
+    <select id="selectSameMusic" resultType="Music" parameterType="map">
+        select music_number from playlist where list_name = '${list_name}' AND user_number = ${user_number} AND
+        music_number = ${music_number}
     </select>
 
 </mapper>
