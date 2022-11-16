@@ -6,41 +6,35 @@
 
 </head>
 <link rel="stylesheet" href="/webapp/css/bootstrapLux.css"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="webapp/css/register.css"/>
+
 <body>
-
-<div>
-    <legend>게시글 상세보기</legend>
-</div>
-
-<br><br><br><br><br><br>
-
-
-<div>
-
-
-    <div class="form-group">
+<br><br><br><br><br>
+<div class="container">
+    <div>
         <label class="form-label">글쓴이</label>
         <input class="form-control" type="text" th:placeholder="${dashboard_user}" disabled="">
     </div>
 
     <br>
 
-    <div class="form-group">
+    <div>
         <label class="form-label">제 목</label>
         <input class="form-control" type="text" th:placeholder="${dashboard_title}" disabled="">
     </div>
 
     <br>
 
-    <div class="form-group">
+    <div>
         <label class="form-label">내 용</label>
-        <input class="form-control" type="text" th:placeholder="${dashboard_content}" disabled="">
+        <textarea class="form-control" type="text" th:placeholder="${dashboard_content}" disabled="" rows="10"></textarea>
     </div>
 
     <br>
 
     <form style="float:left;margin:0;" th:action="|/editBoardForm/${dashboard_No}|"/>
-    <button type="submit" class="btn btn-secondary" th:if="${session.user_email}">수정</button>
+    <input type="submit" class="btn btn-primary" th:if="${session.user_email}" value="수정">
     </form>
 
 
@@ -48,10 +42,10 @@
           th:action="|/deletedashboard/${dashboard_No}/${dashboard_user}|">
 
         <input type="hidden" name="dashboard_No" value="${dashboard_No}"/>
-        <button type="submit" class="btn btn-secondary" th:if="${session.user_email}">삭제</button>
+        <input type="submit" class="btn btn-primary" th:if="${session.user_email}" value="삭제">
     </form>
-    <button type="button" class="btn btn-secondary" onclick="window.location='/boardList'">돌아가기</button>
-    <br><br><br><br><br>
+    <input type="button" class="btn btn-primary" onclick="window.location='/boardList'" value="돌아가기">
+    <br><br>
 
 
 
