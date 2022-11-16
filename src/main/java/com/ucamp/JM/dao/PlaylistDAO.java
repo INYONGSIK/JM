@@ -28,5 +28,5 @@ public interface PlaylistDAO {
     //음악 삭제
     void deletePlaylistMusic(int music_number);
 
-    Music selectSameMusic(int user_number, String list_name, int music_number);
+    Music selectSameMusic(@Param("user_number") int user_number, @Param("list_name") String list_name, @Param("music_number") int music_number);
 }

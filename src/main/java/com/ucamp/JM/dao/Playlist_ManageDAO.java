@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public interface Playlist_ManageDAO {
 
     ArrayList<Playlist_Manage> selectAllPM(int user_number);
+
     void insertPlaylist_Manage(@Param("list_name") String list_name, @Param("user_number") int user_number);
 
     User PMgetUserNumByEmail(String user_email);
@@ -25,7 +26,7 @@ public interface Playlist_ManageDAO {
     //플레이리스트manage 삭제
     void deletePlaylistManageByList_name(String list_name);
 
-    Playlist_Manage samePlaylistNameManage(String list_name, int user_number);
+    Playlist_Manage samePlaylistNameManage(@Param("list_name") String list_name, @Param("user_number") int user_number);
 
 
 }
