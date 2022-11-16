@@ -21,6 +21,14 @@
 
 
 
+
+
+
+
+
+
+
+
 </style>
 <body>
 
@@ -45,12 +53,16 @@
                     <source th:src="|/webapp/music/${details.music_file}|">
                 </audio>
                 <br>
-                <a th:unless="${likes}"
-                   th:href="|/likeIncrement/${details.music_number}/${details.music_singer}/1|">좋아요</a>
-                <a th:if="${likes==1}" th:href="|/likeIncrement/${details.music_number}/${details.music_singer}|">좋아요
+                <span th:if="${session.user_email}">
+                    <a th:unless="${likes} "
+                       th:href="|/likeIncrement/${details.music_number}/${details.music_singer}/1|">좋아요</a>
+                    <a th:if="${likes==1} "
+                       th:href="|/likeIncrement/${details.music_number}/${details.music_singer}|">좋아요
                     취소</a>
                 [[${details.music_like}]]
-                <a th:href="|/reportMusic/${details.music_singer}/${details.music_title}/${details.music_number}|">신고</a>
+                </span>
+                <a th:if="${session.user_email}"
+                   th:href="|/reportMusic/${details.music_singer}/${details.music_title}/${details.music_number}|">신고</a>
                 <a th:if="${admin == 'admin@aaa.com'}"
                    th:href="|/deleteMusic/${details.music_number}/${details.music_title}/${details.music_singer}|">삭제</a>
             </div>
@@ -162,6 +174,14 @@ function showFollowCheck(checkValue){
                 $("#unfollow_button").replaceWith(html);
             }
 }
+
+
+
+
+
+
+
+
 
 
 
