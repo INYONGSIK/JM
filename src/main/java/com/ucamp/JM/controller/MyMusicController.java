@@ -57,6 +57,12 @@ public class MyMusicController {
 
         ArrayList<Music> uploadMusicList = myMusicService.getMusicByMusicSinger(user.getUser_name());
 
+        ArrayList<Music> upload = new ArrayList<>();
+        for (int i = 0; i < uploadMusicList.size(); i++) {
+            upload.add(uploadMusicList.get(i));
+            upload.get(i).setMusic_release(uploadMusicList.get(i).getMusic_release().substring(0, 10));
+        }
+
 
         ArrayList<Like> likeList = musicService.LikeSelectAll(user.getUser_number());
         Music like_music1 = null;
@@ -76,7 +82,7 @@ public class MyMusicController {
         // likeParamDto.setList_name("like");
         // ArrayList<MyMusic> likeMusicList = myMusicService.myLikeMusicList(likeParamDto);
 
-        model.addAttribute("uploadMusicList", uploadMusicList);
+        model.addAttribute("uploadMusicList", upload);
         // model.addAttribute("likeMusicList", likeMusicList);
         return "mypage";
     }
