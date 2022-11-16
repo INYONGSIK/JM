@@ -31,12 +31,12 @@ public class MyMusicServiceImpl implements MyMusicService {
 
     @Override
     public void insertMyMusicToday(Music music) {
-        myMusicDAO.insertMyMusic(music);
+        myMusicDAO.insertMyMusicToday(music);
     }
 
     @Override
     public void insertMyMusicAccumul(Music music) {
-        myMusicDAO.insertMyMusic(music);
+        myMusicDAO.insertMyMusicAccumul(music);
     }
 
 

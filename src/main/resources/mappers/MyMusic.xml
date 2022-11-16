@@ -42,6 +42,9 @@
 
     </select>
 
+    <select id="selectMusicNumber" resultType="int">
+        select music_number from
+    </select>
 
     <insert id="insertMyMusic" parameterType="MyMusic">
         insert into Music(music_number,music_title,music_singer,music_genre,music_release,
@@ -64,15 +67,15 @@
     </insert>
 
     <insert id="insertMyMusicToday" parameterType="MyMusic">
-        insert into Music(today_music_number,music_number,music_title,music_singer,music_genre,music_release,
+        insert into today_music(today_music_number,music_number,music_title,music_singer,music_genre,music_release,
         music_image,music_file,music_lyrics)
-        values(today_music_seq,today_music_seq.nextval,#{music_title},#{music_singer},#{music_genre},#{music_release},
+        values(today_music_seq.nextval,music_seq.currval,#{music_title},#{music_singer},#{music_genre},#{music_release},
         #{music_image},#{music_file},#{music_lyrics})
     </insert>
     <insert id="insertMyMusicAccumul" parameterType="MyMusic">
-        insert into Music(accumul_number,music_number,music_title,music_singer,music_genre,music_release,
+        insert into accumul(accumul_number,music_number,music_title,music_singer,music_genre,music_release,
         music_image,music_file,music_lyrics)
-        values(accumul_seq,today_music_seq.nextval,#{music_title},#{music_singer},#{music_genre},#{music_release},
+        values(accumul_seq.nextval,music_seq.currval,#{music_title},#{music_singer},#{music_genre},#{music_release},
         #{music_image},#{music_file},#{music_lyrics})
     </insert>
 
