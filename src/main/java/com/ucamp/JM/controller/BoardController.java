@@ -204,8 +204,7 @@ public class BoardController {
 
 
             boardService.deleteReportComment(dashboard_No, contents);
-
-            ;
+            return "redirect:/admin/report/1";
         }
         boardService.deleteComment(cno, dashboard_No);
 

@@ -49,7 +49,7 @@
 
 
 
-    <form th:if="${session.user_email}" action="/comment">
+    <form th:if="${session.user_email}" action="/comment" name="c" onsubmit="return check();">
         <input type="hidden" id="dashboard_No" name="dashboard_No" th:value="${dashboard_No}">
         <input type="hidden" id="writer" name="writer" th:value="${sessionName}">
         <div class="input-group mb-3">
@@ -99,7 +99,13 @@
             socket.send("reply," + replyWriter + "," + boardWriter + "," + dashboardNo);
         }
         })
-
-
+</script>
+<script>
+    function check(){
+        if(c.comment.value==""){
+            alert("댓글을 입력해 주세요!!");
+            return false
+        }
+    }
 </script>
 </html>
