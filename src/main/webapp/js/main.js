@@ -18,7 +18,7 @@ $(document).ready(function() {
 
      });
 $(document).on("click","[id^=unfollow]",(function(e){
-                     alert('alert');
+                     alert('팔로우 취소 완료.');
                        var followee = $(this).attr("value");
                        var user_number = $("input[name='user_number']").val();
                        console.log(followee);
