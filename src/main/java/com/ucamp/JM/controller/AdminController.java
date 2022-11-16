@@ -1,9 +1,7 @@
 package com.ucamp.JM.controller;
 
 import com.ucamp.JM.dto.User;
-import com.ucamp.JM.service.AdminService;
-import com.ucamp.JM.service.MusicService;
-import com.ucamp.JM.service.UserService;
+import com.ucamp.JM.service.*;
 import com.ucamp.JM.service.board.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,6 +29,11 @@ public class AdminController {
     @Autowired
     MusicService musicService;
 
+    @Autowired
+    PlaylistService playlistService;
+
+    @Autowired
+    Playlist_ManageService playlistManageService;
 
     @RequestMapping("/admin")
     public String admin(HttpServletRequest request) throws Exception {
@@ -126,7 +129,6 @@ public class AdminController {
         int user_number = boardService.getUserNumByname(music_singer).getUser_number();
 
 
-
         if (boardService.selectOk(user_number, music_title) != null) {
 
             boardService.updateReport_count(user_number, music_title);
@@ -161,7 +163,7 @@ public class AdminController {
     @GetMapping("/deleteMusic/{music_number}/{music_title}/{music_singer}")
     public String deleteMusic(@PathVariable int music_number, @PathVariable String music_title, @PathVariable String music_singer) {
 
-        int user_number = boardService.getUserNumByNickname(music_singer).getUser_number();
+//        int user_number = boardService.getUserNumByNickname(music_singer).getUser_number();
 
         if (musicService.alreadyLike2(music_number) != null) {
             musicService.deleteLike2(music_number);
@@ -171,6 +173,10 @@ public class AdminController {
 //            musicService.deleteLike(music_number, user_number);
             adminService.deleteReportMusic(music_number);
         }
+
+        playlistService.deletePlaylistMusic(music_number);
+
+
         adminService.deleteMusic(music_number);
 
 
