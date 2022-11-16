@@ -34,7 +34,7 @@
 
                      let $socketAlert2  =  $("div#socketAlert2");
                      $socketAlert2.css("display","block");
-                     $socketAlert2.append(event.data);
+                     $socketAlert2.html(event.data);
 
                      setTimeout(function(){
                         $socketAlert2.css("display", "none");
@@ -51,6 +51,7 @@
                   console.log("error : " , err);
                 };
               };
+
 
 
 
