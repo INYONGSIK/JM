@@ -48,7 +48,7 @@
                 </thead>
                 <tbody>
                 <tr th:each="music :${uploadMusicList}">
-                    <td>[[${music.music_title}]]</td>
+                    <td><a th:href="|/musicDetails/${music.music_number}|">[[${music.music_title}]]</a></td>
                     <td>[[${music.music_singer}]]</td>
                     <td>[[${music.music_genre}]]</td>
                     <td>[[${music.music_release}]]</td>
@@ -103,7 +103,7 @@
 
     <tbody>
     <tr th:each="likeMusic :${likeMusicList}">
-        <td>[[${likeMusic.music_title}]]</td>
+        <td><a th:href="|/musicDetails/${likeMusic.music_number}|">[[${likeMusic.music_title}]]</a></td>
         <td>[[${likeMusic.music_singer}]]</td>
         <td>[[${likeMusic.music_genre}]]</td>
         <td>[[${likeMusic.music_release}]]</td>
