@@ -165,12 +165,12 @@ function checkPassword2() {
 // 이름 유효성 검사
 function checkName() {
     const nameValue = name.value.trim();
-    var namePattern = /^[가-힣]{2,4}$/;
+    var namePattern = /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{1,10}$/;
     if (nameValue === "") {
         setError(name, "필수 정보입니다.");
         return false;
     } else if (!namePattern.test(nameValue)) {
-        setError(name, "2글자 이상 한글만 입력해 주세요.");
+        setError(name, "이름은 1~10자 한글 및 영문 입니다.");
         return false;
     } else {
         setSuccess(name);
