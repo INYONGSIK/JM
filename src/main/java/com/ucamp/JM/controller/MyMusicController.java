@@ -72,9 +72,14 @@ public class MyMusicController {
             like_music1 = myMusicService.myLikeMusicList(likeList_Music_num);
             like_musicList.add(like_music1);
         }
+        ArrayList<Music> setLike = new ArrayList<>();
+        for (int i = 0; i < like_musicList.size(); i++) {
+            setLike.add(like_musicList.get(i));
+            setLike.get(i).setMusic_release(like_musicList.get(i).getMusic_release().substring(0, 10));
+        }
 
 
-        model.addAttribute("likeMusicList", like_musicList);
+        model.addAttribute("likeMusicList", setLike);
 
         //좋아요
         //MyMusic likeParamDto = new MyMusic();
