@@ -100,7 +100,7 @@ public class AdminController {
     public String deleteUser(@PathVariable int user_number) {
         adminService.deleteUser(user_number);
 
-        return "redirect:/admin/userList";
+        return "redirect:/admin/adminUserList";
     }
 
     @RequestMapping("/admin/deleteReport/{report_type}/{report_ID}")

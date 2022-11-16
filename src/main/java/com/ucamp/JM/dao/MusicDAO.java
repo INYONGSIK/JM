@@ -32,7 +32,6 @@ public interface MusicDAO {
 
     void insertAccumulMusic(Music music);
 
-
     void updateTodayMusic(Music music);
 
     void updateAccumulMusic(AccumulMusic music);
@@ -44,6 +43,8 @@ public interface MusicDAO {
     void insertWeekMusic(Music music);
 
     void updateWeekMusicLikeToZero();
+
+    void delete_week_music();
 
     //세영 : html에 뿌려주기
     ArrayList<Music> selectTopMusic();
