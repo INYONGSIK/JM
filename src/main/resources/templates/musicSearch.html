@@ -45,7 +45,7 @@
     <tbody>
     <tr th:each="music : ${musics}" class="table-active">
         <td>
-            <img th:src="${music.music_image}" width="50" alt="음악사진">
+            <img th:src="|/webapp/img/musicimage/${music.music_image}|" width="50" alt="음악사진">
         </td>
         <td>[[${music.music_genre}]]</td>
         <td>
