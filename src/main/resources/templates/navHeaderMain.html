@@ -8,6 +8,8 @@
 <body>
 
 <th:block th:fragment="naviMain">
+    <th:block th:replace="header :: header">
+    </th:block>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">
