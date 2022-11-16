@@ -128,7 +128,7 @@
                         <img src="">
                     </div>
                     <div class="col-sm-8">
-                        <p>ooo님</p>
+                        <p>[[ ${session.user_name}]]</p>
                         <p>[[${session.user_email}]]</p>
                         <p>알림</p>
                     </div>
@@ -152,7 +152,7 @@
                                 <button class="accordion-button collapsed" type="button" id="followerListBtn"
                                         th:value="${session.user_number}" data-bs-toggle="collapse"
                                         data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    팔로워
+                                    팔로우
                                 </button>
                             </h2>
                             <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
