@@ -66,21 +66,33 @@
      });
 
      function htmlSelectfunc(list){
+     /*<![CDATA[*/
             var html = "";
             $.each(list,function(index, item){
                     html +="<tr id='musicRankTable'>"+
                     "<td>"+(index+1)+"</td>"+
-                    "<td>"+item.music_title+"</td>"+
+                    "<td><a href='/musicDetails/"+
+                    item.music_number+
+                    "'/>"+
+                    item.music_title+
+                    "</a></td>"+
                     "<td>"+item.music_singer+"</td>"+
                     "<td>"+item.music_genre+"</td>"+
-                    "<td>"+item.music_image+"</td>"+
+                    "<td>"+
+                    "<img src='/webapp/img/musicimage/" +
+                        item.music_image +
+                     "' style={width:10px;}/>"+
+                     "</td>"+
                     "<td>"+
                     "<audio controls>"+
-                        "<source src=" + item.music_file + ">" +
-                    "</audio>"
-                    + "</td>"+
+                    "<source src='/webapp/music/" + item.music_file +  "'/>" +
+                    "</audio>" +
+                    /*<source th:src="|/webapp/music/${item.music_file}|" type="audio/mp3"></source>+*/
+                    "</td>"+
                     "<td>"+item.music_like+"</td>"+
                     "</tr>"
             });
+                         /*]]>*/
             $("#musicRankList").html(html);
+
      }

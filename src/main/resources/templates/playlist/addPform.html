@@ -43,7 +43,7 @@
         <td>[[${music.music_like}]]</td>
         <td>
             <audio controls>
-                <source th:src="${music.music_file}">
+                <source  th:src="|/webapp/music/${music.music_file}|">
             </audio>
         </td>
         <td><input type="submit" value="담기"></td>

@@ -49,7 +49,7 @@
             <td>[[${P.music_title}]] - [[${P.music_singer}]]</td>
             <td>
                 <audio controls>
-                    <source th:src="${P.music_file}">
+                    <source th:src="|/webapp/music/${P.music_file}|">
                 </audio>
             </td>
             <td><a th:href="|/deletemusic/${P.music_number}/${P_list_name}/${P_user_number}|">삭제</a></td>
