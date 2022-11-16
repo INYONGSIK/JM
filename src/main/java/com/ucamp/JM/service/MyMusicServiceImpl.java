@@ -20,8 +20,8 @@ public class MyMusicServiceImpl implements MyMusicService {
     }
 
     @Override
-    public ArrayList<MyMusic> myLikeMusicList(MyMusic paramDto) {
-        return myMusicDAO.myLikeMusicList(paramDto);
+    public Music myLikeMusicList(int music_number) {
+        return myMusicDAO.myLikeMusicList(music_number);
     }
 
     @Override

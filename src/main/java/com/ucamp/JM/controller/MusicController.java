@@ -157,6 +157,7 @@ public class MusicController {
         if (musicService.alreadyLike(music_number, user_number) != null) {
             musicService.deleteLike(music_number, user_number);
         }
+        musicService.likeDown(music_number);
 
         return "redirect:/musicDetails/" + music_number;
 

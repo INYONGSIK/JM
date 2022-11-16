@@ -30,15 +30,16 @@
          order by C.music_number desc -->
     </select>
 
-    <select id="myLikeMusicList" parameterType="MyMusic" resultType="MyMusic">
+    <select id="myLikeMusicList" resultType="Music">
         select
         music_title,
         music_singer,
         music_genre,
+        music_release,
         music_image,
         music_file
         from music
-        where music_singer= #{music_singer}
+        where music_number= ${music_number}
 
     </select>
 
