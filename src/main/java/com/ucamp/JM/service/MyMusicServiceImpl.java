@@ -29,6 +29,16 @@ public class MyMusicServiceImpl implements MyMusicService {
         myMusicDAO.insertMyMusic(music);
     }
 
+    @Override
+    public void insertMyMusicToday(Music music) {
+        myMusicDAO.insertMyMusic(music);
+    }
+
+    @Override
+    public void insertMyMusicAccumul(Music music) {
+        myMusicDAO.insertMyMusic(music);
+    }
+
 
     @Override
     public void delMyMusic(int music_number) {
