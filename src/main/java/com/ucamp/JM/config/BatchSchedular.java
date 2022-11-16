@@ -36,7 +36,9 @@ public class BatchSchedular {
 
     JobExecution jobExecution;
 
+
     @Scheduled(cron = "0/10 * * * * ?")
+
     public void daily() throws JobInstanceAlreadyCompleteException, JobExecutionAlreadyRunningException, JobParametersInvalidException, JobRestartException {
         //(현재 좋아요 - today 좋아요) + 누적좋아요 합산 후 누적 테이블에 update
         //today 좋아요에 현재 좋아요 update;
@@ -46,6 +48,7 @@ public class BatchSchedular {
         jobLauncher.run(dailyJobConfig.dailyjob(), jobParameters);
 
     }
+
 
     @Scheduled(cron = "0/20 * * * * ?")
     public void weekly() throws JobInstanceAlreadyCompleteException, JobExecutionAlreadyRunningException, JobParametersInvalidException, JobRestartException {
@@ -65,9 +68,11 @@ public class BatchSchedular {
     public void FirstOfMonth() throws JobInstanceAlreadyCompleteException, JobExecutionAlreadyRunningException, JobParametersInvalidException, JobRestartException {
         //누적 좋아요 + week 좋아요 합산해서 MONTH에넣기
         System.out.println("1분");
+        musicService.delete_month_music();
         JobParameters jobParameters = new JobParametersBuilder()
                 .addLong("time", System.currentTimeMillis()).toJobParameters();
         jobLauncher.run(monthJobConfig.updateMonthJob(), jobParameters);
         musicService.delete_week_music();
+
     }
 }

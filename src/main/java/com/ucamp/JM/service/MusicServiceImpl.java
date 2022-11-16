@@ -82,6 +82,11 @@ public class MusicServiceImpl implements MusicService {
     }
 
     @Override
+    public void delete_month_music() {
+        musicDAO.delete_month_music();
+    }
+
+    @Override
     public void insertWeekMusic(Music music) {
         musicDAO.insertWeekMusic(music);
     }

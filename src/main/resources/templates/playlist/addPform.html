@@ -35,7 +35,7 @@
             <input type="hidden" name="list_name" th:value="${P_list_name}">
             <input type="hidden" name = "music_number" th:value="${music.music_number}">
        <td>
-            <img th:src="${music.music_image}" width="50" alt="음악사진">
+           <img th:src="|/webapp/img/musicimage/${music.music_image}|" width="50" alt="음악사진">
         </td>
         <td>[[${music.music_genre}]]</td>
         <td>[[${music.music_title}]]</td>

@@ -62,6 +62,10 @@
     </update>
 
 
+    <delete id="delete_month_music">
+        delete month_music
+    </delete>
+
     <delete id="delete_week_music">
         delete week_music
     </delete>

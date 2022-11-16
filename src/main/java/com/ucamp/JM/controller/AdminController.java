@@ -122,7 +122,10 @@ public class AdminController {
     public String reportMusic(HttpServletResponse response, @PathVariable String music_singer, @PathVariable String music_title, @PathVariable int music_number) throws IOException {
 
         System.out.println("musicSinger" + music_singer);
+
         int user_number = boardService.getUserNumByname(music_singer).getUser_number();
+
+
 
         if (boardService.selectOk(user_number, music_title) != null) {
 

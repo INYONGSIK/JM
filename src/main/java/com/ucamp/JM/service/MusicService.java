@@ -38,6 +38,8 @@ public interface MusicService {
 
     void delete_week_music();
 
+    void delete_month_music();
+
     ArrayList<Music> selectTopMusic();
 
     ArrayList<Music> selectTopMusicByGenre(String genre);

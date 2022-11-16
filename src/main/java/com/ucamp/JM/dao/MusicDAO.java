@@ -46,6 +46,8 @@ public interface MusicDAO {
 
     void delete_week_music();
 
+    void delete_month_music();
+
     //세영 : html에 뿌려주기
     ArrayList<Music> selectTopMusic();
 
