@@ -122,8 +122,9 @@ public class AdminController {
     public String reportMusic(HttpServletResponse response, @PathVariable String music_singer, @PathVariable String music_title, @PathVariable int music_number) throws IOException {
 
         System.out.println("musicSinger" + music_singer);
-        System.out.println("닉네임으로 찾기 "+boardService.getUserNumByNickname(music_singer));
-        int user_number = boardService.getUserNumByNickname(music_singer).getUser_number();
+
+        int user_number = boardService.getUserNumByname(music_singer).getUser_number();
+
 
 
         if (boardService.selectOk(user_number, music_title) != null) {
