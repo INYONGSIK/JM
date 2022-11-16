@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ucamp.JM.dao.MusicDAO">
-
 
     <select id="selectTopMusic" resultType="Music">
         <![CDATA[
@@ -87,4 +85,32 @@
         HH24:MI:SS')
         ,#{music_image},#{music_file},#{music_lyrics},#{accumul_music_like})
     </insert>
+
+
+    <select id="LikeSelectAll" resultType="Like">
+        select * from likes where user_number=${user_number} order by likes_number
+    </select>
+
+    <insert id="insertLike" parameterType="Like">
+        insert into likes
+        (likes_number,user_number,music_number,like_check)
+        values(music_like.nextval,${user_number},${music_number},${like_check})
+    </insert>
+
+    <delete id="deleteLike">
+        delete from likes where music_number=${music_number} and user_number=${user_number}
+    </delete>
+
+    <select id="alreadyLike" parameterType="Map" resultType="Like">
+        select * from likes where music_number=${music_number} and user_number=${user_number}
+    </select>
+
+    <delete id="deleteLike2">
+        delete from likes where music_number=${music_number}
+    </delete>
+
+    <select id="alreadyLike2" resultType="Like">
+        select * from likes where music_number=${music_number}
+    </select>
+
 </mapper>

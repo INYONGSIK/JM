@@ -2,6 +2,7 @@ package com.ucamp.JM.service;
 
 import com.ucamp.JM.dao.MusicDAO;
 import com.ucamp.JM.dto.AccumulMusic;
+import com.ucamp.JM.dto.Like;
 import com.ucamp.JM.dto.Music;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -100,5 +101,36 @@ public class MusicServiceImpl implements MusicService {
     public ArrayList<Music> selectTopMusicByDateAndGenre(String date, String genre) {
         return musicDAO.selectTopMusicByDateAndGenre(date, genre);
     }
+
+    @Override
+    public ArrayList<Like> LikeSelectAll(int user_number) {
+        return musicDAO.LikeSelectAll(user_number);
+    }
+
+    @Override
+    public void insertLike(int user_number, int music_number, int like_check) {
+        musicDAO.insertLike(user_number, music_number, like_check);
+    }
+
+    @Override
+    public Like alreadyLike(int music_number, int user_number) {
+        return musicDAO.alreadyLike(music_number, user_number);
+    }
+
+    @Override
+    public void deleteLike(int music_number, int user_number) {
+        musicDAO.deleteLike(music_number, user_number);
+    }
+
+    @Override
+    public void deleteLike2(int music_number) {
+        musicDAO.deleteLike2(music_number);
+    }
+
+    @Override
+    public ArrayList<Like> alreadyLike2(int music_number) {
+        return musicDAO.alreadyLike2(music_number);
+    }
+
 
 }

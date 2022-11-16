@@ -45,7 +45,7 @@ public class BoardController {
 
     // 다인 : 게시판 글 쓰기 기능
     @PostMapping("/boardWriteInput")
-    public String insertBoardWrite(Model model, Board board) {
+    public String insertBoardWrite(Board board) {
 
         boardService.insertBoardWrite(board);
         return "redirect:/boardList";

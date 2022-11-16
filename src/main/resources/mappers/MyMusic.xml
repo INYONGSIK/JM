@@ -45,9 +45,9 @@
 
     <insert id="insertMyMusic" parameterType="MyMusic">
         insert into Music(music_number,music_title,music_singer,music_genre,music_release,
-        music_image,music_file,music_lyrics)
+        music_image,music_file,music_lyrics,music_like)
         values(music_seq.nextval,#{music_title},#{music_singer},#{music_genre},#{music_release},
-        #{music_image},#{music_file},#{music_lyrics})
+        #{music_image},#{music_file},#{music_lyrics},0)
 
         <!-- insert into playlist(
          PLAYLIST_CD,
