@@ -121,7 +121,11 @@ public class MusicController {
         }
 
 
-        model.addAttribute("details", musicService.showMusicDetails(music_number));
+        Music detail = musicService.showMusicDetails(music_number);
+        detail.setMusic_release(detail.getMusic_release().substring(0, 10));
+
+
+        model.addAttribute("details", detail);
         return "musicDetails";
     }
 
