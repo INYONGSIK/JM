@@ -69,15 +69,15 @@
 
     <insert id="insertMyMusicToday" parameterType="MyMusic">
         insert into today_music(today_music_number,music_number,music_title,music_singer,music_genre,music_release,
-        music_image,music_file,music_lyrics)
+        music_image,music_file,music_lyrics,music_like)
         values(today_music_seq.nextval,music_seq.currval,#{music_title},#{music_singer},#{music_genre},#{music_release},
-        #{music_image},#{music_file},#{music_lyrics})
+        #{music_image},#{music_file},#{music_lyrics},0)
     </insert>
     <insert id="insertMyMusicAccumul" parameterType="MyMusic">
         insert into accumul(accumul_number,music_number,music_title,music_singer,music_genre,music_release,
-        music_image,music_file,music_lyrics)
+        music_image,music_file,music_lyrics,music_like)
         values(accumul_seq.nextval,music_seq.currval,#{music_title},#{music_singer},#{music_genre},#{music_release},
-        #{music_image},#{music_file},#{music_lyrics})
+        #{music_image},#{music_file},#{music_lyrics},0)
     </insert>
 
 

@@ -46,6 +46,7 @@ public class MusicServiceImpl implements MusicService {
 
     @Override
     public void insertAccumulMusic(Music music) {
+        log.info(String.valueOf(music.getMusic_like()));
         musicDAO.insertAccumulMusic(music);
     }
 
@@ -53,8 +54,6 @@ public class MusicServiceImpl implements MusicService {
     @Override
     public void updateAccumulMusic(AccumulMusic music) {
 
-        log.info(String.valueOf(music.getMusic_like()));
-        log.info(String.valueOf(music.getAccumul_music_like()));
 
         musicDAO.updateAccumulMusic(music);
     }
@@ -67,14 +66,24 @@ public class MusicServiceImpl implements MusicService {
     @Override
     public void insertMonthMusic(AccumulMusic music) {
         music.setAccumul_music_like(music.getMusic_like() + music.getCurrent_music_like());
-        log.info(music.getMusic_title());
-        log.info(String.valueOf(music.getAccumul_music_like()));
+        log.info("month:" + music.getMusic_title());
+        log.info("month:" + String.valueOf(music.getAccumul_music_like()));
         musicDAO.insertMonthMusic(music);
     }
 
     @Override
     public void updateWeekMusicLikeToZero() {
         musicDAO.updateWeekMusicLikeToZero();
+    }
+
+    @Override
+    public void delete_week_music() {
+        musicDAO.delete_week_music();
+    }
+
+    @Override
+    public void delete_month_music() {
+        musicDAO.delete_month_music();
     }
 
     @Override
@@ -94,11 +103,17 @@ public class MusicServiceImpl implements MusicService {
 
     @Override
     public ArrayList<Music> selectTopMusicByDate(String dateValue) {
+        if (dateValue.equals("week_music")) {
+            dateValue = "accumul";
+        }
         return musicDAO.selectTopMusicByDate(dateValue);
     }
 
     @Override
     public ArrayList<Music> selectTopMusicByDateAndGenre(String date, String genre) {
+        if (date.equals("week_music")) {
+            date = "accumul";
+        }
         return musicDAO.selectTopMusicByDateAndGenre(date, genre);
     }
 
