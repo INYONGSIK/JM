@@ -170,6 +170,7 @@ public class MyMusicController {
                 music.setMusic_file(saveProfile.toString());
             }
             myMusicService.insertMyMusic(music);
+
             myMusicService.insertMyMusicToday(music);
             myMusicService.insertMyMusicAccumul(music);
 
