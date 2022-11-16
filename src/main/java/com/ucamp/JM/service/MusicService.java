@@ -56,5 +56,6 @@ public interface MusicService {
 
     ArrayList<Like> alreadyLike2(int music_number);
 
+    void likeDown(int music_number);
 }
 

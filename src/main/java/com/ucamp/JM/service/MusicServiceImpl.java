@@ -132,5 +132,10 @@ public class MusicServiceImpl implements MusicService {
         return musicDAO.alreadyLike2(music_number);
     }
 
+    @Override
+    public void likeDown(int music_number) {
+        musicDAO.likeDown(music_number);
+    }
+
 
 }
