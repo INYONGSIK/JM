@@ -66,6 +66,7 @@
      });
 
      function htmlSelectfunc(list){
+     /*<![CDATA[*/
             var html = "";
             $.each(list,function(index, item){
                     html +="<tr id='musicRankTable'>"+
@@ -76,11 +77,13 @@
                     "<td>"+item.music_image+"</td>"+
                     "<td>"+
                     "<audio controls>"+
-                        "<source src=" + item.music_file + ">" +
+                        "<source src=/webapp/music/" + [[${item.music_file}]] + ">" +
                     "</audio>"
                     + "</td>"+
                     "<td>"+item.music_like+"</td>"+
                     "</tr>"
             });
+                         /*]]>*/
             $("#musicRankList").html(html);
+
      }
