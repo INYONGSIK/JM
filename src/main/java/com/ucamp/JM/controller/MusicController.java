@@ -107,20 +107,17 @@ public class MusicController {
     public String read(HttpServletRequest request, Model model, @PathVariable int music_number) {
         String user_email = (String) request.getSession().getAttribute("user_email");
 
-        String user_nickname = boardService.getUserNicknameByEmail(user_email).getUser_nickname();
-
-        int user_number = boardService.getUserNumByNickname(user_nickname).getUser_number();
 
         if (user_email != null) {
+            String user_nickname = boardService.getUserNicknameByEmail(user_email).getUser_nickname();
+            int user_number = boardService.getUserNumByNickname(user_nickname).getUser_number();
             if (user_email.equals("admin@aaa.com")) {
                 model.addAttribute("admin", "admin@aaa.com");
             }
-        }
-        System.out.println("좋아요 하는 사용자번호와 음악넘버" + music_number + user_number);
-        System.out.println("좋아요 유무" + musicService.alreadyLike(music_number, user_number));
-        if (musicService.alreadyLike(music_number, user_number) != null) {
+            if (musicService.alreadyLike(music_number, user_number) != null) {
 
-            model.addAttribute("likes", musicService.alreadyLike(music_number, user_number).getLike_check());
+                model.addAttribute("likes", musicService.alreadyLike(music_number, user_number).getLike_check());
+            }
         }
 
 
