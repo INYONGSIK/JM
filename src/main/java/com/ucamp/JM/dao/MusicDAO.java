@@ -1,6 +1,7 @@
 package com.ucamp.JM.dao;
 
 import com.ucamp.JM.dto.AccumulMusic;
+import com.ucamp.JM.dto.Like;
 import com.ucamp.JM.dto.Music;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -52,5 +53,18 @@ public interface MusicDAO {
     ArrayList<Music> selectTopMusicByDate(String dateValue);
 
     ArrayList<Music> selectTopMusicByDateAndGenre(@Param("date") String date, @Param("genre") String genre);
+
+    ArrayList<Like> LikeSelectAll(int user_number);
+
+    void insertLike(@Param("user_number") int user_number, @Param("music_number") int music_number, @Param("like_check") int like_check);
+
+    Like alreadyLike(@Param("music_number") int music_number, @Param("user_number") int user_number);
+
+    void deleteLike(@Param("music_number") int music_number, @Param("user_number") int user_number);
+
+    void deleteLike2(int music_number);
+
+    ArrayList<Like> alreadyLike2(int music_number);
+
 
 }

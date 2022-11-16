@@ -1,6 +1,7 @@
 package com.ucamp.JM.service;
 
 import com.ucamp.JM.dto.AccumulMusic;
+import com.ucamp.JM.dto.Like;
 import com.ucamp.JM.dto.Music;
 
 import java.util.ArrayList;
@@ -43,6 +44,17 @@ public interface MusicService {
 
     ArrayList<Music> selectTopMusicByDateAndGenre(String date, String genre);
 
+    ArrayList<Like> LikeSelectAll(int user_number);
+
+    void insertLike(int user_number, int music_number, int like_check);
+
+    Like alreadyLike(int music_number, int user_number);
+
+    void deleteLike(int music_number, int user_number);
+
+    void deleteLike2(int music_number);
+
+    ArrayList<Like> alreadyLike2(int music_number);
 
 }
 

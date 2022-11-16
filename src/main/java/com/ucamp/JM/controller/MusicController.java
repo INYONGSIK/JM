@@ -3,14 +3,12 @@ package com.ucamp.JM.controller;
 import com.ucamp.JM.dto.Music;
 import com.ucamp.JM.service.GetWeekOf;
 import com.ucamp.JM.service.MusicService;
+import com.ucamp.JM.service.board.BoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
@@ -25,6 +23,8 @@ public class MusicController {
 
     private final MusicService musicService;
     private final GetWeekOf getWeekOf;
+
+    private final BoardService boardService;
 
     @RequestMapping("/uploadMyMusic")
     public String uploadMyMusic() {
@@ -107,20 +107,59 @@ public class MusicController {
     public String read(HttpServletRequest request, Model model, @PathVariable int music_number) {
         String user_email = (String) request.getSession().getAttribute("user_email");
 
+        String user_nickname = boardService.getUserNicknameByEmail(user_email).getUser_nickname();
+
+        int user_number = boardService.getUserNumByNickname(user_nickname).getUser_number();
+
         if (user_email != null) {
             if (user_email.equals("admin@aaa.com")) {
                 model.addAttribute("admin", "admin@aaa.com");
             }
         }
+        System.out.println("좋아요 하는 사용자번호와 음악넘버" + music_number + user_number);
+        System.out.println("좋아요 유무" + musicService.alreadyLike(music_number, user_number));
+        if (musicService.alreadyLike(music_number, user_number) != null) {
+
+            model.addAttribute("likes", musicService.alreadyLike(music_number, user_number).getLike_check());
+        }
+
 
         model.addAttribute("details", musicService.showMusicDetails(music_number));
         return "musicDetails";
     }
 
-    @RequestMapping("/likeIncrement/{music_number}")
-    public String like(Model model, @PathVariable int music_number) {
-        musicService.likeIncrement(music_number);
+    @RequestMapping("/likeIncrement/{music_number}/{music_singer}/{like_check}")
+    public String like(HttpServletRequest request, @PathVariable int like_check, @PathVariable int music_number, @PathVariable String music_singer) {
+        String user_email = (String) request.getSession().getAttribute("user_email");
+
+        String user_nickname = boardService.getUserNicknameByEmail(user_email).getUser_nickname();
+
+        int user_number = boardService.getUserNumByNickname(user_nickname).getUser_number();
+
+
+        if (musicService.alreadyLike(music_number, user_number) == null) {
+            musicService.insertLike(user_number, music_number, like_check);
+            musicService.likeIncrement(music_number);
+        }
+
         return "redirect:/musicDetails/" + music_number;
+    }
+
+    @GetMapping("/likeIncrement/{music_number}/{music_singer}")
+    public String deleteLike(HttpServletRequest request, @PathVariable int music_number, @PathVariable String music_singer) {
+
+        String user_email = (String) request.getSession().getAttribute("user_email");
+
+        String user_nickname = boardService.getUserNicknameByEmail(user_email).getUser_nickname();
+
+        int user_number = boardService.getUserNumByNickname(user_nickname).getUser_number();
+
+        if (musicService.alreadyLike(music_number, user_number) != null) {
+            musicService.deleteLike(music_number, user_number);
+        }
+
+        return "redirect:/musicDetails/" + music_number;
+
     }
 
 }
