@@ -107,5 +107,10 @@
         delete from comments where dashboard_No=#{dashboard_No}
     </delete>
 
+    <select id="getUserNumByname" resultType="User">
+        select user_number from jmuser where user_name=#{user_name}
+
+    </select>
+
 
 </mapper>
