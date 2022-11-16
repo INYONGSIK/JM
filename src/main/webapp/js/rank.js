@@ -81,7 +81,7 @@
                     "<td>"+
                     "<img src='/webapp/img/musicimage/" +
                         item.music_image +
-                     "' style={width:10px;}/>"+
+                     "' width='40' />"+
                      "</td>"+
                     "<td>"+
                     "<audio controls>"+

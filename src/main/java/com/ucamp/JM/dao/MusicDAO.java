@@ -66,5 +66,8 @@ public interface MusicDAO {
 
     ArrayList<Like> alreadyLike2(int music_number);
 
+    @Update("update music set music_like=music_like-1 where music_number=#{music_number}")
+    void likeDown(int music_number);
+
 
 }

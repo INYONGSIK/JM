@@ -1,12 +1,10 @@
 package com.ucamp.JM.controller;
 
 import com.ucamp.JM.dao.UserDAO;
+import com.ucamp.JM.dto.Like;
 import com.ucamp.JM.dto.Music;
 import com.ucamp.JM.dto.User;
-import com.ucamp.JM.service.MusicService;
-import com.ucamp.JM.service.MyMusicService;
-import com.ucamp.JM.service.PlaylistService;
-import com.ucamp.JM.service.UserService;
+import com.ucamp.JM.service.*;
 import com.ucamp.JM.service.board.BoardService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,6 +43,9 @@ public class MyMusicController {
     UserService userService;
 
     @Autowired
+    AdminService adminService;
+
+    @Autowired
     UserDAO userDAO;
 
     private Logger logger = LoggerFactory.getLogger(RootController.class);
@@ -55,6 +56,19 @@ public class MyMusicController {
         User user = userService.queryUser(email);
 
         ArrayList<Music> uploadMusicList = myMusicService.getMusicByMusicSinger(user.getUser_name());
+
+
+        ArrayList<Like> likeList = musicService.LikeSelectAll(user.getUser_number());
+        Music like_music1 = null;
+        ArrayList<Music> like_musicList = new ArrayList<>();
+        for (int i = 0; i < likeList.size(); ++i) {
+            int likeList_Music_num = likeList.get(i).getMusic_number();
+            like_music1 = myMusicService.myLikeMusicList(likeList_Music_num);
+            like_musicList.add(like_music1);
+        }
+
+
+        model.addAttribute("likeMusicList", like_musicList);
 
         //좋아요
         //MyMusic likeParamDto = new MyMusic();
@@ -75,7 +89,10 @@ public class MyMusicController {
         int user_number = boardService.getUserNumByNickname(user_nickname).getUser_number();
 
 
-        musicService.deleteLike(music_number, user_number);
+        musicService.deleteLike2(music_number);
+
+        adminService.deleteReportMusic(music_number);
+
         myMusicService.delMyMusic(music_number);
 
 

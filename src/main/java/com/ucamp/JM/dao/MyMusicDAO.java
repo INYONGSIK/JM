@@ -13,7 +13,7 @@ public interface MyMusicDAO {
 
     ArrayList<MyMusic> myUploadMusicList(MyMusic paramDto);
 
-    ArrayList<MyMusic> myLikeMusicList(MyMusic paramDto);
+    Music myLikeMusicList(int music_number);
 
     void insertMyMusic(Music music);
 

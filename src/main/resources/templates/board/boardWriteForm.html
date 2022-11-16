@@ -21,74 +21,54 @@
 
 
 
-
-
-
     </script>
-
-
 </head>
 <link rel="stylesheet" href="/webapp/css/bootstrapLux.css"/>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-
+<link rel="stylesheet" href="webapp/css/register.css"/>
 <body>
-<div>
-    <legend>게시글 작성</legend>
-</div>
+
 <br><br><br><br><br><br>
 
 <form name="f" action="/boardWriteInput" method="post" onsubmit="return check()">
     <fieldset>
 
-        <div class="row">
+        <div class="container" style="width:50%; margin: 0 auto;">
+            <h1 style="text-align:center">게시글 작성</h1>
             <div>
-
-                <div class="row">
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">글쓴이</label>
-
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control-plaintext" th:value="${dashboard_user}"
-                                   id="dashboard_user" name="dashboard_user" size="30"
-                                   readonly>
-                            <input type="hidden" th:value="${user_number}" name="user_number"/>
-
-                        </div>
+                <div style="display:flex;">
+                    <label class="col-sm-2 col-form-label">글쓴이</label>
+                    <div class="col-sm-2 ">
+                        <input type="text" class="form-control-plaintext" th:value="${dashboard_user}"
+                               id="dashboard_user" name="dashboard_user" size="30" style="padding:10px"
+                               readonly>
+                        <input type="hidden" th:value="${user_number}" name="user_number"/>
                     </div>
-
-
-                    <div class="form-group">
-
-                        <label class="form-label mt-4">제 목</label>
-
-                        <div>
-                            <input type="text" class="form-control" name="dashboard_title" size="50">
-                        </div>
-
-                    </div>
-                    <br>
-
-                    <div class="form-group">
-
-                        <label class="form-label mt-4">내 용</label>
-                        <textarea name="dashboard_content" class="form-control" id="exampleTextarea" rows="3"
-                                  cols="50"></textarea>
-                    </div>
-
-                    <br><br>
-
-                    <div class="row">
-                        <button type="submit" class="btn btn-outline-primary" value="글쓰기">글쓰기</button>
-                        <button type="reset" class="btn btn-outline-primary" value="다시작성">다시작성</button>
-                        <button type="button" class="btn btn-outline-primary" value="목록보기"
-                                onclick="window.location='boardList'">목록보기
-                        </button>
-                        <!--  	<input type="button" value="목록보기" onclick="window.location='list_board.do'">  -->
-
-                    </div>
-
-                    <br><br>
                 </div>
+                <div>
+                    <label class="form-label mt-4">제 목</label>
+                    <div>
+                        <textarea type="text" class="form-control" name="dashboard_title" rows="2"></textarea>
+                    </div>
+                </div>
+                <br>
+                <div>
+
+                    <label class="form-label mt-4">내 용</label>
+                    <textarea name="dashboard_content" class="form-control" id="exampleTextarea" rows="13"
+                              cols="50"></textarea>
+                </div>
+                <br><br>
+                <div>
+                    <input type="submit" class="w-btn" value="글쓰기">
+                    <input type="reset" class="w-btn " value="다시작성">
+                    <input type="button" class="w-btn " value="목록보기"
+                           onclick="window.location='boardList'">
+                    <!--  	<input type="button" value="목록보기" onclick="window.location='list_board.do'">  -->
+
+                </div>
+
+                <br><br>
             </div>
         </div>
     </fieldset>
