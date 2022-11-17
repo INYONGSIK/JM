@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>음악 검색</title>
+    <title>자음모음</title>
 
     <script src="https://code.jquery.com/jquery-3.6.1.js"
             integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
@@ -45,7 +45,7 @@
     <tbody>
     <tr th:each="music : ${musics}" class="table-active">
         <td>
-            <img th:src="${music.music_image}" width="50" alt="음악사진">
+            <img th:src="|/webapp/img/musicimage/${music.music_image}|" width="50" alt="음악사진">
         </td>
         <td>[[${music.music_genre}]]</td>
         <td>

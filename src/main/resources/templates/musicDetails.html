@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>곡 상세정보</title>
+    <title>자음모음</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
     <link rel="stylesheet" href="/webapp/css/bootstrapLux.css"/>
@@ -14,6 +14,24 @@
     height:330px;
     }
 
+<<<<<<< HEAD
+=======
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> 440e037bf98f6f8b0ae0c1b6c87f445e21f21f95
 </style>
 <body>
 
@@ -28,7 +46,7 @@
                 <div class="btn btn-outline-primary" id="replace_button"></div>
             </div>
             <div class="card-body">
-                <img th:src="|/webapp/img/musicimage/${details.music_image}|" alt="음악사진">
+                <img th:src="|/webapp/img/musicimage/${details.music_image}|"  width="400" alt="음악사진">
                 <br>
                 [[${details.music_singer}]]<br>
                 [[${details.music_title}]]<br>
@@ -38,12 +56,16 @@
                     <source th:src="|/webapp/music/${details.music_file}|">
                 </audio>
                 <br>
-                <a th:unless="${likes}"
-                   th:href="|/likeIncrement/${details.music_number}/${details.music_singer}/1|">좋아요</a>
-                <a th:if="${likes==1}" th:href="|/likeIncrement/${details.music_number}/${details.music_singer}|">좋아요
+                <span th:if="${session.user_email}">
+                    <a th:unless="${likes} "
+                       th:href="|/likeIncrement/${details.music_number}/${details.music_singer}/1|">좋아요</a>
+                    <a th:if="${likes==1} "
+                       th:href="|/likeIncrement/${details.music_number}/${details.music_singer}|">좋아요
                     취소</a>
                 [[${details.music_like}]]
-                <a th:href="|/reportMusic/${details.music_singer}/${details.music_title}/${details.music_number}|">신고</a>
+                </span>
+                <a th:if="${session.user_email}"
+                   th:href="|/reportMusic/${details.music_singer}/${details.music_title}/${details.music_number}|">신고</a>
                 <a th:if="${admin == 'admin@aaa.com'}"
                    th:href="|/deleteMusic/${details.music_number}/${details.music_title}/${details.music_singer}|">삭제</a>
             </div>
@@ -156,5 +178,50 @@ function showFollowCheck(checkValue){
             }
 }
 
+<<<<<<< HEAD
+=======
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> 440e037bf98f6f8b0ae0c1b6c87f445e21f21f95
 </script>
 </html>

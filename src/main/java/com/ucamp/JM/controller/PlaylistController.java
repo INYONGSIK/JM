@@ -79,16 +79,16 @@ public class PlaylistController {
     //http://localhost:8090/add_P?user_number=3&list_name=kkk&music_number=1
     @RequestMapping("add_P")
     public String add_P(HttpServletResponse response, Playlist playlist, @RequestParam int user_number, @RequestParam String list_name, @RequestParam int music_number) throws IOException {
+        String encodedParam = null;
+        encodedParam = URLEncoder.encode(list_name, "UTF-8");
 
-
-        if (playlistService.selectSameMusic(user_number, list_name, music_number) == null) {
+        if (playlistService.selectSameMusic(user_number, URLEncoder.encode(list_name, "UTF-8"), music_number) == null) {
             playlistService.insertPlaylist(playlist);
-            String encodedParam = null;
-            encodedParam = URLEncoder.encode(list_name, "UTF-8");
+
 
             return "redirect:/listP/" + user_number + "/" + encodedParam;
         } else {
-            String encodedParam = null;
+
             encodedParam = URLEncoder.encode(list_name, "UTF-8");
             Writer out = response.getWriter();
             String message = URLEncoder.encode("같은 노래를 넣을 수 없습니다..", "UTF-8");

@@ -32,6 +32,7 @@
 
     <select id="myLikeMusicList" resultType="Music">
         select
+        music_number,
         music_title,
         music_singer,
         music_genre,

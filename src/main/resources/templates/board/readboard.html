@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>readboard</title>
+    <title>자음모음</title>
 
 </head>
 <link rel="stylesheet" href="/webapp/css/bootstrapLux.css"/>
@@ -67,7 +67,7 @@
                 <td width="200"><p class="lead">[[${comment.createat}]]</p></td>
 
 
-                <td><a th:href="|/reportComment/${comment.writer}/${comment.content}/${comment.dashboard_no}|"><p class="lead">신고</p></a>
+                <td th:if="${sessionName != comment.writer}"><a  th:href="|/reportComment/${comment.writer}/${comment.content}/${comment.dashboard_no}|"><p class="lead">신고</p></a>
                 </td>
 
                 <td th:if="${sessionName == comment.writer}"><a

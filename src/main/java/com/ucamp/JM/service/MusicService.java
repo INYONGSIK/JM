@@ -62,4 +62,3 @@ public interface MusicService {
 
     void likeDown(int music_number);
 }
-
