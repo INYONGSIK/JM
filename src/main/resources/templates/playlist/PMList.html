@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Playlist</title>
+    <meta charset="UTF-8">
+    <title>Playlist</title>
 
 
 </head>
 <link rel="stylesheet" href="/webapp/css/bootstrapLux.css"/>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-
+<link rel="stylesheet" href="/webapp/css/font.css"/>
 <body>
 <th:block th:replace="~{navHeader :: navi}"></th:block>
 
@@ -16,40 +16,41 @@
 
 <!--<h1>pmList</h1>-->
 <ul th:each="PM : ${PMList}">
-<input type="hidden" th:value="${user_number}" name="user_number">
-<!--  <li><a th:href="|/listP/${user_number}/${PM.list_name}|"> [[${PM.list_name}]]</a> <a th:href="|/deleteplaylist/${PM.list_name}/${user_number}|">삭제</a></li>-->
+    <input type="hidden" th:value="${user_number}" name="user_number">
+    <!--  <li><a th:href="|/listP/${user_number}/${PM.list_name}|"> [[${PM.list_name}]]</a> <a th:href="|/deleteplaylist/${PM.list_name}/${user_number}|">삭제</a></li>-->
 </ul>
 
 <div style="padding:50px;">
-  <h1 style="text-align:center;">플레이리스트</h1>
+    <h1 style="text-align:center;">플레이리스트</h1>
 
-  <br>
+    <br>
 
 
-  <div>
-    <table class='table table-hover' style='width:100%' aria-describedby='example_info'>
-      <thead>
-      <tr class='table-active'>
-        <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
-            aria-sort='ascending'>플레이리스트에 들어가기
-        </th>
-        <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
-            aria-sort='ascending'>플레이리스트 삭제
-        </th>
-        <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
-            aria-sort='ascending'> <div style="text-align:center;"><a href="/addPM">플레이리스트 추가</a></div>
-        </th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr th:each="PM : ${PMList}">
-        <td><a th:href="|/listP/${user_number}/${PM.list_name}|"> [[${PM.list_name}]]</a></td>
-        <td><a th:href="|/deleteplaylist/${PM.list_name}/${user_number}|">삭제</a></td>
-        <td></td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
+    <div>
+        <table class='table table-hover' style='width:100%' aria-describedby='example_info'>
+            <thead>
+            <tr class='table-active'>
+                <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
+                    aria-sort='ascending'>플레이리스트에 들어가기
+                </th>
+                <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
+                    aria-sort='ascending'>플레이리스트 삭제
+                </th>
+                <th class='sorting sorting_asc' tabindex='0' aria-controls='example' rowspan='1' colspan='1'
+                    aria-sort='ascending'>
+                    <div style="text-align:center;"><a href="/addPM">플레이리스트 추가</a></div>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="PM : ${PMList}">
+                <td><a th:href="|/listP/${user_number}/${PM.list_name}|"> [[${PM.list_name}]]</a></td>
+                <td><a th:href="|/deleteplaylist/${PM.list_name}/${user_number}|">삭제</a></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
 
 </div>
