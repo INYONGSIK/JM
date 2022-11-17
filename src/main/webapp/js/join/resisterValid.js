@@ -14,10 +14,10 @@ email.addEventListener("change", checkEmail);
 password.addEventListener("change", checkPassword);
 password2.addEventListener("change", checkPassword2);
 name.addEventListener("change", checkName);
-name.addEventListener("change", birthday);
-name.addEventListener("change", user_birthday);
+birthday.addEventListener("change", checkBirthday);
 phone.addEventListener("change", checkPhone);
 phone2.addEventListener("change", checkPhone2);
+agree.addEventListener("change",checkRadio);
 
 function checkAll() {
     checkNickname()
@@ -29,8 +29,6 @@ function checkAll() {
     checkPhone();
     checkPhone2();
     checkRadio();
-
-    console.log(checkNickname());
 
     if (confirm("회원가입을하시겠습니까?")) {
         if (checkNickname() === true && checkEmail() === true && checkPassword() === true
