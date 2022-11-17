@@ -22,14 +22,14 @@
     <div style="text-align:center;">
         <img src="webapp/img/logoWhite.PNG" width="350" height="350">
     </div>
-    
+
     <!--grid 시작-->
     <div class="row">
         <!--top grid-->
         <div class="col-sm-4">
             <div class="card border-primary mb-3" style="margin:20px;">
                 <div style="display:inline-block">
-                    <h1 style="padding: 20px 30px; float:left;">TOP50</h1>
+                    <h1 style="padding: 20px 30px; float:left; color:black;">TOP50</h1>
                     <button type="button" onclick="location.href='/rank'" class="btn btn-outline-primary"
                             style="max-width: 10rem;margin: 20px; float:right;">더보기
                     </button>
@@ -59,7 +59,7 @@
         <div class="col-sm-4">
             <div class="card border-primary mb-3" style="margin:20px;">
                 <div style="display:inline-block">
-                    <h1 style="padding: 20px 30px; float:left;">게시판</h1>
+                    <h1 style="padding: 20px 30px; float:left; color:black;">게시판</h1>
                     <button type="button" onclick="location.href='/boardList'" class="btn btn-outline-primary"
                             style="max-width: 10rem;margin: 20px; float:right;">더보기
                     </button>
@@ -101,7 +101,7 @@
         <!--info grid-->
         <div class="col-sm-4">
             <div class="card border-primary mb-3" style="margin:20px;">
-                <h1 style="padding: 20px 30px; display:inline">내 정보</h1>
+                <h1 style="padding: 20px 30px; display:inline; color:black; text-align:center;">내 정보</h1>
                 <div class="row">
                     <div class="col-sm-4">
                         <img src="">
@@ -109,7 +109,7 @@
                     <div class="col-sm-8">
                         <p>[[ ${session.user_name}]]</p>
                         <p>[[${session.user_email}]]</p>
-                        <p>알림</p>
+
                     </div>
                 </div>
                 <div class="card-body">
