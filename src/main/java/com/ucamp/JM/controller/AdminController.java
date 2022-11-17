@@ -115,7 +115,22 @@ public class AdminController {
 
 
     @RequestMapping("/admin/adminUserList")
-    public String adminUserList(Model model) {
+    public String adminUserList(HttpServletRequest request, Model model) throws Exception {
+
+        String email = (String) request.getSession().getAttribute("user_email");
+        User user = null;
+
+        if (email == null) {
+            //loginform 으로 이동
+            return "loginform";
+        } else {
+            user = userService.queryUser(email);
+        }
+
+        if (!user.getType().equals("admin")) {
+
+            return "redirect:/";
+        }
 
         model.addAttribute("users", adminService.selectAllUser());
         return "/admin/adminUserList";
