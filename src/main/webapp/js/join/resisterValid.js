@@ -64,7 +64,7 @@ function checkNickname() {
     var checked = true;
     const nicknameValue = nickname.value.trim();
     var nicknamePattern = /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{1,10}$/;
-    if (nicknameValue.value === "") {
+    if (nicknameValue === "") {
         setError(nickname, "필수 정보입니다.");
         return false;
     } else if (!nicknamePattern.test(nicknameValue)) {
