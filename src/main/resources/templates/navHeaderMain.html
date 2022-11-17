@@ -35,25 +35,56 @@
                     <li class="nav-item" th:if="${session.user_email}">
                         <a class="nav-link" href="/mypage">마이페이지</a>
                     </li>
-                    <li class="nav-item" th:if="${session.user_email!=null && session.user_email.equals('admin@aaa.com')}">
+                    <li class="nav-item"
+                        th:if="${session.user_email!=null && session.user_email.equals('admin@aaa.com')}">
                         <a class="nav-link" href="/admin">관리자 페이지</a>
                     </li>
+                    <li class="nav-item">
+                        <input type="hidden" sadfasdf>
+                    </li>
 
+                    <li class="nav-item">
+
+                    </li>
                 </ul>
 
             </div>
         </div>
 
+        <div style="position: absolute; right: 250px; top: 40px;">
+            <form action="/musicSearch" class="d-flex">
+
+                <select name="genre">
+                    <option value="">전체</option>
+                    <option value="발라드">발라드</option>
+                    <option value="힙합">힙합</option>
+                    <option value="댄스">댄스</option>
+                    <option value="일레트로닉">일레트로닉</option>
+                    <option value="트로트">트로트</option>
+                    <option value="인디">인디</option>
+                    <option value="R&B">R&B</option>
+                    <option value="기타">기타</option>
+                </select>
+                <input class="form-control me-sm-2" type="text" placeholder="제목, 가수 검색" name="keyword">
+                <button class="btn btn-secondary my-2 my-sm-0" type="submit">검색</button>
+            </form>
+        </div>
+
+
         <div style="padding:50px;">
             <div style="position: absolute; right: 50px; top: 50px;">
                 <th:block th:unless="${session.user_email}">
-                    <button type="button" class="btn btn-outline-light btn-sm" onclick="location.href='/loginform'">로그인</button>
-                    <button type="button" class="btn btn-outline-light btn-sm" onclick="location.href='/registerform'">회원가입
+                    <button type="button" class="btn btn-outline-light btn-sm" onclick="location.href='/loginform'">
+                        로그인
+                    </button>
+                    <button type="button" class="btn btn-outline-light btn-sm" onclick="location.href='/registerform'">
+                        회원가입
                     </button>
                 </th:block>
 
                 <th:block th:if="${session.user_email}">
-                    <button type="button" class="btn btn-outline-light btn-sm" onclick="location.href='/modifyinformationform'">
+                    <button type="button" class="btn btn-outline-light btn-sm"
+                            onclick="location.href='/modifyinformationform'">
                         회원정보 수정
                     </button>
                     <button type="button" class="btn btn-outline-light btn-sm" onclick="location.href='/logout'">로그아웃
@@ -63,6 +94,7 @@
                     <!--            <a href="/logout">로그아웃</a>-->
                 </th:block>
             </div>
+        </div>
     </nav>
 </th:block>
 
