@@ -76,9 +76,9 @@
     </insert>
     <insert id="insertMyMusicAccumul" parameterType="MyMusic">
         insert into accumul(accumul_number,music_number,music_title,music_singer,music_genre,music_release,
-        music_image,music_file,music_lyrics, music_like)
+        music_image,music_file,music_lyrics,music_like)
         values(accumul_seq.nextval,music_seq.currval,#{music_title},#{music_singer},#{music_genre},#{music_release},
-        #{music_image},#{music_file},#{music_lyrics}, 0)
+        #{music_image},#{music_file},#{music_lyrics},0)
     </insert>
 
 
