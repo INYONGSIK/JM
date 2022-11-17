@@ -16,10 +16,11 @@
     background-color:transparent;
     border: none;
     }
+
 </style>
 <body>
 
-<th:block th:replace="~{navHeader :: navi}"></th:block>
+<th:block th:replace="~{navHeaderMain :: naviMain}"></th:block>
 <div class="row">
     <div class="col-sm-6">
         <div class="card border-primary mb-3" style="margin:20px;padding: 20px 30px;">
@@ -162,5 +163,6 @@ function showFollowCheck(checkValue){
                 $("#unfollow_button").replaceWith(html);
             }
 }
+
 </script>
 </html>
