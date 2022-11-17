@@ -134,7 +134,7 @@ function checkEmail() {
 function checkPassword() {
     const passwordValue = password.value.trim();
     var pwPattern = /^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
-    if (passwordValue.value === "") {
+    if (passwordValue === "") {
         setError(password, "필수 정보입니다.");
         return false;
     } else if (!pwPattern.test(passwordValue)) {
@@ -147,7 +147,6 @@ function checkPassword() {
 }
 // 비밀번호 확인 유혀성 검사
 function checkPassword2() {
-    const passwordValue = password.value.trim();
     const password2Value = password2.value.trim();
     if (password2Value === "") {
         setError(password2, "필수 정보입니다.");
