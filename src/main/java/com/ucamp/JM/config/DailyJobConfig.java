@@ -36,10 +36,10 @@ public class DailyJobConfig {
     @Autowired
     private final MusicServiceImpl musicService;
     private static final String ACCUMULATE =
-            "SELECT A.*, B.current_music_number,B.current_music_like,C.accmullike " +
+            "SELECT A.*, B.current_music_number,B.current_music_like,C.accumul_music_like " +
                     "FROM today_music A, " +
                     "(SELECT music_number as current_music_number, music_like as current_music_like FROM music) B, " +
-                    "(SELECT music_number,music_like as accmullike FROM accumul) C " +
+                    "(SELECT music_number,music_like as accumul_music_like FROM accumul) C " +
                     "where A.music_number = B.current_music_number and A.music_number = C.music_number";
 
     private static final String TODAY = "SELECT * FROM MUSIC";
@@ -124,7 +124,7 @@ public class DailyJobConfig {
                 .dataSource(dataSource)
                 .rowMapper(new BeanPropertyRowMapper<>(AccumulMusic.class))
                 .sql(ACCUMULATE)
-                .name("jdbc4CursorItemReader")
+                .name("jdbcCursorItemReader")
                 .build();
     }
 
@@ -135,8 +135,8 @@ public class DailyJobConfig {
         return new ItemProcessor<AccumulMusic, AccumulMusic>() {
             @Override
             public AccumulMusic process(AccumulMusic music) throws Exception {
-                music.setMusic_like(music.getAccumul_music_like() + (music.getCurrent_music_like() - music.getMusic_like()));
-                log.info("MNo:" + music.getMusic_number() + "like:" + music.getMusic_like());
+                int musicDiff = music.getAccumul_music_like() + (music.getCurrent_music_like() - music.getMusic_like());
+                music.setMusic_like(musicDiff);
                 return music;
             }
         };
