@@ -14,10 +14,10 @@ email.addEventListener("change", checkEmail);
 password.addEventListener("change", checkPassword);
 password2.addEventListener("change", checkPassword2);
 name.addEventListener("change", checkName);
-name.addEventListener("change", birthday);
-name.addEventListener("change", user_birthday);
+birthday.addEventListener("change", checkBirthday);
 phone.addEventListener("change", checkPhone);
 phone2.addEventListener("change", checkPhone2);
+agree.addEventListener("change",checkRadio);
 
 function checkAll() {
     checkNickname()
@@ -29,8 +29,6 @@ function checkAll() {
     checkPhone();
     checkPhone2();
     checkRadio();
-
-    console.log(checkNickname());
 
     if (confirm("회원가입을하시겠습니까?")) {
         if (checkNickname() === true && checkEmail() === true && checkPassword() === true
@@ -66,7 +64,7 @@ function checkNickname() {
     var checked = true;
     const nicknameValue = nickname.value.trim();
     var nicknamePattern = /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{1,10}$/;
-    if (nicknameValue.value === "") {
+    if (nicknameValue === "") {
         setError(nickname, "필수 정보입니다.");
         return false;
     } else if (!nicknamePattern.test(nicknameValue)) {
@@ -136,7 +134,7 @@ function checkEmail() {
 function checkPassword() {
     const passwordValue = password.value.trim();
     var pwPattern = /^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
-    if (passwordValue.value === "") {
+    if (passwordValue === "") {
         setError(password, "필수 정보입니다.");
         return false;
     } else if (!pwPattern.test(passwordValue)) {

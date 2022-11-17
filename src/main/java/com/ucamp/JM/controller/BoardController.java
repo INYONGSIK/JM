@@ -204,8 +204,6 @@ public class BoardController {
 
 
             boardService.deleteReportComment(dashboard_No, contents);
-
-            ;
         }
         boardService.deleteComment(cno, dashboard_No);
 

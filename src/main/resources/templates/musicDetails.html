@@ -12,26 +12,10 @@
     textarea {
     width:100%;
     height:330px;
+    background-color:transparent;
+    border: none;
     }
 
-<<<<<<< HEAD
-=======
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
->>>>>>> 440e037bf98f6f8b0ae0c1b6c87f445e21f21f95
 </style>
 <body>
 
@@ -46,7 +30,7 @@
                 <div class="btn btn-outline-primary" id="replace_button"></div>
             </div>
             <div class="card-body">
-                <img th:src="|/webapp/img/musicimage/${details.music_image}|"  width="400" alt="음악사진">
+                <img th:src="|/webapp/img/musicimage/${details.music_image}|" width="400" alt="음악사진">
                 <br>
                 [[${details.music_singer}]]<br>
                 [[${details.music_title}]]<br>
@@ -78,7 +62,8 @@
             </div>
             <div class="card-body">
                 <br>
-                <textarea th:if=${details.music_lyrics}>[[${details.music_lyrics}]]</textarea>
+                <textarea th:if=${details.music_lyrics}
+                          disabled="">[[${details.music_lyrics}]]</textarea>
 
                 <br>
                 <br>
@@ -178,50 +163,5 @@ function showFollowCheck(checkValue){
             }
 }
 
-<<<<<<< HEAD
-=======
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
->>>>>>> 440e037bf98f6f8b0ae0c1b6c87f445e21f21f95
 </script>
 </html>
